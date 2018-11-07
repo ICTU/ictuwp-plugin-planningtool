@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: GC Maturity\n"
-"POT-Creation-Date: 2018-11-07 08:43+0100\n"
-"PO-Revision-Date: 2018-11-07 08:43+0100\n"
+"POT-Creation-Date: 2018-11-07 16:58+0100\n"
+"PO-Revision-Date: 2018-11-07 16:59+0100\n"
 "Last-Translator: \n"
 "Language-Team: paul@wbvb.nl\n"
 "Language: nl_NL\n"
@@ -21,293 +21,220 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
-#: do-planningstool.php:308
+#: do-planningstool.php:306
 msgctxt "labels"
-msgid "Survey"
-msgstr "Enquête"
+msgid "Actielijn"
+msgstr "Actielijn"
+
+#: do-planningstool.php:307
+msgctxt "labels"
+msgid "Actielijnen"
+msgstr "Actielijns"
 
 #: do-planningstool.php:309
-msgctxt "labels"
-msgid "Surveys"
-msgstr "Enquêtes"
-
-#: do-planningstool.php:311
 msgctxt "labels"
 msgid "survey"
 msgstr "enquête"
 
-#: do-planningstool.php:312
+#: do-planningstool.php:310
 msgctxt "labels"
 msgid "surveys"
 msgstr "enquêtes"
 
-#: do-planningstool.php:318 do-planningstool.php:368 do-planningstool.php:414
-#: do-planningstool.php:459 do-planningstool.php:504
+#: do-planningstool.php:316 do-planningstool.php:366
 #, php-format
 msgctxt "labels"
 msgid "All %s"
 msgstr "Alle  %s"
 
-#: do-planningstool.php:319 do-planningstool.php:323 do-planningstool.php:325
-#: do-planningstool.php:369 do-planningstool.php:373 do-planningstool.php:375
-#: do-planningstool.php:415 do-planningstool.php:419 do-planningstool.php:421
-#: do-planningstool.php:460 do-planningstool.php:464 do-planningstool.php:466
-#: do-planningstool.php:505 do-planningstool.php:509 do-planningstool.php:511
+#: do-planningstool.php:317 do-planningstool.php:321 do-planningstool.php:323
+#: do-planningstool.php:367 do-planningstool.php:371 do-planningstool.php:373
 #, php-format
 msgctxt "labels"
 msgid "Add %s"
 msgstr "%s toevoegen"
 
-#: do-planningstool.php:320 do-planningstool.php:370 do-planningstool.php:416
-#: do-planningstool.php:461 do-planningstool.php:506
+#: do-planningstool.php:318 do-planningstool.php:368
 #, php-format
 msgctxt "labels"
 msgid "Add new %s"
 msgstr "Nieuwe  %s toevoegen"
 
-#: do-planningstool.php:321 do-planningstool.php:371 do-planningstool.php:380
-#: do-planningstool.php:417 do-planningstool.php:426 do-planningstool.php:462
-#: do-planningstool.php:471 do-planningstool.php:507 do-planningstool.php:516
+#: do-planningstool.php:319 do-planningstool.php:369 do-planningstool.php:378
 msgctxt "labels"
 msgid "Edit?"
 msgstr "Bewerken?"
 
-#: do-planningstool.php:322 do-planningstool.php:372 do-planningstool.php:418
-#: do-planningstool.php:463 do-planningstool.php:508
+#: do-planningstool.php:320 do-planningstool.php:370
 #, php-format
 msgctxt "labels"
 msgid "Edit %s"
 msgstr "%s bewerken"
 
-#: do-planningstool.php:324 do-planningstool.php:374 do-planningstool.php:420
-#: do-planningstool.php:465 do-planningstool.php:510
+#: do-planningstool.php:322 do-planningstool.php:372
 msgctxt "labels"
 msgid "Show"
 msgstr "Toon"
 
-#: do-planningstool.php:326 do-planningstool.php:376 do-planningstool.php:422
-#: do-planningstool.php:467 do-planningstool.php:512
+#: do-planningstool.php:324 do-planningstool.php:374
 #, php-format
 msgctxt "labels"
 msgid "Search %s"
 msgstr "%s zoeken"
 
-#: do-planningstool.php:327 do-planningstool.php:377 do-planningstool.php:423
-#: do-planningstool.php:468 do-planningstool.php:513
+#: do-planningstool.php:325 do-planningstool.php:375
 #, php-format
 msgctxt "labels"
 msgid "No %s available"
 msgstr "Geen  %s gevonden"
 
-#: do-planningstool.php:328 do-planningstool.php:378 do-planningstool.php:424
-#: do-planningstool.php:469 do-planningstool.php:514
+#: do-planningstool.php:326 do-planningstool.php:376
 #, php-format
 msgctxt "labels"
 msgid "No %s in trash"
 msgstr "Geen  %s in de prullenbak"
 
-#: do-planningstool.php:329 do-planningstool.php:379 do-planningstool.php:425
-#: do-planningstool.php:470 do-planningstool.php:515
+#: do-planningstool.php:327 do-planningstool.php:377
 msgctxt "labels"
 msgid "Parent"
 msgstr "Parent"
 
-#: do-planningstool.php:356
+#: do-planningstool.php:354
 msgctxt "labels"
 msgid "Organisation type"
 msgstr "Organisatietype"
 
-#: do-planningstool.php:357
+#: do-planningstool.php:355
 msgctxt "labels"
 msgid "Organisation types"
 msgstr "Organisatietypes"
 
-#: do-planningstool.php:359
+#: do-planningstool.php:357
 msgctxt "labels"
 msgid "organisation type"
 msgstr "organisatietype"
 
-#: do-planningstool.php:360
+#: do-planningstool.php:358
 msgctxt "labels"
 msgid "organisation types"
 msgstr "organisatietypes"
 
-#: do-planningstool.php:403
-msgctxt "labels"
-msgid "Organisation size"
-msgstr "Organisatiegrootte"
-
-#: do-planningstool.php:404
-msgctxt "labels"
-msgid "Organisation sizes"
-msgstr "Organisatiegroottes"
-
-#: do-planningstool.php:406
-msgctxt "labels"
-msgid "organisation size"
-msgstr "organisatiegrootte"
-
-#: do-planningstool.php:407
-msgctxt "labels"
-msgid "organisation sizes"
-msgstr "organisatiegroottes"
-
-#: do-planningstool.php:448
-msgctxt "labels"
-msgid "Region"
-msgstr "Regio"
-
-#: do-planningstool.php:449
-msgctxt "labels"
-msgid "Regions"
-msgstr "Regio's"
-
-#: do-planningstool.php:451
-msgctxt "labels"
-msgid "region"
-msgstr "regio"
-
-#: do-planningstool.php:452
-msgctxt "labels"
-msgid "regions"
-msgstr "regio's"
-
-#: do-planningstool.php:493
-msgctxt "labels"
-msgid "Organisation attitude"
-msgstr "Organisatie-attitude"
-
-#: do-planningstool.php:494
-msgctxt "labels"
-msgid "Organisation attitudes"
-msgstr "Organisatie-attitudes"
-
-#: do-planningstool.php:496
-msgctxt "labels"
-msgid "organisation attitude"
-msgstr "organisatie-attitude"
-
-#: do-planningstool.php:497
-msgctxt "labels"
-msgid "organisation attitudes"
-msgstr "organisatie-attitudes"
-
-#: do-planningstool.php:554
+#: do-planningstool.php:418
 msgctxt "naam template"
 msgid "Maturity score template"
 msgstr "GC Volwassenheidsscore template"
 
-#: do-planningstool.php:571
+#: do-planningstool.php:435
 msgid "General settings"
 msgstr "Algemene instellingen"
 
-#: do-planningstool.php:603
+#: do-planningstool.php:467
 msgid "Documentation"
 msgstr "Documentatie"
 
-#: do-planningstool.php:604
+#: do-planningstool.php:468
 msgid "GC Maturity documentation"
 msgstr "Documentatie Gebuiker Centraal Volwassenheidsscore"
 
-#: do-planningstool.php:618
+#: do-planningstool.php:482
 msgctxt "admin"
 msgid "Here you can edit the surveys."
 msgstr "Hier kun je de enquetes bewerken."
 
-#: do-planningstool.php:653
+#: do-planningstool.php:517
 msgctxt "js"
 msgid "URL"
 msgstr "URL"
 
-#: do-planningstool.php:654
+#: do-planningstool.php:518
 msgctxt "js"
 msgid "Caption"
 msgstr "Onderschrift"
 
-#: do-planningstool.php:655
+#: do-planningstool.php:519
 msgctxt "js"
 msgid "New Window"
 msgstr "Nieuw venster"
 
-#: do-planningstool.php:656
+#: do-planningstool.php:520
 msgctxt "js"
 msgid "Are you sure?"
 msgstr "Weet je het zeker?"
 
-#: do-planningstool.php:683 do-planningstool.php:733
+#: do-planningstool.php:547 do-planningstool.php:597
 msgid "Reset statistics"
 msgstr "Gemiddelden opnieuw instellen"
 
-#: do-planningstool.php:684
+#: do-planningstool.php:548
 msgid "Empty log"
 msgstr "Log leegmaken"
 
-#: do-planningstool.php:689
+#: do-planningstool.php:553
 msgid "Ehm, please allow JavaScript."
 msgstr "Javascript staat uit; zonder JS geen functionaliteit."
 
-#: do-planningstool.php:692
+#: do-planningstool.php:556
 msgid "Press the button!"
 msgstr "Druk die knop in!"
 
-#: do-planningstool.php:712 do-planningstool.php:746
+#: do-planningstool.php:576 do-planningstool.php:610
 msgid "Just a moment please"
 msgstr "Moment geduld alstublieft"
 
-#: do-planningstool.php:781
+#: do-planningstool.php:645
 msgid "Maturity score"
 msgstr "Volwassenheids&shy;score"
 
-#: do-planningstool.php:787
+#: do-planningstool.php:651
 msgctxt "scoring menu"
 msgid "Email settings &amp; general scoring"
 msgstr "Instellingen voor e-mail &amp; scoreteksten"
 
-#: do-planningstool.php:789
+#: do-planningstool.php:653
 msgid "Save options"
 msgstr ""
 
-#: do-planningstool.php:838
+#: do-planningstool.php:702
 #, php-format
 msgctxt "question range"
 msgid "%s - %s"
 msgstr "%s - %s"
 
-#: do-planningstool.php:839
+#: do-planningstool.php:703
 #, php-format
 msgctxt "tablabel"
 msgid "%s - questions %s"
 msgstr "%s - vragen %s"
 
-#: do-planningstool.php:840
+#: do-planningstool.php:704
 #, php-format
 msgctxt "tablabel"
 msgid "Group %s: title, introduction and scoring texts"
 msgstr "Groep %s: titel, inleiding en score-teksten"
 
-#: do-planningstool.php:841
+#: do-planningstool.php:705
 #, php-format
 msgctxt "tablabel"
 msgid "Title for group %s"
 msgstr "Titel voor groep %s"
 
-#: do-planningstool.php:842
+#: do-planningstool.php:706
 #, php-format
 msgctxt "tablabel"
 msgid "Introduction %s"
 msgstr "Inleiding bij groep %s"
 
-#: do-planningstool.php:847
+#: do-planningstool.php:711
 #, php-format
 msgctxt "tablabel"
 msgid "Group %s - %s"
 msgstr "Vragen %s - %s"
 
-#: do-planningstool.php:881
+#: do-planningstool.php:745
 msgid "Score for this section"
 msgstr "Score voor dit onderdeel"
 
-#: do-planningstool.php:893
+#: do-planningstool.php:757
 #, php-format
 msgid ""
 "For section <em>%s</em> you scored over %s, but lesss than %s. Here more "
@@ -316,83 +243,83 @@ msgstr ""
 "Voor onderdeel %s haalde je meer dan %s, maar minder dan %s. Hier een "
 "toelichting."
 
-#: do-planningstool.php:895 do-planningstool.php:1047
+#: do-planningstool.php:759 do-planningstool.php:911
 #, php-format
 msgid "between %s and %s"
 msgstr "tussen %s -  %s"
 
-#: do-planningstool.php:897 do-planningstool.php:1050
+#: do-planningstool.php:761 do-planningstool.php:914
 #, php-format
 msgid "Perfect score: %s!"
 msgstr "Perfecte score: %s!"
 
-#: do-planningstool.php:903
+#: do-planningstool.php:767
 #, php-format
 msgctxt "score range"
 msgid "Text %s<br><small>if score %s.</small>"
 msgstr "Scoretekst %s<br><small>als de score %s is.</small>"
 
-#: do-planningstool.php:904
+#: do-planningstool.php:768
 #, php-format
 msgid "Score %s"
 msgstr "Score %s"
 
-#: do-planningstool.php:927
+#: do-planningstool.php:791
 #, php-format
 msgid "Question %s - %s"
 msgstr "Vraag %s -  %s"
 
-#: do-planningstool.php:935
+#: do-planningstool.php:799
 #, php-format
 msgid "Question %s"
 msgstr "Vraag %s"
 
-#: do-planningstool.php:958
+#: do-planningstool.php:822
 #, php-format
 msgid "Label answer %s"
 msgstr "Antwoord %s label"
 
-#: do-planningstool.php:972
+#: do-planningstool.php:836
 #, php-format
 msgid "Value answer %s"
 msgstr "Antwoord %s score"
 
-#: do-planningstool.php:996
+#: do-planningstool.php:860
 msgctxt "email settings"
 msgid "Email settings"
 msgstr "Instellingen voor de mail"
 
-#: do-planningstool.php:1002
+#: do-planningstool.php:866
 msgctxt "email settings"
 msgid "Sender email address"
 msgstr "E-mailadres van de afzender"
 
-#: do-planningstool.php:1005
+#: do-planningstool.php:869
 msgctxt "email settings"
 msgid "info@gebruikercentraal.nl"
 msgstr "info@gebruikercentraal.nl"
 
-#: do-planningstool.php:1009
+#: do-planningstool.php:873
 msgctxt "email settings"
 msgid "Sender email name"
 msgstr "Naam van de afzender"
 
-#: do-planningstool.php:1012
+#: do-planningstool.php:876
 msgctxt "email settings"
 msgid "Gebruiker Centraal"
 msgstr "Gebruiker Centraal"
 
-#: do-planningstool.php:1016
+#: do-planningstool.php:880
 msgctxt "email settings"
 msgid "Email subject line"
 msgstr "Onderwerp voor e-mailbericht"
 
-#: do-planningstool.php:1019 do-planningstool.php:2162
+#: do-planningstool.php:883 do-planningstool.php:1949
 msgctxt "email settings"
 msgid "Link to your survey results"
 msgstr "Link naar de uitslag van de volwassenheids-enquête"
 
-#: do-planningstool.php:1022
+#: do-planningstool.php:886
 #, php-format
 msgctxt "email settings"
 msgid ""
@@ -415,12 +342,12 @@ msgstr ""
 "Hartelijk dank en vriendelijke groet,\n"
 "Het Gebruiker Centraal Actieteam."
 
-#: do-planningstool.php:1025
+#: do-planningstool.php:889
 msgctxt "email settings"
 msgid "Text in the email to the user"
 msgstr "Tekst in de mail aan de gebruiker"
 
-#: do-planningstool.php:1026
+#: do-planningstool.php:890
 #, php-format
 msgctxt "email settings"
 msgid ""
@@ -430,47 +357,47 @@ msgstr ""
 "De tekst moet deze strings bevatten: <br>%s - voor de URL die we versturen."
 "<br>%s - voor de naam die de gebruiker heeft opgegeven."
 
-#: do-planningstool.php:1034
+#: do-planningstool.php:898
 msgid "General scoring texts"
 msgstr "Score-teksten algemeen"
 
-#: do-planningstool.php:1046
+#: do-planningstool.php:910
 #, php-format
 msgid "The text for scores between %s and %s. "
 msgstr "De tekst voor scores tussen %s en %s. "
 
-#: do-planningstool.php:1056
+#: do-planningstool.php:920
 #, php-format
 msgctxt "score range"
 msgid "Score text %s<br><small>if the total score is %s.</small>"
 msgstr "Scoretekst %s<br><small>als de totale score %s is.</small>"
 
-#: do-planningstool.php:1057
+#: do-planningstool.php:921
 #, php-format
 msgid "General average score %s"
 msgstr "Gemiddelde score: %s"
 
-#: do-planningstool.php:1181
+#: do-planningstool.php:1042
 msgctxt "table header"
 msgid "Chapter"
 msgstr "Onderdeel"
 
-#: do-planningstool.php:1183
+#: do-planningstool.php:1044
 msgctxt "table header"
 msgid "Your score"
 msgstr "Jouw score"
 
-#: do-planningstool.php:1187
+#: do-planningstool.php:1048
 msgctxt "table header"
 msgid "Average score"
 msgstr "Gemiddelde score"
 
-#: do-planningstool.php:1280
+#: do-planningstool.php:1141
 msgctxt "labels"
 msgid "your score"
 msgstr "jouw score"
 
-#: do-planningstool.php:1442
+#: do-planningstool.php:1303
 msgid ""
 "Oopsy daisy. There are no data to display. The survey you requested is "
 "empty. The server may have made an error in saving or retrieving the data, "
@@ -479,16 +406,16 @@ msgstr ""
 "Grutjes, geen gegevens beschikbaar. De server heeft waarschijnlijk een "
 "baaldag. Of Paul heeft zitten broddelen. Het is niet jouw schuld."
 
-#: do-planningstool.php:1481
+#: do-planningstool.php:1342
 msgid "Questions and answers"
 msgstr "Vragen en antwoorden"
 
-#: do-planningstool.php:1577
+#: do-planningstool.php:1438
 msgctxt "About you section"
 msgid "About you"
 msgstr "Jouw gegevens"
 
-#: do-planningstool.php:1580
+#: do-planningstool.php:1441
 msgctxt "About you section"
 msgid ""
 "We can send you a link to your survey results if you fill in your email "
@@ -497,12 +424,12 @@ msgstr ""
 "We kunnen je een link sturen naar de uitslag van je enquete. Laat dan "
 "hieronder je e-mailadres achter en je naam."
 
-#: do-planningstool.php:1585
+#: do-planningstool.php:1446
 msgctxt "About you section"
 msgid "Your name"
 msgstr "Jouw naam"
 
-#: do-planningstool.php:1588
+#: do-planningstool.php:1449
 msgctxt "About you section"
 msgid ""
 "We store your name for a maximum of 3 years; it will be visible on the "
@@ -511,17 +438,17 @@ msgstr ""
 "Je naam slaan we maximaal 3 jaar op, zodat jouw naam zichtbaar blijft in je "
 "resultaatpagina. Wil je dat niet? Laat het veld dan leeg."
 
-#: do-planningstool.php:1588 do-planningstool.php:1596
+#: do-planningstool.php:1449 do-planningstool.php:1457
 msgctxt "About you section"
 msgid "Not required"
 msgstr "Niet verplicht"
 
-#: do-planningstool.php:1593
+#: do-planningstool.php:1454
 msgctxt "About you section"
 msgid "Your emailaddress"
 msgstr "Je e-mailadres"
 
-#: do-planningstool.php:1596
+#: do-planningstool.php:1457
 msgctxt "About you section"
 msgid ""
 "We gebruiken dit e-mailadres om je een link te mailen naar jouw "
@@ -530,12 +457,12 @@ msgstr ""
 "We gebruiken dit e-mailadres om je een link te mailen naar jouw "
 "resultaatpagina."
 
-#: do-planningstool.php:1602
+#: do-planningstool.php:1463
 msgctxt "About you section"
 msgid "Permission to store emailaddress"
 msgstr "Toestemming"
 
-#: do-planningstool.php:1603
+#: do-planningstool.php:1464
 msgctxt "About you section"
 msgid ""
 "Yes, keep me up to date about any developments regarding the maturity model "
@@ -547,131 +474,131 @@ msgstr ""
 "3 jaar na vandaag hiervoor bewaren. Alleen de beheerders van deze website "
 "hebben toegang tot deze gegevens."
 
-#: do-planningstool.php:1731
+#: do-planningstool.php:1518
 msgctxt "table description"
 msgid "Radar graph with your score in this survey."
 msgstr "Radargrafiek met jouw score in deze enquete."
 
-#: do-planningstool.php:1736
+#: do-planningstool.php:1523
 msgctxt "table description"
 msgid "Your score in red; average score in orange."
 msgstr "Jouw score in het rood; gemiddelde score oranje."
 
-#: do-planningstool.php:1739
+#: do-planningstool.php:1526
 msgctxt "table description"
 msgid "Your score in orange."
 msgstr "Jouw score in het oranje."
 
-#: do-planningstool.php:1745 do-planningstool.php:1902
-#: do-planningstool.php:1961
+#: do-planningstool.php:1532 do-planningstool.php:1689
+#: do-planningstool.php:1748
 msgctxt "no data error"
 msgid "No data available. Not your fault, blame the server."
 msgstr ""
 "Geen gegevens beschikbaar. Dit is de schuld van de webserver of van de "
 "programmeur."
 
-#: do-planningstool.php:1817 do-planningstool.php:1872
+#: do-planningstool.php:1604 do-planningstool.php:1659
 #, php-format
 msgid "%s point"
 msgid_plural "%s points"
 msgstr[0] "%s punt"
 msgstr[1] "%s punten"
 
-#: do-planningstool.php:1821
+#: do-planningstool.php:1608
 #, php-format
 msgid "Your average score was %s. "
 msgstr "Jouw gemiddelde score was %s. "
 
-#: do-planningstool.php:1822
+#: do-planningstool.php:1609
 #, php-format
 msgid "Thus far, we received %s survey."
 msgid_plural "Thus far, we received %s surveys. "
 msgstr[0] "Er is %s enquete ingestuurd."
 msgstr[1] "Er zijn %s enquetes ingestuurd. "
 
-#: do-planningstool.php:1824
+#: do-planningstool.php:1611
 #, php-format
 msgid "The overall average score is %s. "
 msgstr "De gemiddelde score is %s. "
 
-#: do-planningstool.php:1827
+#: do-planningstool.php:1614
 #, php-format
 msgid "No text available for %s."
 msgstr "Geen tekst gevonden voor  %s."
 
-#: do-planningstool.php:1828
+#: do-planningstool.php:1615
 msgid "Score per section"
 msgstr "Score per onderdeel"
 
-#: do-planningstool.php:1857
+#: do-planningstool.php:1644
 msgctxt "table description"
 msgid "Your score"
 msgstr "Jouw score"
 
-#: do-planningstool.php:1861
+#: do-planningstool.php:1648
 msgctxt "interpretatie"
 msgid "Review your answers"
 msgstr "Bekijk je antwoorden"
 
-#: do-planningstool.php:1866
+#: do-planningstool.php:1653
 msgctxt "interpretatie"
 msgid "Question"
 msgstr "Vraag"
 
-#: do-planningstool.php:1869
+#: do-planningstool.php:1656
 msgctxt "interpretatie"
 msgid "Your answer"
 msgstr "Jouw antwoord"
 
-#: do-planningstool.php:1876 do-planningstool.php:1883
+#: do-planningstool.php:1663 do-planningstool.php:1670
 msgctxt "interpretatie"
 msgid "Score"
 msgstr "Score"
 
-#: do-planningstool.php:1879
+#: do-planningstool.php:1666
 msgctxt "interpretatie"
 msgid "Average score"
 msgstr "Gemiddelde score"
 
-#: do-planningstool.php:1931
+#: do-planningstool.php:1718
 msgctxt "table description"
 msgid "Average score and your score per section"
 msgstr "Gemiddelde score en jouw score per onderdeel"
 
-#: do-planningstool.php:1934
+#: do-planningstool.php:1721
 msgctxt "table description"
 msgid "Your score per section"
 msgstr "Je score per onderdeel"
 
-#: do-planningstool.php:2031
+#: do-planningstool.php:1818
 #, php-format
 msgid "Your survey is not saved; errors occurred: %s"
 msgstr "Je inzending is niet opgeslagen, omdat er fouten zijn opgetreden: %s"
 
-#: do-planningstool.php:2036
+#: do-planningstool.php:1823
 msgid "Submit"
 msgstr "Versturen"
 
-#: do-planningstool.php:2091
+#: do-planningstool.php:1878
 msgid ""
 "Security checks for your form submission failed. Your data will be discarded."
 msgstr "Er is gerommeld met je inzending; de server negeert deze inzending."
 
-#: do-planningstool.php:2104
+#: do-planningstool.php:1891
 msgid "Your organisation's score"
 msgstr "Score van je organisatie"
 
-#: do-planningstool.php:2121
+#: do-planningstool.php:1908
 msgctxt "naam"
 msgid "Your name"
 msgstr "Jouw naam"
 
-#: do-planningstool.php:2126
+#: do-planningstool.php:1913
 msgctxt "email"
 msgid "Your email address"
 msgstr "Je e-mailadres"
 
-#: do-planningstool.php:2155
+#: do-planningstool.php:1942
 msgctxt "email"
 msgid "No mail text found"
 msgstr "Geen e-mail tekst gevonden"
@@ -698,6 +625,54 @@ msgstr ""
 #. Author URI of the plugin/theme
 msgid "https://wbvb.nl"
 msgstr ""
+
+#~ msgctxt "labels"
+#~ msgid "Organisation size"
+#~ msgstr "Organisatiegrootte"
+
+#~ msgctxt "labels"
+#~ msgid "Organisation sizes"
+#~ msgstr "Organisatiegroottes"
+
+#~ msgctxt "labels"
+#~ msgid "organisation size"
+#~ msgstr "organisatiegrootte"
+
+#~ msgctxt "labels"
+#~ msgid "organisation sizes"
+#~ msgstr "organisatiegroottes"
+
+#~ msgctxt "labels"
+#~ msgid "Region"
+#~ msgstr "Regio"
+
+#~ msgctxt "labels"
+#~ msgid "Regions"
+#~ msgstr "Regio's"
+
+#~ msgctxt "labels"
+#~ msgid "region"
+#~ msgstr "regio"
+
+#~ msgctxt "labels"
+#~ msgid "regions"
+#~ msgstr "regio's"
+
+#~ msgctxt "labels"
+#~ msgid "Organisation attitude"
+#~ msgstr "Organisatie-attitude"
+
+#~ msgctxt "labels"
+#~ msgid "Organisation attitudes"
+#~ msgstr "Organisatie-attitudes"
+
+#~ msgctxt "labels"
+#~ msgid "organisation attitude"
+#~ msgstr "organisatie-attitude"
+
+#~ msgctxt "labels"
+#~ msgid "organisation attitudes"
+#~ msgstr "organisatie-attitudes"
 
 #~ msgid "These are required fields:"
 #~ msgstr "Deze velden zijn verplicht:"
@@ -728,7 +703,7 @@ msgstr ""
 
 #~ msgctxt "labels"
 #~ msgid "Add surveys"
-#~ msgstr "Enquête toevoegen"
+#~ msgstr "Actielijn toevoegen"
 
 #~ msgctxt "labels"
 #~ msgid "View survey"

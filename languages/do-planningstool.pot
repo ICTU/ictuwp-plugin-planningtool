@@ -23,12 +23,12 @@ msgstr ""
 
 #: do-planningstool.php:308
 msgctxt "labels"
-msgid "Survey"
+msgid "Actielijn"
 msgstr ""
 
 #: do-planningstool.php:309
 msgctxt "labels"
-msgid "Surveys"
+msgid "Actielijnen"
 msgstr ""
 
 #: do-planningstool.php:311
