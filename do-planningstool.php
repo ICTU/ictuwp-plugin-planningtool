@@ -97,9 +97,6 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 
         define( 'DOPT__ACTIELIJN_CPT',           "actielijn" );
         define( 'DOPT__GEBEURTENIS_CPT',         "gebeurtenis" );
-        define( 'DOPT__QUESTION_CPT',            "vraag" );
-        define( 'DOPT__QUESTION_GROUPING_CT',    "groepering" );
-        define( 'DOPT__QUESTION_DEFAULT',        "default" );
 
         define( 'DOPT__SURVEY_DEFAULT_USERID',   2600 ); // 't is wat, hardgecodeerde userids (todo: invoerbaar maken via admin)
 
@@ -306,8 +303,8 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
        */
       public function do_pt_init_register_post_type() {
 
-        $typeUC_single = _x( "Survey", "labels", "do-planningstool" );
-        $typeUC_plural = _x( "Surveys", "labels", "do-planningstool" );
+        $typeUC_single = _x( "Actielijn", "labels", "do-planningstool" );
+        $typeUC_plural = _x( "Actielijnen", "labels", "do-planningstool" );
         
         $typeLC_single = _x( "survey", "labels", "do-planningstool" );
         $typeLC_plural = _x( "surveys", "labels", "do-planningstool" );
