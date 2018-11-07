@@ -95,7 +95,8 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
         define( 'DOPT__PATH',                    plugin_dir_path( __FILE__ ) );
         define( 'DOPT__PATH_LANGUAGES',          trailingslashit( DOPT__PATH . 'languages' ) );;
 
-        define( 'DOPT__SURVEY_CPT',              "enquetes" );
+        define( 'DOPT__ACTIELIJN_CPT',           "actielijn" );
+        define( 'DOPT__GEBEURTENIS_CPT',         "gebeurtenis" );
         define( 'DOPT__QUESTION_CPT',            "vraag" );
         define( 'DOPT__QUESTION_GROUPING_CT',    "groepering" );
         define( 'DOPT__QUESTION_DEFAULT',        "default" );
@@ -104,7 +105,7 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 
         define( 'DOPT__SURVEY_CT_ORG_TYPE',      "Organisation type" );
 
-        define( 'DOPT__QUESTION_PREFIX',         DOPT__SURVEY_CPT . '_pf_' ); // prefix for cmb2 metadata fields
+        define( 'DOPT__QUESTION_PREFIX',         DOPT__ACTIELIJN_CPT . '_pf_' ); // prefix for cmb2 metadata fields
         define( 'DOPT__CMBS2_PREFIX',            DOPT__QUESTION_PREFIX . '_form_' ); // prefix for cmb2 metadata fields
         define( 'DOPT__FORMKEYS',                DOPT__CMBS2_PREFIX . 'keys' ); // prefix for cmb2 metadata fields
         
@@ -225,7 +226,7 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 
         global $post;
 
-        if ( is_singular( DOPT__SURVEY_CPT ) && in_the_loop() ) {
+        if ( is_singular( DOPT__ACTIELIJN_CPT ) && in_the_loop() ) {
           // lets go
           return $this->do_pt_frontend_display_survey_results( $post->ID );
         }
@@ -345,12 +346,12 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
           "capability_type"       => "post",
           "map_meta_cap"          => true,
           "hierarchical"          => false,
-          "rewrite"               => array( "slug" => DOPT__SURVEY_CPT, "with_front" => true ),
+          "rewrite"               => array( "slug" => DOPT__ACTIELIJN_CPT, "with_front" => true ),
           "query_var"             => true,
       		"supports"              => array( "title", "editor" ),					
     		);
       		
-      	register_post_type( DOPT__SURVEY_CPT, $args );
+      	register_post_type( DOPT__ACTIELIJN_CPT, $args );
 
 
         $typeUC_single = _x( "Organisation type", "labels", "do-planningstool" );
@@ -397,7 +398,7 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
       		"rest_base"           => "",
       		"show_in_quick_edit"  => false,
       	);
-      	register_taxonomy( DOPT__SURVEY_CT_ORG_TYPE, array( DOPT__SURVEY_CPT ), $args );
+      	register_taxonomy( DOPT__SURVEY_CT_ORG_TYPE, array( DOPT__ACTIELIJN_CPT ), $args );
 
 
 
@@ -482,8 +483,6 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
         echo '<div class="wrap">';
         echo '	<h2>' .  esc_html( get_admin_page_title() ) . '</h2>';
         echo '	<p>' .  _x( 'Here you can edit the surveys.', "admin", "do-planningstool" ) . '</p>';
-        echo $this->do_pt_frontend_get_tableview( false, 0, true );
-        // cmb2
         echo '</div>';
   
   
@@ -530,97 +529,6 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
   
     //====================================================================================================
 
-    /**
-     * Check our WordPress installation is compatible with DO_Planningtool
-     */
-    public function do_pt_admin_options_page() {
-
-      echo '<div class="wrap">';
-      echo '	<h2>' .  esc_html( get_admin_page_title() ) . '</h2>';
-      echo '<div id="thetable">';
-      echo $this->do_pt_frontend_get_tableview();      
-      echo '</div>';
-
-?>
-
-    	<table class="form-table" id="progress">
-    		<tr>
-    			<td>
-    				<input id="startsync" type="button" class="button button-primary" value="<?php _e( 'Reset statistics', "do-planningstool" ); ?>" />
-    				<input id="clearlog" type="button" class="button button-secondary" value="<?php _e( 'Empty log', "do-planningstool" ); ?>" />
-    			</td>
-    		</tr>
-    	</table>
-      <noscript style="background: red; padding: .5em; font-size: 120%;display: block; margin-top: 1em !important; color: white;">
-        <strong><?php _e( 'Ehm, please allow JavaScript.', "do-planningstool" );?></strong>
-      </noscript>
-      <div style="width: 100%; padding-top: 16px;" id="items">&nbsp;</div>
-    	<div style="width: 100%; padding-top: 16px; font-style: italic;" id="log"><?php _e( 'Press the button!', "do-planningstool" );?></div>
-    
-    
-    	<script type="text/javascript">
-    
-    
-    		var _button       = jQuery('input#startsync');
-    		var _clearbutton  = jQuery('input#clearlog');
-    		var _lastrow      = jQuery('#progress tr:last');
-    		var startrec = 1;
-    
-    		var setProgress = function (_message) {
-    			_lastrow.append(_message);
-    		}
-    
-    		jQuery(document).ready(function () {
-    
-    			_button.click(function (e) {
-    
-    				e.preventDefault();
-    				jQuery(this).val('<?php _e( 'Just a moment please', "do-planningstool" );?>').prop('disabled', true);
-    				jQuery( '#log' ).empty();
-    				jQuery( '#thetable' ).empty();
-    				_requestJob( );
-    
-    			});
-    
-    			// clear log div
-    			_clearbutton.click(function() {
-    				jQuery( '#log' ).empty();
-    				jQuery( '#thetable' ).empty();
-    			})
-    
-    		})
-    
-    		var _requestJob = function ( ) {
-    			jQuery.post(ajaxurl, { 'action': 'do_pt_reset',  'dofeedback': '1' }, _jobResult);
-    		}
-    
-    		var _jobResult = function (response) {
-    
-          _button.val('<?php _e( 'Reset statistics', "do-planningstool" ) ?>').prop('disabled', false);
-    
-    			if (response.ajaxrespons_item.length > 0) {
-    				// new messages appear on top. .append() can be used to have new entries at the bottom
-    				jQuery('#thetable').html( response.ajaxrespons_item );
-    			}
-    			if (response.ajaxrespons_messages.length > 0) {
-    				for (var i = 0; i < response.ajaxrespons_messages.length; i++) {
-    					// new messages appear on top. .append() can be used to have new entries at the bottom
-    					jQuery('#log').prepend(response.ajaxrespons_messages[i] + '<br />');
-    				}
-    			}
-    
-    			jQuery(this).val('<?php _e( 'Just a moment please', "do-planningstool" );?>').prop('disabled', true);
-    		}
-    
-    	</script>
-    
-    <?php
-      
-          echo '</div>';
-    
-        }
-      
-      //====================================================================================================
   
       /**
        * Check our WordPress installation is compatible with DO_Planningtool
@@ -633,304 +541,7 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
   
       }
   
-      //========================================================================================================
-    /**
-     * Register the form and fields for our admin form
-     */
-    public function do_pt_admin_form_register_cmb2_form_new() {
-
-      /**
-       * Registers options page menu item and form.
-       */
-      $cmb_options = new_cmb2_box( array(
-      	'id'              => 'do_pt_admin_options_metabox',
-      	'title'           => esc_html__( 'Maturity score', "do-planningstool" ),
-      	'object_types'    => array( 'options-page' ),
-      	'option_key'      => DOPT__PLUGIN_KEY, // The option key and admin menu page slug.
-      	'icon_url'        => 'dashicons-admin-settings', // Menu icon. Only applicable if 'parent_slug' is left empty.
-      	'capability'      => 'manage_options', // Cap required to view options-page.
-        'tab_group'       => DOPT__PLUGIN_KEY,
-        'tab_title'       => _x( 'Email settings &amp; general scoring', 'scoring menu', "do-planningstool"),      	
-        'display_cb'      => 'yourprefix_options_display_with_tabs',
-      	'save_button'     => esc_html__( 'Save options', "do-planningstool" ), 
-      ) );
-      /*
-       * Options fields ids only need
-       * to be unique within this box.
-       * Prefix is not needed.
-       */
-      
-      
-        $tabscounter = 0;
-        
-        $key = 'SITESCORE';
-        
-
-        $formfields_data    = do_pt_data_get_survey_json();
-        $sectiontitle_prev  = '';
-
-        if ( $formfields_data ) {
-          
-          // there are questions and answers
-          
-          // first, let's set up the forms for the general test results
-
-          $counter          = 0;
-          $tabscounter      = 0;  
-          $question_counter = 0;  
-          $total_answer_cnt = 0;  
-          $counter_group    = 0;
-
-          $questionsnumber_start  =   1;
-          $questionsnumber_end    =   0;
-          $questionsnumber_prev   =   0;
-          
-          foreach ( $formfields_data as $group_key => $value) {
-
-            // $group_key = 'g1', 'g2', 'g3', etc
-            $tabscounter++;
-            $counter_group++;
-
-            $key_grouplabel         = $group_key . '_group_label';
-            $key_group_description  = $group_key . '_group_description';
-            $grouplabel             = gcms_aux_get_value_for_cmb2_key( $key_grouplabel, $value->group_label );
-            $groupdescription       = gcms_aux_get_value_for_cmb2_key( $key_group_description, $value->group_description );
-            $groupquestions         = (array) $value->group_questions[0];
-
-            $questionsnumber_start  = ( $questionsnumber_prev + $tabscounter );
-            $questionsnumber_end    = ( ( $questionsnumber_start - 1 ) + count( $groupquestions ) );
-            $questionsnumber_prev   = $questionsnumber_end;
-
-            $questionrange          = sprintf( _x( '%s - %s', 'question range', "do-planningstool" ), ( $question_counter + 1 ), ( $question_counter + count( $groupquestions ) ) );
-            $tablabel               = sprintf( _x( '%s - questions %s', 'tablabel', "do-planningstool" ), $tabscounter, $questionrange );
-            $groupheader            = sprintf( _x( 'Group %s: title, introduction and scoring texts', 'tablabel', "do-planningstool" ), $counter_group );
-            $grouptitle_label       = sprintf( _x( 'Title for group %s', 'tablabel', "do-planningstool" ), $counter_group );
-            $groupintro_label       = sprintf( _x( 'Introduction %s', 'tablabel', "do-planningstool" ), $counter_group );
-
-            // maak een tab aan voor de vragen van een groep
-            $args = array(
-            	'id'           => DOPT__PLUGIN_KEY . $group_key,
-            	'menu_title'   => sprintf( _x( 'Group %s - %s', 'tablabel', "do-planningstool" ), $tabscounter, '(' . $questionrange . ')' ),
-            	'object_types' => array( 'options-page' ),
-            	'option_key'   => DOPT__PLUGIN_KEY . DOPT__PLUGIN_SEPARATOR . $group_key,
-            	'parent_slug'  => DOPT__PLUGIN_KEY,
-            	'tab_group'    => DOPT__PLUGIN_KEY,
-            	'tab_title'    => $tablabel,
-              'display_cb'   => 'yourprefix_options_display_with_tabs',
-            );
-            
-            $questions_tab    = new_cmb2_box( $args );
-
-            $questions_tab->add_field( array(
-            	'name'          => $groupheader,
-            	'type'          => 'title',
-            	'id'            => DOPT__CMBS2_PREFIX . 'start_section' . $counter_group
-            ) );
-
-            $questions_tab->add_field( array(
-            	'name'          => $grouptitle_label,
-          		'type'          => 'text',
-            	'id'            => $key_grouplabel,
-            	'default'       => $grouplabel
-            ) );
-      
-            $questions_tab->add_field( array(
-            	'name'          => $groupintro_label,
-          		'type'          => 'textarea',
-            	'id'            => $key_group_description,
-            	'default'       => $groupdescription
-            ) );
-
-            
-            // scoring texts
-            $questions_tab->add_field( array(
-            	'name'          => __( 'Score for this section', "do-planningstool" ),
-            	'type'          => 'title',
-            	'id'            => DOPT__CMBS2_PREFIX . 'start_scoring_section' . $counter_group
-            ) );
-            
-            $counter = 0;
-            
-            // code voor onderhouden namen en inleiding
-            while( $counter <  DOPT__SCORE_MAX ) {
-            
-              $counter++;
-            
-              $default = sprintf( __( 'For section <em>%s</em> you scored over %s, but lesss than %s. Here more about that.', "do-planningstool" ), gcms_aux_get_value_for_cmb2_key( $key ), ( $counter - 1 ), $counter );
-              
-              $label = sprintf( __( 'between %s and %s', "do-planningstool" ), ( $counter - 1 ), $counter );
-              if ( DOPT__SCORE_MAX == $counter ) {
-                $default = sprintf( __( 'Perfect score: %s!', "do-planningstool" ), $counter );
-              }
-            
-              $fieldkey = $group_key . GCMS_SCORESEPARATOR . $counter;
-            
-              $questions_tab->add_field( array(
-              	'name'          => sprintf( _x( 'Text %s<br><small>if score %s.</small>', 'score range', "do-planningstool" ), $counter, $label ),
-              	'description'   => sprintf( __( 'Score %s', "do-planningstool" ), $label . ' (' . $fieldkey . ')' ),
-            		'type'          => 'wysiwyg',
-              	'id'            => $fieldkey,
-              	'default'       => $default
-              ) );
-            
-            }
-
-
-            // loop through the questions
-            foreach ( $groupquestions as $question_key => $question_single ) {
-
-              $question_counter++;
-  
-              $options          = array();
-              $selectrandom     = array();
-              $default          = '';
-              $answers          = (array) $question_single->question_answers[0];
-              $question_label   = $question_single->question_label;
-
-              $questionkey      =  $group_key . DOPT__PLUGIN_SEPARATOR . $question_key;
-
-              $questions_tab->add_field( array(
-              	'name'          =>  sprintf( __( 'Question %s - %s', "do-planningstool" ), $question_counter, gcms_aux_get_value_for_cmb2_key( $questionkey, $question_label, DOPT__PLUGIN_KEY . DOPT__PLUGIN_SEPARATOR . $group_key ) ),
-              	'type'          => 'title',
-              	'id'            => DOPT__CMBS2_PREFIX . '_section_' . $key . '_' . $group_key . '_' . $question_counter
-              ) );
-              
-              // put it together
-              $fieldkey = $group_key . DOPT__PLUGIN_SEPARATOR . $question_key;
-              $questions_tab->add_field( array(
-            		'name'          => sprintf( __( 'Question %s', "do-planningstool" ), $question_counter ),
-              	'id'            => $fieldkey,
-            		'type'          => 'text',
-              	'default'       => $question_label,
-              	'description'   => $fieldkey,
-              	'attributes'    => array(
-              		'required'    => 'required',
-              	),
-            	) );
-
-              $optioncounter = 0;
-
-              // get all possible answers
-              foreach ( $answers as $answer_key => $answer ) {
-                
-                $total_answer_cnt++;
-                $optioncounter++;
-  
-                $this_answer_key  = $group_key . DOPT__PLUGIN_SEPARATOR . $question_key . DOPT__PLUGIN_SEPARATOR . $answer_key;
-                  
-                // put it together
-                $fieldkey = $this_answer_key . DOPT__KEYS_LABEL;
-              	$questions_tab->add_field( array(
-              		'name'          => sprintf( __( 'Label answer %s', "do-planningstool" ), $optioncounter ),
-                	'id'            => $fieldkey,
-              		'type'          => 'text',
-                	'default'       => $answer->answer_label,
-                	'description'   => $fieldkey,
-                	'attributes'    => array(
-                		'required'    => 'required',
-                	),
-              	) );
-                
-                // put it together
-                $fieldkey = $this_answer_key . DOPT__KEYS_VALUE;
-              	$questions_tab->add_field( array(
-              		'type'          => 'text',
-              		'name'          => sprintf( __( 'Value answer %s', "do-planningstool" ), $optioncounter ),
-                	'id'            => $fieldkey,
-                	'default'       => $answer->answer_value,
-                	'description'   => $fieldkey,
-                	'attributes'    => array(
-                		'required'    => 'required',
-                	),
-              	) );
-
-              }
-
-            }
-
-          }
-
-        }
-        else {
-          // fout bij het ophalen van de formulierwaarden
-          do_pt_aux_write_to_log('Fout bij ophalen van de formulierwaarden');
-        }
-
-
-
-        $cmb_options->add_field( array(
-        	'name'          => _x( 'Email settings', "email settings", "do-planningstool" ),
-        	'type'          => 'title',
-        	'id'            => DOPT__CMBS2_PREFIX . 'start_section_emailsection'
-        ) );
-
-        $cmb_options->add_field( array(
-        	'name'          => _x( 'Sender email address', "email settings", "do-planningstool" ),
-      		'type'          => 'text',
-        	'id'            => 'mail-from-address',
-        	'default'       => _x( 'info@gebruikercentraal.nl', "email settings", "do-planningstool" )
-        ) );
-
-        $cmb_options->add_field( array(
-        	'name'          => _x( 'Sender email name', "email settings", "do-planningstool" ),
-      		'type'          => 'text',
-        	'id'            => 'mail-from-name',
-        	'default'       => _x( 'Gebruiker Centraal', "email settings", "do-planningstool" )
-        ) );
-
-        $cmb_options->add_field( array(
-        	'name'          => _x( 'Email subject line', "email settings", "do-planningstool" ),
-      		'type'          => 'text',
-        	'id'            => 'mail-subject',
-        	'default'       => _x( 'Link to your survey results', "email settings", "do-planningstool" )
-        ) );
-
-        $default = sprintf( _x( "Hi %s,\n\nThank you for using this tool.\nFor your future reference, here is a link to the results page of the survey you just filled out:\n%s\n\nKind regards,\nThe Gebruiker Centraal Team.", "email settings", "do-planningstool" ), DOPT__NAMEPLACEHOLDER, DOPT__URLPLACEHOLDER );
-
-        $cmb_options->add_field( array(
-        	'name'          => _x( 'Text in the email to the user', "email settings", "do-planningstool" ),
-        	'description'   => '<span style="font-weight: 700; background: white; color: black;">' . sprintf( _x( 'This text should contain these strings:<br>%s - this is the placeholder for the link we send.<br>%s - this is the placeholder for user\'s name.', "email settings",  "do-planningstool" ), DOPT__URLPLACEHOLDER, DOPT__NAMEPLACEHOLDER ) . '</span>',
-      		'type'          => 'wysiwyg',
-        	'id'            => DOPT__TEXTEMAIL,
-        	'default'       => $default,
-        ) );
-      
-
-        $cmb_options->add_field( array(
-        	'name'          => __( 'General scoring texts', "do-planningstool" ),
-        	'type'          => 'title',
-        	'id'            => DOPT__CMBS2_PREFIX . 'start_section_scoring'
-        ) );
-
-        // reset
-        $counter = 0;
-
-        while( $counter <  DOPT__SCORE_MAX ) {
     
-          $counter++;
-    
-          $default  = sprintf( __( 'The text for scores between %s and %s. ', "do-planningstool" ), ( $counter - 1 ), $counter );
-          $label    = sprintf( __( 'between %s and %s', "do-planningstool" ), ( $counter - 1 ), $counter );
-
-          if ( DOPT__SCORE_MAX == $counter ) {
-            $default = sprintf( __( 'Perfect score: %s!', "do-planningstool" ), $counter );
-          }
-    
-          $fieldkey = $key . GCMS_SCORESEPARATOR . $counter;
-    
-          $cmb_options->add_field( array(
-          	'name'          => sprintf( _x( 'Score text %s<br><small>if the total score is %s.</small>', 'score range', "do-planningstool" ), $counter, $label ),
-          	'description'   => sprintf( __( 'General average score %s', "do-planningstool" ), $label . ' (' . $fieldkey . ')' ),
-        		'type'          => 'wysiwyg',
-          	'id'            => $fieldkey,
-          	'default'       => $default
-          ) );
-
-        
-        }
-
-  
-    }    
 
     //====================================================================================================  
       /**
@@ -1288,22 +899,8 @@ catch( err ) { console.log( err ); } ' );
        */
       public function do_pt_frontend_display_survey_results( $postid ) {
         
-        $returnstring     = '';
+        $returnstring     = 'do_pt_frontend_display_survey_results';
 
-        if ( ! $this->survey_data ) {
-          $this->survey_data = $this->do_pt_data_get_user_answers_and_averages( $postid );
-        }
-
-        if ( $this->survey_data ) {
-
-          $returnstring .= $this->do_pt_frontend_get_graph( false );
-          $returnstring .= $this->do_pt_frontend_get_interpretation( false );
-          $returnstring .= $this->do_pt_frontend_get_tableview( false );      
-
-        }
-        else {
-          $returnstring .= '<p>' . __( "Oopsy daisy. There are no data to display. The survey you requested is empty. The server may have made an error in saving or retrieving the data, or more likely: our developer botched up. It's not your fault.", "do-planningstool" ) . '</p>';
-        }
 
         return $returnstring;
       
@@ -1323,10 +920,6 @@ catch( err ) { console.log( err ); } ' );
 
           add_shortcode( 'gcms_survey', 'do_pt_frontend_register_shortcode' );
 
-          add_action( 'cmb2_init',        array( $this, 'do_pt_frontend_form_register_cmb2_form' ) );
-          add_action( 'cmb2_after_init',  'do_pt_frontend_form_handle_posting' );
-          
-          add_action( 'cmb2_admin_init',  array( $this, 'do_pt_admin_form_register_cmb2_form_new' ) );
 
         }  // DOPT__PLUGIN_USE_CMB2
   
@@ -1338,428 +931,13 @@ catch( err ) { console.log( err ); } ' );
      * Register the form and fields for our front-end submission form
      */
     public function do_pt_frontend_form_register_cmb2_form() {
-
-    	$cmb = new_cmb2_box( array(
-    		'id'            => DOPT__METABOX_ID,
-    		'title'         => __( "Questions and answers", "do-planningstool" ),
-    		'object_types'  => array( 'post' ),
-    		'hookup'        => false,
-    		'save_fields'   => true,
-        'cmb_styles'    => false, // false to disable the CMB stylesheet
-    	) );
-
-      $sectiontitle_prev  = '';
-      $formfields_data    = do_pt_data_get_survey_json();
-
-      if ( $formfields_data ) {
-
-        // loop through the groups
-        foreach ( $formfields_data as $group_key => $value ) {
-
-          $collectionkey          = DOPT__PLUGIN_KEY . DOPT__PLUGIN_SEPARATOR . $group_key;
-          $key_grouplabel         = $group_key . '_group_label';
-          $key_group_description  = $group_key . '_group_description';
-          $grouplabel             = gcms_aux_get_value_for_cmb2_key( $key_grouplabel, $value->group_label, $collectionkey );
-          $groupdescription       = gcms_aux_get_value_for_cmb2_key( $key_group_description, $value->group_description, $collectionkey  );
-          $groupquestions         = (array) $value->group_questions[0];
-
-          $cmb->add_field( array(
-          	'name'          => $grouplabel,
-          	'description'   => $groupdescription,
-          	'type'          => 'title',
-          	'id'            => DOPT__CMBS2_PREFIX . '_section_' . $group_key
-          ) );
-
-          // loop through the questions
-          foreach ( $groupquestions as $question_key => $question_single ) {
-
-            $options          = array();
-            $selectrandom     = array();
-            $default          = '';
-            $answers          = (array) $question_single->question_answers[0];
-            $question_label   = $question_single->question_label;
-
-
-            // get all possible answers
-            foreach ( $answers as $answer_key => $answer ) {
-
-              $this_answer_key              = $group_key . DOPT__PLUGIN_SEPARATOR . $question_key . DOPT__PLUGIN_SEPARATOR . $answer_key;
-
-              $label = gcms_aux_get_value_for_cmb2_key( 
-                $this_answer_key . DOPT__KEYS_LABEL, 
-                $answer->answer_label,
-                $collectionkey 
-              );
-              
-
-              $options[ $this_answer_key  ] = $label;
-              $selectrandom[]               = $this_answer_key;
-
-            }
-
-            // only set a random default if we are debugging
-            if ( WP_DEBUG && DOPT__PLUGIN_DO_DEBUG ) {
-              $default = $selectrandom[ array_rand( $selectrandom ) ];
-            }
-
-            $questionkey    = $group_key . DOPT__PLUGIN_SEPARATOR . $question_key;
-            $question_label = $question_single->question_label;
-            
-            $label = gcms_aux_get_value_for_cmb2_key( 
-                      $questionkey, 
-                      $question_label, 
-                      $collectionkey 
-                    );
-
-            // put it together
-          	$cmb->add_field( array(
-          		'name'    => $label,
-          		'id'      => $group_key . DOPT__PLUGIN_SEPARATOR . $question_key,
-          		'type'    => 'radio',
-              'options' => $options,
-              'default' => $default,
-            	'attributes'  => array(
-            		'required'    => 'required',
-            	),
-              
-          	) );
-
-          }
-        }
-      }
-      else {
-        // fout bij het ophalen van de formulierwaarden
-        do_pt_aux_write_to_log('Fout bij ophalen van de formulierwaarden');
-      }
-
-
-      $yournamedefault = do_pt_get_post_or_cookie( DOPT__SURVEY_YOURNAME );
-      $yourmaildefault = do_pt_get_post_or_cookie( DOPT__SURVEY_EMAILID );
-      
-      $cmb->add_field( array(
-    		'name'    => _x( 'About you', 'About you section', "do-planningstool" ),
-      	'type'    => 'title',
-      	'id'      => DOPT__CMBS2_PREFIX . 'start_section_survey_user_data',
-    		'desc'    => _x( 'We can send you a link to your survey results if you fill in your email address here.', 'About you section', "do-planningstool" ),
-      ) );
-
-
-    	$cmb->add_field( array(
-    		'name'    => _x( 'Your name', 'About you section', "do-planningstool" ),
-    		'id'      => DOPT__SURVEY_YOURNAME,
-    		'type'    => 'text',
-    		'desc'    => _x( "We store your name for a maximum of 3 years; it will be visible on the resultpage. Leave this empty if you don't want this.", 'About you section', "do-planningstool" ) . '<br>' . _x( 'Not required', 'About you section', "do-planningstool" ),
-    		'default' => $yournamedefault,
-    	) );
-      
-    	$cmb->add_field( array(
-    		'name'    => _x( 'Your emailaddress', 'About you section', "do-planningstool" ),
-    		'id'      => DOPT__SURVEY_EMAILID,
-    		'type'    => 'text_email',
-    		'desc'    => _x( 'We gebruiken dit e-mailadres om je een link te mailen naar jouw resultaatpagina.', 'About you section', "do-planningstool" ) . '<br>' . _x( 'Not required', 'About you section', "do-planningstool" ),
-    		'default' => $yourmaildefault,
-    	) );
-    	
-
-      $cmb->add_field( array(
-    		'name'    => _x( 'Permission to store emailaddress', 'About you section', "do-planningstool" ),
-    		'desc'    => _x( 'Yes, keep me up to date about any developments regarding the maturity model system. You may store my email address and name for at most 3 years. Only site-admins have access to these data.', 'About you section', "do-planningstool" ),
-      	'id'   => DOPT__SURVEY_GDPR_CHECK,
-      	'type' => 'checkbox',
-      ) );    	
-    	
-    	$default = '';
-
-      // organisation types
-      $terms = get_terms( array(
-        'taxonomy' => DOPT__SURVEY_CT_ORG_TYPE,
-        'hide_empty' => false,
-      ) );
-    
-      if ( ! empty( $terms ) && ! is_wp_error( $terms ) ){
-        $options = array();
-        $taxinfo = get_taxonomy( DOPT__SURVEY_CT_ORG_TYPE );
-    
-        foreach ( $terms as $term ) {
-          $options[ $term->term_id ] = $term->name;
-          // $default = $term->term_id;
-        }
-    
-      	$cmb->add_field( array(
-      		'name'    => $taxinfo->labels->singular_name,
-      		'id'      => DOPT__QUESTION_PREFIX . DOPT__SURVEY_CT_ORG_TYPE,
-      		'type'    => 'radio',
-          'options' => $options,
-          'default' => $default,
-      	) );
-    
-      }
-
-
-
-
+	    echo 'do_pt_frontend_form_register_cmb2_form';
     }  
 
     //====================================================================================================
 
-    private function do_pt_frontend_get_graph( $doecho = false ) {
-      
-      if ( ! $this->survey_data ) {
-        $this->survey_data = $this->do_pt_data_get_user_answers_and_averages( $postid );
-      }
-      
-      $return = '';
-      
-      if ( $this->survey_data ) {
-
-        $titleid = 'grafiek_amchart';
-
-        $return .= '<div class="radarchart" id="amchart1" style="min-height: 500px; width: 100%" aria-labelledby="' . $titleid . '"></div>';
-        $return .= '<p id="' . $titleid . '">';
-        $return .= '<span class="visuallyhidden">';
-        $return .= _x( "Radar graph with your score in this survey.", "table description", "do-planningstool" );
-        $return .= '</span>';
-
-
-        if ( DOPT__FRONTEND_SHOW_AVERAGES ) {
-          $return .= _x( "Your score in red; average score in orange.", "table description", "do-planningstool" );
-        }
-        else {
-          $return .= _x( "Your score in orange.", "table description", "do-planningstool" );
-        }
-        $return .= '</p>';
-
-      }
-      else {
-        $return = '<p>' . _x( "No data available. Not your fault, blame the server.", "no data error", "do-planningstool" ) . '<p>';
-      }
-      
-
-      if ( $doecho ) {
-        echo $return;
-      }
-      else {
-        return $return;
-      }
-
-    }
-
-    //====================================================================================================
-
-    private function do_pt_frontend_get_percentage( $score = 0, $max = 5, $doecho = false ) {
-
-      $return = '';
-
-      if ( $max ) {
-
-        $displayvalue = ( 100 / $max ); // percentage            
-        $return       = ( $score * $displayvalue ) . '%';
-        
-        $counter = 0;
-        
-
-        $return .= '<div class="star-rating">';
-        
-        while( $counter <  $max ) {
-          if ( $score > $counter ) {
-            $return .= '<svg style="display: none;" class="ja" height="494" viewBox="0 0 507 494" width="507" xmlns="http://www.w3.org/2000/svg"><path d="m253.5 408.75-156.6447697 84.207131 29.9164887-178.353566-126.72828059-126.310696 175.13417659-26.021434 78.322385-162.271435 78.322385 162.271435 175.134177 26.021434-126.728281 126.310696 29.916489 178.353566z" fill="#ffffff" fill-rule="evenodd" stroke="#000"/></svg>';
-          }
-          else {
-            $return .= '<svg style="display: none;" class="nee" height="494" viewBox="0 0 507 494" width="507" xmlns="http://www.w3.org/2000/svg"><path d="m253.5 408.75-156.6447697 84.207131 29.9164887-178.353566-126.72828059-126.310696 175.13417659-26.021434 78.322385-162.271435 78.322385 162.271435 175.134177 26.021434-126.728281 126.310696 29.916489 178.353566z" fill="#ffffff" fill-rule="evenodd" stroke="#000"/></svg>';
-          }
-          $counter++;
-          
-        }
-        $return .= '</div>';
-
-      }
-      
-      if ( $doecho ) {
-        echo $return;
-      }
-      else {
-        return $return;
-      }
-
-    }
-
-    //====================================================================================================
-
     private function do_pt_frontend_get_interpretation( $userdata = array(), $doecho = false ) {
-      
-      if ( ! $this->survey_data ) {
-        $this->survey_data = $this->do_pt_data_get_user_answers_and_averages( $postid );
-      }
-      
-      $return = '';
-      
-      if ( $this->survey_data ) {
-
-        if ( isset( $this->survey_data['averages'] ) ) {
-
-          $overall_average = number_format_i18n( $this->survey_data['averages']['overall'], 0 );
-
-          $total_number_of_surveys  = get_option( DOPT__AVGS_NR_SURVEYS, 1 );
-          $site_average             = get_option( DOPT__AVGS_OVERALL_AVG, 1 );
-          $collectionkey            = DOPT__PLUGIN_KEY . DOPT__PLUGIN_SEPARATOR . $key;
-
-          $punten     = sprintf( _n( '%s point', '%s points', $overall_average, "do-planningstool" ), $overall_average );
-          $key        = 'SITESCORE';
-          $fieldkey   = $key . GCMS_SCORESEPARATOR . number_format_i18n( $this->survey_data['averages']['overall'], 0 ); 
-
-          $return     .= '<p>' . sprintf( __( 'Your average score was %s. ', "do-planningstool" ), $punten );
-          $return     .= sprintf( _n( 'Thus far, we received %s survey.', 'Thus far, we received %s surveys. ', $total_number_of_surveys, "do-planningstool" ), $total_number_of_surveys );
-          if ( DOPT__FRONTEND_SHOW_AVERAGES ) {
-            $return   .= sprintf( __( 'The overall average score is %s. ', "do-planningstool" ), $site_average );
-          }          
-          $return     .= '</p>';
-          $return     .= '<p>' . gcms_aux_get_value_for_cmb2_key( $fieldkey, sprintf( __( 'No text available for %s.', "do-planningstool" ), $fieldkey ) ) . '</p>';
-          $return     .= '<h2>' . __( 'Score per section', "do-planningstool" ) . '</h2>';
-          
-          $counter = 0;
-          
-          foreach( $this->survey_data['user_answers'] as $key => $value ){        
-
-            $counter++;
-
-            $jouwgemiddelde         = $this->survey_data['averages']['groups'][$key];
-            $collectionkey          = DOPT__PLUGIN_KEY . DOPT__PLUGIN_SEPARATOR . $key;
-            $jouwscore              = number_format_i18n( $jouwgemiddelde, 0 );
-            $thesectionid           = sanitize_title( $key . "_" . $counter );
-            $titleid                = sanitize_title( $thesectionid . '_title' );
-            $key_grouplabel         = $key . '_group_label';
-/*
-          $key_group_description  = $group_key . '_group_description';
-          $grouplabel             = gcms_aux_get_value_for_cmb2_key( $key_grouplabel, $value->group_label, $collectionkey );
-          $groupdescription       = gcms_aux_get_value_for_cmb2_key( $key_group_description, $value->group_description, $collectionkey  );
-*/  
-
-            $fieldkey               = $key . GCMS_SCORESEPARATOR . $jouwscore; // g2_score_4
-            $key_grouplabel         = $key . '_group_label';
-
-
-            
-            $titel                  = gcms_aux_get_value_for_cmb2_key( $key_grouplabel, $this->survey_data['default_titles'][ $key_grouplabel ], $collectionkey );
-
-            $return .= '<section aria-labelledby="' . $titleid . '" id="' . $thesectionid . '" class="survey-result">';
-            $return .= '<h3 class="rating-section-title"><span id="' . $titleid . '">' . $titel;
-            $return .= ' <span class="visuallyhidden">' . _x( "Your score", "table description", "do-planningstool" ) . '</span></span> : ' . $this->do_pt_frontend_get_percentage( $jouwscore, DOPT__SCORE_MAX );
-            $return .= '</h3>';
-            $return .= '<p>' . gcms_aux_get_value_for_cmb2_key( $fieldkey ) . '</p>';
-            $return .= '<details>';
-            $return .= '  <summary>' . _x( "Review your answers", "interpretatie", "do-planningstool" ) . '</summary>';
-
-            if ( $value ) {
-              $return .= '<dl>';
-              foreach( $value as $vragen => $antwoorden ){        
-                $return .= '<dt>' . _x( "Question", "interpretatie", "do-planningstool" ) . '</dt>';
-                $return .= '<dd>' . $antwoorden['question_label'] . '</dd>';
-
-                $return .= '<dt>' . _x( "Your answer", "interpretatie", "do-planningstool" ) . '</dt>';
-                $return .= '<dd>' . $antwoorden['answer_label'] . '</dd>';
-
-                $score = sprintf( _n( '%s point', '%s points', $antwoorden['answer_value'], "do-planningstool" ), $antwoorden['answer_value'] );
-
-                if ( DOPT__FRONTEND_SHOW_AVERAGES ) {
-
-                  $return .= '<dt>' . _x( "Score", "interpretatie", "do-planningstool" ) . '</dt>';
-                  $return .= '<dd>' . $score . '</dd>';
-                  
-                  $return .= '<dt class="space-me">' . _x( "Average score", "interpretatie", "do-planningstool" ) . '</dt>';
-                  $return .= '<dd class="space-me">' . $antwoorden['answer_site_average'] . '</dd>';
-                }
-                else {
-                  $return .= '<dt>' . _x( "Score", "interpretatie", "do-planningstool" ) . '</dt>';
-                  $return .= '<dd class="space-me">' . $score . '</dd>';
-                  
-                }
-              }
-              $return .= '</dl>';
-              
-            }
-
-            $return .= '</details>';
-            $return .= '</section>';
-
-          }
-
-        }
-
-
-      }
-      else {
-        $return .= '<p>' . _x( "No data available. Not your fault, blame the server.", "no data error", "do-planningstool" ) . '<p>';
-      }      
-
-      if ( $doecho ) {
-        echo $return;
-      }
-      else {
-        return $return;
-      }
-
-    }
-
-    //====================================================================================================
-
-    private function do_pt_frontend_get_tableview( $doecho = false ) {
-
-      $return = '';
-
-      if ( ! $this->survey_data ) {
-        $this->survey_data = $this->do_pt_data_get_user_answers_and_averages( $postid );
-      }
-      
-      if ( $this->survey_data ) {
-
-        if ( isset( $this->survey_data['cols'] ) ) {
-
-          $return .= '	<table class="gcms-score">' . "\n";
-                  
-          if ( DOPT__FRONTEND_SHOW_AVERAGES ) {
-            $return .= '<caption>' . _x( "Average score and your score per section", "table description", "do-planningstool" ) . "</caption>\n";
-          }
-          else {
-            $return .= '<caption>' . _x( "Your score per section", "table description", "do-planningstool" ) . "</caption>\n";
-          }
-          $return .= '<tr>';
-          foreach( $this->survey_data['cols'] as $key => $value ){        
-            $return .= '<th scope="col">' . $value . "</th>\n";
-          }
-          $return .= "</tr>\n";
-        
-          if ( isset( $this->survey_data['rows'] ) ) {
-
-            foreach( $this->survey_data['rows'] as $key => $value ){        
-  
-              $return .= '<tr>';
-              $return .= '<th scope="row">' . $value[ DOPT__TABLE_COL_TH ] . '</th>';
-  
-              $return .= '<td>' . number_format_i18n( $value[ DOPT__TABLE_COL_USER_AVERAGE ], 1)  . "</td>";
-              if ( DOPT__FRONTEND_SHOW_AVERAGES ) {
-                  $return .= '<td>' . number_format_i18n( $value[ DOPT__TABLE_COL_SITE_AVERAGE ], 1)  . "</td>";
-              }              
-              $return .= "</tr>\n";
-  
-            }
-          }
-          $return .= "</table>\n";
-
-        }
-        else {
-          $return .= '<p>' . _x( "No data available. Not your fault, blame the server.", "no data error", "do-planningstool" ) . '<p>';
-        }
-
-      
-      }
-
-      if ( $doecho ) {
-        echo $return;
-      }
-      else {
-        return $return;
-      }
-    
+	    echo 'do_pt_frontend_get_interpretation';
     }
 
     //====================================================================================================
@@ -1903,7 +1081,7 @@ function do_pt_frontend_form_handle_posting() {
 	$post_data['post_name']   = sanitize_title( $rand . '-' . $sanitized_values[ DOPT__SURVEY_YOURNAME ] );
   $post_data['post_author'] = $user_id ? $user_id : DOPT__SURVEY_DEFAULT_USERID;
   $post_data['post_status'] = 'publish';
-  $post_data['post_type']   = DOPT__SURVEY_CPT;
+  $post_data['post_type']   = DOPT__ACTIELIJN_CPT;
 
   $post_content = '';
   if ( $sanitized_values[ DOPT__SURVEY_YOURNAME ] ) {
@@ -2026,7 +1204,7 @@ function gcms_data_reset_values( $givefeedback = true ) {
   update_option( DOPT__AVGS_OVERALL_AVG, 0 );  
   
   $args = array(
-    'post_type'       => DOPT__SURVEY_CPT,
+    'post_type'       => DOPT__ACTIELIJN_CPT,
     'posts_per_page'  => '-1',
 		'post_status'     => 'publish',
     'order'           => 'ASC'
@@ -2056,7 +1234,7 @@ function gcms_data_reset_values( $givefeedback = true ) {
       
       $counter++;
       $postid           = get_the_id();
-      $subjects[]       = $counter . ' ' . DOPT__SURVEY_CPT . ' = ' . get_the_title() . '(' . $postid . ')';
+      $subjects[]       = $counter . ' ' . DOPT__ACTIELIJN_CPT . ' = ' . get_the_title() . '(' . $postid . ')';
       
       $user_answers_raw     = get_post_meta( $postid );    	
       $user_answers         = maybe_unserialize( $user_answers_raw[DOPT__FORMKEYS][0] );
@@ -2346,7 +1524,7 @@ add_filter('the_post_navigation', 'do_pt_remove_post_navigation_for_survey');
 
 function do_pt_remove_post_navigation_for_survey( $args ){
 
-  if ( DOPT__SURVEY_CPT == get_type() ) {
+  if ( DOPT__ACTIELIJN_CPT == get_type() ) {
     return '';
   }
   else {
