@@ -95,16 +95,14 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
         define( 'DOPT__PATH',                    plugin_dir_path( __FILE__ ) );
         define( 'DOPT__PATH_LANGUAGES',          trailingslashit( DOPT__PATH . 'languages' ) );;
 
-        define( 'DOPT__SURVEY_CPT',              "enquetes" );
-        define( 'DOPT__QUESTION_CPT',            "vraag" );
-        define( 'DOPT__QUESTION_GROUPING_CT',    "groepering" );
-        define( 'DOPT__QUESTION_DEFAULT',        "default" );
+        define( 'DOPT__ACTIELIJN_CPT',           "enquetes" );
+        define( 'DOPT__GEBEURTENIS_CPT',         "gebeurtenis" );
 
         define( 'DOPT__SURVEY_DEFAULT_USERID',   2600 ); // 't is wat, hardgecodeerde userids (todo: invoerbaar maken via admin)
 
         define( 'DOPT__SURVEY_CT_ORG_TYPE',      "Organisation type" );
 
-        define( 'DOPT__QUESTION_PREFIX',         DOPT__SURVEY_CPT . '_pf_' ); // prefix for cmb2 metadata fields
+        define( 'DOPT__QUESTION_PREFIX',         DOPT__ACTIELIJN_CPT . '_pf_' ); // prefix for cmb2 metadata fields
         define( 'DOPT__CMBS2_PREFIX',            DOPT__QUESTION_PREFIX . '_form_' ); // prefix for cmb2 metadata fields
         define( 'DOPT__FORMKEYS',                DOPT__CMBS2_PREFIX . 'keys' ); // prefix for cmb2 metadata fields
         
@@ -225,7 +223,7 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 
         global $post;
 
-        if ( is_singular( DOPT__SURVEY_CPT ) && in_the_loop() ) {
+        if ( is_singular( DOPT__ACTIELIJN_CPT ) && in_the_loop() ) {
           // lets go
           return $this->do_pt_frontend_display_survey_results( $post->ID );
         }
@@ -345,12 +343,12 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
           "capability_type"       => "post",
           "map_meta_cap"          => true,
           "hierarchical"          => false,
-          "rewrite"               => array( "slug" => DOPT__SURVEY_CPT, "with_front" => true ),
+          "rewrite"               => array( "slug" => DOPT__ACTIELIJN_CPT, "with_front" => true ),
           "query_var"             => true,
       		"supports"              => array( "title", "editor" ),					
     		);
       		
-      	register_post_type( DOPT__SURVEY_CPT, $args );
+      	register_post_type( DOPT__ACTIELIJN_CPT, $args );
 
 
         $typeUC_single = _x( "Organisation type", "labels", "do-planningstool" );
@@ -397,7 +395,7 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
       		"rest_base"           => "",
       		"show_in_quick_edit"  => false,
       	);
-      	register_taxonomy( DOPT__SURVEY_CT_ORG_TYPE, array( DOPT__SURVEY_CPT ), $args );
+      	register_taxonomy( DOPT__SURVEY_CT_ORG_TYPE, array( DOPT__ACTIELIJN_CPT ), $args );
 
 
 
@@ -1903,7 +1901,7 @@ function do_pt_frontend_form_handle_posting() {
 	$post_data['post_name']   = sanitize_title( $rand . '-' . $sanitized_values[ DOPT__SURVEY_YOURNAME ] );
   $post_data['post_author'] = $user_id ? $user_id : DOPT__SURVEY_DEFAULT_USERID;
   $post_data['post_status'] = 'publish';
-  $post_data['post_type']   = DOPT__SURVEY_CPT;
+  $post_data['post_type']   = DOPT__ACTIELIJN_CPT;
 
   $post_content = '';
   if ( $sanitized_values[ DOPT__SURVEY_YOURNAME ] ) {
@@ -2026,7 +2024,7 @@ function gcms_data_reset_values( $givefeedback = true ) {
   update_option( DOPT__AVGS_OVERALL_AVG, 0 );  
   
   $args = array(
-    'post_type'       => DOPT__SURVEY_CPT,
+    'post_type'       => DOPT__ACTIELIJN_CPT,
     'posts_per_page'  => '-1',
 		'post_status'     => 'publish',
     'order'           => 'ASC'
@@ -2056,7 +2054,7 @@ function gcms_data_reset_values( $givefeedback = true ) {
       
       $counter++;
       $postid           = get_the_id();
-      $subjects[]       = $counter . ' ' . DOPT__SURVEY_CPT . ' = ' . get_the_title() . '(' . $postid . ')';
+      $subjects[]       = $counter . ' ' . DOPT__ACTIELIJN_CPT . ' = ' . get_the_title() . '(' . $postid . ')';
       
       $user_answers_raw     = get_post_meta( $postid );    	
       $user_answers         = maybe_unserialize( $user_answers_raw[DOPT__FORMKEYS][0] );
@@ -2346,7 +2344,7 @@ add_filter('the_post_navigation', 'do_pt_remove_post_navigation_for_survey');
 
 function do_pt_remove_post_navigation_for_survey( $args ){
 
-  if ( DOPT__SURVEY_CPT == get_type() ) {
+  if ( DOPT__ACTIELIJN_CPT == get_type() ) {
     return '';
   }
   else {
