@@ -1,5 +1,5 @@
-# Digitale Overheid - WordPress plugin Planningstool
-Planningstoolplugin voor digitaleoverheid.nl. Toont actielijnen en gebeurtenissen.
+# Digitale Overheid - WordPress plugin Planning Tool
+Planning Tool plugin voor digitaleoverheid.nl. Toont actielijnen en gebeurtenissen.
 
 ## Contact
 * Pim Nieuwenburg
