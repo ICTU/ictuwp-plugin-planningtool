@@ -11,7 +11,7 @@
  * Author URI:          https://wbvb.nl
  * License:             GPL-2.0+
  *
- * Text Domain:         do-planningstool
+ * Text Domain:         do-planning-tool
  * Domain Path:         /languages
  */
 
@@ -88,7 +88,7 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
         $protocol = strtolower(substr($_SERVER["SERVER_PROTOCOL"],0,strpos( $_SERVER["SERVER_PROTOCOL"],'/'))).'://';
   
         define( 'DOPT__VERSION',                 $this->version );
-        define( 'DOPT__FOLDER',                  'do-planningstool' );
+        define( 'DOPT__FOLDER',                  'do-planning-tool' );
         define( 'DOPT__BASE_URL',                trailingslashit( plugins_url( DOPT__FOLDER ) ) );
         define( 'DOPT__ASSETS_URL',              trailingslashit( DOPT__BASE_URL . 'assets' ) );
         define( 'DOPT__MEDIAELEMENT_URL',        trailingslashit( DOPT__BASE_URL . 'mediaelement' ) );
@@ -244,7 +244,7 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
         
         // add a page temlate name
         $this->templates          = array();
-        $this->templatefile   		= 'stelselcatalogus-template.php';
+        $this->templatefile   		= 'planningtool-template.php';
 
         add_action( 'init',                   array( $this, 'do_pt_init_register_post_type' ) );
         
@@ -285,28 +285,28 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
        */
       public function do_pt_init_register_post_type() {
 
-        $typeUC_single = _x( "Actielijn", "labels", "do-planningstool" );
-        $typeUC_plural = _x( "Actielijnen", "labels", "do-planningstool" );
+        $typeUC_single = _x( "Actielijn", "labels", "do-planning-tool" );
+        $typeUC_plural = _x( "Actielijnen", "labels", "do-planning-tool" );
         
-        $typeLC_single = _x( "actielijn", "labels", "do-planningstool" );
-        $typeLC_plural = _x( "actielijnen", "labels", "do-planningstool" );
+        $typeLC_single = _x( "actielijn", "labels", "do-planning-tool" );
+        $typeLC_plural = _x( "actielijnen", "labels", "do-planning-tool" );
 
       	$labels = array(
       		"name"                  => sprintf( '%s', $typeUC_single ),
       		"singular_name"         => sprintf( '%s', $typeUC_single ),
       		"menu_name"             => sprintf( '%s', $typeUC_single ),
-      		"all_items"             => sprintf( _x( 'All %s', 'labels', "do-planningstool" ), $typeLC_plural ),
-      		"add_new"               => sprintf( _x( 'Add %s', 'labels', "do-planningstool" ), $typeLC_plural ),
-      		"add_new_item"          => sprintf( _x( 'Add new %s', 'labels', "do-planningstool" ), $typeLC_single ),
-      		"edit"                  => _x( "Edit?", "labels", "do-planningstool" ),
-      		"edit_item"             => sprintf( _x( 'Edit %s', 'labels', "do-planningstool" ), $typeLC_single ),
-      		"new_item"              => sprintf( _x( 'Add %s', 'labels', "do-planningstool" ), $typeLC_single ),
-      		"view"                  => _x( "Show", "labels", "do-planningstool" ),
-      		"view_item"             => sprintf( _x( 'Add %s', 'labels', "do-planningstool" ), $typeLC_single ),
-      		"search_items"          => sprintf( _x( 'Search %s', 'labels', "do-planningstool" ), $typeLC_single ),
-      		"not_found"             => sprintf( _x( 'No %s available', 'labels', "do-planningstool" ), $typeLC_single ),
-      		"not_found_in_trash"    => sprintf( _x( 'No %s in trash', 'labels', "do-planningstool" ), $typeLC_plural ),
-      		"parent"                => _x( "Parent", "labels", "do-planningstool" ),
+      		"all_items"             => sprintf( _x( 'All %s', 'labels', "do-planning-tool" ), $typeLC_plural ),
+      		"add_new"               => sprintf( _x( 'Add %s', 'labels', "do-planning-tool" ), $typeLC_plural ),
+      		"add_new_item"          => sprintf( _x( 'Add new %s', 'labels', "do-planning-tool" ), $typeLC_single ),
+      		"edit"                  => _x( "Edit?", "labels", "do-planning-tool" ),
+      		"edit_item"             => sprintf( _x( 'Edit %s', 'labels', "do-planning-tool" ), $typeLC_single ),
+      		"new_item"              => sprintf( _x( 'Add %s', 'labels', "do-planning-tool" ), $typeLC_single ),
+      		"view"                  => _x( "Show", "labels", "do-planning-tool" ),
+      		"view_item"             => sprintf( _x( 'Add %s', 'labels', "do-planning-tool" ), $typeLC_single ),
+      		"search_items"          => sprintf( _x( 'Search %s', 'labels', "do-planning-tool" ), $typeLC_single ),
+      		"not_found"             => sprintf( _x( 'No %s available', 'labels', "do-planning-tool" ), $typeLC_single ),
+      		"not_found_in_trash"    => sprintf( _x( 'No %s in trash', 'labels', "do-planning-tool" ), $typeLC_plural ),
+      		"parent"                => _x( "Parent", "labels", "do-planning-tool" ),
       		
     		);
       
@@ -334,28 +334,28 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
       	register_post_type( DOPT__ACTIELIJN_CPT, $args );
       	
 
-        $typeUC_single = _x( "Gebeurtenis", "labels", "do-planningstool" );
-        $typeUC_plural = _x( "Gebeurtenissen", "labels", "do-planningstool" );
+        $typeUC_single = _x( "Gebeurtenis", "labels", "do-planning-tool" );
+        $typeUC_plural = _x( "Gebeurtenissen", "labels", "do-planning-tool" );
         
-        $typeLC_single = _x( "gebeurtenis", "labels", "do-planningstool" );
-        $typeLC_plural = _x( "gebeurtenissen", "labels", "do-planningstool" );
+        $typeLC_single = _x( "gebeurtenis", "labels", "do-planning-tool" );
+        $typeLC_plural = _x( "gebeurtenissen", "labels", "do-planning-tool" );
 
       	$labels = array(
       		"name"                  => sprintf( '%s', $typeUC_single ),
       		"singular_name"         => sprintf( '%s', $typeUC_single ),
       		"menu_name"             => sprintf( '%s', $typeUC_single ),
-      		"all_items"             => sprintf( _x( 'All %s', 'labels', "do-planningstool" ), $typeLC_plural ),
-      		"add_new"               => sprintf( _x( 'Add %s', 'labels', "do-planningstool" ), $typeLC_plural ),
-      		"add_new_item"          => sprintf( _x( 'Add new %s', 'labels', "do-planningstool" ), $typeLC_single ),
-      		"edit"                  => _x( "Edit?", "labels", "do-planningstool" ),
-      		"edit_item"             => sprintf( _x( 'Edit %s', 'labels', "do-planningstool" ), $typeLC_single ),
-      		"new_item"              => sprintf( _x( 'Add %s', 'labels', "do-planningstool" ), $typeLC_single ),
-      		"view"                  => _x( "Show", "labels", "do-planningstool" ),
-      		"view_item"             => sprintf( _x( 'Add %s', 'labels', "do-planningstool" ), $typeLC_single ),
-      		"search_items"          => sprintf( _x( 'Search %s', 'labels', "do-planningstool" ), $typeLC_single ),
-      		"not_found"             => sprintf( _x( 'No %s available', 'labels', "do-planningstool" ), $typeLC_single ),
-      		"not_found_in_trash"    => sprintf( _x( 'No %s in trash', 'labels', "do-planningstool" ), $typeLC_plural ),
-      		"parent"                => _x( "Parent", "labels", "do-planningstool" ),
+      		"all_items"             => sprintf( _x( 'All %s', 'labels', "do-planning-tool" ), $typeLC_plural ),
+      		"add_new"               => sprintf( _x( 'Add %s', 'labels', "do-planning-tool" ), $typeLC_plural ),
+      		"add_new_item"          => sprintf( _x( 'Add new %s', 'labels', "do-planning-tool" ), $typeLC_single ),
+      		"edit"                  => _x( "Edit?", "labels", "do-planning-tool" ),
+      		"edit_item"             => sprintf( _x( 'Edit %s', 'labels', "do-planning-tool" ), $typeLC_single ),
+      		"new_item"              => sprintf( _x( 'Add %s', 'labels', "do-planning-tool" ), $typeLC_single ),
+      		"view"                  => _x( "Show", "labels", "do-planning-tool" ),
+      		"view_item"             => sprintf( _x( 'Add %s', 'labels', "do-planning-tool" ), $typeLC_single ),
+      		"search_items"          => sprintf( _x( 'Search %s', 'labels', "do-planning-tool" ), $typeLC_single ),
+      		"not_found"             => sprintf( _x( 'No %s available', 'labels', "do-planning-tool" ), $typeLC_single ),
+      		"not_found_in_trash"    => sprintf( _x( 'No %s in trash', 'labels', "do-planning-tool" ), $typeLC_plural ),
+      		"parent"                => _x( "Parent", "labels", "do-planning-tool" ),
       		
     		);
       
@@ -386,11 +386,11 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
       	
 
 
-        $typeUC_single = _x( "Organisation type", "labels", "do-planningstool" );
-        $typeUC_plural = _x( "Organisation types", "labels", "do-planningstool" );
+        $typeUC_single = _x( "Organisation type", "labels", "do-planning-tool" );
+        $typeUC_plural = _x( "Organisation types", "labels", "do-planning-tool" );
         
-        $typeLC_single = _x( "organisation type", "labels", "do-planningstool" );
-        $typeLC_plural = _x( "organisation types", "labels", "do-planningstool" );
+        $typeLC_single = _x( "organisation type", "labels", "do-planning-tool" );
+        $typeLC_plural = _x( "organisation types", "labels", "do-planning-tool" );
 
         // organisation types
       	$labels = array(
@@ -398,19 +398,19 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
       		"name"                  => sprintf( '%s', $typeUC_single ),
       		"singular_name"         => sprintf( '%s', $typeUC_single ),
       		"menu_name"             => sprintf( '%s', $typeUC_single ),
-      		"all_items"             => sprintf( _x( 'All %s', 'labels', "do-planningstool" ), $typeLC_plural ),
-      		"add_new"               => sprintf( _x( 'Add %s', 'labels', "do-planningstool" ), $typeLC_plural ),
-      		"add_new_item"          => sprintf( _x( 'Add new %s', 'labels', "do-planningstool" ), $typeLC_single ),
-      		"edit"                  => _x( "Edit?", "labels", "do-planningstool" ),
-      		"edit_item"             => sprintf( _x( 'Edit %s', 'labels', "do-planningstool" ), $typeLC_single ),
-      		"new_item"              => sprintf( _x( 'Add %s', 'labels', "do-planningstool" ), $typeLC_single ),
-      		"view"                  => _x( "Show", "labels", "do-planningstool" ),
-      		"view_item"             => sprintf( _x( 'Add %s', 'labels', "do-planningstool" ), $typeLC_single ),
-      		"search_items"          => sprintf( _x( 'Search %s', 'labels', "do-planningstool" ), $typeLC_single ),
-      		"not_found"             => sprintf( _x( 'No %s available', 'labels', "do-planningstool" ), $typeLC_single ),
-      		"not_found_in_trash"    => sprintf( _x( 'No %s in trash', 'labels', "do-planningstool" ), $typeLC_plural ),
-      		"parent"                => _x( "Parent", "labels", "do-planningstool" ),
-      		"archives"              => _x( "Edit?", "labels", "do-planningstool" ),
+      		"all_items"             => sprintf( _x( 'All %s', 'labels', "do-planning-tool" ), $typeLC_plural ),
+      		"add_new"               => sprintf( _x( 'Add %s', 'labels', "do-planning-tool" ), $typeLC_plural ),
+      		"add_new_item"          => sprintf( _x( 'Add new %s', 'labels', "do-planning-tool" ), $typeLC_single ),
+      		"edit"                  => _x( "Edit?", "labels", "do-planning-tool" ),
+      		"edit_item"             => sprintf( _x( 'Edit %s', 'labels', "do-planning-tool" ), $typeLC_single ),
+      		"new_item"              => sprintf( _x( 'Add %s', 'labels', "do-planning-tool" ), $typeLC_single ),
+      		"view"                  => _x( "Show", "labels", "do-planning-tool" ),
+      		"view_item"             => sprintf( _x( 'Add %s', 'labels', "do-planning-tool" ), $typeLC_single ),
+      		"search_items"          => sprintf( _x( 'Search %s', 'labels', "do-planning-tool" ), $typeLC_single ),
+      		"not_found"             => sprintf( _x( 'No %s available', 'labels', "do-planning-tool" ), $typeLC_single ),
+      		"not_found_in_trash"    => sprintf( _x( 'No %s in trash', 'labels', "do-planning-tool" ), $typeLC_plural ),
+      		"parent"                => _x( "Parent", "labels", "do-planning-tool" ),
+      		"archives"              => _x( "Edit?", "labels", "do-planning-tool" ),
 
     		);
 
@@ -446,7 +446,7 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
       */
       function do_pt_init_add_page_templates( $post_templates ) {
       
-        $post_templates[$this->templatefile]  		= _x( 'Maturity score template', "naam template", "do-planningstool" );    
+        $post_templates[$this->templatefile]  		= _x( 'Maturity score template', "naam template", "do-planning-tool" );    
         return $post_templates;
       
       }
@@ -463,7 +463,7 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
     		// Add a General section
     		add_settings_section(
     			$this->option_name . '_general',
-    			__( 'General settings', "do-planningstool" ),
+    			__( 'General settings', "do-planning-tool" ),
     			array( $this, $this->option_name . '_general_cb' ),
     			DOPT__PLUGIN_KEY
     		);
@@ -478,7 +478,7 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
       public function do_pt_admin_register_styles() {
   
         if ( is_admin() ) {
-          wp_enqueue_style( 'do-planningstool-admin', DOPT__ASSETS_URL . 'css/do-planningstool-admin.css', false, DOPT__VERSION );
+          wp_enqueue_style( 'do-planning-tool-admin', DOPT__ASSETS_URL . 'css/do-planning-tool-admin.css', false, DOPT__VERSION );
         }
   
       }
@@ -495,8 +495,8 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
         // documentation tab
         $screen->add_do_pt_admin_help_tab( array(
           'id'      => 'documentation',
-          'title'   => __( 'Documentation', "do-planningstool" ),
-          'content' => "<p><a href='https://github.com/ICTU/Digitale-Overheid---WordPress-plugin-Planning-Tool/documentation/' target='blank'>" . __( 'GC Maturity documentation', "do-planningstool" ) . "</a></p>",
+          'title'   => __( 'Documentation', "do-planning-tool" ),
+          'content' => "<p><a href='https://github.com/ICTU/Digitale-Overheid---WordPress-plugin-Planning-Tool/documentation/' target='blank'>" . __( 'GC Maturity documentation', "do-planning-tool" ) . "</a></p>",
           )
         );
       }
@@ -510,7 +510,7 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
   
         echo '<div class="wrap">';
         echo '	<h2>' .  esc_html( get_admin_page_title() ) . '</h2>';
-        echo '	<p>' .  _x( 'Hier onderhoud voor de actielijnen.', "admin", "do-planningstool" ) . '</p>';
+        echo '	<p>' .  _x( 'Hier onderhoud voor de actielijnen.', "admin", "do-planning-tool" ) . '</p>';
         echo '</div>';
   
   
@@ -543,10 +543,10 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
       public function do_pt_admin_localize_scripts() {
   
           wp_localize_script( 'gcms-admin-script', 'gcms', array(
-                  'url'               => _x( "URL", "js", "do-planningstool" ),
-                  'caption'           => _x( "Caption", "js", "do-planningstool" ),
-                  'new_window'        => _x( "New Window", "js", "do-planningstool" ),
-                  'confirm'           => _x( "Are you sure?", "js", "do-planningstool" ),
+                  'url'               => _x( "URL", "js", "do-planning-tool" ),
+                  'caption'           => _x( "Caption", "js", "do-planning-tool" ),
+                  'new_window'        => _x( "New Window", "js", "do-planning-tool" ),
+                  'confirm'           => _x( "Are you sure?", "js", "do-planning-tool" ),
                   'ajaxurl'           => admin_url( 'admin-ajax.php' ),
                   'resize_nonce'      => wp_create_nonce( 'do_pt_resize' ),
                   'iframeurl'         => admin_url( 'admin-post.php?action=do_pt_preview' ),
@@ -570,16 +570,16 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
     	<table class="form-table" id="progress">
     		<tr>
     			<td>
-    				<input id="startsync" type="button" class="button button-primary" value="<?php _e( 'Reset statistics', "do-planningstool" ); ?>" />
-    				<input id="clearlog" type="button" class="button button-secondary" value="<?php _e( 'Empty log', "do-planningstool" ); ?>" />
+    				<input id="startsync" type="button" class="button button-primary" value="<?php _e( 'Reset statistics', "do-planning-tool" ); ?>" />
+    				<input id="clearlog" type="button" class="button button-secondary" value="<?php _e( 'Empty log', "do-planning-tool" ); ?>" />
     			</td>
     		</tr>
     	</table>
       <noscript style="background: red; padding: .5em; font-size: 120%;display: block; margin-top: 1em !important; color: white;">
-        <strong><?php _e( 'Ehm, please allow JavaScript.', "do-planningstool" );?></strong>
+        <strong><?php _e( 'Ehm, please allow JavaScript.', "do-planning-tool" );?></strong>
       </noscript>
       <div style="width: 100%; padding-top: 16px;" id="items">&nbsp;</div>
-    	<div style="width: 100%; padding-top: 16px; font-style: italic;" id="log"><?php _e( 'Press the button!', "do-planningstool" );?></div>
+    	<div style="width: 100%; padding-top: 16px; font-style: italic;" id="log"><?php _e( 'Press the button!', "do-planning-tool" );?></div>
     
     
     	<script type="text/javascript">
@@ -599,7 +599,7 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
     			_button.click(function (e) {
     
     				e.preventDefault();
-    				jQuery(this).val('<?php _e( 'Just a moment please', "do-planningstool" );?>').prop('disabled', true);
+    				jQuery(this).val('<?php _e( 'Just a moment please', "do-planning-tool" );?>').prop('disabled', true);
     				jQuery( '#log' ).empty();
     				jQuery( '#thetable' ).empty();
     				_requestJob( );
@@ -620,7 +620,7 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
     
     		var _jobResult = function (response) {
     
-          _button.val('<?php _e( 'Reset statistics', "do-planningstool" ) ?>').prop('disabled', false);
+          _button.val('<?php _e( 'Reset statistics', "do-planning-tool" ) ?>').prop('disabled', false);
     
     			if (response.ajaxrespons_item.length > 0) {
     				// new messages appear on top. .append() can be used to have new entries at the bottom
@@ -633,7 +633,7 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
     				}
     			}
     
-    			jQuery(this).val('<?php _e( 'Just a moment please', "do-planningstool" );?>').prop('disabled', true);
+    			jQuery(this).val('<?php _e( 'Just a moment please', "do-planning-tool" );?>').prop('disabled', true);
     		}
     
     	</script>
@@ -668,15 +668,15 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
        */
       $cmb_options = new_cmb2_box( array(
       	'id'              => 'do_pt_admin_options_metabox',
-      	'title'           => esc_html__( 'Maturity score', "do-planningstool" ),
+      	'title'           => esc_html__( 'Maturity score', "do-planning-tool" ),
       	'object_types'    => array( 'options-page' ),
       	'option_key'      => DOPT__PLUGIN_KEY, // The option key and admin menu page slug.
       	'icon_url'        => 'dashicons-admin-settings', // Menu icon. Only applicable if 'parent_slug' is left empty.
       	'capability'      => 'manage_options', // Cap required to view options-page.
         'tab_group'       => DOPT__PLUGIN_KEY,
-        'tab_title'       => _x( 'Email settings &amp; general scoring', 'scoring menu', "do-planningstool"),      	
+        'tab_title'       => _x( 'Email settings &amp; general scoring', 'scoring menu', "do-planning-tool"),      	
         'display_cb'      => 'yourprefix_options_display_with_tabs',
-      	'save_button'     => esc_html__( 'Save options', "do-planningstool" ), 
+      	'save_button'     => esc_html__( 'Save options', "do-planning-tool" ), 
       ) );
       /*
        * Options fields ids only need
@@ -698,27 +698,27 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 
 
         $cmb_options->add_field( array(
-        	'name'          => _x( 'Email settings', "email settings", "do-planningstool" ),
+        	'name'          => _x( 'Email settings', "email settings", "do-planning-tool" ),
         	'type'          => 'title',
         	'id'            => DOPT__CMBS2_PREFIX . 'start_section_emailsection'
         ) );
 
         $cmb_options->add_field( array(
-        	'name'          => _x( 'Sender email address', "email settings", "do-planningstool" ),
+        	'name'          => _x( 'Sender email address', "email settings", "do-planning-tool" ),
       		'type'          => 'text',
         	'id'            => 'mail-from-address',
-        	'default'       => _x( 'info@gebruikercentraal.nl', "email settings", "do-planningstool" )
+        	'default'       => _x( 'info@gebruikercentraal.nl', "email settings", "do-planning-tool" )
         ) );
 
         $cmb_options->add_field( array(
-        	'name'          => _x( 'Sender email name', "email settings", "do-planningstool" ),
+        	'name'          => _x( 'Sender email name', "email settings", "do-planning-tool" ),
       		'type'          => 'text',
         	'id'            => 'mail-from-name',
-        	'default'       => _x( 'Gebruiker Centraal', "email settings", "do-planningstool" )
+        	'default'       => _x( 'Gebruiker Centraal', "email settings", "do-planning-tool" )
         ) );
 
         $cmb_options->add_field( array(
-        	'name'          => __( 'General scoring texts', "do-planningstool" ),
+        	'name'          => __( 'General scoring texts', "do-planning-tool" ),
         	'type'          => 'title',
         	'id'            => DOPT__CMBS2_PREFIX . 'start_section_scoring'
         ) );
@@ -742,7 +742,7 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
           $postid   = get_the_ID();
           $infooter = false;
           
-          wp_enqueue_style( 'do-planningstool-frontend', DOPT__ASSETS_URL . 'css/do-planningstool.css', array(), DOPT__VERSION, $infooter );
+          wp_enqueue_style( 'do-planning-tool-frontend', DOPT__ASSETS_URL . 'css/do-planning-tool.css', array(), DOPT__VERSION, $infooter );
 
         }
       }
@@ -787,7 +787,7 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 
     	$cmb = new_cmb2_box( array(
     		'id'            => DOPT__METABOX_ID,
-    		'title'         => __( "Questions and answers", "do-planningstool" ),
+    		'title'         => __( "Questions and answers", "do-planning-tool" ),
     		'object_types'  => array( 'post' ),
     		'hookup'        => false,
     		'save_fields'   => true,
@@ -803,18 +803,18 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
       $yourmaildefault = do_pt_get_post_or_cookie( DOPT__SURVEY_EMAILID );
       
     	$cmb->add_field( array(
-    		'name'    => _x( 'Your name', 'About you section', "do-planningstool" ),
+    		'name'    => _x( 'Your name', 'About you section', "do-planning-tool" ),
     		'id'      => DOPT__SURVEY_YOURNAME,
     		'type'    => 'text',
-    		'desc'    => _x( "We store your name for a maximum of 3 years; it will be visible on the resultpage. Leave this empty if you don't want this.", 'About you section', "do-planningstool" ) . '<br>' . _x( 'Not required', 'About you section', "do-planningstool" ),
+    		'desc'    => _x( "We store your name for a maximum of 3 years; it will be visible on the resultpage. Leave this empty if you don't want this.", 'About you section', "do-planning-tool" ) . '<br>' . _x( 'Not required', 'About you section', "do-planning-tool" ),
     		'default' => $yournamedefault,
     	) );
       
     	$cmb->add_field( array(
-    		'name'    => _x( 'Your emailaddress', 'About you section', "do-planningstool" ),
+    		'name'    => _x( 'Your emailaddress', 'About you section', "do-planning-tool" ),
     		'id'      => DOPT__SURVEY_EMAILID,
     		'type'    => 'text_email',
-    		'desc'    => _x( 'We gebruiken dit e-mailadres om je een link te mailen naar jouw resultaatpagina.', 'About you section', "do-planningstool" ) . '<br>' . _x( 'Not required', 'About you section', "do-planningstool" ),
+    		'desc'    => _x( 'We gebruiken dit e-mailadres om je een link te mailen naar jouw resultaatpagina.', 'About you section', "do-planning-tool" ) . '<br>' . _x( 'Not required', 'About you section', "do-planning-tool" ),
     		'default' => $yourmaildefault,
     	) );
 
@@ -911,12 +911,12 @@ function do_pt_frontend_register_shortcode( $atts = array() ) {
 	// Get any submission errors
 	if ( ( $error = $cmb->prop( 'submission_error' ) ) && is_wp_error( $error ) ) {
 		// If there was an error with the submission, add it to our ouput.
-		$output .= '<h2>' . sprintf( __( 'Actielijn niet opgeslagen; errors occurred: %s', "do-planningstool" ), '<strong>'. $error->get_error_message() .'</strong>' ) . '</h2>';
+		$output .= '<h2>' . sprintf( __( 'Actielijn niet opgeslagen; errors occurred: %s', "do-planning-tool" ), '<strong>'. $error->get_error_message() .'</strong>' ) . '</h2>';
 	}
 
 
 	// Get our form
-	$output .= cmb2_get_metabox_form( $cmb, DOPT_MB2_RANDOM_OBJECT_ID, array( 'save_button' => __( "Submit", "do-planningstool" ) ) );
+	$output .= cmb2_get_metabox_form( $cmb, DOPT_MB2_RANDOM_OBJECT_ID, array( 'save_button' => __( "Submit", "do-planning-tool" ) ) );
 
 	return $output;
 
@@ -971,7 +971,7 @@ function do_pt_frontend_form_handle_posting() {
 
 	// Check security nonce
 	if ( ! isset( $_POST[ $cmb->nonce() ] ) || ! wp_verify_nonce( $_POST[ $cmb->nonce() ], $cmb->nonce() ) ) {
-		return $cmb->prop( 'submission_error', new WP_Error( 'security_fail', __( "Security checks for your form submission failed. Your data will be discarded.", "do-planningstool" ) ) );
+		return $cmb->prop( 'submission_error', new WP_Error( 'security_fail', __( "Security checks for your form submission failed. Your data will be discarded.", "do-planning-tool" ) ) );
 	}
 
 
@@ -984,7 +984,7 @@ function do_pt_frontend_form_handle_posting() {
 
 	// Check name submitted
 	if ( empty( $_POST[ DOPT__SURVEY_YOURNAME ] ) ) {
-    $sanitized_values[ DOPT__SURVEY_YOURNAME ] = __( "Your organisation's score", "do-planningstool" ) . ' (' . $datum . ')';
+    $sanitized_values[ DOPT__SURVEY_YOURNAME ] = __( "Your organisation's score", "do-planning-tool" ) . ' (' . $datum . ')';
 	}
 
   $rand   = $aantalenquetes . '-' . substr( md5( microtime() ),rand( 0, 26 ), 20 );	
@@ -1001,12 +1001,12 @@ function do_pt_frontend_form_handle_posting() {
 
   $post_content = '';
   if ( $sanitized_values[ DOPT__SURVEY_YOURNAME ] ) {
-    $post_content .= _x( 'Your name', 'naam', "do-planningstool" ) . '=' . $sanitized_values[ DOPT__SURVEY_YOURNAME ] . '<br>';
+    $post_content .= _x( 'Your name', 'naam', "do-planning-tool" ) . '=' . $sanitized_values[ DOPT__SURVEY_YOURNAME ] . '<br>';
     setcookie( DOPT__SURVEY_YOURNAME , $sanitized_values[ DOPT__SURVEY_YOURNAME ], time() + ( 3600 * 24 * 60 ), '/');
   }
   
   if ( $sanitized_values[  DOPT__SURVEY_EMAILID  ] ) {
-    $post_content .= _x( 'Your email address', 'email', "do-planningstool" ) . '=' . $sanitized_values[ DOPT__SURVEY_EMAILID ] . '<br>';
+    $post_content .= _x( 'Your email address', 'email', "do-planning-tool" ) . '=' . $sanitized_values[ DOPT__SURVEY_EMAILID ] . '<br>';
     setcookie( DOPT__SURVEY_EMAILID , $sanitized_values[ DOPT__SURVEY_EMAILID ], time() + ( 3600 * 24 * 60 ), '/');
   }
 
@@ -1307,8 +1307,8 @@ if (! function_exists( 'dodebug' ) ) {
  */
 function do_pt_init_load_plugin_textdomain() {
 
-  //          load_plugin_textdomain( "do-planningstool", false, DOPT__PATH_LANGUAGES );
-  load_plugin_textdomain( "do-planningstool", false, basename( dirname( __FILE__ ) ) . '/languages' );
+  //          load_plugin_textdomain( "do-planning-tool", false, DOPT__PATH_LANGUAGES );
+  load_plugin_textdomain( "do-planning-tool", false, basename( dirname( __FILE__ ) ) . '/languages' );
 
 }
 
