@@ -653,7 +653,7 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
         }
       
       //====================================================================================================
-  
+
       /**
        * Check our WordPress installation is compatible with DO_Planningtool
        */
@@ -737,7 +737,6 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 
   
     }    
-
   
       //========================================================================================================
   
@@ -763,10 +762,7 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
        */
       public function do_pt_frontend_display_results( $postid ) {
         
-        $returnstring     = '';
-
-        $returnstring .= '<p>' . __( "Oopsy daisy. There are no data to display. The server may have made an error in saving or retrieving the data, or more likely: our developer botched up. It's not your fault.", "do-planningstool" ) . '</p>';
-
+        $returnstring     = 'do_pt_frontend_display_survey_results';
         return $returnstring;
       
       }
@@ -785,10 +781,6 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 
           add_shortcode( 'do_pt_actielijn', 'do_pt_frontend_register_shortcode' );
 
-          add_action( 'cmb2_init',        array( $this, 'do_pt_frontend_form_register_cmb2_form' ) );
-          add_action( 'cmb2_after_init',  'do_pt_frontend_form_handle_posting' );
-          
-          add_action( 'cmb2_admin_init',  array( $this, 'do_pt_admin_form_register_cmb2_form_new' ) );
 
         }  // DOPT__PLUGIN_USE_CMB2
   
@@ -906,6 +898,14 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
     }
 
 
+	    echo 'do_pt_frontend_form_register_cmb2_form';
+    }  
+
+    //====================================================================================================
+
+    private function do_pt_frontend_get_interpretation( $userdata = array(), $doecho = false ) {
+	    echo 'do_pt_frontend_get_interpretation';
+    }
 
     //====================================================================================================
 
