@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: Planning Tool digitaleoverheid.nl\n"
-"POT-Creation-Date: 2018-11-09 12:47+0100\n"
+"POT-Creation-Date: 2018-11-09 13:55+0100\n"
 "PO-Revision-Date: 2018-06-13 10:59+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -21,293 +21,694 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
-#: do-planning-tool.php:296
+#: cmb2/includes/CMB2.php:179
+msgid "Metabox configuration is required to have an ID parameter."
+msgstr ""
+
+#: cmb2/includes/CMB2.php:581
+msgid "Click to toggle"
+msgstr ""
+
+#: cmb2/includes/CMB2_Ajax.php:75
+msgid "Please Try Again"
+msgstr ""
+
+#: cmb2/includes/CMB2_Ajax.php:181 cmb2/tests/cmb-tests-base.php:50
+msgid "Remove Embed"
+msgstr ""
+
+#. translators: 1: results for. 2: link to codex.wordpress.org/Embeds
+#: cmb2/includes/CMB2_Ajax.php:189 cmb2/includes/helper-functions.php:107
+#: cmb2/tests/cmb-tests-base.php:68 cmb2/tests/test-cmb-types-display.php:208
+#, php-format
+msgid "No oEmbed Results Found for %1$s. View more info at %2$s."
+msgstr ""
+
+#: cmb2/includes/CMB2_Base.php:422
+#, php-format
+msgid ""
+"The \"%1$s\" field parameter has been deprecated in favor of the \"%2$s\" "
+"parameter."
+msgstr ""
+
+#: cmb2/includes/CMB2_Base.php:426
+#, php-format
+msgid ""
+"Using the \"%1$s\" field parameter as a callback has been deprecated in favor of "
+"the \"%2$s\" parameter."
+msgstr ""
+
+#: cmb2/includes/CMB2_Base.php:456
+#, php-format
+msgid ""
+"%1$s was called with a parameter that is <strong>deprecated</strong> since "
+"version %2$s! %3$s"
+msgstr ""
+
+#: cmb2/includes/CMB2_Base.php:458
+#, php-format
+msgid ""
+"%1$s was called with a parameter that is <strong>deprecated</strong> since "
+"version %2$s with no alternative available."
+msgstr ""
+
+#: cmb2/includes/CMB2_Base.php:491 cmb2/includes/CMB2_Hookup_Base.php:102
+#: cmb2/includes/CMB2_Options_Hookup.php:357
+#: cmb2/includes/types/CMB2_Type_Base.php:173
+#, php-format
+msgid "Invalid %1$s property: %2$s"
+msgstr ""
+
+#: cmb2/includes/CMB2_Base.php:509 cmb2/includes/types/CMB2_Type_Base.php:157
+#, php-format
+msgid "Invalid %1$s method: %2$s"
+msgstr ""
+
+#: cmb2/includes/CMB2_Field.php:1348
+msgid "Add Group"
+msgstr ""
+
+#: cmb2/includes/CMB2_Field.php:1349
+msgid "Remove Group"
+msgstr ""
+
+#: cmb2/includes/CMB2_Field.php:1380 cmb2/includes/CMB2_Field.php:1384
+#: cmb2/tests/test-cmb-field.php:237
+msgid "None"
+msgstr ""
+
+#: cmb2/includes/CMB2_Field.php:1495
+msgid "Sorry, this field does not have a cmb_id specified."
+msgstr ""
+
+#: cmb2/includes/CMB2_Field_Display.php:432 cmb2/includes/CMB2_JS.php:230
+#: cmb2/includes/types/CMB2_Type_File_Base.php:79
+#: cmb2/tests/test-cmb-types-base.php:149 cmb2/tests/test-cmb-types.php:956
+msgid "File:"
+msgstr ""
+
+#: cmb2/includes/CMB2_Hookup_Base.php:44
+#, php-format
+msgid "%1$s should be implemented by the extended class."
+msgstr ""
+
+#: cmb2/includes/CMB2_JS.php:165 cmb2/includes/CMB2_JS.php:210
+msgid "Clear"
+msgstr ""
+
+#: cmb2/includes/CMB2_JS.php:166
+msgid "Default"
+msgstr ""
+
+#: cmb2/includes/CMB2_JS.php:167
+msgid "Select Color"
+msgstr ""
+
+#: cmb2/includes/CMB2_JS.php:168
+msgid "Current Color"
+msgstr ""
+
+#: cmb2/includes/CMB2_JS.php:200
+msgctxt "Valid formatDate string for jquery-ui datepicker"
+msgid "mm/dd/yy"
+msgstr ""
+
+#: cmb2/includes/CMB2_JS.php:201
+msgid "Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday"
+msgstr ""
+
+#: cmb2/includes/CMB2_JS.php:202
+msgid "Su, Mo, Tu, We, Th, Fr, Sa"
+msgstr ""
+
+#: cmb2/includes/CMB2_JS.php:203
+msgid "Sun, Mon, Tue, Wed, Thu, Fri, Sat"
+msgstr ""
+
+#: cmb2/includes/CMB2_JS.php:204
+msgid ""
+"January, February, March, April, May, June, July, August, September, October, "
+"November, December"
+msgstr ""
+
+#: cmb2/includes/CMB2_JS.php:205
+msgid "Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec"
+msgstr ""
+
+#: cmb2/includes/CMB2_JS.php:206
+msgid "Next"
+msgstr ""
+
+#: cmb2/includes/CMB2_JS.php:207
+msgid "Prev"
+msgstr ""
+
+#: cmb2/includes/CMB2_JS.php:208
+msgid "Today"
+msgstr ""
+
+#: cmb2/includes/CMB2_JS.php:209 cmb2/includes/CMB2_JS.php:219
+msgid "Done"
+msgstr ""
+
+#: cmb2/includes/CMB2_JS.php:213
+msgid "Choose Time"
+msgstr ""
+
+#: cmb2/includes/CMB2_JS.php:214
+msgid "Time"
+msgstr ""
+
+#: cmb2/includes/CMB2_JS.php:215
+msgid "Hour"
+msgstr ""
+
+#: cmb2/includes/CMB2_JS.php:216
+msgid "Minute"
+msgstr ""
+
+#: cmb2/includes/CMB2_JS.php:217
+msgid "Second"
+msgstr ""
+
+#: cmb2/includes/CMB2_JS.php:218
+msgid "Now"
+msgstr ""
+
+#: cmb2/includes/CMB2_JS.php:220
+msgctxt ""
+"Valid formatting string, as per http://trentrichardson.com/examples/timepicker/"
+msgid "hh:mm TT"
+msgstr ""
+
+#: cmb2/includes/CMB2_JS.php:226
+msgid "Use this file"
+msgstr ""
+
+#: cmb2/includes/CMB2_JS.php:227
+msgid "Use these files"
+msgstr ""
+
+#: cmb2/includes/CMB2_JS.php:228 cmb2/includes/types/CMB2_Type_File_Base.php:64
+msgid "Remove Image"
+msgstr ""
+
+#: cmb2/includes/CMB2_JS.php:229 cmb2/includes/CMB2_Types.php:413
+#: cmb2/includes/types/CMB2_Type_File_Base.php:84
+#: cmb2/tests/test-cmb-types-base.php:149 cmb2/tests/test-cmb-types.php:47
+#: cmb2/tests/test-cmb-types.php:55 cmb2/tests/test-cmb-types.php:956
+msgid "Remove"
+msgstr ""
+
+#: cmb2/includes/CMB2_JS.php:231 cmb2/includes/types/CMB2_Type_File_Base.php:82
+#: cmb2/tests/test-cmb-types-base.php:149 cmb2/tests/test-cmb-types.php:956
+msgid "Download"
+msgstr ""
+
+#: cmb2/includes/CMB2_JS.php:232
+msgid "Select / Deselect All"
+msgstr ""
+
+#: cmb2/includes/CMB2_Options_Hookup.php:139
+msgid "Nothing to update."
+msgstr ""
+
+#: cmb2/includes/CMB2_Options_Hookup.php:143
+msgid "Settings updated."
+msgstr ""
+
+#: cmb2/includes/CMB2_Types.php:232
+msgid "Custom CMB2 field type classes must extend CMB2_Type_Base."
+msgstr ""
+
+#: cmb2/includes/CMB2_Types.php:350
+msgid "Add Row"
+msgstr ""
+
+#: cmb2/includes/CMB2_Types.php:413 cmb2/tests/test-cmb-types.php:47
+#: cmb2/tests/test-cmb-types.php:55
+msgid "Remove Row"
+msgstr ""
+
+#: cmb2/includes/CMB2_hookup.php:181
+msgid ""
+"Term Metadata is a WordPress 4.4+ feature. Please upgrade your WordPress install."
+msgstr ""
+
+#: cmb2/includes/CMB2_hookup.php:185
+msgid "Term metaboxes configuration requires a \"taxonomies\" parameter."
+msgstr ""
+
+#: cmb2/includes/CMB2_hookup.php:465
+#, php-format
+msgid "Toggle panel: %s"
+msgstr ""
+
+#: cmb2/includes/helper-functions.php:307
+msgid "Save"
+msgstr ""
+
+#: cmb2/includes/rest-api/CMB2_REST_Controller.php:257
+msgid "This box does not have read permissions."
+msgstr ""
+
+#: cmb2/includes/rest-api/CMB2_REST_Controller.php:277
+msgid "This box does not have write permissions."
+msgstr ""
+
+#: cmb2/includes/rest-api/CMB2_REST_Controller.php:300
+msgid ""
+"No box found by that id. A box needs to be registered with the \"show_in_rest\" "
+"parameter configured."
+msgstr ""
+
+#: cmb2/includes/rest-api/CMB2_REST_Controller.php:378
+msgid "A human-readable description of the object."
+msgstr ""
+
+#: cmb2/includes/rest-api/CMB2_REST_Controller.php:385
+msgid "The id for the object."
+msgstr ""
+
+#: cmb2/includes/rest-api/CMB2_REST_Controller.php:392
+msgid "The title for the object."
+msgstr ""
+
+#: cmb2/includes/rest-api/CMB2_REST_Controller_Boxes.php:51
+msgid "Includes the registered fields for the box in the response."
+msgstr ""
+
+#: cmb2/includes/rest-api/CMB2_REST_Controller_Boxes.php:72
+msgid ""
+"Includes the fully rendered attributes, 'form_open', 'form_close', as well as "
+"the enqueued 'js_dependencies' script handles, and 'css_dependencies' stylesheet "
+"handles."
+msgstr ""
+
+#: cmb2/includes/rest-api/CMB2_REST_Controller_Boxes.php:122
+msgid "No boxes found."
+msgstr ""
+
+#: cmb2/includes/rest-api/CMB2_REST_Controller_Fields.php:27
+msgid "Includes the box object which the fields are registered to in the response."
+msgstr ""
+
+#: cmb2/includes/rest-api/CMB2_REST_Controller_Fields.php:30
+msgid ""
+"When the '_rendered' argument is passed, the renderable field attributes will be "
+"returned fully rendered. By default, the names of the callback handers for the "
+"renderable attributes will be returned."
+msgstr ""
+
+#: cmb2/includes/rest-api/CMB2_REST_Controller_Fields.php:33
+#: cmb2/includes/rest-api/CMB2_REST_Controller_Fields.php:36
+msgid ""
+"To view or modify the field's value, the 'object_id' and 'object_type' arguments "
+"are required."
+msgstr ""
+
+#: cmb2/includes/rest-api/CMB2_REST_Controller_Fields.php:236
+#: cmb2/tests/test-cmb-rest-controllers.php:247
+msgid "CMB2 Field value cannot be updated without the value parameter specified."
+msgstr ""
+
+#: cmb2/includes/rest-api/CMB2_REST_Controller_Fields.php:297
+#: cmb2/tests/test-cmb-rest-controllers.php:258
+#: cmb2/tests/test-cmb-rest-controllers.php:269
+msgid ""
+"CMB2 Field value cannot be modified without the object_id and object_type "
+"parameters specified."
+msgstr ""
+
+#: cmb2/includes/rest-api/CMB2_REST_Controller_Fields.php:312
+#: cmb2/includes/rest-api/CMB2_REST_Controller_Fields.php:341
+msgid "No field found by that id."
+msgstr ""
+
+#: cmb2/includes/rest-api/CMB2_REST_Controller_Fields.php:415
+#, php-format
+msgid "Value Error for %s"
+msgstr ""
+
+#. translators: %s: register_routes()
+#: cmb2/includes/shim/WP_REST_Controller.php:25
+#, php-format
+msgid "Method '%s' must be overridden."
+msgstr ""
+
+#: cmb2/includes/shim/WP_REST_Controller.php:35
+#: cmb2/includes/shim/WP_REST_Controller.php:47
+#: cmb2/includes/shim/WP_REST_Controller.php:59
+#: cmb2/includes/shim/WP_REST_Controller.php:71
+#: cmb2/includes/shim/WP_REST_Controller.php:83
+#: cmb2/includes/shim/WP_REST_Controller.php:95
+#: cmb2/includes/shim/WP_REST_Controller.php:107
+#: cmb2/includes/shim/WP_REST_Controller.php:119
+#: cmb2/includes/shim/WP_REST_Controller.php:131
+#: cmb2/includes/shim/WP_REST_Controller.php:143
+#: cmb2/includes/shim/WP_REST_Controller.php:155
+#: cmb2/includes/shim/WP_REST_Controller.php:168
+#, php-format
+msgid "Method '%s' not implemented. Must be overridden in subclass."
+msgstr ""
+
+#: cmb2/includes/shim/WP_REST_Controller.php:273
+msgid "Current page of the collection."
+msgstr ""
+
+#: cmb2/includes/shim/WP_REST_Controller.php:281
+msgid "Maximum number of items to be returned in result set."
+msgstr ""
+
+#: cmb2/includes/shim/WP_REST_Controller.php:290
+msgid "Limit results to those matching a string."
+msgstr ""
+
+#: cmb2/includes/shim/WP_REST_Controller.php:308
+msgid ""
+"Scope under which the request is made; determines fields present in response."
+msgstr ""
+
+#: cmb2/includes/types/CMB2_Type_File.php:76 cmb2/tests/test-cmb-types.php:932
+#: cmb2/tests/test-cmb-types.php:956
+msgid "Add or Upload File"
+msgstr ""
+
+#: cmb2/includes/types/CMB2_Type_File_List.php:41 cmb2/tests/test-cmb-types.php:881
+#: cmb2/tests/test-cmb-types.php:912
+msgid "Add or Upload Files"
+msgstr ""
+
+#: cmb2/includes/types/CMB2_Type_Taxonomy_Base.php:115
+msgid "No terms"
+msgstr ""
+
+#: cmb2/tests/test-cmb-field.php:263
+msgid "Test Metabox"
+msgstr ""
+
+#: cmb2/tests/test-cmb-field.php:274
+msgid "Test Multi Checkbox"
+msgstr ""
+
+#: cmb2/tests/test-cmb-field.php:275
+msgid "field description (optional)"
+msgstr ""
+
+#: cmb2/tests/test-cmb-field.php:280
+msgid "Check One"
+msgstr ""
+
+#: cmb2/tests/test-cmb-field.php:281
+msgid "Check Two"
+msgstr ""
+
+#: cmb2/tests/test-cmb-field.php:282
+msgid "Check Three"
+msgstr ""
+
+#: do-planning-tool.php:288
 msgctxt "labels"
 msgid "Actielijn"
 msgstr ""
 
-#: do-planning-tool.php:297
+#: do-planning-tool.php:289
 msgctxt "labels"
 msgid "Actielijnen"
 msgstr ""
 
-#: do-planning-tool.php:299
+#: do-planning-tool.php:291
 msgctxt "labels"
 msgid "actielijn"
 msgstr ""
 
-#: do-planning-tool.php:300
+#: do-planning-tool.php:292
 msgctxt "labels"
 msgid "actielijnen"
 msgstr ""
 
-#: do-planning-tool.php:306 do-planning-tool.php:355 do-planning-tool.php:409
+#: do-planning-tool.php:298 do-planning-tool.php:347 do-planning-tool.php:401
 #, php-format
 msgctxt "labels"
 msgid "All %s"
 msgstr ""
 
-#: do-planning-tool.php:307 do-planning-tool.php:311 do-planning-tool.php:313
-#: do-planning-tool.php:356 do-planning-tool.php:360 do-planning-tool.php:362
-#: do-planning-tool.php:410 do-planning-tool.php:414 do-planning-tool.php:416
+#: do-planning-tool.php:299 do-planning-tool.php:303 do-planning-tool.php:305
+#: do-planning-tool.php:348 do-planning-tool.php:352 do-planning-tool.php:354
+#: do-planning-tool.php:402 do-planning-tool.php:406 do-planning-tool.php:408
 #, php-format
 msgctxt "labels"
 msgid "Add %s"
 msgstr ""
 
-#: do-planning-tool.php:308 do-planning-tool.php:357 do-planning-tool.php:411
+#: do-planning-tool.php:300 do-planning-tool.php:349 do-planning-tool.php:403
 #, php-format
 msgctxt "labels"
 msgid "Add new %s"
 msgstr ""
 
-#: do-planning-tool.php:309 do-planning-tool.php:358 do-planning-tool.php:412
-#: do-planning-tool.php:421
+#: do-planning-tool.php:301 do-planning-tool.php:350 do-planning-tool.php:404
+#: do-planning-tool.php:413
 msgctxt "labels"
 msgid "Edit?"
 msgstr ""
 
-#: do-planning-tool.php:310 do-planning-tool.php:359 do-planning-tool.php:413
+#: do-planning-tool.php:302 do-planning-tool.php:351 do-planning-tool.php:405
 #, php-format
 msgctxt "labels"
 msgid "Edit %s"
 msgstr ""
 
-#: do-planning-tool.php:312 do-planning-tool.php:361 do-planning-tool.php:415
+#: do-planning-tool.php:304 do-planning-tool.php:353 do-planning-tool.php:407
 msgctxt "labels"
 msgid "Show"
 msgstr ""
 
-#: do-planning-tool.php:314 do-planning-tool.php:363 do-planning-tool.php:417
+#: do-planning-tool.php:306 do-planning-tool.php:355 do-planning-tool.php:409
 #, php-format
 msgctxt "labels"
 msgid "Search %s"
 msgstr ""
 
-#: do-planning-tool.php:315 do-planning-tool.php:364 do-planning-tool.php:418
+#: do-planning-tool.php:307 do-planning-tool.php:356 do-planning-tool.php:410
 #, php-format
 msgctxt "labels"
 msgid "No %s available"
 msgstr ""
 
-#: do-planning-tool.php:316 do-planning-tool.php:365 do-planning-tool.php:419
+#: do-planning-tool.php:308 do-planning-tool.php:357 do-planning-tool.php:411
 #, php-format
 msgctxt "labels"
 msgid "No %s in trash"
 msgstr ""
 
-#: do-planning-tool.php:317 do-planning-tool.php:366 do-planning-tool.php:420
+#: do-planning-tool.php:309 do-planning-tool.php:358 do-planning-tool.php:412
 msgctxt "labels"
 msgid "Parent"
 msgstr ""
 
-#: do-planning-tool.php:345
+#: do-planning-tool.php:337
 msgctxt "labels"
 msgid "Gebeurtenis"
 msgstr ""
 
-#: do-planning-tool.php:346
+#: do-planning-tool.php:338
 msgctxt "labels"
 msgid "Gebeurtenissen"
 msgstr ""
 
-#: do-planning-tool.php:348
+#: do-planning-tool.php:340
 msgctxt "labels"
 msgid "gebeurtenis"
 msgstr ""
 
-#: do-planning-tool.php:349
+#: do-planning-tool.php:341
 msgctxt "labels"
 msgid "gebeurtenissen"
 msgstr ""
 
-#: do-planning-tool.php:397
+#: do-planning-tool.php:389
 msgctxt "labels"
 msgid "Organisation type"
 msgstr ""
 
-#: do-planning-tool.php:398
+#: do-planning-tool.php:390
 msgctxt "labels"
 msgid "Organisation types"
 msgstr ""
 
-#: do-planning-tool.php:400
+#: do-planning-tool.php:392
 msgctxt "labels"
 msgid "organisation type"
 msgstr ""
 
-#: do-planning-tool.php:401
+#: do-planning-tool.php:393
 msgctxt "labels"
 msgid "organisation types"
 msgstr ""
 
-#: do-planning-tool.php:457
+#: do-planning-tool.php:449
 msgctxt "naam template"
 msgid "Maturity score template"
 msgstr ""
 
-#: do-planning-tool.php:474
+#: do-planning-tool.php:466
 msgid "General settings"
 msgstr ""
 
-#: do-planning-tool.php:506
+#: do-planning-tool.php:498
 msgid "Documentation"
 msgstr ""
 
-#: do-planning-tool.php:507
+#: do-planning-tool.php:499
 msgid "GC Maturity documentation"
 msgstr ""
 
-#: do-planning-tool.php:521
+#: do-planning-tool.php:513
 msgctxt "admin"
 msgid "Hier onderhoud voor de actielijnen."
 msgstr ""
 
-#: do-planning-tool.php:554
+#: do-planning-tool.php:546
 msgctxt "js"
 msgid "URL"
 msgstr ""
 
-#: do-planning-tool.php:555
+#: do-planning-tool.php:547
 msgctxt "js"
 msgid "Caption"
 msgstr ""
 
-#: do-planning-tool.php:556
+#: do-planning-tool.php:548
 msgctxt "js"
 msgid "New Window"
 msgstr ""
 
-#: do-planning-tool.php:557
+#: do-planning-tool.php:549
 msgctxt "js"
 msgid "Are you sure?"
 msgstr ""
 
-#: do-planning-tool.php:581 do-planning-tool.php:631
+#: do-planning-tool.php:573 do-planning-tool.php:623
 msgid "Reset statistics"
 msgstr ""
 
-#: do-planning-tool.php:582
+#: do-planning-tool.php:574
 msgid "Empty log"
 msgstr ""
 
-#: do-planning-tool.php:587
+#: do-planning-tool.php:579
 msgid "Ehm, please allow JavaScript."
 msgstr ""
 
-#: do-planning-tool.php:590
+#: do-planning-tool.php:582
 msgid "Press the button!"
 msgstr ""
 
-#: do-planning-tool.php:610 do-planning-tool.php:644
+#: do-planning-tool.php:602 do-planning-tool.php:636
 msgid "Just a moment please"
 msgstr ""
 
-#: do-planning-tool.php:679
+#: do-planning-tool.php:671
 msgid "Maturity score"
 msgstr ""
 
-#: do-planning-tool.php:685
+#: do-planning-tool.php:677
 msgctxt "scoring menu"
 msgid "Email settings &amp; general scoring"
 msgstr ""
 
-#: do-planning-tool.php:687
+#: do-planning-tool.php:679
 msgid "Save options"
 msgstr ""
 
-#: do-planning-tool.php:709
+#: do-planning-tool.php:701
 msgctxt "email settings"
 msgid "Email settings"
 msgstr ""
 
-#: do-planning-tool.php:715
+#: do-planning-tool.php:707
 msgctxt "email settings"
 msgid "Sender email address"
 msgstr ""
 
-#: do-planning-tool.php:718
+#: do-planning-tool.php:710
 msgctxt "email settings"
 msgid "info@gebruikercentraal.nl"
 msgstr ""
 
-#: do-planning-tool.php:722
+#: do-planning-tool.php:714
 msgctxt "email settings"
 msgid "Sender email name"
 msgstr ""
 
-#: do-planning-tool.php:725
+#: do-planning-tool.php:717
 msgctxt "email settings"
 msgid "Gebruiker Centraal"
 msgstr ""
 
-#: do-planning-tool.php:729
+#: do-planning-tool.php:721
 msgid "General scoring texts"
 msgstr ""
 
-#: do-planning-tool.php:798
+#: do-planning-tool.php:790
 msgid "Questions and answers"
 msgstr ""
 
-#: do-planning-tool.php:814
+#: do-planning-tool.php:806
 msgctxt "About you section"
 msgid "Your name"
 msgstr ""
 
-#: do-planning-tool.php:817
+#: do-planning-tool.php:809
 msgctxt "About you section"
 msgid ""
 "We store your name for a maximum of 3 years; it will be visible on the "
 "resultpage. Leave this empty if you don't want this."
 msgstr ""
 
-#: do-planning-tool.php:817 do-planning-tool.php:825
+#: do-planning-tool.php:809 do-planning-tool.php:817
 msgctxt "About you section"
 msgid "Not required"
 msgstr ""
 
-#: do-planning-tool.php:822
+#: do-planning-tool.php:814
 msgctxt "About you section"
 msgid "Your emailaddress"
 msgstr ""
 
-#: do-planning-tool.php:825
+#: do-planning-tool.php:817
 msgctxt "About you section"
 msgid ""
 "We gebruiken dit e-mailadres om je een link te mailen naar jouw resultaatpagina."
 msgstr ""
 
-#: do-planning-tool.php:965
+#: do-planning-tool.php:914
 #, php-format
 msgid "Actielijn niet opgeslagen; errors occurred: %s"
 msgstr ""
 
-#: do-planning-tool.php:970
+#: do-planning-tool.php:919
 msgid "Submit"
 msgstr ""
 
-#: do-planning-tool.php:1025
+#: do-planning-tool.php:974
 msgid ""
 "Security checks for your form submission failed. Your data will be discarded."
 msgstr ""
 
-#: do-planning-tool.php:1038
+#: do-planning-tool.php:987
 msgid "Your organisation's score"
 msgstr ""
 
-#: do-planning-tool.php:1055
+#: do-planning-tool.php:1004
 msgctxt "naam"
 msgid "Your name"
 msgstr ""
 
-#: do-planning-tool.php:1060
+#: do-planning-tool.php:1009
 msgctxt "email"
 msgid "Your email address"
-msgstr ""
-
-#: do-planning-tool.php:1081
-msgctxt "email"
-msgid "No mail text found"
 msgstr ""
 
 #. Plugin Name of the plugin/theme
