@@ -90,8 +90,7 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
         define( 'DOPT__VERSION',                 $this->version );
         define( 'DOPT__FOLDER',                  'do-planning-tool' );
         define( 'DOPT__BASE_URL',                trailingslashit( plugins_url( DOPT__FOLDER ) ) );
-        define( 'DOPT__ASSETS_URL',              trailingslashit( DOPT__BASE_URL . 'assets' ) );
-        define( 'DOPT__MEDIAELEMENT_URL',        trailingslashit( DOPT__BASE_URL . 'mediaelement' ) );
+        define( 'DOPT__ASSETS_URL',              trailingslashit( DOPT__BASE_URL ) );
         define( 'DOPT__PATH',                    plugin_dir_path( __FILE__ ) );
         define( 'DOPT__PATH_LANGUAGES',          trailingslashit( DOPT__PATH . 'languages' ) );;
 
@@ -205,9 +204,9 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 
         global $post;
 
-        if ( is_singular( DOPT__ACTIELIJN_CPT ) && in_the_loop() ) {
-          // lets go
-          return $this->do_pt_frontend_display_results( $post->ID );
+        if( in_the_loop() && is_single() && ( DOPT__ACTIELIJN_CPT == get_post_type() || DOPT__GEBEURTENIS_CPT == get_post_type() ) ) {
+          // if ( is_singular( DOPT__ACTIELIJN_CPT )  ) {
+          return $content . $this->do_pt_frontend_display_results( $post->ID );
         }
         else {
           return $content;
@@ -257,9 +256,6 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
         // admin settings
         add_action( 'admin_init',             array( $this, 'do_pt_admin_register_settings' ) );
         
-        // Hook do_sync method *todo*
-        add_action( 'wp_ajax_do_pt_reset',    'gcms_data_reset_values');
-
         add_action( 'wp_enqueue_scripts',     array( $this, 'do_pt_frontend_register_frontend_style_script' ) );
 
         add_action( 'admin_enqueue_scripts',  array( $this, 'do_pt_admin_register_styles' ) );
@@ -375,7 +371,7 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
           "capability_type"       => "post",
           "map_meta_cap"          => true,
           "hierarchical"          => false,
-          "rewrite"               => array( "slug" => DOPT__ACTIELIJN_CPT, "with_front" => true ),
+          "rewrite"               => array( "slug" => DOPT__GEBEURTENIS_CPT, "with_front" => true ),
           "query_var"             => true,
       		"supports"              => array( "title", "editor" ),					
     		);
@@ -446,7 +442,7 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
       */
       function do_pt_init_add_page_templates( $post_templates ) {
       
-        $post_templates[$this->templatefile]  		= _x( 'Maturity score template', "naam template", "do-planning-tool" );    
+        $post_templates[$this->templatefile]  = _x( 'Planning Tool Template', "naam template", "do-planning-tool" );    
         return $post_templates;
       
       }
@@ -753,8 +749,10 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
        * Output the HTML
        */
       public function do_pt_frontend_display_results( $postid ) {
-        
-        $returnstring     = 'do_pt_frontend_display_survey_results';
+
+        // if( ( is_single() && DOPT__ACTIELIJN_CPT == get_post_type() ) || ( is_single() && DOPT__GEBEURTENIS_CPT == get_post_type() ) ) {
+
+        $returnstring     = 'do_pt_frontend_display_results';
         return $returnstring;
       
       }
@@ -845,9 +843,43 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
     
       }
 
-
     }  
 
+    //====================================================================================================
+
+    public function filter_breadcrumb( $crumb, $args ) {
+    
+      if ( $crumb ) {
+        
+        $span_before_start  = '<span class="breadcrumb-link-wrap" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">';  
+        $span_between_start = '<span itemprop="name">';  
+        $span_before_end    = '</span>';  
+        $loop               = rhswp_get_context_info();
+        $berichtnaam        = get_the_title();
+
+        $planning_page      = get_field( 'planning_page', 'option');
+        $planning_page_id   = $planning_page->ID;
+        
+        if ( !$planning_page_id ) {
+          $planning_page_id = get_option( 'page_for_posts' );
+        }  
+  
+        if( ( is_single() && DOPT__ACTIELIJN_CPT == get_post_type() ) || 
+            ( is_single() && DOPT__GEBEURTENIS_CPT == get_post_type() ) ) {
+  
+  
+        	if ( $planning_page_id ) {
+        		return '<a href="' . get_permalink( $planning_page_id ) . '">' . get_the_title( $planning_page_id ) .'</a>' . $args['sep'] . ' ' . $berichtnaam;
+        	}
+        	else {
+        		return $crumb;
+        	}
+      	}
+      	else {
+      		return $crumb;
+      	}
+      }
+    }
 
 
     //====================================================================================================
@@ -869,12 +901,28 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
       
       if ( $this->templatefile == $page_template ) {
   
-        add_action( 'genesis_entry_content',  'do_pt_do_frontend_form_submission_shortcode_echo', 15 );
+        add_action( 'genesis_entry_content',  'do_pt_do_frontend_pagetemplate_add_actielijnen', 15 );
 
         //* Force full-width-content layout
         add_filter( 'genesis_pre_get_option_site_layout', '__genesis_return_full_width_content' );
       
       }
+
+  	//=================================================
+    if( ( is_single() && DOPT__ACTIELIJN_CPT == get_post_type() ) || 
+        ( is_single() && DOPT__GEBEURTENIS_CPT == get_post_type() ) ) {
+
+      // check the breadcrumb
+      add_filter( 'genesis_single_crumb',   array( $this, 'filter_breadcrumb' ), 10, 2 );
+      add_filter( 'genesis_page_crumb',     array( $this, 'filter_breadcrumb' ), 10, 2 );
+      add_filter( 'genesis_archive_crumb',  array( $this, 'filter_breadcrumb' ), 10, 2 ); 				
+
+      // filter the <h1>
+//      add_filter( 'genesis_post_title_text', array( $this, 'filter_the_title' ), 16 );
+
+      }
+
+      
     }
 
   
@@ -939,6 +987,41 @@ function do_pt_frontend_cmb2_get() {
 
 	// Get CMB2 metabox object
 	return cmb2_get_metabox( $metabox_id, $object_id );
+
+}
+
+//========================================================================================================
+  
+/**
+ * Handles form submission on save. Redirects if save is successful, otherwise sets an error message as a cmb property
+ *
+ * @return void
+ */
+function do_pt_do_frontend_pagetemplate_add_actielijnen() {
+
+  $args = array(
+      'post_type'       => DOPT__ACTIELIJN_CPT, // hiero
+      'post_status'     => 'publish',
+      'posts_per_page'  => -1,
+    );
+    
+  $wp_queryposts = new WP_Query( $args );
+
+  if ( $wp_queryposts->have_posts() ) {
+
+    $postcounter = 0;
+
+    while ( $wp_queryposts->have_posts() ) : $wp_queryposts->the_post();
+      $postcounter++;
+      $theid = get_the_id();
+      echo '<article><h2><a href="' . get_the_permalink() . '">(' . $theid . ') ' . get_the_title() . '</a></h2>';
+      echo '</article>';
+      
+      do_action( 'genesis_after_entry' );
+
+    endwhile;
+
+  }
 
 }
 
@@ -1037,12 +1120,6 @@ function do_pt_frontend_form_handle_posting() {
 	$cmb->save_fields( $new_submission_id, 'post', $sanitized_values );
 	update_post_meta( $new_submission_id, DOPT__FORMKEYS, $sanitized_values );
 
-  gcms_data_reset_values( false );
-
-
-
-
-
 	/*
 	 * Redirect back to the form page with a query variable with the new post ID.
 	 * This will help double-submissions with browser refreshes
@@ -1059,103 +1136,6 @@ function do_pt_frontend_form_handle_posting() {
 	exit;
 	
 }
-
-//========================================================================================================
-
-/**
- * Reset the statistics
- */
-function gcms_data_reset_values( $givefeedback = true ) {
-  
-  if ( isset( $_POST['dofeedback'] ) ) {
-    $givefeedback = true;
-  }
-
-  $log              = '';
-  $subjects         = array();
-  $allemetingen     = array();
-  $counter          = 0;
-
-  $args = array(
-    'post_type'       => DOPT__ACTIELIJN_CPT,
-    'posts_per_page'  => '-1',
-		'post_status'     => 'publish',
-    'order'           => 'ASC'
-  );   
-
-
-  $the_query = new WP_Query( $args );
-
-  if($the_query->have_posts() ) {
-    
-    while ( $the_query->have_posts() ) {
-      
-      $the_query->the_post();
-      
-      $counter++;
-      $postid           = get_the_id();
-      $subjects[]       = $counter . ' ' . DOPT__ACTIELIJN_CPT . ' = ' . get_the_title() . '(' . $postid . ')';
-      
-      $user_answers_raw     = get_post_meta( $postid );    	
-      $user_answers         = maybe_unserialize( $user_answers_raw[DOPT__FORMKEYS][0] );
-      
-      foreach ( $user_answers as $key => $value) {
-
-      
-        $subjects[]   = '(' . $postid . ') ' . $key . '=' . $value . '.';
-        $constituents = explode( DOPT__PLUGIN_SEPARATOR, $value ); // [0] = group, [1] = question, [2] = answer
-        
-        $group    = '';
-        $question = '';
-        $answer   = '';
-        
-        if ( isset( $constituents[0] ) ) {
-          $group    = $constituents[0];
-        }
-        if ( isset( $constituents[1] ) ) {
-          $question = $constituents[1];
-        }
-        if ( isset( $constituents[2] ) ) {
-          $answer = $constituents[2];
-        }
-
-        $current_answer   = (array) $formfields_data->$group->group_questions[0]->$question->question_answers[0]->$answer;
-
-        if ( intval( $current_answer['answer_value'] ) > 0 ) {
-          $values[ $group . DOPT__PLUGIN_SEPARATOR . $question ][] = $current_answer['answer_value'];
-          $values[ $group ][] = $current_answer['answer_value'];
-        }
-      }
-    }        
-  }
-
-  // loop door alle keys en bereken hun gemiddelde
-  foreach( $values as $key => $value ){        
-    
-    $systemaverage_score  = gcms_aux_get_average_for_array( $value, 1);
-    $subjects[]           = 'nieuw gemiddelde voor ' . $key . ' = ' . $systemaverage_score . '.';
-
-    $allemetingen[ $key ] = $systemaverage_score;
-    
-    // save het gemiddelde
-    update_option( $key, $systemaverage_score );
-
-  }
-
-  // overall gemiddelde
-  $average_overall  = gcms_aux_get_average_for_array( $allemetingen, 1);
-
-  if ( $givefeedback ) {
-
-  	wp_send_json( array(
-  		'ajaxrespons_messages'  => $subjects,
-  		'ajaxrespons_item'      => $log,
-  	) );
-
-  }
-
-}
-    
 
 //========================================================================================================
 
@@ -1314,7 +1294,6 @@ function do_pt_init_load_plugin_textdomain() {
 
 //========================================================================================================
 
-
 /**
  * Helper function for reading post values or cookie values
  */
@@ -1343,15 +1322,6 @@ function do_pt_get_post_or_cookie( $key = '', $default = '' ) {
 
 //========================================================================================================
 
-/**
- * Filter the mail content type.
- */
-function do_pt_mail_set_html_mail_content_type() {
-    return 'text/html';
-}
-
-//========================================================================================================
-
 add_filter('the_post_navigation', 'do_pt_remove_post_navigation_for_actielijn');
 
 function do_pt_remove_post_navigation_for_actielijn( $args ){
@@ -1366,6 +1336,58 @@ function do_pt_remove_post_navigation_for_actielijn( $args ){
 
 }
 
+//========================================================================================================
+
+if( function_exists('acf_add_local_field_group') ) {
+  
+  acf_add_local_field_group(array(
+  	'key' => 'group_5be5e4ee3cb94',
+  	'title' => 'Planning Tool instellingen',
+  	'fields' => array(
+  		array(
+  			'key' => 'field_5be5e5070642f',
+  			'label' => 'Planning-pagina',
+  			'name' => 'planning_page',
+  			'type' => 'post_object',
+  			'instructions' => '',
+  			'required' => 0,
+  			'conditional_logic' => 0,
+  			'wrapper' => array(
+  				'width' => '',
+  				'class' => '',
+  				'id' => '',
+  			),
+  			'post_type' => array(
+  				0 => 'page',
+  			),
+  			'taxonomy' => '',
+  			'allow_null' => 0,
+  			'multiple' => 0,
+  			'return_format' => 'object',
+  			'ui' => 1,
+  		),
+  	),
+  	'location' => array(
+  		array(
+  			array(
+  				'param' => 'options_page',
+  				'operator' => '==',
+  				'value' => 'instellingen',
+  			),
+  		),
+  	),
+  	'menu_order' => 0,
+  	'position' => 'normal',
+  	'style' => 'default',
+  	'label_placement' => 'top',
+  	'instruction_placement' => 'label',
+  	'hide_on_screen' => '',
+  	'active' => 1,
+  	'description' => '',
+  ));
+
+}
 
 //========================================================================================================
+
 
