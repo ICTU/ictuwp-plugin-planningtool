@@ -2,6 +2,11 @@
 
 # sh '/shared-paul-files/Webs/git-repos/Digitale-Overheid---WordPress-plugin-Planning-Tool/distribute.sh' &>/dev/null
 
+# voor een update van de CMB2 bestanden:
+sh '/shared-paul-files/Webs/git-repos/ICTU---Digitale-Overheid-WP---rijksvideoplugin/get_cmb2_files.sh' &>/dev/null
+
+
+
 echo '----------------------------------------------------------------';
 echo 'Distribute DO planning tool plugin';
 

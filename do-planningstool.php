@@ -112,7 +112,6 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
         define( 'DOPT__PLUGIN_OUTPUT_TOSCREEN',  true );
         define( 'DOPT__PLUGIN_USE_CMB2',         true ); 
         define( 'DOPT__PLUGIN_GENESIS_ACTIVE',   true ); // todo: inbouwen check op actief zijn van Genesis framework
-        define( 'DOPT__PLUGIN_AMCHART_ACTIVE',   true ); // todo: inbouwen check op actief zijn AM-chart of op AM-chart licentie
 
         define( 'DOPT__METABOX_ID',              'front-end-post-form' ); 
         define( 'DOPT_MB2_RANDOM_OBJECT_ID',     'fake-oject-id' ); 
@@ -123,12 +122,8 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
         
         define( 'DOPT__PLUGIN_SEPARATOR',        '__' );
 
-        define( 'GCMS_SCORESEPARATOR',            DOPT__PLUGIN_SEPARATOR . 'score' . DOPT__PLUGIN_SEPARATOR );
+        define( 'DOPT__SCORESEPARATOR',          DOPT__PLUGIN_SEPARATOR . 'score' . DOPT__PLUGIN_SEPARATOR );
  
-        define( 'DOPT__TABLE_COL_TH',            0 );
-        define( 'DOPT__TABLE_COL_USER_AVERAGE',  1 );
-        define( 'DOPT__TABLE_COL_SITE_AVERAGE',  2 );
-
         define( 'DOPT__SURVEY_EMAILID',          'submitted_your_email' );
         define( 'DOPT__SURVEY_YOURNAME',         'submitted_your_name' );
         define( 'DOPT__SURVEY_GDPR_CHECK',       'gdpr_do_save_my_emailaddress' );
@@ -138,9 +133,6 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 
         define( 'DOPT__URLPLACEHOLDER',          '[[url]]' );
         define( 'DOPT__NAMEPLACEHOLDER',         '[[name]]' );
-
-        define( 'DOPT__TEXTEMAIL',               'textforemail' );
-
 
         $this->option_name  = 'ictudo_planning-option';
         
@@ -860,49 +852,6 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 
     //====================================================================================================
 
-    private function do_pt_frontend_get_percentage( $score = 0, $max = 5, $doecho = false ) {
-
-      $return = '';
-
-      if ( $max ) {
-
-        $displayvalue = ( 100 / $max ); // percentage            
-        $return       = ( $score * $displayvalue ) . '%';
-        
-        $counter = 0;
-        
-
-        $return .= '<div class="star-rating">';
-        
-        while( $counter <  $max ) {
-          if ( $score > $counter ) {
-            $return .= '<svg style="display: none;" class="ja" height="494" viewBox="0 0 507 494" width="507" xmlns="http://www.w3.org/2000/svg"><path d="m253.5 408.75-156.6447697 84.207131 29.9164887-178.353566-126.72828059-126.310696 175.13417659-26.021434 78.322385-162.271435 78.322385 162.271435 175.134177 26.021434-126.728281 126.310696 29.916489 178.353566z" fill="#ffffff" fill-rule="evenodd" stroke="#000"/></svg>';
-          }
-          else {
-            $return .= '<svg style="display: none;" class="nee" height="494" viewBox="0 0 507 494" width="507" xmlns="http://www.w3.org/2000/svg"><path d="m253.5 408.75-156.6447697 84.207131 29.9164887-178.353566-126.72828059-126.310696 175.13417659-26.021434 78.322385-162.271435 78.322385 162.271435 175.134177 26.021434-126.728281 126.310696 29.916489 178.353566z" fill="#ffffff" fill-rule="evenodd" stroke="#000"/></svg>';
-          }
-          $counter++;
-          
-        }
-        $return .= '</div>';
-
-      }
-      
-      if ( $doecho ) {
-        echo $return;
-      }
-      else {
-        return $return;
-      }
-
-    }
-
-
-	    echo 'do_pt_frontend_form_register_cmb2_form';
-    }  
-
-    //====================================================================================================
-
     private function do_pt_frontend_get_interpretation( $userdata = array(), $doecho = false ) {
 	    echo 'do_pt_frontend_get_interpretation';
     }
@@ -1072,27 +1021,6 @@ function do_pt_frontend_form_handle_posting() {
 
   $theurl   = get_permalink( $new_submission_id );
 
-  // compose the mail
-  if ( $sanitized_values[ DOPT__SURVEY_EMAILID ] ) {
-
-    if ( filter_var( $sanitized_values[ DOPT__SURVEY_EMAILID ], FILTER_VALIDATE_EMAIL ) ) {    
-
-      // the users mailaddress appears to be a valid mailaddress
-      $mailtext = gcms_aux_get_value_for_cmb2_key( DOPT__TEXTEMAIL, _x( 'No mail text found', 'email', "do-planningstool" ) );
-      $mailtext = str_replace( DOPT__URLPLACEHOLDER, '<a href="' . $theurl . '">' . $theurl . '</a>', $mailtext );
-      $mailtext = str_replace( DOPT__NAMEPLACEHOLDER, $sanitized_values[ DOPT__SURVEY_YOURNAME ], $mailtext );
-
-      $mailfrom_address = gcms_aux_get_value_for_cmb2_key( 'mail-from-address' );
-      $mailfrom_name    = gcms_aux_get_value_for_cmb2_key( 'mail-from-name' );
-  
-      add_filter( 'wp_mail_content_type', 'do_pt_mail_set_html_mail_content_type' );
-       
-      // Reset content-type to avoid conflicts -- https://core.trac.wordpress.org/ticket/23578
-      remove_filter( 'wp_mail_content_type', 'do_pt_mail_set_html_mail_content_type' );
-      
-  
-    }
-  }
 
   if ( $sanitized_values[  DOPT__SURVEY_GDPR_CHECK  ] ) {
     // we are given permission to store the name and emailaddress

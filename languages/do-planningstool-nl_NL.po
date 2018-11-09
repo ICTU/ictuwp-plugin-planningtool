@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: GC Maturity\n"
-"POT-Creation-Date: 2018-11-09 12:39+0100\n"
-"PO-Revision-Date: 2018-11-09 12:46+0100\n"
+"POT-Creation-Date: 2018-11-09 12:47+0100\n"
+"PO-Revision-Date: 2018-11-09 12:47+0100\n"
 "Last-Translator: Paul van Buuren <paul@wbvb.nl>\n"
 "Language-Team: paul@wbvb.nl\n"
 "Language: nl_NL\n"
@@ -245,30 +245,16 @@ msgstr "Gebruiker Centraal"
 msgid "General scoring texts"
 msgstr "Score-teksten algemeen"
 
-#: do-planningstool.php:768
-#, fuzzy
-#| msgid ""
-#| "Oopsy daisy. There are no data to display. The survey you requested is "
-#| "empty. The server may have made an error in saving or retrieving the "
-#| "data, or more likely: our developer botched up. It's not your fault."
-msgid ""
-"Oopsy daisy. There are no data to display. The server may have made an error "
-"in saving or retrieving the data, or more likely: our developer botched up. "
-"It's not your fault."
-msgstr ""
-"Grutjes, geen gegevens beschikbaar. De server heeft waarschijnlijk een "
-"baaldag. Of Paul heeft zitten broddelen. Het is niet jouw schuld."
-
-#: do-planningstool.php:806
+#: do-planningstool.php:798
 msgid "Questions and answers"
 msgstr "Vragen en antwoorden"
 
-#: do-planningstool.php:822
+#: do-planningstool.php:814
 msgctxt "About you section"
 msgid "Your name"
 msgstr "Jouw naam"
 
-#: do-planningstool.php:825
+#: do-planningstool.php:817
 msgctxt "About you section"
 msgid ""
 "We store your name for a maximum of 3 years; it will be visible on the "
@@ -277,17 +263,17 @@ msgstr ""
 "Je naam slaan we maximaal 3 jaar op, zodat jouw naam zichtbaar blijft in je "
 "resultaatpagina. Wil je dat niet? Laat het veld dan leeg."
 
-#: do-planningstool.php:825 do-planningstool.php:833
+#: do-planningstool.php:817 do-planningstool.php:825
 msgctxt "About you section"
 msgid "Not required"
 msgstr "Niet verplicht"
 
-#: do-planningstool.php:830
+#: do-planningstool.php:822
 msgctxt "About you section"
 msgid "Your emailaddress"
 msgstr "Je e-mailadres"
 
-#: do-planningstool.php:833
+#: do-planningstool.php:825
 msgctxt "About you section"
 msgid ""
 "We gebruiken dit e-mailadres om je een link te mailen naar jouw "
@@ -352,6 +338,19 @@ msgstr ""
 #. Author URI of the plugin/theme
 msgid "https://wbvb.nl"
 msgstr ""
+
+#, fuzzy
+#~| msgid ""
+#~| "Oopsy daisy. There are no data to display. The survey you requested is "
+#~| "empty. The server may have made an error in saving or retrieving the "
+#~| "data, or more likely: our developer botched up. It's not your fault."
+#~ msgid ""
+#~ "Oopsy daisy. There are no data to display. The server may have made an "
+#~ "error in saving or retrieving the data, or more likely: our developer "
+#~ "botched up. It's not your fault."
+#~ msgstr ""
+#~ "Grutjes, geen gegevens beschikbaar. De server heeft waarschijnlijk een "
+#~ "baaldag. Of Paul heeft zitten broddelen. Het is niet jouw schuld."
 
 #~ msgctxt "admin"
 #~ msgid "Here you can edit the surveys."
