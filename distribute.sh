@@ -6,6 +6,7 @@
 sh '/shared-paul-files/Webs/git-repos/ICTU---Digitale-Overheid-WP---rijksvideoplugin/get_cmb2_files.sh' &>/dev/null
 
 
+cp '/Volumes/Macintosh HD/shared-paul-files/Webs/git-repos/ICTU---Digitale-Overheid-WP-theme/less/00-palet.less' '/shared-paul-files/Webs/git-repos/Digitale-Overheid---WordPress-plugin-Planning-Tool/less/palet-do.less';
 
 echo '----------------------------------------------------------------';
 echo 'Distribute DO planning tool plugin';
@@ -30,7 +31,7 @@ find . -name ‘*.DS_Store’ -type f -delete
 
 
 # copy from temp dir to dev-env
-  rsync -r -a --delete '/shared-paul-files/Webs/temp/' '/shared-paul-files/Webs/ICTU/Gebruiker Centraal/development/wp-content/plugins/do-planning-tool/' 
+rsync -r -a --delete '/shared-paul-files/Webs/temp/' '/shared-paul-files/Webs/ICTU/Gebruiker Centraal/development/wp-content/plugins/do-planning-tool/' 
 
 # remove temp dir
 rm -rf '/shared-paul-files/Webs/temp/'

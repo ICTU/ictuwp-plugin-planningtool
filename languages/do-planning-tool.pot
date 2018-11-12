@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: Planning Tool digitaleoverheid.nl\n"
-"POT-Creation-Date: 2018-11-09 13:55+0100\n"
+"POT-Creation-Date: 2018-11-12 15:02+0100\n"
 "PO-Revision-Date: 2018-06-13 10:59+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -427,288 +427,303 @@ msgstr ""
 msgid "Check Three"
 msgstr ""
 
-#: do-planning-tool.php:288
+#: do-planning-tool.php:283
 msgctxt "labels"
 msgid "Actielijn"
 msgstr ""
 
-#: do-planning-tool.php:289
+#: do-planning-tool.php:284
 msgctxt "labels"
 msgid "Actielijnen"
 msgstr ""
 
-#: do-planning-tool.php:291
+#: do-planning-tool.php:286
 msgctxt "labels"
 msgid "actielijn"
 msgstr ""
 
-#: do-planning-tool.php:292
+#: do-planning-tool.php:287
 msgctxt "labels"
 msgid "actielijnen"
 msgstr ""
 
-#: do-planning-tool.php:298 do-planning-tool.php:347 do-planning-tool.php:401
+#: do-planning-tool.php:293 do-planning-tool.php:341 do-planning-tool.php:398
 #, php-format
 msgctxt "labels"
 msgid "All %s"
 msgstr ""
 
-#: do-planning-tool.php:299 do-planning-tool.php:303 do-planning-tool.php:305
-#: do-planning-tool.php:348 do-planning-tool.php:352 do-planning-tool.php:354
-#: do-planning-tool.php:402 do-planning-tool.php:406 do-planning-tool.php:408
+#: do-planning-tool.php:294 do-planning-tool.php:298 do-planning-tool.php:342
+#: do-planning-tool.php:346 do-planning-tool.php:399 do-planning-tool.php:403
 #, php-format
 msgctxt "labels"
 msgid "Add %s"
 msgstr ""
 
-#: do-planning-tool.php:300 do-planning-tool.php:349 do-planning-tool.php:403
+#: do-planning-tool.php:295 do-planning-tool.php:343 do-planning-tool.php:400
 #, php-format
 msgctxt "labels"
 msgid "Add new %s"
 msgstr ""
 
-#: do-planning-tool.php:301 do-planning-tool.php:350 do-planning-tool.php:404
-#: do-planning-tool.php:413
+#: do-planning-tool.php:296 do-planning-tool.php:344 do-planning-tool.php:401
+#: do-planning-tool.php:410
 msgctxt "labels"
 msgid "Edit?"
 msgstr ""
 
-#: do-planning-tool.php:302 do-planning-tool.php:351 do-planning-tool.php:405
+#: do-planning-tool.php:297 do-planning-tool.php:345 do-planning-tool.php:402
 #, php-format
 msgctxt "labels"
 msgid "Edit %s"
 msgstr ""
 
-#: do-planning-tool.php:304 do-planning-tool.php:353 do-planning-tool.php:407
+#: do-planning-tool.php:299 do-planning-tool.php:347 do-planning-tool.php:404
 msgctxt "labels"
 msgid "Show"
 msgstr ""
 
-#: do-planning-tool.php:306 do-planning-tool.php:355 do-planning-tool.php:409
+#: do-planning-tool.php:300 do-planning-tool.php:348 do-planning-tool.php:405
+#, php-format
+msgctxt "labels"
+msgid "View %s"
+msgstr ""
+
+#: do-planning-tool.php:301 do-planning-tool.php:349 do-planning-tool.php:406
 #, php-format
 msgctxt "labels"
 msgid "Search %s"
 msgstr ""
 
-#: do-planning-tool.php:307 do-planning-tool.php:356 do-planning-tool.php:410
+#: do-planning-tool.php:302 do-planning-tool.php:350 do-planning-tool.php:407
 #, php-format
 msgctxt "labels"
 msgid "No %s available"
 msgstr ""
 
-#: do-planning-tool.php:308 do-planning-tool.php:357 do-planning-tool.php:411
+#: do-planning-tool.php:303 do-planning-tool.php:351 do-planning-tool.php:408
 #, php-format
 msgctxt "labels"
 msgid "No %s in trash"
 msgstr ""
 
-#: do-planning-tool.php:309 do-planning-tool.php:358 do-planning-tool.php:412
+#: do-planning-tool.php:304 do-planning-tool.php:352 do-planning-tool.php:409
 msgctxt "labels"
 msgid "Parent"
 msgstr ""
 
-#: do-planning-tool.php:337
+#: do-planning-tool.php:331
 msgctxt "labels"
 msgid "Gebeurtenis"
 msgstr ""
 
-#: do-planning-tool.php:338
+#: do-planning-tool.php:332
 msgctxt "labels"
 msgid "Gebeurtenissen"
 msgstr ""
 
-#: do-planning-tool.php:340
+#: do-planning-tool.php:334
 msgctxt "labels"
 msgid "gebeurtenis"
 msgstr ""
 
-#: do-planning-tool.php:341
+#: do-planning-tool.php:335
 msgctxt "labels"
 msgid "gebeurtenissen"
 msgstr ""
 
-#: do-planning-tool.php:389
+#: do-planning-tool.php:386
 msgctxt "labels"
 msgid "Organisation type"
 msgstr ""
 
-#: do-planning-tool.php:390
+#: do-planning-tool.php:387
 msgctxt "labels"
 msgid "Organisation types"
 msgstr ""
 
-#: do-planning-tool.php:392
+#: do-planning-tool.php:389
 msgctxt "labels"
 msgid "organisation type"
 msgstr ""
 
-#: do-planning-tool.php:393
+#: do-planning-tool.php:390
 msgctxt "labels"
 msgid "organisation types"
 msgstr ""
 
-#: do-planning-tool.php:449
+#: do-planning-tool.php:446
 msgctxt "naam template"
-msgid "Maturity score template"
+msgid "Planning Tool Template"
 msgstr ""
 
-#: do-planning-tool.php:466
+#: do-planning-tool.php:463
 msgid "General settings"
 msgstr ""
 
-#: do-planning-tool.php:498
+#: do-planning-tool.php:495
 msgid "Documentation"
 msgstr ""
 
-#: do-planning-tool.php:499
+#: do-planning-tool.php:496
 msgid "GC Maturity documentation"
 msgstr ""
 
-#: do-planning-tool.php:513
+#: do-planning-tool.php:510
 msgctxt "admin"
 msgid "Hier onderhoud voor de actielijnen."
 msgstr ""
 
-#: do-planning-tool.php:546
+#: do-planning-tool.php:543
 msgctxt "js"
 msgid "URL"
 msgstr ""
 
-#: do-planning-tool.php:547
+#: do-planning-tool.php:544
 msgctxt "js"
 msgid "Caption"
 msgstr ""
 
-#: do-planning-tool.php:548
+#: do-planning-tool.php:545
 msgctxt "js"
 msgid "New Window"
 msgstr ""
 
-#: do-planning-tool.php:549
+#: do-planning-tool.php:546
 msgctxt "js"
 msgid "Are you sure?"
 msgstr ""
 
-#: do-planning-tool.php:573 do-planning-tool.php:623
+#: do-planning-tool.php:570 do-planning-tool.php:620
 msgid "Reset statistics"
 msgstr ""
 
-#: do-planning-tool.php:574
+#: do-planning-tool.php:571
 msgid "Empty log"
 msgstr ""
 
-#: do-planning-tool.php:579
+#: do-planning-tool.php:576
 msgid "Ehm, please allow JavaScript."
 msgstr ""
 
-#: do-planning-tool.php:582
+#: do-planning-tool.php:579
 msgid "Press the button!"
 msgstr ""
 
-#: do-planning-tool.php:602 do-planning-tool.php:636
+#: do-planning-tool.php:599 do-planning-tool.php:633
 msgid "Just a moment please"
 msgstr ""
 
-#: do-planning-tool.php:671
+#: do-planning-tool.php:668
 msgid "Maturity score"
 msgstr ""
 
-#: do-planning-tool.php:677
+#: do-planning-tool.php:674
 msgctxt "scoring menu"
 msgid "Email settings &amp; general scoring"
 msgstr ""
 
-#: do-planning-tool.php:679
+#: do-planning-tool.php:676
 msgid "Save options"
 msgstr ""
 
-#: do-planning-tool.php:701
+#: do-planning-tool.php:698
 msgctxt "email settings"
 msgid "Email settings"
 msgstr ""
 
-#: do-planning-tool.php:707
+#: do-planning-tool.php:704
 msgctxt "email settings"
 msgid "Sender email address"
 msgstr ""
 
-#: do-planning-tool.php:710
+#: do-planning-tool.php:707
 msgctxt "email settings"
 msgid "info@gebruikercentraal.nl"
 msgstr ""
 
-#: do-planning-tool.php:714
+#: do-planning-tool.php:711
 msgctxt "email settings"
 msgid "Sender email name"
 msgstr ""
 
-#: do-planning-tool.php:717
+#: do-planning-tool.php:714
 msgctxt "email settings"
 msgid "Gebruiker Centraal"
 msgstr ""
 
-#: do-planning-tool.php:721
+#: do-planning-tool.php:718
 msgid "General scoring texts"
 msgstr ""
 
-#: do-planning-tool.php:790
+#: do-planning-tool.php:775
 msgid "Questions and answers"
 msgstr ""
 
-#: do-planning-tool.php:806
+#: do-planning-tool.php:791
 msgctxt "About you section"
 msgid "Your name"
 msgstr ""
 
-#: do-planning-tool.php:809
+#: do-planning-tool.php:794
 msgctxt "About you section"
 msgid ""
 "We store your name for a maximum of 3 years; it will be visible on the "
 "resultpage. Leave this empty if you don't want this."
 msgstr ""
 
-#: do-planning-tool.php:809 do-planning-tool.php:817
+#: do-planning-tool.php:794 do-planning-tool.php:802
 msgctxt "About you section"
 msgid "Not required"
 msgstr ""
 
-#: do-planning-tool.php:814
+#: do-planning-tool.php:799
 msgctxt "About you section"
 msgid "Your emailaddress"
 msgstr ""
 
-#: do-planning-tool.php:817
+#: do-planning-tool.php:802
 msgctxt "About you section"
 msgid ""
 "We gebruiken dit e-mailadres om je een link te mailen naar jouw resultaatpagina."
 msgstr ""
 
-#: do-planning-tool.php:914
+#: do-planning-tool.php:949
 #, php-format
 msgid "Actielijn niet opgeslagen; errors occurred: %s"
 msgstr ""
 
-#: do-planning-tool.php:919
+#: do-planning-tool.php:954
 msgid "Submit"
 msgstr ""
 
-#: do-planning-tool.php:974
+#: do-planning-tool.php:1067
 msgid ""
 "Security checks for your form submission failed. Your data will be discarded."
 msgstr ""
 
-#: do-planning-tool.php:987
+#: do-planning-tool.php:1080
 msgid "Your organisation's score"
 msgstr ""
 
-#: do-planning-tool.php:1004
+#: do-planning-tool.php:1097
 msgctxt "naam"
 msgid "Your name"
 msgstr ""
 
-#: do-planning-tool.php:1009
+#: do-planning-tool.php:1102
 msgctxt "email"
 msgid "Your email address"
+msgstr ""
+
+#: do-planning-tool.php:1629
+msgctxt "tussenkopje"
+msgid "Actielijnen"
+msgstr ""
+
+#: do-planning-tool.php:1634
+msgctxt "tussenkopje"
+msgid "Gebeurtenissen"
 msgstr ""
 
 #. Plugin Name of the plugin/theme

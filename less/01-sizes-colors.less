@@ -12,6 +12,7 @@
 // * Version desc: Added extra checkbox for getting user permission to store emailaddress; attempt to translate everything into the Engelands.
 // * @link    https://github.com/ICTU/Digitale-Overheid---WordPress-plugin-Planning-Tool/
 
+@import "palet-do.less";
 
 
 @break_fullwidth:       1200px;
@@ -35,4 +36,33 @@
   padding: 0;
   position: absolute;
   width: 1px;
+}
+
+.kleurtjeslijntjes( @kleur1: red,  @kleur2: green, @txtcolor_hover: @wit ) {
+
+  h2 {
+    background: @kleur1;
+  }
+
+/*
+  ul {
+    & > li {
+      border-color: @kleur1;
+      
+      & > a {
+        background: @kleur2;
+        border-color: @kleur1;
+        
+        &:hover {
+        	background: @kleur1;
+        	color: @txtcolor_hover;
+        	
+        	strong {
+          	background: @kleur1;
+        	}
+        }
+      }
+    }
+  }
+*/  
 }

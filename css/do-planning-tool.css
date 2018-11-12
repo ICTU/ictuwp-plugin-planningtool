@@ -49,4 +49,155 @@
 	
  
  */
+.programma h2 {
+  color: #fff;
+  padding: 0.25em 0.5em;
+}
+.programma.digibeter-oranje h2,
+.programma.digibeter-violet h2,
+.programma.digibeter-paars h2,
+.programma.digibeter-groen h2,
+.programma.digibeter-blauw h2 {
+  color: #fff;
+}
+.programma.digibeter-en-orange,
+.programma.digibeter-oranje {
+  /*
+  ul {
+    & > li {
+      border-color: @kleur1;
+      
+      & > a {
+        background: @kleur2;
+        border-color: @kleur1;
+        
+        &:hover {
+        	background: @kleur1;
+        	color: @txtcolor_hover;
+        	
+        	strong {
+          	background: @kleur1;
+        	}
+        }
+      }
+    }
+  }
+*/
+}
+.programma.digibeter-en-orange h2,
+.programma.digibeter-oranje h2 {
+  background: #E17000;
+}
+.programma.digibeter-en-violet,
+.programma.digibeter-violet {
+  /*
+  ul {
+    & > li {
+      border-color: @kleur1;
+      
+      & > a {
+        background: @kleur2;
+        border-color: @kleur1;
+        
+        &:hover {
+        	background: @kleur1;
+        	color: @txtcolor_hover;
+        	
+        	strong {
+          	background: @kleur1;
+        	}
+        }
+      }
+    }
+  }
+*/
+}
+.programma.digibeter-en-violet h2,
+.programma.digibeter-violet h2 {
+  background: #A90061;
+}
+.programma.digibeter-en-purple,
+.programma.digibeter-paars {
+  /*
+  ul {
+    & > li {
+      border-color: @kleur1;
+      
+      & > a {
+        background: @kleur2;
+        border-color: @kleur1;
+        
+        &:hover {
+        	background: @kleur1;
+        	color: @txtcolor_hover;
+        	
+        	strong {
+          	background: @kleur1;
+        	}
+        }
+      }
+    }
+  }
+*/
+}
+.programma.digibeter-en-purple h2,
+.programma.digibeter-paars h2 {
+  background: #42145F;
+}
+.programma.digibeter-en-green,
+.programma.digibeter-groen {
+  /*
+  ul {
+    & > li {
+      border-color: @kleur1;
+      
+      & > a {
+        background: @kleur2;
+        border-color: @kleur1;
+        
+        &:hover {
+        	background: @kleur1;
+        	color: @txtcolor_hover;
+        	
+        	strong {
+          	background: @kleur1;
+        	}
+        }
+      }
+    }
+  }
+*/
+}
+.programma.digibeter-en-green h2,
+.programma.digibeter-groen h2 {
+  background: #39870C;
+}
+.programma.digibeter-en-blue,
+.programma.digibeter-blauw {
+  /*
+  ul {
+    & > li {
+      border-color: @kleur1;
+      
+      & > a {
+        background: @kleur2;
+        border-color: @kleur1;
+        
+        &:hover {
+        	background: @kleur1;
+        	color: @txtcolor_hover;
+        	
+        	strong {
+          	background: @kleur1;
+        	}
+        }
+      }
+    }
+  }
+*/
+}
+.programma.digibeter-en-blue h2,
+.programma.digibeter-blauw h2 {
+  background: #007BC7;
+}
 /*# sourceMappingURL=do-planning-tool.css.map */

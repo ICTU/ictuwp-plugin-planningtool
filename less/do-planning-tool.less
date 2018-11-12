@@ -53,3 +53,45 @@
 
 @import "01-sizes-colors.less";  
 
+
+.programma {
+
+  h2 {
+    color: @wit;
+    padding: .25em .5em;
+  }
+
+  &.digibeter-oranje,
+  &.digibeter-violet,
+  &.digibeter-paars,
+  &.digibeter-groen,
+  &.digibeter-blauw {
+    h2 {
+      color: @wit;
+    }
+  }
+
+  &.digibeter-en-orange,
+  &.digibeter-oranje {
+    .kleurtjeslijntjes( @digibeter_oranje, @digibeter_oranje_licht );
+  }
+  &.digibeter-en-violet,
+  &.digibeter-violet {
+    .kleurtjeslijntjes( @digibeter_violet, @digibeter_violet_licht );
+  }
+  &.digibeter-en-purple,
+  &.digibeter-paars {
+    .kleurtjeslijntjes( @digibeter_paars, @digibeter_paars_licht );
+  }
+  &.digibeter-en-green,
+  &.digibeter-groen {
+    .kleurtjeslijntjes( @digibeter_groen, @digibeter_groen_licht );
+  }
+  &.digibeter-en-blue,
+  &.digibeter-blauw {
+    .kleurtjeslijntjes( @digibeter_blauw, @digibeter_blauw_licht );
+  }
+
+
+}
+
