@@ -49,9 +49,18 @@
 	
  
  */
+.programma {
+  margin-bottom: 1em;
+}
 .programma h2 {
   color: #fff;
   padding: 0.25em 0.5em;
+  margin-top: 0;
+}
+.programma h3,
+.programma ul {
+  margin-left: 0.5em;
+  margin-right: 0.5em;
 }
 .programma.digibeter-oranje h2,
 .programma.digibeter-violet h2,
@@ -62,6 +71,7 @@
 }
 .programma.digibeter-en-orange,
 .programma.digibeter-oranje {
+  border: 4px solid #E17000;
   /*
   ul {
     & > li {
@@ -90,6 +100,7 @@
 }
 .programma.digibeter-en-violet,
 .programma.digibeter-violet {
+  border: 4px solid #A90061;
   /*
   ul {
     & > li {
@@ -118,6 +129,7 @@
 }
 .programma.digibeter-en-purple,
 .programma.digibeter-paars {
+  border: 4px solid #42145F;
   /*
   ul {
     & > li {
@@ -146,6 +158,7 @@
 }
 .programma.digibeter-en-green,
 .programma.digibeter-groen {
+  border: 4px solid #39870C;
   /*
   ul {
     & > li {
@@ -174,6 +187,7 @@
 }
 .programma.digibeter-en-blue,
 .programma.digibeter-blauw {
+  border: 4px solid #007BC7;
   /*
   ul {
     & > li {
