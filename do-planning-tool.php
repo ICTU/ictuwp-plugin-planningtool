@@ -24,11 +24,12 @@ add_action( 'plugins_loaded', 'do_pt_init_load_plugin_textdomain' );
 
 if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 
-/**
- * Register the plugin.
- *
- * Display the administration panel, add JavaScript etc.
- */
+  /**
+   * Register the plugin.
+   *
+   * Display the administration panel, add JavaScript etc.
+   */
+   
   class DO_Planning_Tool {
   
       /**
@@ -98,7 +99,7 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 
         define( 'DOPT__SURVEY_DEFAULT_USERID',   2600 ); // 't is wat, hardgecodeerde userids (todo: invoerbaar maken via admin)
 
-        define( 'DOPT__SURVEY_CT_ORG_TYPE',      "Organisation type" );
+        define( 'DOPT_CT_PLANNINGLABEL',         "Planning label" );
 
         define( 'DOPT__QUESTION_PREFIX',         DOPT__ACTIELIJN_CPT . '_pf_' ); // prefix for cmb2 metadata fields
         define( 'DOPT__CMBS2_PREFIX',            DOPT__QUESTION_PREFIX . '_form_' ); // prefix for cmb2 metadata fields
@@ -133,7 +134,6 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
         define( 'DOPT__NAMEPLACEHOLDER',         '[[name]]' );
 
         $this->option_name  = 'ictudo_planning-option';
-        
 
        }
   
@@ -204,7 +204,7 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
         global $post;
 
         if( in_the_loop() && is_single() && ( DOPT__ACTIELIJN_CPT == get_post_type() || DOPT__GEBEURTENIS_CPT == get_post_type() ) ) {
-          return $content . do_pt_frontend_display_results( $post->ID );
+          return $content . do_pt_frontend_display_actielijn_info( $post->ID );
         }
         else {
           return $content;
@@ -382,11 +382,11 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
       	
 
 
-        $typeUC_single = _x( "Organisation type", "labels", "do-planning-tool" );
-        $typeUC_plural = _x( "Organisation types", "labels", "do-planning-tool" );
+        $typeUC_single = _x( "Planning label", "labels", "do-planning-tool" );
+        $typeUC_plural = _x( "Planning labels", "labels", "do-planning-tool" );
         
-        $typeLC_single = _x( "organisation type", "labels", "do-planning-tool" );
-        $typeLC_plural = _x( "organisation types", "labels", "do-planning-tool" );
+        $typeLC_single = _x( "planning label", "labels", "do-planning-tool" );
+        $typeLC_plural = _x( "planning labels", "labels", "do-planning-tool" );
 
         // organisation types
       	$labels = array(
@@ -420,13 +420,14 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
       		"show_in_menu"        => true,
       		"show_in_nav_menus"   => true,
       		"query_var"           => true,
-      		"rewrite"             => array( 'slug' => DOPT__SURVEY_CT_ORG_TYPE, 'with_front' => true, ),
+      		"rewrite"             => array( 'slug' => DOPT_CT_PLANNINGLABEL, 'with_front' => true, ),
       		"show_admin_column"   => true,
       		"show_in_rest"        => false,
       		"rest_base"           => "",
       		"show_in_quick_edit"  => false,
       	);
-//      	register_taxonomy( DOPT__SURVEY_CT_ORG_TYPE, array( DOPT__ACTIELIJN_CPT ), $args );
+
+      	register_taxonomy( DOPT_CT_PLANNINGLABEL, array( DOPT__ACTIELIJN_CPT ), $args );
 
 //      	flush_rewrite_rules();
 
@@ -787,13 +788,13 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 
       // organisation types
       $terms = get_terms( array(
-        'taxonomy' => DOPT__SURVEY_CT_ORG_TYPE,
+        'taxonomy' => DOPT_CT_PLANNINGLABEL,
         'hide_empty' => false,
       ) );
     
       if ( ! empty( $terms ) && ! is_wp_error( $terms ) ){
         $options = array();
-        $taxinfo = get_taxonomy( DOPT__SURVEY_CT_ORG_TYPE );
+        $taxinfo = get_taxonomy( DOPT_CT_PLANNINGLABEL );
     
         foreach ( $terms as $term ) {
           $options[ $term->term_id ] = $term->name;
@@ -802,7 +803,7 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
     
       	$cmb->add_field( array(
       		'name'    => $taxinfo->labels->singular_name,
-      		'id'      => DOPT__QUESTION_PREFIX . DOPT__SURVEY_CT_ORG_TYPE,
+      		'id'      => DOPT__QUESTION_PREFIX . DOPT_CT_PLANNINGLABEL,
       		'type'    => 'radio',
           'options' => $options,
           'default' => $default,
@@ -954,52 +955,155 @@ function do_pt_frontend_cmb2_get() {
  */
 function do_pt_do_frontend_pagetemplate_add_actielijnen() {
 
+  $acfid            = get_the_id();
+  $year_start       = date("Y");
+  $year_end         = date("Y");
+  $actielijnblokken = get_field( 'actielijnen_per_thema', $acfid );
 
-  $terms = get_terms( array(
-    'taxonomy'    => RHSWP_CT_DIGIBETER,
-    'hide_empty'  => true,
-  ) );
 
-  if ( $terms ) {
+  if( have_rows('actielijnen_per_thema', $acfid ) ) {
 
-    foreach ( $terms as $term ) {
+    foreach( $actielijnblokken as $actielijnblok ) {
 
-      $args = array(
-          'post_type'       => DOPT__ACTIELIJN_CPT, // hiero
-          'post_status'     => 'publish',
-          'tax_query'       => array(
-              array(
-                'taxonomy'  => RHSWP_CT_DIGIBETER,
-                'field'     => 'term_id',
-                'terms'     => $term->term_id,
-              )
-          ),      
-          'posts_per_page'  => -1,
-        );
+      $actielijnblok_titel    = esc_html( $actielijnblok[ 'actielijnen_per_thema_titel' ] );
+      $digibeterclass         = get_field( 'digibeter_term_achtergrondkleur', RHSWP_CT_DIGIBETER . '_' . $actielijnblok[ 'actielijnen_per_thema_kleur' ] );
+      $select_actielijnen     = $actielijnblok[ 'actielijnen_per_thema_actielijnen' ];
 
-      $wp_queryposts = new WP_Query( $args );
+      echo '<div class="programma ' . $digibeterclass . '">';      
+      echo '<h2>' . $actielijnblok_titel . '</h2>';      
+      
+      if( $select_actielijnen ) {
 
+        foreach( $select_actielijnen as $select_actielijn ) {
+
+          echo '<h3><a href="' . get_the_permalink( $select_actielijn->ID ) . '">' . get_the_title( $select_actielijn->ID ) . '</a>';
+          
+          $actielijn_toon_datum               = get_field( 'actielijn_toon_datum', $select_actielijn->ID );
+          $actielijn_kwartaal_start_kwartaal  = get_field( 'actielijn_kwartaal_start_kwartaal', $select_actielijn->ID );
+          $actielijn_kwartaal_start_jaar      = get_field( 'actielijn_kwartaal_start_jaar', $select_actielijn->ID );
+          $actielijn_kwartaal_eind_kwartaal   = get_field( 'actielijn_kwartaal_eind_kwartaal', $select_actielijn->ID );
+          $actielijn_kwartaal_eind_jaar       = get_field( 'actielijn_kwartaal_eind_jaar', $select_actielijn->ID );
+
+          if ( intval( $actielijn_kwartaal_start_jaar > 0 ) && ( intval( $actielijn_kwartaal_start_jaar ) < intval( $year_start ) ) ) {
+            $year_start = $actielijn_kwartaal_start_jaar;  
+          }
+          
+          if ( intval( $actielijn_kwartaal_eind_jaar > 0 ) && ( intval( $actielijn_kwartaal_eind_jaar ) > intval( $year_end ) ) ) {
+            $year_end = $actielijn_kwartaal_eind_jaar;  
+          }
+
+          if ( $actielijn_toon_datum || ( $actielijn_kwartaal_start_kwartaal && $actielijn_kwartaal_start_jaar ) || ( $actielijn_kwartaal_eind_kwartaal && $actielijn_kwartaal_eind_jaar )  ) {
+
+            echo ' <br><small>';
+      
+            if ( $actielijn_toon_datum ) {
+              echo _x( 'Planning', 'tussenkopje', "do-planning-tool" ) . ': ';
+              echo $actielijn_toon_datum;
+            }
+      
+
+            if ( ( $actielijn_kwartaal_start_kwartaal && $actielijn_kwartaal_start_jaar ) || ( $actielijn_kwartaal_eind_kwartaal && $actielijn_kwartaal_eind_jaar ) ) {
     
-      if ( $wp_queryposts->have_posts() ) {
-
-        $digibeterclass  = get_field( 'digibeter_term_achtergrondkleur', RHSWP_CT_DIGIBETER . '_' . $term->term_id );
-
-        echo '<div class="programma ' . $digibeterclass . '">';      
-        echo '<h2>' . $term->name . '</h2>';      
-
-        $postcounter = 0;
+            echo ' <br><small><pre>';
     
-        while ( $wp_queryposts->have_posts() ) : $wp_queryposts->the_post();
-          $postcounter++;
-          $theid = get_the_id();
-          echo '<h3><a href="' . get_the_permalink() . '">' . get_the_title() . '</a></h3>';
-          echo do_pt_frontend_display_results( $theid, false, true );          
-          do_action( 'genesis_after_entry' );
-    
-        endwhile;
+              if ( $actielijn_kwartaal_start_kwartaal && $actielijn_kwartaal_start_jaar ) {
+        
+                if ( $actielijn_kwartaal_eind_kwartaal && $actielijn_kwartaal_eind_jaar ) {
+                  echo _x( 'Van', 'tussenkopje', "do-planning-tool" ) . ' ';
+                }
+                else {
+                  echo _x( 'Start', 'tussenkopje', "do-planning-tool" ) . ': ';
+                }
+        
+                echo $actielijn_kwartaal_start_kwartaal . '-' . $actielijn_kwartaal_start_jaar;
 
-        echo '</div>';
+              }
+              
+              if ( $actielijn_kwartaal_eind_kwartaal && $actielijn_kwartaal_eind_jaar ) {
+        
+                if ( $actielijn_kwartaal_start_kwartaal && $actielijn_kwartaal_start_jaar ) {
+                  echo ' ' . _x( 'tot', 'tussenkopje', "do-planning-tool" ) . ' ';
+                }
+                else {
+                  echo _x( 'Eind', 'tussenkopje', "do-planning-tool" ) . ': ';
+                }
+        
+                echo $actielijn_kwartaal_eind_kwartaal . '-' . $actielijn_kwartaal_eind_jaar;
+                
+              }
+
+              echo '</pre></small> ';
+
+            }
+
+            echo '</small>';
+            
+          }
     
+          echo ' </h3>';
+          echo do_pt_frontend_display_actielijn_info( $select_actielijn->ID, false, true );          
+
+        }
+
+      }
+
+      echo '<p>2: Jaren: van ' . $year_start . ' tot ' . $year_end . '</p>';
+
+      echo '</div>';
+
+    }
+    
+  }
+  else {
+
+    echo '<p>' . __( "Geen actielijnen geselecteerd voor deze pagina, dus alle actielijnen per digibeter-kleur worden getoond.", "do-planning-tool" ) . '</p>';
+    
+  
+    $terms = get_terms( array(
+      'taxonomy'    => RHSWP_CT_DIGIBETER,
+      'hide_empty'  => true,
+    ) );
+  
+    if ( $terms ) {
+  
+      foreach ( $terms as $term ) {
+  
+        $args = array(
+            'post_type'       => DOPT__ACTIELIJN_CPT, // hiero
+            'post_status'     => 'publish',
+            'tax_query'       => array(
+                array(
+                  'taxonomy'  => RHSWP_CT_DIGIBETER,
+                  'field'     => 'term_id',
+                  'terms'     => $term->term_id,
+                )
+            ),      
+            'posts_per_page'  => -1,
+          );
+  
+        $wp_queryposts = new WP_Query( $args );
+  
+      
+        if ( $wp_queryposts->have_posts() ) {
+  
+          $digibeterclass  = get_field( 'digibeter_term_achtergrondkleur', RHSWP_CT_DIGIBETER . '_' . $term->term_id );
+  
+          echo '<div class="programma ' . $digibeterclass . '">';      
+          echo '<h2>' . $term->name . '</h2>';      
+  
+          $postcounter = 0;
+      
+          while ( $wp_queryposts->have_posts() ) : $wp_queryposts->the_post();
+            $postcounter++;
+            $theid = get_the_id();
+            echo '<h3><a href="' . get_the_permalink() . '">' . get_the_title() . '</a></h3>';
+            echo do_pt_frontend_display_actielijn_info( $theid, false, true );          
+      
+          endwhile;
+  
+          echo '</div>';
+      
+        }
       }
     }
   }
@@ -1319,9 +1423,120 @@ function do_pt_remove_post_navigation_for_actielijn( $args ){
 
 //========================================================================================================
 
-
 if( function_exists('acf_add_local_field_group') ) {
 
+  acf_add_local_field_group(array(
+  	'key' => 'group_5beaf126f2d00',
+  	'title' => 'Planning Tool Page',
+  	'fields' => array(
+  		array(
+  			'key' => 'field_5beaf13ac4396',
+  			'label' => 'Actielijnen per thema',
+  			'name' => 'actielijnen_per_thema',
+  			'type' => 'repeater',
+  			'instructions' => 'Kies een thema en voeg de bijbehorende actielijnen toe',
+  			'required' => 0,
+  			'conditional_logic' => 0,
+  			'wrapper' => array(
+  				'width' => '',
+  				'class' => '',
+  				'id' => '',
+  			),
+  			'collapsed' => '',
+  			'min' => 0,
+  			'max' => 0,
+  			'layout' => 'row',
+  			'button_label' => 'Blok met actielijnen toevoegen',
+  			'sub_fields' => array(
+  				array(
+  					'key' => 'field_5beaf173c4397',
+  					'label' => 'Thema-titel',
+  					'name' => 'actielijnen_per_thema_titel',
+  					'type' => 'text',
+  					'instructions' => '',
+  					'required' => 0,
+  					'conditional_logic' => 0,
+  					'wrapper' => array(
+  						'width' => '',
+  						'class' => '',
+  						'id' => '',
+  					),
+  					'default_value' => '',
+  					'placeholder' => '',
+  					'prepend' => '',
+  					'append' => '',
+  					'maxlength' => '',
+  				),
+  				array(
+  					'key' => 'field_5bec22d240e6c',
+  					'label' => 'Kies een kleur',
+  					'name' => 'actielijnen_per_thema_kleur',
+  					'type' => 'taxonomy',
+  					'instructions' => '',
+  					'required' => 0,
+  					'conditional_logic' => 0,
+  					'wrapper' => array(
+  						'width' => '',
+  						'class' => '',
+  						'id' => '',
+  					),
+  					'taxonomy' => 'digitaleagenda',
+  					'field_type' => 'radio',
+  					'allow_null' => 1,
+  					'add_term' => 0,
+  					'save_terms' => 0,
+  					'load_terms' => 0,
+  					'return_format' => 'id',
+  					'multiple' => 0,
+  				),
+  				array(
+  					'key' => 'field_5bec22f340e6d',
+  					'label' => 'Kies de actielijnen in dit blok',
+  					'name' => 'actielijnen_per_thema_actielijnen',
+  					'type' => 'relationship',
+  					'instructions' => '',
+  					'required' => 0,
+  					'conditional_logic' => 0,
+  					'wrapper' => array(
+  						'width' => '',
+  						'class' => '',
+  						'id' => '',
+  					),
+  					'post_type' => array(
+  						0 => 'actielijn',
+  					),
+  					'taxonomy' => '',
+  					'filters' => array(
+  						0 => 'search',
+  						1 => 'taxonomy',
+  					),
+  					'elements' => '',
+  					'min' => 1,
+  					'max' => '',
+  					'return_format' => 'object',
+  				),
+  			),
+  		),
+  	),
+  	'location' => array(
+  		array(
+  			array(
+  				'param' => 'page_template',
+  				'operator' => '==',
+  				'value' => 'planningtool-template.php',
+  			),
+  		),
+  	),
+  	'menu_order' => 0,
+  	'position' => 'acf_after_title',
+  	'style' => 'default',
+  	'label_placement' => 'top',
+  	'instruction_placement' => 'label',
+  	'hide_on_screen' => '',
+  	'active' => 1,
+  	'description' => '',
+  ));
+  
   acf_add_local_field_group(array(
   	'key' => 'group_5be9756fd880f',
   	'title' => 'Gebeurtenis: datum + gekoppelde actielijnen',
@@ -1399,7 +1614,7 @@ if( function_exists('acf_add_local_field_group') ) {
   			'name' => 'actielijn_toon_datum',
   			'type' => 'text',
   			'instructions' => 'deze tekst is zichtbaar voor de gebruiker',
-  			'required' => 1,
+  			'required' => 0,
   			'conditional_logic' => 0,
   			'wrapper' => array(
   				'width' => '',
@@ -1411,36 +1626,102 @@ if( function_exists('acf_add_local_field_group') ) {
   			'prepend' => '',
   			'append' => '',
   			'maxlength' => '',
+  		),
+  		array(
+  			'key' => 'field_5bec3c8db4fd6',
+  			'label' => 'Heeft start- of einddatums?',
+  			'name' => 'heeft_start-_of_einddatums',
+  			'type' => 'radio',
+  			'instructions' => '',
+  			'required' => 0,
+  			'conditional_logic' => 0,
+  			'wrapper' => array(
+  				'width' => '',
+  				'class' => '',
+  				'id' => '',
+  			),
+  			'choices' => array(
+  				'start' => 'Alleen startdatum',
+  				'eind' => 'Alleen einddatum',
+  				'start_eind' => 'Zowel een start- als einddatum',
+  			),
+  			'allow_null' => 0,
+  			'other_choice' => 0,
+  			'default_value' => 'start',
+  			'layout' => 'vertical',
+  			'return_format' => 'value',
+  			'save_other_choice' => 0,
   		),
   		array(
   			'key' => 'field_5be99a18c781e',
-  			'label' => 'Kwartaal start (niet zichtbaar)',
-  			'name' => 'actielijn_kwartaal_start',
-  			'type' => 'text',
-  			'instructions' => 'Format: yyyy-qx. Dus: 2018-q2 voor het tweede kwartaal van 2018.',
-  			'required' => 0,
-  			'conditional_logic' => 0,
+  			'label' => 'Start lwartaal',
+  			'name' => 'actielijn_kwartaal_start_kwartaal',
+  			'type' => 'select',
+  			'instructions' => '(niet zichtbaar)',
+  			'required' => 1,
+  			'conditional_logic' => array(
+  				array(
+  					array(
+  						'field' => 'field_5bec3c8db4fd6',
+  						'operator' => '==',
+  						'value' => 'start',
+  					),
+  				),
+  				array(
+  					array(
+  						'field' => 'field_5bec3c8db4fd6',
+  						'operator' => '==',
+  						'value' => 'start_eind',
+  					),
+  				),
+  			),
   			'wrapper' => array(
-  				'width' => '',
+  				'width' => '48',
   				'class' => '',
   				'id' => '',
   			),
-  			'default_value' => '',
+  			'choices' => array(
+  				'q1' => 'Kwartaal 1',
+  				'q2' => 'Kwartaal 2',
+  				'q3' => 'Kwartaal 3',
+  				'q4' => 'Kwartaal 4',
+  			),
+  			'default_value' => array(
+  				0 => 'q1',
+  			),
+  			'allow_null' => 0,
+  			'multiple' => 0,
+  			'ui' => 0,
+  			'return_format' => 'value',
+  			'ajax' => 0,
   			'placeholder' => '',
-  			'prepend' => '',
-  			'append' => '',
-  			'maxlength' => '',
   		),
   		array(
-  			'key' => 'field_5be9cc4bd4b27',
-  			'label' => 'Kwartaal eind (niet zichtbaar)',
-  			'name' => 'actielijn_kwartaal_eind',
-  			'type' => 'text',
-  			'instructions' => 'Format: yyyy-qx. Dus: 2018-q2 voor het tweede kwartaal van 2018.',
-  			'required' => 0,
-  			'conditional_logic' => 0,
+  			'key' => 'field_5bec3d241a410',
+  			'label' => 'Jaar start',
+  			'name' => 'actielijn_kwartaal_start_jaar',
+  			'type' => 'number',
+  			'instructions' => '(niet zichtbaar)
+  Format: xxxx',
+  			'required' => 1,
+  			'conditional_logic' => array(
+  				array(
+  					array(
+  						'field' => 'field_5bec3c8db4fd6',
+  						'operator' => '==',
+  						'value' => 'start',
+  					),
+  				),
+  				array(
+  					array(
+  						'field' => 'field_5bec3c8db4fd6',
+  						'operator' => '==',
+  						'value' => 'start_eind',
+  					),
+  				),
+  			),
   			'wrapper' => array(
-  				'width' => '',
+  				'width' => '48',
   				'class' => '',
   				'id' => '',
   			),
@@ -1448,7 +1729,90 @@ if( function_exists('acf_add_local_field_group') ) {
   			'placeholder' => '',
   			'prepend' => '',
   			'append' => '',
-  			'maxlength' => '',
+  			'min' => '',
+  			'max' => '',
+  			'step' => '',
+  		),
+  		array(
+  			'key' => 'field_5bec3e0b8f5f6',
+  			'label' => 'Kwartaal eind',
+  			'name' => 'actielijn_kwartaal_eind_kwartaal',
+  			'type' => 'select',
+  			'instructions' => '(niet zichtbaar)',
+  			'required' => 1,
+  			'conditional_logic' => array(
+  				array(
+  					array(
+  						'field' => 'field_5bec3c8db4fd6',
+  						'operator' => '==',
+  						'value' => 'eind',
+  					),
+  				),
+  				array(
+  					array(
+  						'field' => 'field_5bec3c8db4fd6',
+  						'operator' => '==',
+  						'value' => 'start_eind',
+  					),
+  				),
+  			),
+  			'wrapper' => array(
+  				'width' => '48',
+  				'class' => '',
+  				'id' => '',
+  			),
+  			'choices' => array(
+  				'q1' => 'Kwartaal 1',
+  				'q2' => 'Kwartaal 2',
+  				'q3' => 'Kwartaal 3',
+  				'q4' => 'Kwartaal 4',
+  			),
+  			'default_value' => array(
+  				0 => 'q1',
+  			),
+  			'allow_null' => 0,
+  			'multiple' => 0,
+  			'ui' => 0,
+  			'return_format' => 'value',
+  			'ajax' => 0,
+  			'placeholder' => '',
+  		),
+  		array(
+  			'key' => 'field_5bec3e248f5f7',
+  			'label' => 'Jaar eind',
+  			'name' => 'actielijn_kwartaal_eind_jaar',
+  			'type' => 'number',
+  			'instructions' => '(niet zichtbaar)
+  Format: xxxx',
+  			'required' => 1,
+  			'conditional_logic' => array(
+  				array(
+  					array(
+  						'field' => 'field_5bec3c8db4fd6',
+  						'operator' => '==',
+  						'value' => 'eind',
+  					),
+  				),
+  				array(
+  					array(
+  						'field' => 'field_5bec3c8db4fd6',
+  						'operator' => '==',
+  						'value' => 'start_eind',
+  					),
+  				),
+  			),
+  			'wrapper' => array(
+  				'width' => '48',
+  				'class' => '',
+  				'id' => '',
+  			),
+  			'default_value' => '',
+  			'placeholder' => '',
+  			'prepend' => '',
+  			'append' => '',
+  			'min' => '',
+  			'max' => '',
+  			'step' => '',
   		),
   		array(
   			'key' => 'field_5be974b66ea85',
@@ -1490,13 +1854,12 @@ if( function_exists('acf_add_local_field_group') ) {
   	'position' => 'acf_after_title',
   	'style' => 'default',
   	'label_placement' => 'top',
-  	'instruction_placement' => 'label',
+  	'instruction_placement' => 'field',
   	'hide_on_screen' => '',
   	'active' => 1,
   	'description' => '',
   ));
   
-    
   acf_add_local_field_group(array(
   	'key' => 'group_5be5e4ee3cb94',
   	'title' => 'Planning Tool instellingen',
@@ -1663,72 +2026,54 @@ add_filter('acf/update_value/name=related_gebeurtenissen_actielijnen', 'bidirect
  * Append related actielijnen or gebeurtenissen
  */
  
-function do_pt_frontend_display_results( $postid, $showheader = false, $doecho = false ) {
+function do_pt_frontend_display_actielijn_info( $postid, $showheader = false, $doecho = false ) {
 
   $returnstring = '';
 
-  if( get_field( 'related_gebeurtenissen_actielijnen', $postid ) ) {
+  if ( DOPT__GEBEURTENIS_CPT == get_post_type( $postid ) ) {
 
-    if ( DOPT__GEBEURTENIS_CPT == get_post_type() ) {
-
-
-      if ( $showheader ) {
-        $returnstring = '<h2>' . _x( 'Actielijnen', 'tussenkopje', "do-planning-tool" ) . '</h2>';
-      }
-
-      $gebeurtenis_datum     = get_field( 'gebeurtenis_datum', $postid );
-
-      if ( $gebeurtenis_datum ) {
-        echo '<p>' . date_i18n( get_option( 'date_format' ), strtotime( $gebeurtenis_datum ) ) . '</p>';
-      }
-
+    if ( $showheader ) {
+      $returnstring = '<h2>' . _x( 'Actielijnen', 'tussenkopje', "do-planning-tool" ) . '</h2>';
     }
-    elseif ( DOPT__ACTIELIJN_CPT == get_post_type() ) {
-      
-      if ( $showheader ) {
-        $returnstring = '<h2>' . _x( 'Gebeurtenissen', 'tussenkopje', "do-planning-tool" ) . '</h2>';
-      }
 
-      $actielijn_toon_datum     = get_field( 'actielijn_toon_datum', $postid );
-      $actielijn_kwartaal_start = get_field( 'actielijn_kwartaal_start', $postid );
-      $actielijn_kwartaal_eind  = get_field( 'actielijn_kwartaal_eind', $postid );
+    $gebeurtenis_datum     = get_field( 'gebeurtenis_datum', $postid );
 
-      if ( $actielijn_toon_datum || $actielijn_kwartaal_start || $actielijn_kwartaal_eind ) {
-        echo '<p>';
-        if ( $actielijn_toon_datum ) {
-          echo $actielijn_toon_datum . '<br>';
-        }
-        if ( $actielijn_kwartaal_start ) {
-          echo _x( 'Start', 'tussenkopje', "do-planning-tool" ) . ': ' . $actielijn_kwartaal_start . '<br>';
-        }
-        if ( $actielijn_kwartaal_eind ) {
-          echo _x( 'Eind', 'tussenkopje', "do-planning-tool" ) . ': ' . $actielijn_kwartaal_eind . '<br>';
-        }
-        echo ' </p>';
-      }
-      
-      
-    } 
+    if ( $gebeurtenis_datum ) {
+      echo '<p>' . date_i18n( get_option( 'date_format' ), strtotime( $gebeurtenis_datum ) ) . '</p>';
+    }
 
+  }
+  elseif ( DOPT__ACTIELIJN_CPT == get_post_type( $postid ) ) {
+
+    if ( $showheader ) {
+      $returnstring = '<h2>' . _x( 'Gebeurtenissen', 'tussenkopje', "do-planning-tool" ) . '</h2>';
+    }
+
+    
+    
+  } 
+
+  if( get_field( 'related_gebeurtenissen_actielijnen', $postid ) ) {
+  
     $returnstring .= '<ul>';
-
+  
     $relatedobjects = get_field('related_gebeurtenissen_actielijnen', $postid );
       
     foreach ( $relatedobjects as $relatedobject ) {
-
+  
       $acfgebeurtenis_datum     = get_field( 'gebeurtenis_datum', $relatedobject->ID );
       $gebeurtenis_datum        = '';
-
+  
       if ( $acfgebeurtenis_datum ) {
-        $gebeurtenis_datum = date_i18n( get_option( 'date_format' ), strtotime( $acfgebeurtenis_datum ) );
+        $gebeurtenis_datum = date_i18n( get_option( 'date_format' ), strtotime( $acfgebeurtenis_datum ) ) . ' - ';
       }
-
-      $returnstring .= '<li><a href="' . get_permalink( $relatedobject->ID ) . '">' . $gebeurtenis_datum . ' - ' . get_the_title( $relatedobject->ID ) . '</a></li>';
-
+  
+      $returnstring .= '<li><a href="' . get_permalink( $relatedobject->ID ) . '">' . $gebeurtenis_datum . get_the_title( $relatedobject->ID ) . '</a></li>';
+  
     }
-
+  
     $returnstring .= '</ul>';
-
+  
   }
   
   if ( $doecho ) {
