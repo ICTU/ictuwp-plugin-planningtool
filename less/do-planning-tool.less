@@ -54,52 +54,136 @@
 @import "01-sizes-colors.less";  
 
 
-.programma {
+@media only screen {
 
-  margin-bottom: 1em;
+  .programma {
   
-  h2 {
-    color: @wit;
-    padding: .25em .5em;
-    margin-top: 0;
-  }
+    margin-bottom: 1em;
+    padding-bottom: 1em;
 
-  h3, ul {
-    margin-left: .5em;
-    margin-right: .5em;
-  }
-
-  &.digibeter-oranje,
-  &.digibeter-violet,
-  &.digibeter-paars,
-  &.digibeter-groen,
-  &.digibeter-blauw {
+    caption {
+     font-size: 2em;
+     text-align: left; 
+    } 
+       
+    caption,
     h2 {
       color: @wit;
+      padding: .25em .5em .25em 1rem;
+      margin-top: 0;
     }
-  }
-
-  &.digibeter-en-orange,
-  &.digibeter-oranje {
-    .kleurtjeslijntjes( @digibeter_oranje, @digibeter_oranje_licht );
-  }
-  &.digibeter-en-violet,
-  &.digibeter-violet {
-    .kleurtjeslijntjes( @digibeter_violet, @digibeter_violet_licht );
-  }
-  &.digibeter-en-purple,
-  &.digibeter-paars {
-    .kleurtjeslijntjes( @digibeter_paars, @digibeter_paars_licht );
-  }
-  &.digibeter-en-green,
-  &.digibeter-groen {
-    .kleurtjeslijntjes( @digibeter_groen, @digibeter_groen_licht );
-  }
-  &.digibeter-en-blue,
-  &.digibeter-blauw {
-    .kleurtjeslijntjes( @digibeter_blauw, @digibeter_blauw_licht );
-  }
 
 
+  
+    h3, 
+    p, 
+    ul {
+      margin-left: 1rem;
+      margin-right: 1rem;
+    }
+
+    td,
+    th {
+      padding-left: 1rem !important;
+      
+      ul, ol {
+        &, li {
+          list-style: none;
+          margin-left: 0;
+          padding-left: 0;
+        }
+      }
+      
+    }
+    
+    p,
+    ul {
+      margin-top: 0;
+      margin-bottom: 0;
+      
+      & + ul {
+        margin-top: 0;
+      }
+      
+      & + h3 {
+        margin-top: 1em;
+      }
+    }
+
+    th[scope="col"] {
+        width: 25%;
+    }
+    
+    #th_col_actielijn {
+      width: 50%;
+    }
+
+    &.digibeter-oranje,
+    &.digibeter-violet,
+    &.digibeter-paars,
+    &.digibeter-groen,
+    &.digibeter-blauw {
+      h2 {
+        color: @wit;
+      }
+    }
+  
+    &.digibeter-en-orange,
+    &.digibeter-oranje {
+      .kleurtjeslijntjes( @digibeter_oranje, @digibeter_oranje_licht );
+    }
+    &.digibeter-en-violet,
+    &.digibeter-violet {
+      .kleurtjeslijntjes( @digibeter_violet, @digibeter_violet_licht );
+    }
+    &.digibeter-en-purple,
+    &.digibeter-paars {
+      .kleurtjeslijntjes( @digibeter_paars, @digibeter_paars_licht );
+    }
+    &.digibeter-en-green,
+    &.digibeter-groen {
+      .kleurtjeslijntjes( @digibeter_groen, @digibeter_groen_licht );
+    }
+    &.digibeter-en-blue,
+    &.digibeter-blauw {
+      .kleurtjeslijntjes( @digibeter_blauw, @digibeter_blauw_licht );
+    }
+  
+  }
+
+}
+
+
+@media only screen and ( max-width: 500px ) {
+
+  .entry-content table, 
+  .entry-content table.programma,
+  .programma {
+    
+    tr, th, td {
+      display: block;
+      clear: both;
+      float: none;
+    }
+
+    td, th {
+      padding-top: 0;
+      padding-bottom: .1em;
+    }
+
+    td, th {
+      padding-top: .5em;
+    }
+
+    th[scope="row"] {
+      width: 100%;
+    }
+
+    th[scope="col"] {
+      .visuallyhidden();
+    }
+
+  }
+  
 }
 

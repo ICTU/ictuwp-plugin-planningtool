@@ -11,10 +11,6 @@
 .cmb-type-text-small input {
   width: 100%;
 }
-.cmb-row.answer-value + .cmb2-row {
-  border: 1px solid red !important;
-  clear: both !important;
-}
 .cmb-type-title {
   width: 100%;
   clear: both;

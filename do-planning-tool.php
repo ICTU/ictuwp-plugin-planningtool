@@ -5,7 +5,7 @@
  * Plugin Name:         ICTU / WP Planning Tool digitaleoverheid.nl
  * Plugin URI:          https://github.com/ICTU/Digitale-Overheid---WordPress-plugin-Planning-Tool/
  * Description:         Plugin voor digitaleoverheid.nl waarmee extra functionaliteit mogelijk wordt voor het tonen van een planning met actielijnen en gebeurtenissen.
- * Version:             0.0.1
+ * Version:             0.0.1c
  * Version description: First set up of plugin files.
  * Author:              Paul van Buuren
  * Author URI:          https://wbvb.nl
@@ -35,7 +35,7 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
       /**
        * @var string
        */
-      public $version = '0.0.1';
+      public $version = '0.0.1c';
   
   
       /**
@@ -969,14 +969,36 @@ function do_pt_do_frontend_pagetemplate_add_actielijnen() {
       $digibeterclass         = get_field( 'digibeter_term_achtergrondkleur', RHSWP_CT_DIGIBETER . '_' . $actielijnblok[ 'actielijnen_per_thema_kleur' ] );
       $select_actielijnen     = $actielijnblok[ 'actielijnen_per_thema_actielijnen' ];
 
-      echo '<div class="programma ' . $digibeterclass . '">';      
-      echo '<h2>' . $actielijnblok_titel . '</h2>';      
+//      echo '<div class="programma ' . $digibeterclass . '">';      
+//      echo '<h2>' . $actielijnblok_titel . '</h2>';      
       
+
+      echo '<div class="overflowscroll">';      
+
+      echo '<table>';
+      echo '<table class="programma ' . $digibeterclass . '">';      
+      echo '<caption>' . $actielijnblok_titel . '</caption>';      
+
       if( $select_actielijnen ) {
+
+        echo '<tr>';
+        echo '<th scope="col" id="th_col_actielijn">' . _x( 'Actielijn', 'tussenkopje', "do-planning-tool" ) . '</th>';
+        echo '<th scope="col" id="th_col_planning">' . _x( 'Planning', 'tussenkopje', "do-planning-tool" ) . '</th>';
+        echo '<th scope="col" id="th_col_gebeurtenis">' . _x( 'Gebeurtenissen', 'tussenkopje', "do-planning-tool" ) . '</th>';
+
+        echo '</tr>';
 
         foreach( $select_actielijnen as $select_actielijn ) {
 
-          echo '<h3><a href="' . get_the_permalink( $select_actielijn->ID ) . '">' . get_the_title( $select_actielijn->ID ) . '</a>';
+          echo '<tr>';
+          echo '<th scope="row">';
+//          echo '<h3>';
+          echo '<a href="' . get_the_permalink( $select_actielijn->ID ) . '">' . get_the_title( $select_actielijn->ID ) . '</a>';
+//          echo '</h3>';
+          echo '</th>';
+
+
+          echo '<td>';
           
           $actielijn_toon_datum               = get_field( 'actielijn_toon_datum', $select_actielijn->ID );
           $actielijn_kwartaal_start_kwartaal  = get_field( 'actielijn_kwartaal_start_kwartaal', $select_actielijn->ID );
@@ -994,17 +1016,25 @@ function do_pt_do_frontend_pagetemplate_add_actielijnen() {
 
           if ( $actielijn_toon_datum || ( $actielijn_kwartaal_start_kwartaal && $actielijn_kwartaal_start_jaar ) || ( $actielijn_kwartaal_eind_kwartaal && $actielijn_kwartaal_eind_jaar )  ) {
 
-            echo ' <br><small>';
-      
-            if ( $actielijn_toon_datum ) {
-              echo _x( 'Planning', 'tussenkopje', "do-planning-tool" ) . ': ';
-              echo $actielijn_toon_datum;
+//            echo ' <p>';
+
+            $planning = wp_get_post_terms( $select_actielijn->ID, DOPT_CT_PLANNINGLABEL );
+
+            if ( $planning || $actielijn_toon_datum ) {
+
+//              echo _x( 'Planning', 'tussenkopje', "do-planning-tool" ) . ': ';
+              if ( $planning[0]->name ) {
+                echo $planning[0]->name;
+              }
+              else {
+                echo $actielijn_toon_datum;
+              }
+              
             }
-      
 
             if ( ( $actielijn_kwartaal_start_kwartaal && $actielijn_kwartaal_start_jaar ) || ( $actielijn_kwartaal_eind_kwartaal && $actielijn_kwartaal_eind_jaar ) ) {
     
-            echo ' <br><small><pre>';
+            echo '<!--<pre>';
     
               if ( $actielijn_kwartaal_start_kwartaal && $actielijn_kwartaal_start_jaar ) {
         
@@ -1032,26 +1062,34 @@ function do_pt_do_frontend_pagetemplate_add_actielijnen() {
                 
               }
 
-              echo '</pre></small> ';
+              echo '</pre> -->';
 
             }
 
-            echo '</small>';
+//            echo '</p>';
             
           }
     
-          echo ' </h3>';
+          echo ' </td>';
+          echo '<td>';
+
           echo do_pt_frontend_display_actielijn_info( $select_actielijn->ID, false, true );          
+
+          echo ' </td>';
+
+          echo '</tr>';
 
         }
 
       }
 
-      echo '<p>2: Jaren: van ' . $year_start . ' tot ' . $year_end . '</p>';
+      echo '</table>';
 
-      echo '</div>';
+      echo '</div>'; // overflowscroll
 
     }
+
+    echo '<p>2: Jaren: van ' . $year_start . ' tot ' . $year_end . '</p>';
     
   }
   else {
