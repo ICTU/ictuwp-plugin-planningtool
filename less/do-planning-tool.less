@@ -151,6 +151,104 @@
   
   }
 
+@minheight_year: 6em;
+@columnwidth_labels: 20em;
+@timescale_year_width: 16em;
+
+  .timescale-container {
+    padding: 0;
+    overflow-x: scroll;
+    position: relative;
+    min-height: @minheight_year;
+    min-height: 900px;
+    background: @lichtgrijs;
+    
+    .actielijn-info {
+      border-bottom: 2px solid darken( @lichtgrijs, 10% );
+      overflow: hidden;
+      padding: .1em 0;
+      background: @wit;
+      width: 100%;
+      clear: both;
+      float: none;
+      width: max-content;
+      
+      &:first-of-type {
+        border-top: 2px solid darken( @lichtgrijs, 10% );
+      }
+      
+      p {
+        width: @columnwidth_labels;
+        padding: .25em .5em;
+        float: left;
+      }
+      
+      .planning {
+        width: max-content;
+        overflow: hidden;
+        display: block;
+        float: left;
+      }
+      
+      .strook {
+        display: inline-block;
+        float: left;
+        width: ( @timescale_year_width / 4 );
+        background: @lichtgrijs;
+        border: 3px solid @wit;
+
+        &.active {
+          background: @active;
+          border-color: @active;
+          color: @wit;
+        }
+      }
+      
+    }
+    .actielijnen {
+      margin-top: @minheight_year;
+    }
+    
+  }
+  #timescale {
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-height: @minheight_year;
+    width: max-content;
+    padding-left: @columnwidth_labels;
+    
+    div {
+      text-align: center;
+      float: left;
+      display: inline-block;
+      margin: 0;
+      padding: .5em 0;
+      background: @wit;
+      span {
+        float: none;
+        clear: both;
+        display: block;
+      }
+    }
+    .timescale-year {
+      width: @timescale_year_width;
+      border: 3px solid @bordercolor;
+      padding-bottom: 0;
+      height: ( @minheight_year / 2 );
+    }
+    .timescale-quarteryear {
+      width: 25%;
+      border-top: 3px solid @bordercolor;
+      border-right: 3px solid @bordercolor;
+      height: ( @minheight_year / 2 );
+      
+      &:last-of-type {
+        border-right-style: none;
+      }
+    }
+  }
+
 }
 
 
