@@ -99,8 +99,6 @@ function bidirectional_acf_update_value( $value, $post_id, $field  ) {
     
 }
 
-add_filter('acf/update_value/name=related_gebeurtenissen_actielijnen', 'bidirectional_acf_update_value', 10, 3);
-
 //========================================================================================================
 
 if( function_exists('acf_add_local_field_group') ) {
@@ -288,25 +286,6 @@ if( function_exists('acf_add_local_field_group') ) {
   	'key' => 'group_5be97485d6c95',
   	'title' => 'Actielijn: datums + link met gebeurtenissen',
   	'fields' => array(
-  		array(
-  			'key' => 'field_5be9d869b3559',
-  			'label' => 'Datum beschrijving (zichtbaar)',
-  			'name' => 'actielijn_toon_datum',
-  			'type' => 'text',
-  			'instructions' => 'deze tekst is zichtbaar voor de gebruiker',
-  			'required' => 0,
-  			'conditional_logic' => 0,
-  			'wrapper' => array(
-  				'width' => '',
-  				'class' => '',
-  				'id' => '',
-  			),
-  			'default_value' => '',
-  			'placeholder' => '',
-  			'prepend' => '',
-  			'append' => '',
-  			'maxlength' => '',
-  		),
   		array(
   			'key' => 'field_5bec3c8db4fd6',
   			'label' => 'Heeft start- of einddatums?',
@@ -539,6 +518,96 @@ if( function_exists('acf_add_local_field_group') ) {
   	'active' => 1,
   	'description' => '',
   ));
+
+
+  acf_add_local_field_group(array(
+  	'key' => 'group_5be5e4ee3cb94',
+  	'title' => 'Planning Tool instellingen',
+  	'fields' => array(
+  		array(
+  			'key' => 'field_5be5e5070642f',
+  			'label' => 'Planning-pagina',
+  			'name' => 'planning_page',
+  			'type' => 'post_object',
+  			'instructions' => '',
+  			'required' => 0,
+  			'conditional_logic' => 0,
+  			'wrapper' => array(
+  				'width' => '',
+  				'class' => '',
+  				'id' => '',
+  			),
+  			'post_type' => array(
+  				0 => 'page',
+  			),
+  			'taxonomy' => '',
+  			'allow_null' => 0,
+  			'multiple' => 0,
+  			'return_format' => 'object',
+  			'ui' => 1,
+  		),
+  		array(
+  			'key' => 'field_5bee9098c1202',
+  			'label' => 'Start jaar',
+  			'name' => 'planning_page_start_jaar',
+  			'type' => 'number',
+  			'instructions' => 'format: xxxx',
+  			'required' => 1,
+  			'conditional_logic' => 0,
+  			'wrapper' => array(
+  				'width' => '',
+  				'class' => '',
+  				'id' => '',
+  			),
+  			'default_value' => 2017,
+  			'placeholder' => '',
+  			'prepend' => '',
+  			'append' => '',
+  			'min' => 1900,
+  			'max' => 2100,
+  			'step' => '',
+  		),
+  		array(
+  			'key' => 'field_5bee90d2a5dad',
+  			'label' => 'Eind jaar',
+  			'name' => 'planning_page_end_jaar',
+  			'type' => 'number',
+  			'instructions' => 'format: xxxx',
+  			'required' => 1,
+  			'conditional_logic' => 0,
+  			'wrapper' => array(
+  				'width' => '',
+  				'class' => '',
+  				'id' => '',
+  			),
+  			'default_value' => 2020,
+  			'placeholder' => '',
+  			'prepend' => '',
+  			'append' => '',
+  			'min' => 1900,
+  			'max' => 2100,
+  			'step' => '',
+  		),
+  	),
+  	'location' => array(
+  		array(
+  			array(
+  				'param' => 'options_page',
+  				'operator' => '==',
+  				'value' => 'instellingen',
+  			),
+  		),
+  	),
+  	'menu_order' => 0,
+  	'position' => 'normal',
+  	'style' => 'default',
+  	'label_placement' => 'top',
+  	'instruction_placement' => 'label',
+  	'hide_on_screen' => '',
+  	'active' => 1,
+  	'description' => '',
+  ));
+
   
 
 }

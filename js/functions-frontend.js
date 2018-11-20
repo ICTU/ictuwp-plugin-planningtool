@@ -65,13 +65,14 @@ function letDivsScroll() {
       
       console.log('width: ' + allProgrammaDivs[i].dataset.possiblewidth );
 
-      allProgrammaDivs[i].addEventListener('scroll', stickyTimescaleblock);
+ //     allProgrammaDivs[i].addEventListener('scroll', stickyTimescaleblock);
       allProgrammaDivs[i].style.width = allProgrammaDivs[i].dataset.possiblewidth;
+      allProgrammaDivs[i].style.maxWidth = '100%';
       allProgrammaDivs[i].classList.add('fixed');
 
     }
   } catch (e) {
-    console.log("Woeps, AddTableARIA(): " + e);
+    console.log("Woeps, letDivsScroll(): " + e);
   }
 
 }

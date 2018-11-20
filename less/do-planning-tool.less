@@ -9,7 +9,7 @@
 // * @author  Paul van Buuren
 // * @license GPL-2.0+
 // * @plugin: do-planning-tool
-// * Version: 0.0.1e
+// * Version: 0.0.1h
 // * Version desc: First set up of plugin files.
 // * @link    https://github.com/ICTU/Digitale-Overheid---WordPress-plugin-Planning-Tool/
 
@@ -56,7 +56,7 @@
 @maxwidth:              1200px;
 @minheight_year:        4em;
 @minheight_cell:        3em;
-@columnwidth_labels:    20em;
+@columnwidth_labels:    30em;
 @timescale_year_width:  16em;
 @thefontsize:           80%;
 @thefontsreset:         ( 100% * ( 100% / @thefontsize ) );
@@ -72,7 +72,6 @@
     padding-bottom: 1em;
 
     &.fixed {
-//      border-color: blue !important;
       margin-left: auto;
       margin-right: auto;
     }
@@ -146,23 +145,23 @@
   
     &.digibeter-en-orange,
     &.digibeter-oranje {
-      .kleurtjeslijntjes( @digibeter_oranje, @digibeter_oranje_licht );
+      .kleurtjeslijntjes( @digibeter_oranje, @digibeter_oranje_licht, @wit );
     }
     &.digibeter-en-violet,
     &.digibeter-violet {
-      .kleurtjeslijntjes( @digibeter_violet, @digibeter_violet_licht );
+      .kleurtjeslijntjes( @digibeter_violet, @digibeter_violet_licht, @wit );
     }
     &.digibeter-en-purple,
     &.digibeter-paars {
-      .kleurtjeslijntjes( @digibeter_paars, @digibeter_paars_licht );
+      .kleurtjeslijntjes( @digibeter_paars, @digibeter_paars_licht, @wit );
     }
     &.digibeter-en-green,
     &.digibeter-groen {
-      .kleurtjeslijntjes( @digibeter_groen, @digibeter_groen_licht );
+      .kleurtjeslijntjes( @digibeter_groen, @digibeter_groen_licht, @wit );
     }
     &.digibeter-en-blue,
     &.digibeter-blauw {
-      .kleurtjeslijntjes( @digibeter_blauw, @digibeter_blauw_licht );
+      .kleurtjeslijntjes( @digibeter_blauw, @digibeter_blauw_licht, @wit );
     }
   
   }
@@ -200,6 +199,23 @@
         float: left;
         a {
           font-size: @thefontsreset;
+        }
+      }
+      
+      .verbergmij {
+        .visuallyhidden();
+      }
+      
+      &:hover {
+
+        border-color: @txt;
+        
+        .verbergmij {
+          .visuallyvisual();
+          border: 2px solid red;
+          background: yellow;
+          padding: .5em;
+          display: block;
         }
       }
       
@@ -300,12 +316,22 @@
         }
 
 
+        &.start,
+        &.eind,
+        &.start_eind {
+          .strook {
+            &.start {
+              background-repeat: no-repeat; 
+              background-size: contain;
+            }
+          }
+        }
+
         &.start_eind {
           .strook {
             &.start {
               background-image: url('../assets/images/arrow-start.svg'), url('../assets/images/arrow-end.svg');
               background-position: center left, center right;
-              background-repeat: no-repeat; /* this applies to both images */
               border-left-color: @wit;
               border-right-color: @wit;
             }
@@ -314,14 +340,17 @@
         &.start {
           .strook {
             &.start {
-              background: @active url('../assets/images/arrow-start.svg') no-repeat left center;
+              background-image: url('../assets/images/arrow-start.svg');
+              background-position: left center;
             }
           }
         }
         &.eind {
           .strook {
             &.start {
-              background: @active url('../assets/images/arrow-end.svg') no-repeat right center;
+              background-image: url('../assets/images/arrow-end.svg');
+              background-position: right center;
+              
               border-right-color: @wit;
             }
           }
@@ -357,9 +386,8 @@
     min-height: @minheight_year;
     width: max-content;
     padding-left: @columnwidth_labels;
-    border-left: 4px solid transparent;
-    
-    
+//    border-left: 4px solid transparent;
+
     &.fixed {
       position: fixed;
       top: 0;

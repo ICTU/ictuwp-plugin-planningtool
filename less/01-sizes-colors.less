@@ -59,13 +59,14 @@
 //=========================================================================================================
 
 
-.kleurtjeslijntjes( @kleur1: red,  @kleur2: green, @txtcolor_hover: @wit ) {
+.kleurtjeslijntjes( @kleur1: red,  @kleur2: green, @txtcolor: @txt, @txtcolor_hover: @wit ) {
 
   border: 4px solid @kleur1;
 
   caption,
   h2 {
     background: @kleur1;
+    color: @txtcolor;
   }
   
   th, tr, td {
@@ -77,6 +78,13 @@
   }
   
 
+.timescale-container .actielijn-info .planning .strook.current,
+.timescaleblock .current {
+    background-color: @kleur1;
+    color: @txtcolor;
+  }
+
+  
 /*
   ul {
     & > li {
