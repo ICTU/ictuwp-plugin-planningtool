@@ -5,8 +5,8 @@
  * Plugin Name:         ICTU / WP Planning Tool digitaleoverheid.nl
  * Plugin URI:          https://github.com/ICTU/Digitale-Overheid---WordPress-plugin-Planning-Tool/
  * Description:         Plugin voor digitaleoverheid.nl waarmee extra functionaliteit mogelijk wordt voor het tonen van een planning met actielijnen en gebeurtenissen.
- * Version:             0.0.1h
- * Version description: First set up of plugin files.
+ * Version:             0.0.2
+ * Version description: First design of actielijnen implemented.
  * Author:              Paul van Buuren
  * Author URI:          https://wbvb.nl
  * License:             GPL-2.0+
@@ -35,7 +35,7 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
       /**
        * @var string
        */
-      public $version = '0.0.1h';
+      public $version = '0.0.2';
   
   
       /**
@@ -53,7 +53,6 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 
       public $actielijn_data = null;
 
-  
       /**
        * Init
        */
@@ -115,9 +114,13 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
         define( 'DOPT__ALGEMEEN_KEY',            'ictudo_planning_key' ); 
         define( 'DOPT__PLUGIN_KEY',              'ictudo_planning' ); 
  
-        define( 'DOPT__NR_QUARTERS',              4 );
+        define( 'DOPT__NR_QUARTERS',              5 );
 
         $this->option_name  = 'ictudo_planning-option';
+
+        define( 'DOPT_CSS_YEARWIDTH',           12 ); 
+        define( 'DOPT_CSS_QUARTERWIDTH',        3 ); 
+        
 
        }
   
@@ -670,8 +673,6 @@ function do_pt_do_frontend_pagetemplate_add_actielijnen() {
   $unique_actielijnid       = 0;
   $emptycontentcounter      = 0;
   $numberofyears            = 0;
-  $emsperyear               = 16;
-  $emsperquarter            = 4;
   
   $dinges                   = 'gantt';
 //  $dinges                   = 'table';
@@ -768,7 +769,7 @@ function do_pt_do_frontend_pagetemplate_add_actielijnen() {
      
         $planningstrook .= '<div class="timescale-year"><span' . $extraclass_year . '>' . $currentyear . '</span>';
       
-        while ( intval( $currentquarter ) <= intval( DOPT__NR_QUARTERS ) ) : 
+        while ( intval( $currentquarter ) <= intval( ( DOPT__NR_QUARTERS - 1 ) ) ) : 
 
           $extraclass_year = '';
 
@@ -806,9 +807,9 @@ function do_pt_do_frontend_pagetemplate_add_actielijnen() {
   //      echo '<p>1: Jaren: van ' . $year_start . ' tot ' . $year_end . ' (actielijnen: ' . count( $actielijnen_array ) . ')</p>';
 
 
-        // 16em voor een jaar
-        // 30em voor padding left
-        $possiblewidth = ( ( $numberofyears * 16 ) + 30 );
+        // 12em voor een jaar, zie DOPT_CSS_YEARWIDTH 
+        // 20em voor padding left
+        $possiblewidth = ( ( $numberofyears * DOPT_CSS_YEARWIDTH  ) + 20 );
 
         echo '<div id="' . sanitize_title( $actielijnblok_titel ) . '" class="programma ' . $digibeterclass . '" data-possiblewidth="' . $possiblewidth . 'em" data-possibleyears="' . $numberofyears . ' years">';      
         
@@ -926,7 +927,8 @@ function do_pt_do_frontend_pagetemplate_add_actielijnen() {
 
                   $jaarlengte       = ( $rekenjaarend - $rekenjaarstart );
                   $kwartaallengte   = ( ( $rekenq_end - $rekenq_start ) + 1 );
-                  $emwidth          = ( ( $jaarlengte * $emsperyear ) + ( $kwartaallengte * $emsperquarter ) );
+                  $emwidth          = ( ( $jaarlengte * DOPT_CSS_YEARWIDTH  ) + ( $jaarlengte * DOPT_CSS_QUARTERWIDTH ) + ( $kwartaallengte * DOPT_CSS_QUARTERWIDTH ) );
+//                  $emwidth          = ( $jaarlengte * DOPT_CSS_YEARWIDTH  );
 
                   
                   $length = ' style="width: ' . $emwidth . 'em;" data-rekenjaarstart="' . $rekenjaarstart . '" '.
@@ -1341,6 +1343,8 @@ function do_pt_frontend_display_actielijn_info( $postid, $showheader = false, $d
       
     foreach ( $relatedobjects as $relatedobject ) {      
       $datumveld = get_field( 'gebeurtenis_datum', $relatedobject->ID );
+
+      
       if ( $datumveld ) {
         $sortthisarray[ strtotime( $datumveld ) ] = $relatedobject->ID;
       }
@@ -1362,18 +1366,39 @@ function do_pt_frontend_display_actielijn_info( $postid, $showheader = false, $d
         $title = date_i18n( get_option( 'date_format' ), $key ) ;
       }
 
-      if ( intval( $endyear ) > 0 ) {
+      if ( ( intval( $startyear ) > 0 ) && ( intval( $key ) > 0 ) ) {
         
         $yearevent        = date_i18n( "Y", $key );
-        $daydiff          = dateDiff( ( $yearevent + 1 ) . '-01-01', date_i18n( get_option( 'date_format' ), $key )  );
-        $emdag            = round( ( 16 / 365 ), 2 ); // 16em per jaar
-        $extradagen       = round( ( $daydiff * $emdag ), 2);
+        $mnt_event        = date_i18n( "m", $key );
+        $day_event        = date_i18n( "d", $key );
         
-        $styling = ' style="padding-right: ' . ( ( ( intval( $endyear ) - $yearevent ) * 16 ) + $extradagen ) . 'em;"';
+        if ( $yearevent ) {
+
+          $yeardiff         = 0;
+          $oneemday         = round( ( DOPT_CSS_YEARWIDTH  / 365 ), 2 ); // 12em per jaar
+          
+          if ( $startyear < $yearevent ) {
+            $yeardiff       = ( $yearevent - $startyear );
+          }
+          
+          $translate        = 0;
+          $translate_year   = ( intval( $yeardiff ) * ( DOPT_CSS_YEARWIDTH + DOPT_CSS_QUARTERWIDTH ) );
+
+          $startdatum       = ( $yearevent ) . '-01-01';
+          $einddatum        = ( $yearevent ) . '-' . $mnt_event . '-' . $day_event;
+
+          $daydiff          = dateDiff( $startdatum, $einddatum  );
+          $translate_days   = round( ( $daydiff * $oneemday ), 2);
+
+          $translate        = ( $translate_year + $translate_days );
+
+          $styling = ' data-yearevent="' . $yearevent . '" data-extradagen="' . $extradagen . '" data-daydiff="' . $daydiff . '" data-emdag="' . $emdag . '" style="transform: translateX(' . $translate . 'em);"';
+  
+        }
 
       }
 
-  
+
       $returnstring .= '<li' . $styling . '><a href="' . get_permalink( $value ) . '" title="' . $title . '">' . get_the_title( $value ) . '</a></li>';
   
     }

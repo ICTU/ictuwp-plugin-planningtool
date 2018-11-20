@@ -58,15 +58,43 @@
 
 //=========================================================================================================
 
+.icon_socmed_icon1(@image1, @image2, @fillnew) {
+  @datauri1:        data-uri('image/svg+xml;charset=UTF-8', "@{image1}");
+  @datauri2:        data-uri('image/svg+xml;charset=UTF-8', "@{image2}");
+  
+  @replace_what1:   escape('fill="#D0021B"');
+  @replace_with1:   escape('fill="@{fillnew}"');
 
-.kleurtjeslijntjes( @kleur1: red,  @kleur2: green, @txtcolor: @txt, @txtcolor_hover: @wit ) {
+  @replacesource1:  replace("@{datauri1}", @replace_what1, @replace_with1, "g");
 
-  border: 4px solid @kleur1;
+  @replacesource2:  replace("@{datauri2}", @replace_what1, @replace_with1, "g");
+
+  background-image: e(@replacesource1),  e(@replacesource2);
+}
+
+
+//=========================================================================================================
+
+.icon_socmed_icon(@src, @fill-new) {
+  @data-uri:          data-uri('image/svg+xml;charset=UTF-8', "@{src}");
+  @replace-default:   escape('fill="#D0021B"');
+  @replace-new:       escape('fill="@{fill-new}"');
+  @replacesrc1:       replace("@{data-uri}", @replace-default, @replace-new, "g");
+
+  background-image: e(@replacesrc1);
+}
+
+//=========================================================================================================
+
+
+.kleurtjeslijntjes( @kleur1: red,  @kleur2: green, @txtcolor1: @txt, @txtcolor2: @wit ) {
+
+//  border: 4px solid @kleur1;
 
   caption,
   h2 {
     background: @kleur1;
-    color: @txtcolor;
+    color: @txtcolor1;
   }
   
   th, tr, td {
@@ -76,12 +104,43 @@
   th[scope="col"] {
     background: @kleur2;
   }
-  
 
-.timescale-container .actielijn-info .planning .strook.current,
-.timescaleblock .current {
+  .timescale-container .actielijn-info .planning {
+    .strook.current {
+      border-top: 1px solid @kleur1;
+      border-bottom: 1px solid @kleur1;
+      background-color: @kleur2;
+      color: @txtcolor2;
+      .icon_socmed_icon( '../assets/images/arrow-start.svg', @kleur1 );
+    }
+      
+    &.eind {
+      .strook.current {
+        .icon_socmed_icon( '../assets/images/arrow-end.svg', @kleur1 );
+      }
+    }
+    
+    &.start_eind {
+      .strook.current {
+        .icon_socmed_icon1( '../assets/images/arrow-start.svg', '../assets/images/arrow-end.svg', @kleur1 );
+      }
+    }
+    
+  }
+  
+/*
+  .timescaleblock,
+  .timescale-container .actielijn-info .planning .strook.current,
+  .timescaleblock .current {
     background-color: @kleur1;
-    color: @txtcolor;
+    color: @txtcolor1;
+  }
+*/
+
+
+  .timescaleblock {
+    background-color: @kleur1;
+    color: @txtcolor1;
   }
 
   
@@ -96,7 +155,7 @@
         
         &:hover {
         	background: @kleur1;
-        	color: @txtcolor_hover;
+        	color: @txtcolor2;
         	
         	strong {
           	background: @kleur1;

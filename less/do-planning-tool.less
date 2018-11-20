@@ -9,8 +9,8 @@
 // * @author  Paul van Buuren
 // * @license GPL-2.0+
 // * @plugin: do-planning-tool
-// * Version: 0.0.1h
-// * Version desc: First set up of plugin files.
+// * Version: 0.0.2
+// * Version desc: First design of actielijnen implemented.
 // * @link    https://github.com/ICTU/Digitale-Overheid---WordPress-plugin-Planning-Tool/
 
 
@@ -55,9 +55,8 @@
 
 @maxwidth:              1200px;
 @minheight_year:        4em;
-@minheight_cell:        3em;
 @columnwidth_labels:    30em;
-@timescale_year_width:  16em;
+@timescale_year_width:  12em; // 16em;
 @thefontsize:           80%;
 @thefontsreset:         ( 100% * ( 100% / @thefontsize ) );
 
@@ -66,10 +65,14 @@
 @media only screen {
 
   .programma {
+
+    a:focus {
+//      outline:2px solid #14C9DF;
+    }
   
     font-size: @thefontsize;
     margin-bottom: 1em;
-    padding-bottom: 1em;
+    padding-bottom: 0;
 
     &.fixed {
       margin-left: auto;
@@ -89,6 +92,9 @@
       font-size: ( 1.4 * @thefontsreset );
     }
 
+    h2 {
+      margin-bottom: 0;
+    }
 
   
     h3, 
@@ -145,23 +151,23 @@
   
     &.digibeter-en-orange,
     &.digibeter-oranje {
-      .kleurtjeslijntjes( @digibeter_oranje, @digibeter_oranje_licht, @wit );
+      .kleurtjeslijntjes( @digibeter_oranje, @digibeter_oranje_licht, @wit, @txt );
     }
     &.digibeter-en-violet,
     &.digibeter-violet {
-      .kleurtjeslijntjes( @digibeter_violet, @digibeter_violet_licht, @wit );
+      .kleurtjeslijntjes( @digibeter_violet, @digibeter_violet_licht, @wit, @txt );
     }
     &.digibeter-en-purple,
     &.digibeter-paars {
-      .kleurtjeslijntjes( @digibeter_paars, @digibeter_paars_licht, @wit );
+      .kleurtjeslijntjes( @digibeter_paars, @digibeter_paars_licht, @wit, @txt );
     }
     &.digibeter-en-green,
     &.digibeter-groen {
-      .kleurtjeslijntjes( @digibeter_groen, @digibeter_groen_licht, @wit );
+      .kleurtjeslijntjes( @digibeter_groen, @digibeter_groen_licht, @wit, @txt );
     }
     &.digibeter-en-blue,
     &.digibeter-blauw {
-      .kleurtjeslijntjes( @digibeter_blauw, @digibeter_blauw_licht, @wit );
+      .kleurtjeslijntjes( @digibeter_blauw, @digibeter_blauw_licht, @wit, @txt );
     }
   
   }
@@ -171,15 +177,19 @@
     padding: 0;
     overflow-x: scroll;
     position: relative;
-    min-height: @minheight_year;
+//    min-height: @minheight_year;
 //    min-height: 900px;
-    background: @lichtgrijs;
+    background: @wit;
+    box-shadow: inset 0 0 10px rgba(90, 90, 90, .5);
+
     
     .actielijn-info {
-      border-bottom: 2px solid darken( @lichtgrijs, 10% );
       overflow: hidden;
-      padding: .15em 0 .1em 0;
-      background: @wit;
+      padding: 0;
+      background-color: @wit;
+      background: url('../assets/images/bg-image-white.svg?k'),  url('../assets/images/bg-image-grid.svg?k');
+      background-size: 30em 30em, 15em 3em;
+      background-repeat: repeat-y, repeat;
       width: 100%;
       clear: both;
       float: none;
@@ -189,16 +199,24 @@
         background: yellow;
       }
       
-      &:first-of-type {
-        border-top: 2px solid darken( @lichtgrijs, 10% );
-      }
-      
       p {
         width: @columnwidth_labels;
-        padding: .25em .5em;
+        padding: 1em .5em 1em 1rem;
         float: left;
+        position: relative;
+        min-height: 6em;
+        
         a {
           font-size: @thefontsreset;
+          text-decoration: none;
+          color: @txt;
+          
+          &:hover,
+          &:active,
+          &:focus {
+            text-decoration: underline;
+          }
+          
         }
       }
       
@@ -216,6 +234,11 @@
           background: yellow;
           padding: .5em;
           display: block;
+
+          position: absolute;
+          bottom: 0;
+          left: 1rem;
+          
         }
       }
       
@@ -224,8 +247,8 @@
         overflow: hidden;
         display: block;
         float: left;
-        padding-top: .3em;
-        padding-bottom: .25em;
+        padding-top: 1em;
+        padding-bottom: 1em;
         
         p,
         ul {
@@ -234,30 +257,38 @@
         }
         
         ul {
+          padding-top: .5em;
           &, li {
             list-style: none;
             padding: 0;
             margin: 0;
           }
           li {
-            text-align: right;
+            text-align: left;
             padding-right: .5em;
             overflow: hidden;
             
             a {
               display: inline-block;
               min-width: 4em;
+              margin: .1em;
               
-              &:after {
+              &:before {
                 content: ' ';
                 display: block;
                 height: 8px;
                 width: 8px;
-                float: right;
+                float: left;
                 margin-top: .5em;
-                margin-left: .5em;
+                margin-right: .5em;
                 background: @active;
               }
+              &:hover,
+              &:active,
+              &:focus {
+                background: @wit;
+              }
+              
             }
             
             span {
@@ -276,45 +307,21 @@
         .strook {
           text-align: left;
           display: inline-block;
-//          font-size: @thefontsize;
           float: left;
           width: ( @timescale_year_width / 4 );
-          background: @lichtgrijs;
-          border-left: 3px solid @wit;
-          border-right: 3px solid @wit;
           min-height: 2em;
           margin: 0;
-          padding: .5em 0 .5em 2em;
+          padding: .5em 0 .5em 2.5em;
           background-repeat: no-repeat;
           background-size: contain;
   
           
           &.current {
-            border-left-color: @active;
-            border-right-color: @active;
             background: @active;
-//            color: @active;
             color: @wit;
-            
-            &.end {
-              border-right-color: @wit;
-            }
-            &.start {
-              border-left-color: @wit;
-            }
-            
-            &:hover {
-//              background: lighten( @active, 10 );
-            }
-            
           }
-  
-          &.inactive + .active {
-            border-left-color: @wit;
-          }
-  
-        }
 
+        }
 
         &.start,
         &.eind,
@@ -330,17 +337,15 @@
         &.start_eind {
           .strook {
             &.start {
-              background-image: url('../assets/images/arrow-start.svg'), url('../assets/images/arrow-end.svg');
+              background-image: url('../assets/images/arrow-start.svg?k'), url('../assets/images/arrow-end.svg?k');
               background-position: center left, center right;
-              border-left-color: @wit;
-              border-right-color: @wit;
             }
           }
         }
         &.start {
           .strook {
             &.start {
-              background-image: url('../assets/images/arrow-start.svg');
+              background-image: url('../assets/images/arrow-start.svg?k');
               background-position: left center;
             }
           }
@@ -348,10 +353,8 @@
         &.eind {
           .strook {
             &.start {
-              background-image: url('../assets/images/arrow-end.svg');
+              background-image: url('../assets/images/arrow-end.svg?k');
               background-position: right center;
-              
-              border-right-color: @wit;
             }
           }
         }
@@ -361,7 +364,7 @@
         &.eind {
           .strook {
             &.last {
-              border-right-color: @active;
+//              border-right-color: @active;
             }
           }
         }
@@ -377,12 +380,8 @@
   }
   
   .timescaleblock {
-//    position: absolute;
-//    position: fixed;
-//    margin-top: 0;
-//    margin-left: 0;
     z-index: 9999;
-
+    background: @wit;
     min-height: @minheight_year;
     width: max-content;
     padding-left: @columnwidth_labels;
@@ -402,7 +401,6 @@
       display: inline-block;
       margin: 0;
       padding: 0;
-      background: @wit;
       span {
         float: none;
         clear: both;
@@ -410,19 +408,21 @@
       }
     }
     .current {
-      background: @active;
-      color: @wit;
+//      background: @active;
+//      color: @wit;
     }
     .timescale-year {
       width: @timescale_year_width;
-      border: 3px solid @bordercolor;
       padding-bottom: 0;
-//      font-size: @thefontsize;
+      margin-right: 3em;
     }
     .timescale-quarteryear {
       width: 25%;
-      border-top: 3px solid @bordercolor;
-      border-right: 3px solid @bordercolor;
+      background-image: url('../assets/images/bg-image-grid.svg?k');
+      background-size: 15em 3em;
+      background-repeat: repeat;
+      min-height: 2em;
+      margin-top: .5em;
       
       &:last-of-type {
         border-right-style: none;
@@ -438,6 +438,10 @@
   .page-template-planningtool-template.full-width-content {
     .site-inner {
       max-width: none;
+    }
+    .entry-content {
+      padding-left: 1em;
+      padding-right: 1em;
     }
     .entry-header,
     #reactieformulier,
