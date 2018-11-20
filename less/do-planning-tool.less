@@ -9,7 +9,7 @@
 // * @author  Paul van Buuren
 // * @license GPL-2.0+
 // * @plugin: do-planning-tool
-// * Version: 0.0.1d
+// * Version: 0.0.1e
 // * Version desc: First set up of plugin files.
 // * @link    https://github.com/ICTU/Digitale-Overheid---WordPress-plugin-Planning-Tool/
 
@@ -53,13 +53,29 @@
 
 @import "01-sizes-colors.less";  
 
+@maxwidth:              1200px;
+@minheight_year:        4em;
+@minheight_cell:        3em;
+@columnwidth_labels:    20em;
+@timescale_year_width:  16em;
+@thefontsize:           80%;
+@thefontsreset:         ( 100% * ( 100% / @thefontsize ) );
+
+
 
 @media only screen {
 
   .programma {
   
+    font-size: @thefontsize;
     margin-bottom: 1em;
     padding-bottom: 1em;
+
+    &.fixed {
+//      border-color: blue !important;
+      margin-left: auto;
+      margin-right: auto;
+    }
 
     caption {
      font-size: 2em;
@@ -71,12 +87,12 @@
       color: @wit;
       padding: .25em .5em .25em 1rem;
       margin-top: 0;
+      font-size: ( 1.4 * @thefontsreset );
     }
 
 
   
     h3, 
-    p, 
     ul {
       margin-left: 1rem;
       margin-right: 1rem;
@@ -151,27 +167,28 @@
   
   }
 
-@minheight_year: 6em;
-@columnwidth_labels: 20em;
-@timescale_year_width: 16em;
 
   .timescale-container {
     padding: 0;
     overflow-x: scroll;
     position: relative;
     min-height: @minheight_year;
-    min-height: 900px;
+//    min-height: 900px;
     background: @lichtgrijs;
     
     .actielijn-info {
       border-bottom: 2px solid darken( @lichtgrijs, 10% );
       overflow: hidden;
-      padding: .1em 0;
+      padding: .15em 0 .1em 0;
       background: @wit;
       width: 100%;
       clear: both;
       float: none;
       width: max-content;
+      
+      &:target {
+        background: yellow;
+      }
       
       &:first-of-type {
         border-top: 2px solid darken( @lichtgrijs, 10% );
@@ -181,6 +198,9 @@
         width: @columnwidth_labels;
         padding: .25em .5em;
         float: left;
+        a {
+          font-size: @thefontsreset;
+        }
       }
       
       .planning {
@@ -188,42 +208,172 @@
         overflow: hidden;
         display: block;
         float: left;
-      }
-      
-      .strook {
-        display: inline-block;
-        float: left;
-        width: ( @timescale_year_width / 4 );
-        background: @lichtgrijs;
-        border: 3px solid @wit;
-
-        &.active {
-          background: @active;
-          border-color: @active;
-          color: @wit;
+        padding-top: .3em;
+        padding-bottom: .25em;
+        
+        p,
+        ul {
+          clear: both;
+          float: none;
         }
+        
+        ul {
+          &, li {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+          }
+          li {
+            text-align: right;
+            padding-right: .5em;
+            overflow: hidden;
+            
+            a {
+              display: inline-block;
+              min-width: 4em;
+              
+              &:after {
+                content: ' ';
+                display: block;
+                height: 8px;
+                width: 8px;
+                float: right;
+                margin-top: .5em;
+                margin-left: .5em;
+                background: @active;
+              }
+            }
+            
+            span {
+              visibility: hidden;
+            }
+            &:hover {
+             span {
+                visibility: visible;
+              }
+            }
+
+          }
+          
+        }
+      
+        .strook {
+          text-align: left;
+          display: inline-block;
+//          font-size: @thefontsize;
+          float: left;
+          width: ( @timescale_year_width / 4 );
+          background: @lichtgrijs;
+          border-left: 3px solid @wit;
+          border-right: 3px solid @wit;
+          min-height: 2em;
+          margin: 0;
+          padding: .5em 0 .5em 2em;
+          background-repeat: no-repeat;
+          background-size: contain;
+  
+          
+          &.current {
+            border-left-color: @active;
+            border-right-color: @active;
+            background: @active;
+//            color: @active;
+            color: @wit;
+            
+            &.end {
+              border-right-color: @wit;
+            }
+            &.start {
+              border-left-color: @wit;
+            }
+            
+            &:hover {
+//              background: lighten( @active, 10 );
+            }
+            
+          }
+  
+          &.inactive + .active {
+            border-left-color: @wit;
+          }
+  
+        }
+
+
+        &.start_eind {
+          .strook {
+            &.start {
+              background-image: url('../assets/images/arrow-start.svg'), url('../assets/images/arrow-end.svg');
+              background-position: center left, center right;
+              background-repeat: no-repeat; /* this applies to both images */
+              border-left-color: @wit;
+              border-right-color: @wit;
+            }
+          }
+        }
+        &.start {
+          .strook {
+            &.start {
+              background: @active url('../assets/images/arrow-start.svg') no-repeat left center;
+            }
+          }
+        }
+        &.eind {
+          .strook {
+            &.start {
+              background: @active url('../assets/images/arrow-end.svg') no-repeat right center;
+              border-right-color: @wit;
+            }
+          }
+        }
+
+        &.start_eind,
+        &.start,
+        &.eind {
+          .strook {
+            &.last {
+              border-right-color: @active;
+            }
+          }
+        }
+        
+        
       }
       
     }
     .actielijnen {
-      margin-top: @minheight_year;
+//      margin-top: @minheight_year;
     }
     
   }
-  #timescale {
-    position: absolute;
-    top: 0;
-    left: 0;
+  
+  .timescaleblock {
+//    position: absolute;
+//    position: fixed;
+//    margin-top: 0;
+//    margin-left: 0;
+    z-index: 9999;
+
     min-height: @minheight_year;
     width: max-content;
     padding-left: @columnwidth_labels;
+    border-left: 4px solid transparent;
+    
+    
+    &.fixed {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 9999;
+    }
     
     div {
       text-align: center;
       float: left;
       display: inline-block;
       margin: 0;
-      padding: .5em 0;
+      padding: 0;
       background: @wit;
       span {
         float: none;
@@ -231,17 +381,20 @@
         display: block;
       }
     }
+    .current {
+      background: @active;
+      color: @wit;
+    }
     .timescale-year {
       width: @timescale_year_width;
       border: 3px solid @bordercolor;
       padding-bottom: 0;
-      height: ( @minheight_year / 2 );
+//      font-size: @thefontsize;
     }
     .timescale-quarteryear {
       width: 25%;
       border-top: 3px solid @bordercolor;
       border-right: 3px solid @bordercolor;
-      height: ( @minheight_year / 2 );
       
       &:last-of-type {
         border-right-style: none;
@@ -251,6 +404,23 @@
 
 }
 
+
+@media only screen and ( min-width: 500px ) {
+
+  .page-template-planningtool-template.full-width-content {
+    .site-inner {
+      max-width: none;
+    }
+    .entry-header,
+    #reactieformulier,
+    .sharing.block {
+      max-width: @maxwidth;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+
+}
 
 @media only screen and ( max-width: 500px ) {
 

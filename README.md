@@ -9,7 +9,7 @@ Planning Tool plugin voor digitaleoverheid.nl. Toont actielijnen en gebeurteniss
 * eh
 
 ## Current version:
-0.0.1d - First set up of plugin files.
+0.0.1e - First set up of plugin files.
 
 ## Version history
-* 0.0.1d - First set up of plugin files.
+* 0.0.1e - First set up of plugin files.
