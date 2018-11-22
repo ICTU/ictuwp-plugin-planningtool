@@ -5,8 +5,8 @@
  * Plugin Name:         ICTU / WP Planning Tool digitaleoverheid.nl
  * Plugin URI:          https://github.com/ICTU/Digitale-Overheid---WordPress-plugin-Planning-Tool/
  * Description:         Plugin voor digitaleoverheid.nl waarmee extra functionaliteit mogelijk wordt voor het tonen van een planning met actielijnen en gebeurtenissen.
- * Version:             0.0.3
- * Version description: Second design sprint implemented.
+ * Version:             0.0.4
+ * Version description: Desktop screen design nearing completion.
  * Author:              Paul van Buuren
  * Author URI:          https://wbvb.nl
  * License:             GPL-2.0+
@@ -35,7 +35,7 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
       /**
        * @var string
        */
-      public $version = '0.0.3';
+      public $version = '0.0.4';
   
   
       /**
@@ -354,150 +354,6 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
         );
       }
   
-      //====================================================================================================
-  
-      /**
-       * Check our WordPress installation is compatible with DO_Planningtool
-       */
-      public function do_pt_admin_main_page_get() {
-  
-        echo '<div class="wrap">';
-        echo '	<h2>' .  esc_html( get_admin_page_title() ) . '</h2>';
-        echo '	<p>' .  _x( 'Hier onderhoud voor de actielijnen.', "admin", "do-planning-tool" ) . '</p>';
-        echo '</div>';
-  
-  
-      }
-
-      //========================================================================================================
-  
-      /**
-       * Register admin JavaScript
-       */
-      public function do_pt_admin_register_scripts() {
-  
-          // media library dependencies
-          wp_enqueue_media();
-  
-          // plugin dependencies
-          wp_enqueue_script( 'jquery-ui-core', array( 'jquery' ) );
-  
-          $this->do_pt_admin_localize_scripts();
-  
-          do_action( 'do_pt_do_pt_admin_register_scripts' );
-  
-      }
-  
-      //========================================================================================================
-  
-      /**
-       * Localise admin script
-       */
-      public function do_pt_admin_localize_scripts() {
-  
-          wp_localize_script( 'gcms-admin-script', 'gcms', array(
-                  'url'               => _x( "URL", "js", "do-planning-tool" ),
-                  'caption'           => _x( "Caption", "js", "do-planning-tool" ),
-                  'new_window'        => _x( "New Window", "js", "do-planning-tool" ),
-                  'confirm'           => _x( "Are you sure?", "js", "do-planning-tool" ),
-                  'ajaxurl'           => admin_url( 'admin-ajax.php' ),
-                  'resize_nonce'      => wp_create_nonce( 'do_pt_resize' ),
-                  'iframeurl'         => admin_url( 'admin-post.php?action=do_pt_preview' ),
-              )
-          );
-  
-      }
-  
-    //====================================================================================================
-
-    /**
-     * Check our WordPress installation is compatible with DO_Planningtool
-     */
-    public function do_pt_admin_options_page() {
-
-      echo '<div class="wrap">';
-      echo '	<h2>' .  esc_html( get_admin_page_title() ) . '</h2>';
-
-?>
-
-    	<table class="form-table" id="progress">
-    		<tr>
-    			<td>
-    				<input id="startsync" type="button" class="button button-primary" value="<?php _e( 'Reset statistics', "do-planning-tool" ); ?>" />
-    				<input id="clearlog" type="button" class="button button-secondary" value="<?php _e( 'Empty log', "do-planning-tool" ); ?>" />
-    			</td>
-    		</tr>
-    	</table>
-      <noscript style="background: red; padding: .5em; font-size: 120%;display: block; margin-top: 1em !important; color: white;">
-        <strong><?php _e( 'Ehm, please allow JavaScript.', "do-planning-tool" );?></strong>
-      </noscript>
-      <div style="width: 100%; padding-top: 16px;" id="items">&nbsp;</div>
-    	<div style="width: 100%; padding-top: 16px; font-style: italic;" id="log"><?php _e( 'Press the button!', "do-planning-tool" );?></div>
-    
-    
-    	<script type="text/javascript">
-    
-    
-    		var _button       = jQuery('input#startsync');
-    		var _clearbutton  = jQuery('input#clearlog');
-    		var _lastrow      = jQuery('#progress tr:last');
-    		var startrec = 1;
-    
-    		var setProgress = function (_message) {
-    			_lastrow.append(_message);
-    		}
-    
-    		jQuery(document).ready(function () {
-    
-    			_button.click(function (e) {
-    
-    				e.preventDefault();
-    				jQuery(this).val('<?php _e( 'Just a moment please', "do-planning-tool" );?>').prop('disabled', true);
-    				jQuery( '#log' ).empty();
-    				jQuery( '#thetable' ).empty();
-    				_requestJob( );
-    
-    			});
-    
-    			// clear log div
-    			_clearbutton.click(function() {
-    				jQuery( '#log' ).empty();
-    				jQuery( '#thetable' ).empty();
-    			})
-    
-    		})
-    
-    		var _requestJob = function ( ) {
-    			jQuery.post(ajaxurl, { 'action': 'do_pt_reset',  'dofeedback': '1' }, _jobResult);
-    		}
-    
-    		var _jobResult = function (response) {
-    
-          _button.val('<?php _e( 'Reset statistics', "do-planning-tool" ) ?>').prop('disabled', false);
-    
-    			if (response.ajaxrespons_item.length > 0) {
-    				// new messages appear on top. .append() can be used to have new entries at the bottom
-    				jQuery('#thetable').html( response.ajaxrespons_item );
-    			}
-    			if (response.ajaxrespons_messages.length > 0) {
-    				for (var i = 0; i < response.ajaxrespons_messages.length; i++) {
-    					// new messages appear on top. .append() can be used to have new entries at the bottom
-    					jQuery('#log').prepend(response.ajaxrespons_messages[i] + '<br />');
-    				}
-    			}
-    
-    			jQuery(this).val('<?php _e( 'Just a moment please', "do-planning-tool" );?>').prop('disabled', true);
-    		}
-    
-    	</script>
-    
-    <?php
-      
-          echo '</div>';
-    
-        }
-
-  
       //========================================================================================================
   
       /**
@@ -507,7 +363,6 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 
         if ( !is_admin() ) {
 
-          $postid   = get_the_ID();
           $infooter = false;
           
           wp_enqueue_style( 'do-planning-tool-frontend', DOPT__ASSETS_URL . 'css/do-planning-tool.css', array(), DOPT__VERSION, $infooter );
@@ -574,6 +429,7 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
       }
 
     	//=================================================
+    	
       if ( is_single() && ( DOPT__ACTIELIJN_CPT == get_post_type() || DOPT__GEBEURTENIS_CPT == get_post_type() ) ) {
 
         // check the breadcrumb
@@ -701,51 +557,47 @@ function do_pt_do_frontend_pagetemplate_add_actielijnen() {
     $year_end = ( date("Y") + 1 );
   }
 
-  
   $dinges                   = 'gantt';
 //  $dinges                   = 'table';
 
-
-  
-if (isset($_GET['presentatievorm'])) $dinges = sanitize_title( $_GET['presentatievorm'] );  
-
-
-$ganttchard_display_check   = '';
-$table_display_check        = '';
-
-$checked = ' checked="checked"';
-
-if ( 'gantt' == $dinges ) {
-  $ganttchard_display_check = $checked;  
-}
-elseif ( 'table' == $dinges ) {
-  $table_display_check = $checked;  
-}
-
 /*
 
-global $wp;
-$current_url = home_url( add_query_arg( array(), $wp->request ) );
+  global $wp;
+  $current_url = home_url( add_query_arg( array(), $wp->request ) );
 
+  if (isset($_GET['presentatievorm'])) $dinges = sanitize_title( $_GET['presentatievorm'] );  
+  
+  
+  $ganttchard_display_check   = '';
+  $table_display_check        = '';
+  
+  $checked = ' checked="checked"';
+  
+  if ( 'gantt' == $dinges ) {
+    $ganttchard_display_check = $checked;  
+  }
+  elseif ( 'table' == $dinges ) {
+    $table_display_check = $checked;  
+  }
 
-echo '<form method="get" action="' . $current_url . '">';
-echo '<fieldset>';
-echo '<legend>';
-echo 'Kies hoe je de gegevens gepresenteerd wilt hebben';
-echo '</legend>';
-
-echo '<label for="ganttchard_display">';
-echo '<input id="ganttchard_display" value="gantt" name="presentatievorm"' . $ganttchard_display_check . ' type="radio" /> Toon met Gantt-chart';
-echo '</label>';
-
-echo '<label for="table_display">';
-echo '<input id="table_display" value="table" name="presentatievorm"' . $table_display_check . ' type="radio" /> Toon in een tabel';
-echo '</label>';
-
-echo '<button type="submit">Kies</button>';
-
-echo '</fieldset>';
-echo '</form>';
+  echo '<form method="get" action="' . $current_url . '">';
+  echo '<fieldset>';
+  echo '<legend>';
+  echo 'Kies hoe je de gegevens gepresenteerd wilt hebben';
+  echo '</legend>';
+  
+  echo '<label for="ganttchard_display">';
+  echo '<input id="ganttchard_display" value="gantt" name="presentatievorm"' . $ganttchard_display_check . ' type="radio" /> Toon met Gantt-chart';
+  echo '</label>';
+  
+  echo '<label for="table_display">';
+  echo '<input id="table_display" value="table" name="presentatievorm"' . $table_display_check . ' type="radio" /> Toon in een tabel';
+  echo '</label>';
+  
+  echo '<button type="submit">Kies</button>';
+  
+  echo '</fieldset>';
+  echo '</form>';
 
 */
 
@@ -879,10 +731,10 @@ echo '</form>';
         // 12em voor een jaar, zie DOPT_CSS_YEARWIDTH 
         // 20em voor padding left, zie DOPT_CSS_PADDINGLEFT 
         $offset                   = .25;
-        $possiblewidth_timeline   = ( $numberofyears * DOPT_CSS_YEARWIDTH );
+        $possiblewidth_timeline   = ( ( $numberofyears * DOPT_CSS_YEARWIDTH ) - 1 ); // -1 is to strip off the unnecessary margin-right of the last year
         $possiblewidth_total      = ( $possiblewidth_timeline + DOPT_CSS_PADDINGLEFT );
 
-        echo '<section id="' . sanitize_title( $actielijnblok_titel ) . '" class="programma ' . $digibeterclass . '" data-possiblewidth="' . ( $possiblewidth_total + 1 ) . 'em" data-possibleyears="' . $numberofyears . ' years">';      
+        echo '<section id="' . sanitize_title( $actielijnblok_titel ) . '" class="programma ' . $digibeterclass . '" data-possiblewidth="' . ( $possiblewidth_total + 1 ) . 'em">';      
         echo '<header>';
         echo '<div class="container">';
         echo '<h2>' . $actielijnblok_titel . '</h2>';      

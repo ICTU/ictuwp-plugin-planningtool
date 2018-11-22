@@ -1,16 +1,17 @@
 /*
- * DO_Planningtool. 
- *
- * Plugin Name:         DO_Planningtool
- * Plugin URI:          https://github.com/ICTU/Digitale-Overheid---WordPress-plugin-Planning-Tool/
- * Description:         De mogelijkheid om video's in te voegen met diverse media-formats en ondertitels
- * Version:             1.0.0
- * Version description: First version
- * Author:              Paul van Buuren
- * Author URI:          https://wbvb.nl
- * License:             GPL-2.0+
- */
+// * DO_Planningtool. 
+// * 
+// * Plugin Name:         DO_Planningtool
+// * Plugin URI:          https://github.com/ICTU/Digitale-Overheid---WordPress-plugin-Planning-Tool/
+// * Description:         De mogelijkheid om video's in te voegen met diverse media-formats en ondertitels
+// * Version:             0.0.4
+// * Version description: Desktop screen design nearing completion.
+// * Author:              Paul van Buuren
+// * Author URI:          https://wbvb.nl
+// * License:             GPL-2.0+
+*/
 
+//========================================================================================================
 
 function AddTableARIA() {
   // in order to have table-like functionality for AT, add appropriate roles to table elements
@@ -52,20 +53,16 @@ function AddTableARIA() {
 
 }
 
-AddTableARIA();
-
-
+//========================================================================================================
 
 function letDivsScroll() {
 
   try {
     var i = 0;
     var allProgrammaDivs = document.querySelectorAll('.programma');
-    for ( i = 0; i < allProgrammaDivs.length; i++) {
-      
-      console.log('width: ' + allProgrammaDivs[i].dataset.possiblewidth );
 
- //     allProgrammaDivs[i].addEventListener('scroll', stickyTimescaleblock);
+    for ( i = 0; i < allProgrammaDivs.length; i++) {
+
       allProgrammaDivs[i].style.width = allProgrammaDivs[i].dataset.possiblewidth;
       allProgrammaDivs[i].style.maxWidth = '100%';
       allProgrammaDivs[i].classList.add('fixed');
@@ -77,6 +74,7 @@ function letDivsScroll() {
 
 }
 
+//========================================================================================================
 
 //var nav     = document.querySelector('#timescaleblock_1');
 //var nav     = document.querySelector('#timescaleblock_1');
@@ -106,5 +104,9 @@ function stickyTimescaleblock( e ) {
 
 //window.addEventListener('scroll', stickyTimescaleblock);
 
+AddTableARIA();
 
 letDivsScroll();
+
+//========================================================================================================
+

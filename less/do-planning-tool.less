@@ -9,8 +9,8 @@
 // * @author  Paul van Buuren
 // * @license GPL-2.0+
 // * @plugin: do-planning-tool
-// * Version: 0.0.3
-// * Version desc: Second design sprint implemented.
+// * Version: 0.0.4
+// * Version desc: Desktop screen design nearing completion.
 // * @link    https://github.com/ICTU/Digitale-Overheid---WordPress-plugin-Planning-Tool/
 
 
@@ -79,7 +79,7 @@ div {
   .programma {
 
     font-size: @thefontsize;
-    margin-bottom: 1em;
+    margin-bottom: 3em;
     padding-bottom: 0;
 
     &.fixed {
@@ -206,11 +206,11 @@ div {
 //    background: @wit;
 
       background-color: @wit;
-      background: url('../assets/images/bg-image-white.svg?l'),  url('../assets/images/bg-image-grid.svg?l');
+      background: url('../assets/images/bg-image-white.svg?m'),  url('../assets/images/bg-image-grid.svg?m');
       background-size: @columnwidth_labels @columnwidth_labels, ( @timescale_year_width + 1 ) 1em;
       background-repeat: repeat-y, repeat;
 /*      
-      background: url('../assets/images/bg-image-grid.svg?l');
+      background: url('../assets/images/bg-image-grid.svg?m');
       background-size: 13em 1em;
       background-repeat: repeat;
 */      
@@ -408,14 +408,18 @@ div {
     .timescale-year {
       width: @timescale_year_width;
       padding-bottom: 0;
-      margin-right: 1em;
+
+      & + .timescale-year {
+        margin-left: 1em;
+      }
+      
     }
     .timescale-quarteryear {
       width: 25%;
       min-height: 2em;
       margin-top: .5em;
 
-    background-image: url('../assets/images/bg-image-grid.svg?l');
+    background-image: url('../assets/images/bg-image-grid.svg?m');
     background-size: ( @timescale_year_width + 1 ) 1em;
     background-repeat: repeat;
 
