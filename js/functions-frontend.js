@@ -60,7 +60,7 @@ function letDivsScroll() {
 
   try {
     var i = 0;
-    var allProgrammaDivs = document.querySelectorAll('div.programma');
+    var allProgrammaDivs = document.querySelectorAll('.programma');
     for ( i = 0; i < allProgrammaDivs.length; i++) {
       
       console.log('width: ' + allProgrammaDivs[i].dataset.possiblewidth );

@@ -5,8 +5,8 @@
  * Plugin Name:         ICTU / WP Planning Tool digitaleoverheid.nl
  * Plugin URI:          https://github.com/ICTU/Digitale-Overheid---WordPress-plugin-Planning-Tool/
  * Description:         Plugin voor digitaleoverheid.nl waarmee extra functionaliteit mogelijk wordt voor het tonen van een planning met actielijnen en gebeurtenissen.
- * Version:             0.0.2
- * Version description: First design of actielijnen implemented.
+ * Version:             0.0.3
+ * Version description: Second design sprint implemented.
  * Author:              Paul van Buuren
  * Author URI:          https://wbvb.nl
  * License:             GPL-2.0+
@@ -35,7 +35,7 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
       /**
        * @var string
        */
-      public $version = '0.0.2';
+      public $version = '0.0.3';
   
   
       /**
@@ -118,9 +118,9 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 
         $this->option_name  = 'ictudo_planning-option';
 
-        define( 'DOPT_CSS_YEARWIDTH',           12 ); 
+        define( 'DOPT_CSS_YEARWIDTH',           13 ); // 12ems per year + 1em margin right
         define( 'DOPT_CSS_QUARTERWIDTH',        3 ); 
-        
+        define( 'DOPT_CSS_PADDINGLEFT',         26 ); // basically DOPT_CSS_YEARWIDTH but then twice
 
        }
   
@@ -512,7 +512,7 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
           
           wp_enqueue_style( 'do-planning-tool-frontend', DOPT__ASSETS_URL . 'css/do-planning-tool.css', array(), DOPT__VERSION, $infooter );
 
-          wp_enqueue_script( 'functions-frontend-min', DOPT__ASSETS_URL . 'js/functions-frontend.js', '', CHILD_THEME_VERSION, true );
+          wp_enqueue_script( 'functions-frontend-min', DOPT__ASSETS_URL . 'js/functions-frontend.js', '', DOPT__VERSION, true );
 
 
         }
@@ -539,8 +539,7 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
   
         if( ( is_single() && DOPT__ACTIELIJN_CPT == get_post_type() ) || 
             ( is_single() && DOPT__GEBEURTENIS_CPT == get_post_type() ) ) {
-  
-  
+
         	if ( $planning_page_id ) {
         		return '<a href="' . get_permalink( $planning_page_id ) . '">' . get_the_title( $planning_page_id ) .'</a>' . $args['sep'] . ' ' . $berichtnaam;
         	}
@@ -666,17 +665,12 @@ function do_pt_do_frontend_pagetemplate_add_actielijnen() {
   $actielijnblokken         = get_field( 'actielijnen_per_thema', $acfid );
   $year_now                 = date("Y");
   $q_now                    = date("m");
-  $year_start               = ( $year_now - 1 );
-  $year_end                 = ( $year_now + 1 );
-  $planning_page_start_jaar = get_field( 'planning_page_start_jaar', 'option');
-  $planning_page_end_jaar   = get_field( 'planning_page_end_jaar', 'option');
+  $year_start               = get_field( 'planning_page_start_jaar', 'option');
+  $year_end                 = get_field( 'planning_page_end_jaar', 'option');
   $unique_actielijnid       = 0;
   $emptycontentcounter      = 0;
   $numberofyears            = 0;
   
-  $dinges                   = 'gantt';
-//  $dinges                   = 'table';
-
   if ( $q_now >= 10 ) {
     $q_now = 4;  
   }
@@ -690,17 +684,70 @@ function do_pt_do_frontend_pagetemplate_add_actielijnen() {
     $q_now = 1;  
   }
 
-
   $actielijnen_array = array();
 
-  if ( intval( $planning_page_start_jaar > 0 ) && ( intval( $planning_page_start_jaar ) < intval( $year_start ) ) ) {
-    $year_start = $planning_page_start_jaar;  
+
+  if ( intval( $year_start > 0 ) && ( intval( $year_start ) > intval( date("Y") ) ) ) {
+    $year_start = date("Y");  
   }
-  if ( intval( $planning_page_end_jaar > 0 ) && ( intval( $planning_page_end_jaar ) > intval( $year_end ) ) ) {
-    $year_end = $planning_page_end_jaar;  
+  if ( intval( $year_end > 0 ) && ( intval( $year_end ) < intval( date("Y") ) ) ) {
+    $year_end = ( date("Y") + 1 );
   }
 
+  if ( ! $year_start ) {
+    $year_start = date("Y");
+  }
+  if ( ! $year_end ) {
+    $year_end = ( date("Y") + 1 );
+  }
 
+  
+  $dinges                   = 'gantt';
+//  $dinges                   = 'table';
+
+
+  
+if (isset($_GET['presentatievorm'])) $dinges = sanitize_title( $_GET['presentatievorm'] );  
+
+
+$ganttchard_display_check   = '';
+$table_display_check        = '';
+
+$checked = ' checked="checked"';
+
+if ( 'gantt' == $dinges ) {
+  $ganttchard_display_check = $checked;  
+}
+elseif ( 'table' == $dinges ) {
+  $table_display_check = $checked;  
+}
+
+/*
+
+global $wp;
+$current_url = home_url( add_query_arg( array(), $wp->request ) );
+
+
+echo '<form method="get" action="' . $current_url . '">';
+echo '<fieldset>';
+echo '<legend>';
+echo 'Kies hoe je de gegevens gepresenteerd wilt hebben';
+echo '</legend>';
+
+echo '<label for="ganttchard_display">';
+echo '<input id="ganttchard_display" value="gantt" name="presentatievorm"' . $ganttchard_display_check . ' type="radio" /> Toon met Gantt-chart';
+echo '</label>';
+
+echo '<label for="table_display">';
+echo '<input id="table_display" value="table" name="presentatievorm"' . $table_display_check . ' type="radio" /> Toon in een tabel';
+echo '</label>';
+
+echo '<button type="submit">Kies</button>';
+
+echo '</fieldset>';
+echo '</form>';
+
+*/
 
   if( have_rows('actielijnen_per_thema', $acfid ) ) {
   
@@ -722,12 +769,33 @@ function do_pt_do_frontend_pagetemplate_add_actielijnen() {
 
           foreach( $select_actielijnen as $select_actielijn ) {
             
-            $actielijn_kwartaal_start_kwartaal  = get_field( 'actielijn_kwartaal_start_kwartaal', $select_actielijn->ID );
-            $actielijn_kwartaal_start_jaar      = get_field( 'actielijn_kwartaal_start_jaar', $select_actielijn->ID );
-            $actielijn_kwartaal_eind_kwartaal   = get_field( 'actielijn_kwartaal_eind_kwartaal', $select_actielijn->ID );
-            $actielijn_kwartaal_eind_jaar       = get_field( 'actielijn_kwartaal_eind_jaar', $select_actielijn->ID );
             $actielijn_info                     = array();
-      
+            $actielijn_kwartaal_start_jaar      = 0;
+            $actielijn_kwartaal_eind_jaar       = 0;
+
+            switch ( get_field( 'heeft_start-_of_einddatums', $select_actielijn->ID ) ) {
+              
+              case 'start_eind':
+                $actielijn_kwartaal_start_kwartaal  = get_field( 'actielijn_kwartaal_start_kwartaal', $select_actielijn->ID );
+                $actielijn_kwartaal_start_jaar      = get_field( 'actielijn_kwartaal_start_jaar', $select_actielijn->ID );
+                $actielijn_kwartaal_eind_kwartaal   = get_field( 'actielijn_kwartaal_eind_kwartaal', $select_actielijn->ID );
+                $actielijn_kwartaal_eind_jaar       = get_field( 'actielijn_kwartaal_eind_jaar', $select_actielijn->ID );
+
+                break;
+            
+              case 'start':
+                $actielijn_kwartaal_start_kwartaal  = get_field( 'actielijn_kwartaal_start_kwartaal', $select_actielijn->ID );
+                $actielijn_kwartaal_start_jaar      = get_field( 'actielijn_kwartaal_start_jaar', $select_actielijn->ID );
+                break;
+            
+              case 'eind':
+                $actielijn_kwartaal_eind_kwartaal   = get_field( 'actielijn_kwartaal_eind_kwartaal', $select_actielijn->ID );
+                $actielijn_kwartaal_eind_jaar       = get_field( 'actielijn_kwartaal_eind_jaar', $select_actielijn->ID );
+
+                break;
+            
+            }      
+
             if ( intval( $actielijn_kwartaal_start_jaar > 0 ) && ( intval( $actielijn_kwartaal_start_jaar ) < intval( $year_start ) ) ) {
               $year_start = $actielijn_kwartaal_start_jaar;  
             }
@@ -741,15 +809,14 @@ function do_pt_do_frontend_pagetemplate_add_actielijnen() {
             $actielijn_info['title']            = get_the_title( $select_actielijn->ID );
             $actielijn_info['datumreekstype']   = get_field( 'heeft_start-_of_einddatums', $select_actielijn->ID );
 
-            $actielijn_info['active_start_at']  = '';
-            $actielijn_info['active_end_at']    = '';
+//            $actielijn_info['active_start_at']  = '';
+//            $actielijn_info['active_end_at']    = '';
 
 
             $actielijnen_array[] = $actielijn_info;
       
           }
         }
-
       }
       
       $numberofyears = ( $year_end - $year_start ) + 1;
@@ -803,38 +870,45 @@ function do_pt_do_frontend_pagetemplate_add_actielijnen() {
         $actielijnblok_titel    = esc_html( $actielijnblok[ 'actielijnen_per_thema_titel' ] );
         $digibeterclass         = get_field( 'digibeter_term_achtergrondkleur', RHSWP_CT_DIGIBETER . '_' . $actielijnblok[ 'actielijnen_per_thema_kleur' ] );
         $select_actielijnen     = $actielijnblok[ 'actielijnen_per_thema_actielijnen' ];
+
+        $planningstrook2        = preg_replace('/class="timescaleblock"/', 'class="timescaleblock" id="timescaleblock_' . $actielijnblok_counter . '"', $planningstrook );          
           
   //      echo '<p>1: Jaren: van ' . $year_start . ' tot ' . $year_end . ' (actielijnen: ' . count( $actielijnen_array ) . ')</p>';
 
 
         // 12em voor een jaar, zie DOPT_CSS_YEARWIDTH 
-        // 20em voor padding left
-        $possiblewidth = ( ( $numberofyears * DOPT_CSS_YEARWIDTH  ) + 20 );
+        // 20em voor padding left, zie DOPT_CSS_PADDINGLEFT 
+        $offset                   = .25;
+        $possiblewidth_timeline   = ( $numberofyears * DOPT_CSS_YEARWIDTH );
+        $possiblewidth_total      = ( $possiblewidth_timeline + DOPT_CSS_PADDINGLEFT );
 
-        echo '<div id="' . sanitize_title( $actielijnblok_titel ) . '" class="programma ' . $digibeterclass . '" data-possiblewidth="' . $possiblewidth . 'em" data-possibleyears="' . $numberofyears . ' years">';      
-        
-        
+        echo '<section id="' . sanitize_title( $actielijnblok_titel ) . '" class="programma ' . $digibeterclass . '" data-possiblewidth="' . ( $possiblewidth_total + 1 ) . 'em" data-possibleyears="' . $numberofyears . ' years">';      
+        echo '<header>';
+        echo '<div class="container">';
         echo '<h2>' . $actielijnblok_titel . '</h2>';      
+        echo '</div>';
+        echo '<div class="container">';
+        echo $planningstrook2;
+        echo '<div>';
+        echo '</header>';
 
         echo '<div class="timescale-container">';
-  
 
-        $planningstrook2 = preg_replace('/class="timescaleblock"/', 'class="timescaleblock" id="timescaleblock_' . $actielijnblok_counter . '"', $planningstrook );          
-
-        echo $planningstrook2;
         
         echo '<div class="actielijnen">';
 
         if( $select_actielijnen ) {
+
+//$yeardiff
   
 //        foreach( $actielijnen_array as $actielijn ) {
-        foreach( $select_actielijnen as $select_actielijn ) {
+          foreach( $select_actielijnen as $select_actielijn ) {
             
+            $unique_actielijnid++;
+
             $currentyear    = $year_start;
             $startatyearq   = intval( $year_start . 1 );
             $endatyearq     = intval( $year_end . 4 );
-            $unique_actielijnid++;
-
 
             $actielijn_kwartaal_start_kwartaal  = get_field( 'actielijn_kwartaal_start_kwartaal', $select_actielijn->ID );
             $actielijn_kwartaal_start_jaar      = get_field( 'actielijn_kwartaal_start_jaar', $select_actielijn->ID );
@@ -848,7 +922,7 @@ function do_pt_do_frontend_pagetemplate_add_actielijnen() {
             switch ( get_field( 'heeft_start-_of_einddatums', $select_actielijn->ID ) ) {
               
               case 'start_eind':
-                $actielijn_info['active_start_at']  = get_field( 'actielijn_kwartaal_start_jaar', $select_actielijn->ID ) . $kwartaal_start;
+//                $actielijn_info['active_start_at']  = get_field( 'actielijn_kwartaal_start_jaar', $select_actielijn->ID ) . $kwartaal_start;
                 $startatyearq   = get_field( 'actielijn_kwartaal_start_jaar', $select_actielijn->ID ) . $kwartaal_start;
                 $endatyearq     = get_field( 'actielijn_kwartaal_eind_jaar', $select_actielijn->ID ) . $kwartaal_end;
                 break;
@@ -867,22 +941,27 @@ function do_pt_do_frontend_pagetemplate_add_actielijnen() {
             echo '<div id="actielijn_' . $select_actielijn->ID . '_' . $unique_actielijnid . '" class="actielijn-info">';
             echo '<p><a href="' . get_the_permalink( $select_actielijn->ID ) . '">' . get_the_title( $select_actielijn->ID ) . '</a>';
 
-            echo '<span class="verbergmij">';
+/*
+            echo '<span class="xverbergmij">';
+
+            echo '<br>' . get_field( 'heeft_start-_of_einddatums', $select_actielijn->ID );
 
             if ( $planning ) {
               if ( $planning[0]->name ) {
-                echo 'label: "' . $planning[0]->name . '", ';
+                echo '<br>label: "' . $planning[0]->name . '", ';
               }
             }
             
             echo 'ingevoerde kwartalen: ' . get_field( 'actielijn_kwartaal_start_kwartaal', $select_actielijn->ID ) . '-' . get_field( 'actielijn_kwartaal_start_jaar', $select_actielijn->ID ) . ' - ' . get_field( 'actielijn_kwartaal_eind_kwartaal', $select_actielijn->ID ) . '-' . get_field( 'actielijn_kwartaal_eind_jaar', $select_actielijn->ID ) . '.';
 
             echo '</span>';
+*/
             
             echo '</p>';
             
             echo '<div class="planning ' . get_field( 'heeft_start-_of_einddatums', $select_actielijn->ID ) . '">';
     
+/*
             while ( intval( $currentyear ) <= intval( $year_end ) ) : 
             
               while ( intval( $currentquarter ) <= intval( DOPT__NR_QUARTERS ) ) : 
@@ -960,6 +1039,53 @@ function do_pt_do_frontend_pagetemplate_add_actielijnen() {
               $currentyear++;
                 
             endwhile;
+*/
+
+
+
+            $rekenjaarstart   = substr( $startatyearq, 0, 4);
+            $rekenjaarend     = substr( $endatyearq, 0, 4);
+
+            $rekenq_start     = substr( $startatyearq, 4, 1);
+            $rekenq_end       = substr( $endatyearq, 4, 1);
+
+
+            $jaarlengte       = ( $rekenjaarend - $rekenjaarstart );
+            $kwartaallengte   = ( ( $rekenq_end - $rekenq_start ) + 1 );
+            
+            $emwidth          = ( ( $jaarlengte * DOPT_CSS_YEARWIDTH  ) + ( $kwartaallengte * DOPT_CSS_QUARTERWIDTH ) );
+//                  $emwidth          = ( $jaarlengte * DOPT_CSS_YEARWIDTH  );
+
+//$year_start       = $actielijn_kwartaal_start_jaar;  
+//$year_end         = $actielijn_kwartaal_eind_jaar;  
+$marginleft_year  = ( ( $rekenjaarstart - $year_start ) * DOPT_CSS_YEARWIDTH );
+$marginleft_quart = ( ( $rekenq_start - 1 ) * DOPT_CSS_QUARTERWIDTH );
+
+$marginright = ( $possiblewidth_timeline - ( $emwidth + ( $marginleft_year + $marginleft_quart ) ) );
+
+/*
+echo '<p>paddingleft_year=' . $marginleft_year . '<br>';
+echo 'marginleft_quart=' . $marginleft_quart . '<br>';
+echo 'emwidth=' . $emwidth . '</p>';
+*/
+            
+            $length = ' style="width: ' . ( $emwidth -  ( 2 * $offset ) ). 'em; margin-left: ' . ( $marginleft_year + $marginleft_quart + $offset ) . 'em; margin-right: ' . $marginright . 'em;" data-startatyearq="' . $startatyearq . '" '.
+            'data-endatyearq="' . $endatyearq . '"';
+
+
+            $emptycontent = '&nbsp;';
+            $active       = ' current';
+
+                  if ( $planning ) {
+    
+                    if ( $planning[0]->name ) {
+                      $emptycontent = $planning[0]->name;
+                    }
+                    
+                  }
+
+
+            echo '<div class="strook' . $active . '"' . $length . '>' . $emptycontent . '</div>';    
 
             echo do_pt_frontend_display_actielijn_info( $select_actielijn->ID, false, true, $year_start, $year_end );          
             
@@ -974,7 +1100,7 @@ function do_pt_do_frontend_pagetemplate_add_actielijnen() {
   
         echo '</div>'; // class=timescale-container;
   
-        echo '</div>'; // class=programma
+        echo '</section>'; // class=programma
   
       }
       

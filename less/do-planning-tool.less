@@ -9,8 +9,8 @@
 // * @author  Paul van Buuren
 // * @license GPL-2.0+
 // * @plugin: do-planning-tool
-// * Version: 0.0.2
-// * Version desc: First design of actielijnen implemented.
+// * Version: 0.0.3
+// * Version desc: Second design sprint implemented.
 // * @link    https://github.com/ICTU/Digitale-Overheid---WordPress-plugin-Planning-Tool/
 
 
@@ -55,8 +55,8 @@
 
 @maxwidth:              1200px;
 @minheight_year:        4em;
-@columnwidth_labels:    30em;
 @timescale_year_width:  12em; // 16em;
+@columnwidth_labels:    ( ( @timescale_year_width + 1 ) * 2 ); // ( 1 timescale = 12em width + 1em margin right: 13em ) and that twice please
 @thefontsize:           80%;
 @thefontsreset:         ( 100% * ( 100% / @thefontsize ) );
 
@@ -64,12 +64,20 @@
 
 @media only screen {
 
+/*
+section {
+  border: 2px solid red !important;
+  margin: 1em !important;
+  padding: 1em !important;
+}
+div {
+  border: 2px solid yellow !important;
+  margin: 1em !important;
+  padding: 1em !important;
+}
+*/
   .programma {
 
-    a:focus {
-//      outline:2px solid #14C9DF;
-    }
-  
     font-size: @thefontsize;
     margin-bottom: 1em;
     padding-bottom: 0;
@@ -78,22 +86,41 @@
       margin-left: auto;
       margin-right: auto;
     }
+    
+    header {
+      overflow: hidden;
+      
+      .container {
+        float: left;
+        margin: 0;
+        width: @columnwidth_labels;
+        
+        & + .container {
+          width: auto;
+        }
+      }
+      .timescaleblock {
+//        position: absolute;
+//        bottom: .5em;
+      }
+      
+    }
 
     caption {
-     font-size: 2em;
-     text-align: left; 
+      text-align: left; 
+      font-size: ( 1.4 * @thefontsreset );
     } 
        
     caption,
     h2 {
       color: @wit;
-      padding: .25em .5em .25em 1rem;
+      padding: .5em .5em .5em 1rem;
       margin-top: 0;
-      font-size: ( 1.4 * @thefontsreset );
     }
 
     h2 {
-      margin-bottom: 0;
+      font-size: ( 1.2 * @thefontsreset );
+      margin: 0;
     }
 
   
@@ -151,23 +178,23 @@
   
     &.digibeter-en-orange,
     &.digibeter-oranje {
-      .kleurtjeslijntjes( @digibeter_oranje, @digibeter_oranje_licht, @wit, @txt );
+      .kleurtjeslijntjes( @digibeter_oranje, @oranje_licht, @wit, @txt );
     }
     &.digibeter-en-violet,
     &.digibeter-violet {
-      .kleurtjeslijntjes( @digibeter_violet, @digibeter_violet_licht, @wit, @txt );
+      .kleurtjeslijntjes( @digibeter_violet, @violet_licht, @wit, @txt );
     }
     &.digibeter-en-purple,
     &.digibeter-paars {
-      .kleurtjeslijntjes( @digibeter_paars, @digibeter_paars_licht, @wit, @txt );
+      .kleurtjeslijntjes( @digibeter_paars, @paars_licht, @wit, @txt );
     }
     &.digibeter-en-green,
     &.digibeter-groen {
-      .kleurtjeslijntjes( @digibeter_groen, @digibeter_groen_licht, @wit, @txt );
+      .kleurtjeslijntjes( @digibeter_groen, @groen_licht, @wit, @txt );
     }
     &.digibeter-en-blue,
     &.digibeter-blauw {
-      .kleurtjeslijntjes( @digibeter_blauw, @digibeter_blauw_licht, @wit, @txt );
+      .kleurtjeslijntjes( @digibeter_blauw, @hemelblauw_licht, @wit, @txt );
     }
   
   }
@@ -175,25 +202,28 @@
 
   .timescale-container {
     padding: 0;
-    overflow-x: scroll;
     position: relative;
-//    min-height: @minheight_year;
-//    min-height: 900px;
-    background: @wit;
-    box-shadow: inset 0 0 10px rgba(90, 90, 90, .5);
+//    background: @wit;
 
-    
+      background-color: @wit;
+      background: url('../assets/images/bg-image-white.svg?l'),  url('../assets/images/bg-image-grid.svg?l');
+      background-size: @columnwidth_labels @columnwidth_labels, ( @timescale_year_width + 1 ) 1em;
+      background-repeat: repeat-y, repeat;
+/*      
+      background: url('../assets/images/bg-image-grid.svg?l');
+      background-size: 13em 1em;
+      background-repeat: repeat;
+*/      
+
     .actielijn-info {
       overflow: hidden;
       padding: 0;
-      background-color: @wit;
-      background: url('../assets/images/bg-image-white.svg?k'),  url('../assets/images/bg-image-grid.svg?k');
-      background-size: 30em 30em, 15em 3em;
-      background-repeat: repeat-y, repeat;
       width: 100%;
       clear: both;
       float: none;
       width: max-content;
+      border-top: 4px solid transparent;
+      border-bottom: 4px solid transparent;
       
       &:target {
         background: yellow;
@@ -201,22 +231,13 @@
       
       p {
         width: @columnwidth_labels;
-        padding: 1em .5em 1em 1rem;
+        padding: .5em .5em 1em 1rem;
         float: left;
         position: relative;
-        min-height: 6em;
+        min-height: 4em;
         
         a {
           font-size: @thefontsreset;
-          text-decoration: none;
-          color: @txt;
-          
-          &:hover,
-          &:active,
-          &:focus {
-            text-decoration: underline;
-          }
-          
         }
       }
       
@@ -225,12 +246,10 @@
       }
       
       &:hover {
-
-        border-color: @txt;
+        background: rgba( 210, 210, 210, .3 );
         
         .verbergmij {
           .visuallyvisual();
-          border: 2px solid red;
           background: yellow;
           padding: .5em;
           display: block;
@@ -244,11 +263,11 @@
       
       .planning {
         width: max-content;
-        overflow: hidden;
+//        overflow: hidden;
         display: block;
         float: left;
-        padding-top: 1em;
-        padding-bottom: 1em;
+        padding-top: .75em;
+        padding-bottom: .25em;
         
         p,
         ul {
@@ -266,7 +285,7 @@
           li {
             text-align: left;
             padding-right: .5em;
-            overflow: hidden;
+//            overflow: hidden;
             
             a {
               display: inline-block;
@@ -299,23 +318,20 @@
                 visibility: visible;
               }
             }
-
           }
-          
         }
       
         .strook {
           text-align: left;
           display: inline-block;
           float: left;
-          width: ( @timescale_year_width / 4 );
+          width: ( ( @timescale_year_width + 1 ) / 4 );
           min-height: 2em;
           margin: 0;
-          padding: .5em 0 .5em 2.5em;
+          padding: .25em .5em;
           background-repeat: no-repeat;
           background-size: contain;
-  
-          
+
           &.current {
             background: @active;
             color: @wit;
@@ -336,57 +352,33 @@
 
         &.start_eind {
           .strook {
-            &.start {
-              background-image: url('../assets/images/arrow-start.svg?k'), url('../assets/images/arrow-end.svg?k');
-              background-position: center left, center right;
-            }
+            .arrow_before();
+            .arrow_after();
           }
         }
         &.start {
           .strook {
-            &.start {
-              background-image: url('../assets/images/arrow-start.svg?k');
-              background-position: left center;
-            }
+            .arrow_before();
           }
         }
         &.eind {
           .strook {
-            &.start {
-              background-image: url('../assets/images/arrow-end.svg?k');
-              background-position: right center;
-            }
+            .arrow_after();
           }
         }
-
-        &.start_eind,
-        &.start,
-        &.eind {
-          .strook {
-            &.last {
-//              border-right-color: @active;
-            }
-          }
-        }
-        
-        
       }
-      
     }
-    .actielijnen {
-//      margin-top: @minheight_year;
-    }
-    
   }
   
   .timescaleblock {
-    z-index: 9999;
-    background: @wit;
-    min-height: @minheight_year;
-    width: max-content;
-    padding-left: @columnwidth_labels;
-//    border-left: 4px solid transparent;
+//    background: @wit;
+//    min-height: @minheight_year;
+//    padding-left: @columnwidth_labels;
+    width: 100%;
 
+    overflow: hidden;
+//    border-left: 4px solid transparent;
+/*
     &.fixed {
       position: fixed;
       top: 0;
@@ -394,7 +386,7 @@
       right: 0;
       z-index: 9999;
     }
-    
+*/    
     div {
       text-align: center;
       float: left;
@@ -405,6 +397,8 @@
         float: none;
         clear: both;
         display: block;
+        font-size: @thefontsreset;
+        margin-top: .75em;
       }
     }
     .current {
@@ -414,15 +408,17 @@
     .timescale-year {
       width: @timescale_year_width;
       padding-bottom: 0;
-      margin-right: 3em;
+      margin-right: 1em;
     }
     .timescale-quarteryear {
       width: 25%;
-      background-image: url('../assets/images/bg-image-grid.svg?k');
-      background-size: 15em 3em;
-      background-repeat: repeat;
       min-height: 2em;
       margin-top: .5em;
+
+    background-image: url('../assets/images/bg-image-grid.svg?l');
+    background-size: ( @timescale_year_width + 1 ) 1em;
+    background-repeat: repeat;
+
       
       &:last-of-type {
         border-right-style: none;
@@ -438,10 +434,11 @@
   .page-template-planningtool-template.full-width-content {
     .site-inner {
       max-width: none;
+      overflow: auto;
     }
     .entry-content {
-      padding-left: 1em;
-      padding-right: 1em;
+//      padding-left: 1em;
+//      padding-right: 1em;
     }
     .entry-header,
     #reactieformulier,
@@ -452,6 +449,24 @@
     }
   }
 
+}
+
+form {
+  input[type="radio"] {
+    float: left;
+    clear: right;
+    margin-right: .5em;
+  }
+  label {
+    overflow: hidden;
+    display: block;
+    clear: both;
+    margin-bottom: .5em;
+  }
+  button {
+    float: none;
+    clear: both;
+  }
 }
 
 @media only screen and ( max-width: 500px ) {
