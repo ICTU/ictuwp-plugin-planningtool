@@ -1,5 +1,18 @@
 <?php
 
+// * DO_Planningtool - dopt.acf-definitions-functions.php
+// * ----------------------------------------------------------------------------------
+// * definitions and aux. functions for Advanced Custom Fields
+// * ----------------------------------------------------------------------------------
+// * @author  Paul van Buuren
+// * @license GPL-2.0+
+// * @package do-planning-tool
+// * @version 0.0.5
+// * @desc.   Eerste opzet mobiele weergave.
+// * @link    https://github.com/ICTU/Digitale-Overheid---WordPress-plugin-Planning-Tool/
+
+
+
 if ( ! defined( 'ABSPATH' ) ) {
     exit; // disable direct access
 }
@@ -103,6 +116,8 @@ function bidirectional_acf_update_value( $value, $post_id, $field  ) {
 
 if( function_exists('acf_add_local_field_group') ) {
 
+  //======================================================================================================
+  
   acf_add_local_field_group(array(
   	'key' => 'group_5beaf126f2d00',
   	'title' => 'Planning Tool Page',
@@ -214,7 +229,9 @@ if( function_exists('acf_add_local_field_group') ) {
   	'active' => 1,
   	'description' => '',
   ));
-  
+
+  //======================================================================================================
+
   acf_add_local_field_group(array(
   	'key' => 'group_5be9756fd880f',
   	'title' => 'Gebeurtenis: datum + gekoppelde actielijnen',
@@ -224,7 +241,7 @@ if( function_exists('acf_add_local_field_group') ) {
   			'label' => 'Datum',
   			'name' => 'gebeurtenis_datum',
   			'type' => 'date_picker',
-  			'instructions' => '',
+  			'instructions' => 'Deze exacte datum is nodig om de gebeurtenis in de planning op de juiste plek te tonen. Daarom moet je hier sowieso iets invoeren.',
   			'required' => 1,
   			'conditional_logic' => 0,
   			'wrapper' => array(
@@ -233,8 +250,27 @@ if( function_exists('acf_add_local_field_group') ) {
   				'id' => '',
   			),
   			'display_format' => 'j F Y',
-  			'return_format' => 'Ymd',
+  			'return_format' => 'j F Y',
   			'first_day' => 1,
+  		),
+  		array(
+  			'key' => 'field_5bf6ab4d3ec49',
+  			'label' => 'Geschatte datum',
+  			'name' => 'gebeurtenis_geschatte_datum',
+  			'type' => 'text',
+  			'instructions' => 'Als je nog geen exacte datum kunt noemen, kun je hier een tekst invoeren. Deze wordt dan getoond in plaats van de exacte datum hierboven. Als je niks invoert, tonen we de exacte datum gewoon.',
+  			'required' => 0,
+  			'conditional_logic' => 0,
+  			'wrapper' => array(
+  				'width' => '',
+  				'class' => '',
+  				'id' => '',
+  			),
+  			'default_value' => '',
+  			'placeholder' => '',
+  			'prepend' => '',
+  			'append' => '',
+  			'maxlength' => '',
   		),
   		array(
   			'key' => 'field_5be975841eea9',
@@ -281,11 +317,32 @@ if( function_exists('acf_add_local_field_group') ) {
   	'active' => 1,
   	'description' => '',
   ));
-  
+
+  //======================================================================================================
+
   acf_add_local_field_group(array(
   	'key' => 'group_5be97485d6c95',
-  	'title' => 'Actielijn: datums + link met gebeurtenissen',
+  	'title' => 'Actielijn: datums, samenhang met gebeurtenissen en actielijnen',
   	'fields' => array(
+  		array(
+  			'key' => 'field_5be9d869b3559',
+  			'label' => 'Datum beschrijving (zichtbaar)',
+  			'name' => 'actielijn_toon_datum',
+  			'type' => 'text',
+  			'instructions' => 'deze tekst is zichtbaar voor de gebruiker',
+  			'required' => 1,
+  			'conditional_logic' => 0,
+  			'wrapper' => array(
+  				'width' => '',
+  				'class' => '',
+  				'id' => '',
+  			),
+  			'default_value' => '',
+  			'placeholder' => '',
+  			'prepend' => '',
+  			'append' => '',
+  			'maxlength' => '',
+  		),
   		array(
   			'key' => 'field_5bec3c8db4fd6',
   			'label' => 'Heeft start- of einddatums?',
@@ -474,6 +531,32 @@ if( function_exists('acf_add_local_field_group') ) {
   			'step' => '',
   		),
   		array(
+  			'key' => 'field_5bf6a2b4026d1',
+  			'label' => 'Kies gerelateerde actielijnen',
+  			'name' => 'related_actielijnen',
+  			'type' => 'relationship',
+  			'instructions' => '',
+  			'required' => 0,
+  			'conditional_logic' => 0,
+  			'wrapper' => array(
+  				'width' => '',
+  				'class' => '',
+  				'id' => '',
+  			),
+  			'post_type' => array(
+  				0 => 'actielijn',
+  			),
+  			'taxonomy' => '',
+  			'filters' => array(
+  				0 => 'search',
+  				1 => 'taxonomy',
+  			),
+  			'elements' => '',
+  			'min' => '',
+  			'max' => '',
+  			'return_format' => 'object',
+  		),
+  		array(
   			'key' => 'field_5be974b66ea85',
   			'label' => 'Kies bijbehorende gebeurtenissen',
   			'name' => 'related_gebeurtenissen_actielijnen',
@@ -519,7 +602,8 @@ if( function_exists('acf_add_local_field_group') ) {
   	'description' => '',
   ));
 
-
+  //======================================================================================================
+  
   acf_add_local_field_group(array(
   	'key' => 'group_5be5e4ee3cb94',
   	'title' => 'Planning Tool instellingen',
@@ -608,6 +692,7 @@ if( function_exists('acf_add_local_field_group') ) {
   	'description' => '',
   ));
 
+  //======================================================================================================
   
 
 }

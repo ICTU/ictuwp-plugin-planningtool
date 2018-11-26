@@ -1,1 +1,38 @@
-<svg height="10" viewBox="0 0 130 10" width="130" xmlns="http://www.w3.org/2000/svg"><g fill="#999" fill-opacity=".2012" fill-rule="evenodd"><path d="m.9375 0h28.125v10h-28.125z"/><path d="m.9375 0h28.125v10h-28.125z" transform="translate(30)"/><path d="m.9375 0h28.125v10h-28.125z" transform="translate(60)"/><path d="m.9375 0h28.125v10h-28.125z" transform="translate(90)"/></g></svg>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="130px" height="10px" viewBox="0 0 130 10" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.4 (67378) - http://www.bohemiancoding.com/sketch -->
+    <title>bg-image-grid</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0.9375" y="0" width="28.125" height="10"></rect>
+        <rect id="path-3" x="0.9375" y="0" width="28.125" height="10"></rect>
+        <rect id="path-5" x="0.9375" y="0" width="28.125" height="10"></rect>
+        <rect id="path-7" x="0.9375" y="0" width="28.125" height="10"></rect>
+    </defs>
+    <g id="bg-image-grid" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g fill="#D8D8D8">
+            <mask id="mask-2" fill="white">
+                <use xlink:href="#path-1"></use>
+            </mask>
+            <use id="Mask" fill-opacity="0.1012" fill="#000000" xlink:href="#path-1"></use>
+        </g>
+        <g fill="#D8D8D8" transform="translate(30.000000, 0.000000)">
+            <mask id="mask-4" fill="white">
+                <use xlink:href="#path-3"></use>
+            </mask>
+            <use id="Mask" fill-opacity="0.1012" fill="#000000" xlink:href="#path-3"></use>
+        </g>
+        <g fill="#D8D8D8" transform="translate(60.000000, 0.000000)">
+            <mask id="mask-6" fill="white">
+                <use xlink:href="#path-5"></use>
+            </mask>
+            <use id="Mask" fill-opacity="0.1012" fill="#000000" xlink:href="#path-5"></use>
+        </g>
+        <g fill="#D8D8D8" transform="translate(90.000000, 0.000000)">
+            <mask id="mask-8" fill="white">
+                <use xlink:href="#path-7"></use>
+            </mask>
+            <use id="Mask" fill-opacity="0.1012" fill="#000000" xlink:href="#path-7"></use>
+        </g>
+    </g>
+</svg>

@@ -8,8 +8,8 @@
 // * @author  Paul van Buuren
 // * @license GPL-2.0+
 // * @plugin: do-planning-tool
-// * Version: 0.0.4
-// * Version desc: Desktop screen design nearing completion.
+// * Version: 0.0.5
+// * Version desc: Eerste opzet mobiele weergave.
 // * @link    https://github.com/ICTU/Digitale-Overheid---WordPress-plugin-Planning-Tool/
 
 @import "palet-do.less";
@@ -28,7 +28,9 @@
 
 @bordercolor:           @lichtgrijs;
 
-@active: @blauw3;
+@arrow_offset:          -3px;
+
+@active:                @blauw3;
 
 //=========================================================================================================
 
@@ -89,7 +91,7 @@
 
 .kleurtjeslijntjes( @kleur1: red,  @kleur2: green, @txtcolor1: @txt, @txtcolor2: @wit ) {
 
-//  border: 4px solid @kleur1;
+  border: 8px solid @kleur1;
 
   header {
     background: @kleur1;
@@ -108,8 +110,8 @@
     background: @kleur2;
   }
 
-  .timescale-container .actielijn-info .planning {
-    .strook.current {
+  .single-actielijn .planning {
+    .ganttbar {
       border-top: 2px solid @wit;
       border-bottom: 2px solid @wit;
       background-color: @kleur2;
@@ -117,7 +119,7 @@
     }
 
     &.start {
-      .strook.current {
+    .ganttbar {
         &:before {
           .embed_arrow_datauri( '../assets/images/arrow-start.svg', @kleur1 );
         }        
@@ -125,7 +127,7 @@
     }        
       
     &.eind {
-      .strook.current {
+    .ganttbar {
         &:after {
           .embed_arrow_datauri( '../assets/images/arrow-end.svg', @kleur1 );
         }        
@@ -133,7 +135,7 @@
     }
     
     &.start_eind {
-      .strook.current {
+    .ganttbar {
         &:before {
           .embed_arrow_datauri( '../assets/images/arrow-start.svg', @kleur1 );
         }        
@@ -144,48 +146,25 @@
     }
     
   }
-  
-/*
-  .timescaleblock,
-  .timescale-container .actielijn-info .planning .strook.current,
-  .timescaleblock .current {
-    background-color: @kleur1;
-    color: @txtcolor1;
-  }
-*/
 
-
-  .timescaleblock {
+  .intervalheader {
     background-color: @kleur1;
     color: @txtcolor1;
   }
 
+  @media only screen and ( max-width: @breakpoint_chart ) {
   
-/*
-  ul {
-    & > li {
-      border-color: @kleur1;
-      
-      & > a {
-        background: @kleur2;
-        border-color: @kleur1;
-        
-        &:hover {
-        	background: @kleur1;
-        	color: @txtcolor2;
-        	
-        	strong {
-          	background: @kleur1;
-        	}
-        }
+    .programma {
+      .single-actielijn {  
+        background-color: @kleur2;
       }
     }
   }
-*/  
+
+
 }
 
 
-@arrow_offset: -3px;
 
 .arrow_shared() {
   position: absolute;
@@ -204,7 +183,7 @@
 
   &:after {
     .arrow_shared();
-    background-image: url('../assets/images/arrow-end.svg?m');
+    background-image: url('../assets/images/arrow-end.svg');
     background-position: left center;
 //    right: @arrow_offset;
     right: 0;
@@ -218,7 +197,7 @@
   
   &:before {
     .arrow_shared();
-    background-image: url('../assets/images/arrow-start.svg?m');
+    background-image: url('../assets/images/arrow-start.svg');
     background-position: right center;
 //    left: @arrow_offset;
     left: 0;

@@ -4,8 +4,8 @@
 // * Plugin Name:         DO_Planningtool
 // * Plugin URI:          https://github.com/ICTU/Digitale-Overheid---WordPress-plugin-Planning-Tool/
 // * Description:         De mogelijkheid om video's in te voegen met diverse media-formats en ondertitels
-// * Version:             0.0.4
-// * Version description: Desktop screen design nearing completion.
+// * Version:             0.0.5
+// * Version description: Eerste opzet mobiele weergave.
 // * Author:              Paul van Buuren
 // * Author URI:          https://wbvb.nl
 // * License:             GPL-2.0+
@@ -59,6 +59,8 @@ function letDivsScroll() {
 
   try {
     var i = 0;
+    
+
     var allProgrammaDivs = document.querySelectorAll('.programma');
 
     for ( i = 0; i < allProgrammaDivs.length; i++) {
@@ -68,16 +70,43 @@ function letDivsScroll() {
       allProgrammaDivs[i].classList.add('fixed');
 
     }
+
+
+    var allToggleLinks = document.querySelectorAll('.set-opacity-toggle_XXX');
+
+    for ( i = 0; i < allToggleLinks.length; i++) {
+    
+      allToggleLinks[i].classList.remove('set-opacity-toggle');
+
+      allToggleLinks[i].addEventListener('mouseover', changeDefOver);
+      allToggleLinks[i].addEventListener('mouseout', changeDefOut);
+
+      allToggleLinks[i].addEventListener('focus', changeDefOver);
+      allToggleLinks[i].addEventListener('focusout', changeDefOut);
+
+    }
+
+
   } catch (e) {
     console.log("Woeps, letDivsScroll(): " + e);
   }
 
 }
 
+
+
+function changeDefOver(e) {
+  e.target.classList.toggle('visuallyhidden');
+}
+
+function changeDefOut(e) {
+  e.target.classList.toggle('visuallyhidden');
+}
+
 //========================================================================================================
 
-//var nav     = document.querySelector('#timescaleblock_1');
-//var nav     = document.querySelector('#timescaleblock_1');
+//var nav     = document.querySelector('#intervalheader_1');
+//var nav     = document.querySelector('#intervalheader_1');
 //var navTop  = nav.offsetTop;
 //var navLeft = nav.offsetLeft;
 //var sLeft   = element.scrollLeft;
@@ -85,7 +114,7 @@ function letDivsScroll() {
 function stickyTimescaleblock( e ) {
 
   var sLeft   = e.scrollLeft;
-  var nav     = e.querySelector('.timescaleblock');
+  var nav     = e.querySelector('.intervalheader');
 
   console.log('sLeft = ' + sLeft);
 //  console.log('navLeft = ' + navLeft);

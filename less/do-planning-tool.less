@@ -9,8 +9,8 @@
 // * @author  Paul van Buuren
 // * @license GPL-2.0+
 // * @plugin: do-planning-tool
-// * Version: 0.0.4
-// * Version desc: Desktop screen design nearing completion.
+// * Version: 0.0.5
+// * Version desc: Eerste opzet mobiele weergave.
 // * @link    https://github.com/ICTU/Digitale-Overheid---WordPress-plugin-Planning-Tool/
 
 
@@ -54,6 +54,7 @@
 @import "01-sizes-colors.less";  
 
 @maxwidth:              1200px;
+@breakpoint_chart:      821px;
 @minheight_year:        4em;
 @timescale_year_width:  12em; // 16em;
 @columnwidth_labels:    ( ( @timescale_year_width + 1 ) * 2 ); // ( 1 timescale = 12em width + 1em margin right: 13em ) and that twice please
@@ -62,20 +63,30 @@
 
 
 
+//========================================================================================================
+
+form {
+  input[type="radio"] {
+    float: left;
+    clear: right;
+    margin-right: .5em;
+  }
+  label {
+    overflow: hidden;
+    display: block;
+    clear: both;
+    margin-bottom: .5em;
+  }
+  button {
+    float: none;
+    clear: both;
+  }
+}
+
+//========================================================================================================
+
 @media only screen {
 
-/*
-section {
-  border: 2px solid red !important;
-  margin: 1em !important;
-  padding: 1em !important;
-}
-div {
-  border: 2px solid yellow !important;
-  margin: 1em !important;
-  padding: 1em !important;
-}
-*/
   .programma {
 
     font-size: @thefontsize;
@@ -99,36 +110,16 @@ div {
           width: auto;
         }
       }
-      .timescaleblock {
-//        position: absolute;
-//        bottom: .5em;
-      }
-      
+
     }
+
+    //====================================================================================================
+    // for the table version
 
     caption {
       text-align: left; 
       font-size: ( 1.4 * @thefontsreset );
     } 
-       
-    caption,
-    h2 {
-      color: @wit;
-      padding: .5em .5em .5em 1rem;
-      margin-top: 0;
-    }
-
-    h2 {
-      font-size: ( 1.2 * @thefontsreset );
-      margin: 0;
-    }
-
-  
-    h3, 
-    ul {
-      margin-left: 1rem;
-      margin-right: 1rem;
-    }
 
     td,
     th {
@@ -141,9 +132,92 @@ div {
           padding-left: 0;
         }
       }
-      
+    }
+
+    th[scope="col"] {
+        width: 25%;
     }
     
+    #th_col_actielijn {
+      width: 50%;
+    }
+    
+    //====================================================================================================
+    // for the section version
+    .timescale-container {
+
+      .single-actielijn {
+        padding: .25em .5em;
+        overflow: hidden;
+        
+        &:hover {
+          background: rgba( 210, 210, 210, .3 );
+        }
+      }
+    }    
+
+    .intervalheader {
+  
+      width: 100%;
+      overflow: hidden;
+  
+      div {
+        text-align: center;
+        float: left;
+        display: inline-block;
+        margin: 0;
+        padding: 0;
+        span {
+          float: none;
+          clear: both;
+          display: block;
+          font-size: @thefontsreset;
+          margin-top: .75em;
+        }
+      }
+
+      .intervalheader-year {
+        width: @timescale_year_width;
+        padding-bottom: 0;
+  
+        & + .intervalheader-year {
+          margin-left: 1em;
+        }
+        
+      }
+      .intervalheader-quarter {
+        width: 25%;
+        min-height: 2em;
+        margin-top: .5em;
+        background-image: url('../assets/images/bg-image-grid.svg'),  url('../assets/images/bg-image-grid.svg'),  url('../assets/images/bg-image-grid.svg');
+        background-size: ( @timescale_year_width + 1 ) 1em,  ( @timescale_year_width + 1 ) 1em,  ( @timescale_year_width + 1 ) 1em;
+        background-repeat: repeat;
+
+        &:last-of-type {
+          border-right-style: none;
+        }
+      }
+    }    
+    
+    //====================================================================================================
+    // for both versions
+    caption,
+    h2 {
+      color: @wit;
+      padding: .5em .5em .5em 1rem;
+      margin-top: 0;
+    }
+
+    h2 {
+      font-size: ( 1.2 * @thefontsreset );
+      margin: 0;
+    }
+
+    ul {
+      margin-left: 1rem;
+      margin-right: 1rem;
+    }
+
     p,
     ul {
       margin-top: 0;
@@ -156,14 +230,6 @@ div {
       & + h3 {
         margin-top: 1em;
       }
-    }
-
-    th[scope="col"] {
-        width: 25%;
-    }
-    
-    #th_col_actielijn {
-      width: 50%;
     }
 
     &.digibeter-oranje,
@@ -196,253 +262,60 @@ div {
     &.digibeter-blauw {
       .kleurtjeslijntjes( @digibeter_blauw, @hemelblauw_licht, @wit, @txt );
     }
-  
-  }
 
+    //====================================================================================================
 
-  .timescale-container {
-    padding: 0;
-    position: relative;
-//    background: @wit;
-
-      background-color: @wit;
-      background: url('../assets/images/bg-image-white.svg?m'),  url('../assets/images/bg-image-grid.svg?m');
-      background-size: @columnwidth_labels @columnwidth_labels, ( @timescale_year_width + 1 ) 1em;
-      background-repeat: repeat-y, repeat;
-/*      
-      background: url('../assets/images/bg-image-grid.svg?m');
-      background-size: 13em 1em;
-      background-repeat: repeat;
-*/      
-
-    .actielijn-info {
-      overflow: hidden;
-      padding: 0;
-      width: 100%;
-      clear: both;
-      float: none;
-      width: max-content;
-      border-top: 4px solid transparent;
-      border-bottom: 4px solid transparent;
+    .ganttbar {
+      text-align: left;
+      margin: 0;
+      padding: 0 .5em;
+      background-repeat: no-repeat;
+      background-size: contain;
+      background: @active;
+      color: @wit;
+    }
+    .planning {
       
-      &:target {
-        background: yellow;
-      }
-      
-      p {
-        width: @columnwidth_labels;
-        padding: .5em .5em 1em 1rem;
-        float: left;
-        position: relative;
-        min-height: 4em;
+      ul {
+        margin: .25em 0;
         
-        a {
-          font-size: @thefontsreset;
-        }
-      }
-      
-      .verbergmij {
-        .visuallyhidden();
-      }
-      
-      &:hover {
-        background: rgba( 210, 210, 210, .3 );
-        
-        .verbergmij {
-          .visuallyvisual();
-          background: yellow;
-          padding: .5em;
-          display: block;
-
-          position: absolute;
-          bottom: 0;
-          left: 1rem;
+        li {
           
         }
       }
       
-      .planning {
-        width: max-content;
-//        overflow: hidden;
-        display: block;
-        float: left;
-        padding-top: .75em;
-        padding-bottom: .25em;
-        
-        p,
-        ul {
-          clear: both;
-          float: none;
+      &.start_eind {
+        .ganttbar {
+          .arrow_before();
+          .arrow_after();
         }
-        
-        ul {
-          padding-top: .5em;
-          &, li {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-          }
-          li {
-            text-align: left;
-            padding-right: .5em;
-//            overflow: hidden;
-            
-            a {
-              display: inline-block;
-              min-width: 4em;
-              margin: .1em;
-              
-              &:before {
-                content: ' ';
-                display: block;
-                height: 8px;
-                width: 8px;
-                float: left;
-                margin-top: .5em;
-                margin-right: .5em;
-                background: @active;
-              }
-              &:hover,
-              &:active,
-              &:focus {
-                background: @wit;
-              }
-              
-            }
-            
-            span {
-              visibility: hidden;
-            }
-            &:hover {
-             span {
-                visibility: visible;
-              }
-            }
-          }
+      }
+      &.start {
+        .ganttbar {
+          .arrow_before();
         }
-      
-        .strook {
-          text-align: left;
-          display: inline-block;
-          float: left;
-          width: ( ( @timescale_year_width + 1 ) / 4 );
-          min-height: 2em;
-          margin: 0;
-          padding: .25em .5em;
-          background-repeat: no-repeat;
-          background-size: contain;
-
-          &.current {
-            background: @active;
-            color: @wit;
-          }
-
-        }
-
-        &.start,
-        &.eind,
-        &.start_eind {
-          .strook {
-            &.start {
-              background-repeat: no-repeat; 
-              background-size: contain;
-            }
-          }
-        }
-
-        &.start_eind {
-          .strook {
-            .arrow_before();
-            .arrow_after();
-          }
-        }
-        &.start {
-          .strook {
-            .arrow_before();
-          }
-        }
-        &.eind {
-          .strook {
-            .arrow_after();
-          }
+      }
+      &.eind {
+        .ganttbar {
+          .arrow_after();
         }
       }
     }
-  }
+    
+
   
-  .timescaleblock {
-//    background: @wit;
-//    min-height: @minheight_year;
-//    padding-left: @columnwidth_labels;
-    width: 100%;
-
-    overflow: hidden;
-//    border-left: 4px solid transparent;
-/*
-    &.fixed {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 9999;
-    }
-*/    
-    div {
-      text-align: center;
-      float: left;
-      display: inline-block;
-      margin: 0;
-      padding: 0;
-      span {
-        float: none;
-        clear: both;
-        display: block;
-        font-size: @thefontsreset;
-        margin-top: .75em;
-      }
-    }
-    .current {
-//      background: @active;
-//      color: @wit;
-    }
-    .timescale-year {
-      width: @timescale_year_width;
-      padding-bottom: 0;
-
-      & + .timescale-year {
-        margin-left: 1em;
-      }
-      
-    }
-    .timescale-quarteryear {
-      width: 25%;
-      min-height: 2em;
-      margin-top: .5em;
-
-    background-image: url('../assets/images/bg-image-grid.svg?m');
-    background-size: ( @timescale_year_width + 1 ) 1em;
-    background-repeat: repeat;
-
-      
-      &:last-of-type {
-        border-right-style: none;
-      }
-    }
   }
 
 }
 
+//========================================================================================================
 
-@media only screen and ( min-width: 500px ) {
+@media only screen and ( min-width: @breakpoint_chart ) {
 
   .page-template-planningtool-template.full-width-content {
     .site-inner {
       max-width: none;
       overflow: auto;
-    }
-    .entry-content {
-//      padding-left: 1em;
-//      padding-right: 1em;
     }
     .entry-header,
     #reactieformulier,
@@ -453,27 +326,105 @@ div {
     }
   }
 
+  .programma {
+    .timescale-container {
+      padding: 0;
+//      position: relative;
+      background-color: @wit;
+      background: url('../assets/images/bg-image-white.svg'),  
+                  url('../assets/images/bg-image-grid.svg');
+      background-size: @columnwidth_labels @columnwidth_labels, 
+                  ( @timescale_year_width + 1 ) 1em;
+      background-repeat: repeat-y, 
+                  repeat;
+  
+      .single-actielijn {
+        padding: 0;
+        clear: both;
+        float: none;
+        
+        .description {
+          width: @columnwidth_labels;
+          padding: .5em .5em 1em 1rem;
+          float: left;
+//          position: relative;
+          min-height: 4em;
+  
+          a {
+            font-size: @thefontsreset;
+          }
+        }
+
+        .planning {
+          display: block;
+          float: left;
+          padding-top: .75em;
+          padding-bottom: .25em;
+          width: ~"calc(99% - @{columnwidth_labels})";
+          
+          p,
+          ul {
+            clear: both;
+            float: none;
+          }
+          
+          ul {
+            padding-top: .5em;
+            position: relative;
+            
+            &, li {
+              list-style: none;
+              padding: 0;
+              margin: 0;
+            }
+            li {
+              text-align: left;
+              padding-right: .5em;
+
+              a {
+                display: inline-block;
+                min-width: 4em;
+                margin: .1em;
+                display: block;
+                
+                &:before {
+                  content: ' ';
+                  display: block;
+                  float: left;
+                  height: 8px;
+                  width: 8px;
+                  margin-top: .5em;
+                  margin-right: .5em;
+                  background: @active;
+                }
+                &:hover,
+                &:active,
+                &:focus {
+                  background: @wit;
+                }
+
+                span {
+                  visibility: hidden;
+                }
+                &:hover,
+                &:active,
+                &:focus {
+                 span {
+                    visibility: visible;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }
 
-form {
-  input[type="radio"] {
-    float: left;
-    clear: right;
-    margin-right: .5em;
-  }
-  label {
-    overflow: hidden;
-    display: block;
-    clear: both;
-    margin-bottom: .5em;
-  }
-  button {
-    float: none;
-    clear: both;
-  }
-}
+//========================================================================================================
 
-@media only screen and ( max-width: 500px ) {
+@media only screen and ( max-width: @breakpoint_chart ) {
 
   .entry-content table, 
   .entry-content table.programma,
@@ -501,8 +452,23 @@ form {
     th[scope="col"] {
       .visuallyhidden();
     }
+  }
 
+  .programma {
+    .single-actielijn {  
+      margin-bottom: 1em;
+      p a {
+        font-size: 120%;
+        font-weight: bold;
+        text-decoration: none;
+        margin-top: .5em;
+        margin-bottom: .5em;
+        display: block;
+      }
+    }
   }
   
 }
+
+//========================================================================================================
 
