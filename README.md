@@ -9,10 +9,10 @@ Planning Tool plugin voor digitaleoverheid.nl. Toont actielijnen en gebeurteniss
 * eh
 
 ## Current version:
-1.0.0 - Print-weergave toegevoegd.
+1.0.2 - Datumlabels en beschrijving gecorrigeerd in Gantt-chart.
 
 ## Version history
-* 1.0.0 - Print-weergave toegevoegd.
+* 1.0.2 - Datumlabels en beschrijving gecorrigeerd in Gantt-chart.
 * 0.0.5 - Eerste opzet mobiele weergave.
 * 0.0.4 - Desktop screen design nearing completion.
 * 0.0.3 - Second design sprint implemented.

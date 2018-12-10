@@ -5,8 +5,8 @@
  * Plugin Name:         ICTU / WP Planning Tool digitaleoverheid.nl
  * Plugin URI:          https://github.com/ICTU/Digitale-Overheid---WordPress-plugin-Planning-Tool/
  * Description:         Plugin voor digitaleoverheid.nl waarmee extra functionaliteit mogelijk wordt voor het tonen van een planning met actielijnen en gebeurtenissen.
- * Version:             1.0.0
- * Version description: Print-weergave toegevoegd.
+ * Version:             1.0.2
+ * Version description: Datumlabels en beschrijving gecorrigeerd in Gantt-chart.
  * Author:              Paul van Buuren
  * Author URI:          https://wbvb.nl
  * License:             GPL-2.0+
@@ -35,7 +35,7 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
       /**
        * @var string
        */
-      public $version = '1.0.0';
+      public $version = '1.0.2';
   
   
       /**
@@ -325,7 +325,7 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
     	/**
     	 * Register the options page
     	 *
-    	 * @since    1.0.2a
+    	 * @since    1.0.2
     	 */
     	public function do_pt_admin_register_settings() {
   
@@ -1218,18 +1218,14 @@ else {
     
       global $post;
       
-      $echo         = true;
-      $showheader   = true;
-      $returnstring = '';
-      $actielijnentitletext = '';
-
-//        $acfid = DOPT__GEBEURTENIS_CPT . '_' . $post->ID;
-        $acfid = $post->ID;
-
+      $echo                   = true;
+      $showheader             = true;
+      $returnstring           = '';
+      $actielijnentitletext   = '';
+      $acfid                  = $post->ID;
 
       if ( is_single() && DOPT__GEBEURTENIS_CPT == get_post_type() ) {
 
-    
         $gebeurtenis_datum     = _x( 'Geen datum ingevoerd', 'geschatte planning', 'wp-rijkshuisstijl' );
   
         if ( get_field( 'gebeurtenis_geschatte_datum', $acfid ) ) {
@@ -1239,20 +1235,13 @@ else {
           $gebeurtenis_datum     = date_i18n( get_option( 'date_format' ),  strtotime( get_field( 'gebeurtenis_datum', $acfid ) ) );
         }
   
-        $returnstring .= '<p>' . _x( 'Planning:', 'geschatte planning', 'wp-rijkshuisstijl' ) . ' ' .  strtolower( $gebeurtenis_datum ) . '</p>';
+        $returnstring .= '<p>' . _x( 'Planning:', 'geschatte planning', 'wp-rijkshuisstijl' ) . ' ' .  strtolower( $gebeurtenis_datum ) . '.</p>';
         
 
         //------------------------------------------------------------------------------------------------
         // kijken of er gebeurtenissen aan deze actielijn gekoppeld zijn
 
         $related_gebeurtenissen = get_field('related_gebeurtenissen_actielijnen', $acfid );
-
-if( $related_gebeurtenissen ) {
-// $returnstring .= '<p>Gebeurtenissen voor: ' . $acfid . '</p>';
-}
-else {
-// $returnstring .= '<p>Geen gebeurtenissen voor: ' . $acfid . '</p>';
-}
 
         if( $related_gebeurtenissen ) {
       
@@ -1670,11 +1659,6 @@ function do_pt_frontend_get_gebeurtenissen_for_actielijn( $args ) {
       $mnt_event            = date_i18n( "m", strtotime( $datumveld ) );
       $day_event            = date_i18n( "d", strtotime( $datumveld ) );
 
-
-//echo 'datumveld=' . $datumveld  . '<br>';
-//echo 'YYYY-MM-DD=' . $yearevent  . '-' . $mnt_event . '-' . $day_event . '<br>';
-//echo 'datumveld=' . $datumveld  . ', datumveld2=' . date_i18n( get_option( 'date_format' ),  strtotime( $datumveld ) ) . '<br>';
-      
       if ( $datumveld ) {
         $sortthisarray[ strtotime( $datumveld ) ] = $relatedobject->ID;
       }
@@ -1689,19 +1673,17 @@ function do_pt_frontend_get_gebeurtenissen_for_actielijn( $args ) {
       
       $gebeurtenis_datum     = _x( 'Geen datum ingevoerd', 'geschatte planning', 'wp-rijkshuisstijl' );
 
+      $label = _x( 'datum:', 'label voor verborgen datum in ganttchart', "do-planning-tool" );
+
       if ( get_field( 'gebeurtenis_geschatte_datum', $value ) ) {
         $gebeurtenis_datum     = get_field( 'gebeurtenis_geschatte_datum', $value );
+        $label = _x( 'geschatte datum:', 'label voor verborgen datum in ganttchart', "do-planning-tool" );
       }
       elseif ( $key ) {
         $gebeurtenis_datum     = date_i18n( get_option( 'date_format' ),  $key );
       }
 
-
-      if ( $key ) {
-        $gebeurtenis_datum      = date_i18n( get_option( 'date_format' ), $key );
-      }
-
-      $returnstring .= '<li class="' . DOPT__GEBEURTENIS_CPT . '-' . $value . '"><a href="' . get_permalink( $value ) . '">' . get_the_title( $value ) . '<span class="set-opacity-toggle">' . sprintf( _x( ', datum: %s', 'verborgen datum in ganttchart', "do-planning-tool" ), strtolower( $gebeurtenis_datum ) )  . '</span></a></li>';
+      $returnstring .= '<li class="' . DOPT__GEBEURTENIS_CPT . '-' . $value . '"><a href="' . get_permalink( $value ) . '">' . get_the_title( $value ) . '<span aria-hidden="true">' . sprintf( _x( ', %s %s', 'verborgen datum in ganttchart', "do-planning-tool" ), $label, strtolower( $gebeurtenis_datum ) )  . '</span></a></li>';
   
     }
   
