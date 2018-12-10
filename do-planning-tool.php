@@ -5,8 +5,8 @@
  * Plugin Name:         ICTU / WP Planning Tool digitaleoverheid.nl
  * Plugin URI:          https://github.com/ICTU/Digitale-Overheid---WordPress-plugin-Planning-Tool/
  * Description:         Plugin voor digitaleoverheid.nl waarmee extra functionaliteit mogelijk wordt voor het tonen van een planning met actielijnen en gebeurtenissen.
- * Version:             1.0.0
- * Version description: Print-weergave toegevoegd.
+ * Version:             1.0.1a
+ * Version description: Experimenten met linear-background images.
  * Author:              Paul van Buuren
  * Author URI:          https://wbvb.nl
  * License:             GPL-2.0+
@@ -35,7 +35,7 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
       /**
        * @var string
        */
-      public $version = '1.0.0';
+      public $version = '1.0.1a';
   
   
       /**
@@ -135,8 +135,8 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 
         define( 'DOPT__ARCHIVE_CSS',            'dopt-header-css' );  
 
-        // define( 'DOPT_CSS_RADIALGRADIENT', true );
-        define( 'DOPT_CSS_RADIALGRADIENT', false );
+        define( 'DOPT_CSS_RADIALGRADIENT', true );
+        // define( 'DOPT_CSS_RADIALGRADIENT', false );
 
        }
   
@@ -570,6 +570,123 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
           //----------------------------------------------------------------------------------------------------
           //----------------------------------------------------------------------------------------------------
 
+         if ( DOPT_CSS_RADIALGRADIENT ) {
+    
+            //----------------------------------------------------------------------------------------------------
+            //----------------------------------------------------------------------------------------------------
+  
+            $breedtelaatstekolom  = 1;
+            $aantaljaar           = 5;
+            $aantalkwartalen      = 4;
+            $kwartaalbreedte      = 3;
+            $jaarcounter          = 1;
+            $kwartaalcounter      = 1;
+            $afstand              = ( ( $kwartaalbreedte * $aantalkwartalen ) + $breedtelaatstekolom );
+            $kwartaalstart        = ( 2 * $afstand );
+            $verspring            = .001;
+            $rgba                 = "rgba(156,156,156,.4)";
+            $rgba2                = "red";
+            $rgba3                = "green";
+            
+            $header_css .= ".programma .timescale-container {";
+            $header_css .= "background: ";
+            $header_css .= "  linear-gradient( ";
+            $header_css .= "    90deg,  ";
+            $header_css .= "    white,  ";
+            $header_css .= "    white " . ( 2 * $afstand ) . "em";
+            $header_css .= "  ),";
+  
+            $header_css .= "  linear-gradient( ";
+            $header_css .= "    90deg,  ";
+  
+            $startat = ( 2 * $afstand );
+  
+            $header_css .= "    white, ";
+            $header_css .= "    white " . $startat . "em, ";
+  
+            $verspringpx    = '1px';
+            $verspringpx2   = '2px';
+            $verspringpx3   = '3px';
+            
+            while ( $jaarcounter <= $aantaljaar ) {
+              
+              $kwartaalcounter = 1;
+              
+              while ( $kwartaalcounter <= $aantalkwartalen ) {
+                
+                if ( 1 == $jaarcounter && 1 == $kwartaalcounter ) {
+                
+                  $appendstring = " white calc(" . $startat . "em + " . $verspringpx . "),
+                  " . $rgba . " calc(" . ( $startat ) . "em + " . $verspringpx . "),
+                  " . $rgba3 . " calc(" . ( $startat + $kwartaalbreedte ) . "em - " . $verspringpx . "),
+                  white calc(" . ( $startat + $kwartaalbreedte ) . "em - " . $verspringpx . "),";
+                
+                }
+                else {
+                
+                  $appendstring = "white calc(" . $startat . "em),
+                  " . $rgba . " calc(" . ( $startat ) . "em + " . $verspringpx2 . "),
+                  " . $rgba2 . " calc(" . ( $startat + $kwartaalbreedte ) . "em - " . $verspringpx3 . "),
+                  white calc(" . ( $startat + $kwartaalbreedte ) . "em ),";
+                
+                }
+                
+                $header_css .= $appendstring . "\n";
+                $kwartaalcounter++ ;
+                $startat = ( $startat + $kwartaalbreedte );
+                
+              }
+              
+              $startat = ( $startat + $breedtelaatstekolom );
+              $jaarcounter++;
+              
+            }
+  
+            $header_css .= "    white " . ( ( $this->dopt_years_max_nr * DOPT_CSS_YEARWIDTH ) + DOPT_CSS_PADDINGLEFT ) . "em";
+            $header_css .= "  ),";
+            
+            $header_css .= "  linear-gradient( ";
+            $header_css .= "    90deg,  ";
+            $header_css .= "    white " . ( ( $this->dopt_years_max_nr * DOPT_CSS_YEARWIDTH ) + DOPT_CSS_PADDINGLEFT ) . "em,  ";
+            $header_css .= "    white 100% ";
+            $header_css .= "  );";
+            
+  //          $header_css .= "background-size: " . ( 2 * $afstand ) . "em 22em,78em 100em,84em .5em;";
+            $header_css .= "background-size: 2em 22em," . ( ( $this->dopt_years_max_nr * DOPT_CSS_YEARWIDTH ) + DOPT_CSS_PADDINGLEFT ) . "em 100em, 84em .5em;";
+            $header_css .= "background-repeat: repeat-y, repeat-y, repeat-y;";
+  
+            $header_css .= "} \n";
+  
+          } // DOPT_CSS_RADIALGRADIENT 
+          else {
+            if ( 22 == 33 ) {
+              
+              $header_css .= ".programma .timescale-container {";
+              $header_css .= "background: ";
+              $header_css .= "  linear-gradient( ";
+              $header_css .= "    90deg,  ";
+              $header_css .= "    white 0,  ";
+              $header_css .= "    white 100% ";
+              $header_css .= "  ),";
+              $header_css .= "  url('/wp-content/plugins/do-planning-tool/assets/images/bg-image-grid.svg'),";
+              $header_css .= "  linear-gradient( ";
+              $header_css .= "    90deg,  ";
+              $header_css .= "    yellow 84em,  ";
+              $header_css .= "    pink 100% ";
+              $header_css .= "  );";
+              
+              $header_css .= "background-size: 26em 22em, 13em 1em, 84em .5em;";
+              $header_css .= "background-repeat: repeat-y, repeat, repeat-y;";
+            
+              $header_css .= "} \n";
+            
+            }
+            
+          }
+
+          //----------------------------------------------------------------------------------------------------
+          //----------------------------------------------------------------------------------------------------
+
           foreach( $this->dopt_array_data as $key => $value ) {
             
             $actielijn_kwartaal_start_jaar      = 0;
@@ -668,25 +785,6 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
                 
               }
 
-/*
-
-if ( $start_kwartaal ) {
-  echo 'start_kwartaal: ' . $start_kwartaal . '<br>';
-}
-if ( $startatyearq ) {
-  echo 'startatyearq: ' . $startatyearq . '<br>';
-}
-if ( $eind_kwartaal ) {
-  echo 'eind_kwartaal: ' . $eind_kwartaal . '<br>';
-}
-if ( $endatyearq ) {
-  echo 'endatyearq: ' . $endatyearq . '<br>';
-}
-
-echo '</p>';
-
-*/
-
               if ( ( $emwidth_start ) || ( $emwidth_eind ) ) {
 
                 $header_css .= "\n." . $value['type'] . '-' . $key . " .ganttbar { ";
@@ -701,15 +799,6 @@ echo '</p>';
               }
             }
           }
-
-/*
-$header_css .= "@media only screen {\n";
-$header_css .= '[aria-hidden="true"] {';
-$header_css .= "display: block;";
-$header_css .= "visibility: hidden;";
-$header_css .= "} ";
-$header_css .= "} ";
-*/
 
           wp_enqueue_style( DOPT__ARCHIVE_CSS, DOPT__ASSETS_URL . 'css/do-planning-tool.css', array(), DOPT__VERSION, 'all' );
         
