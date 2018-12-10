@@ -1,0 +1,57 @@
+
+//**
+// * DO_Planningtool - do-planning-tool-admin.less
+// * ----------------------------------------------------------------------------------
+// * CSS for admin
+// * ----------------------------------------------------------------------------------
+// * @author  Paul van Buuren
+// * @license GPL-2.0+
+// * @plugin: do-planning-tool
+// * Version: 0.0.1h
+// * Version desc: First set up of plugin files.
+// * @link    https://github.com/ICTU/Digitale-Overheid---WordPress-plugin-Planning-Tool/
+
+@import "01-sizes-colors.less";  
+
+.cmb-type-group .cmb-th,
+.cmb2-postbox .cmb-th {
+//  width: 30% !important;
+}
+
+.cmb-type-text,
+.cmb-type-text-small {
+  
+  
+  &.half-width {
+    width: 47%;
+    max-width: 48%;
+    float: left;
+    display: inline-block;
+    margin: 0;
+    background: green;
+  }
+  input {
+    width: 100%;
+  }
+}
+
+
+.cmb-type-text-small {
+  &.half-width {
+//    clear: right;
+  }
+}
+
+.cmb-type-title {
+  width: 100%;
+  clear: both;
+  float: none;  
+}
+
+.cmb2-wrap,
+.cmb2-metabox {
+  overflow: hidden;
+  padding: 0;
+  display: block;
+  width: 100%;
+}

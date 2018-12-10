@@ -19,3 +19,6 @@ wp-content/plugins/hello.php
 
 *.codekit3
 .config.codekit3
+
+test/*
+tets/*

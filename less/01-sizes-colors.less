@@ -1,0 +1,207 @@
+
+
+//**
+// * DO_Planningtool - 01-sizes-colors.less
+// * ----------------------------------------------------------------------------------
+// * CSS for front-end
+// * ----------------------------------------------------------------------------------
+// * @author  Paul van Buuren
+// * @license GPL-2.0+
+// * @plugin: do-planning-tool
+// * Version: 0.0.5
+// * Version desc: Eerste opzet mobiele weergave.
+// * @link    https://github.com/ICTU/Digitale-Overheid---WordPress-plugin-Planning-Tool/
+
+@import "palet-do.less";
+
+
+@break_fullwidth:       1200px;
+@break_tablet:          800px;
+@break_phone:           500px;
+
+@starcolor_default:     silver;
+@starcolor_gold:        #FF7700;
+@blauw3:                #002F3E;
+@wit:                   #fff;
+@txt:                   @blauw3;
+@lichtgrijs:            #e2e2e2;
+
+@bordercolor:           @lichtgrijs;
+
+@arrow_offset:          -3px;
+
+@active:                @blauw3;
+
+//=========================================================================================================
+
+.visuallyhidden() {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+//=========================================================================================================
+
+.visuallyvisual() {
+  border: inherit;
+  clip: auto;
+  height: auto;
+  margin: auto;
+  overflow: auto;
+  padding: inherit;
+  position: inherit;
+  width: auto;
+}
+
+//=========================================================================================================
+
+.embed_double_arrow_datauri(@image1, @image2, @fillnew) {
+  @datauri1:        data-uri('image/svg+xml;charset=UTF-8', "@{image1}");
+  @datauri2:        data-uri('image/svg+xml;charset=UTF-8', "@{image2}");
+  
+  @replace_what1:   escape('fill="#002f3e"');
+  @replace_with1:   escape('fill="@{fillnew}"');
+
+  @replacesource1:  replace("@{datauri1}", @replace_what1, @replace_with1, "g");
+
+  @replacesource2:  replace("@{datauri2}", @replace_what1, @replace_with1, "g");
+
+  background-image: e(@replacesource1),  e(@replacesource2);
+}
+
+
+//=========================================================================================================
+
+.embed_arrow_datauri(@src, @fill-new) {
+  @data-uri:          data-uri('image/svg+xml;charset=UTF-8', "@{src}");
+  @replace-default:   escape('fill="#002f3e"');
+  @replace-new:       escape('fill="@{fill-new}"');
+  @replacesrc1:       replace("@{data-uri}", @replace-default, @replace-new, "g");
+
+  background-image: e(@replacesrc1);
+}
+
+//=========================================================================================================
+
+
+.kleurtjeslijntjes( @kleur1: red,  @kleur2: green, @txtcolor1: @txt, @txtcolor2: @wit ) {
+
+  border: 8px solid @kleur1;
+
+  header {
+    background: @kleur1;
+  }
+
+  caption {
+    background: @kleur1;
+    color: @txtcolor1;
+  }
+  
+  th, tr, td {
+    background-color: @wit;
+  }
+
+  th[scope="col"] {
+    background: @kleur2;
+  }
+
+  .single-actielijn .planning {
+    .ganttbar {
+      border-top: 2px solid @wit;
+      border-bottom: 2px solid @wit;
+      background-color: @kleur2;
+      color: @txtcolor2;
+    }
+
+    &.start {
+    .ganttbar {
+        &:before {
+          .embed_arrow_datauri( '../assets/images/arrow-start.svg', @kleur1 );
+        }        
+      }        
+    }        
+      
+    &.eind {
+    .ganttbar {
+        &:after {
+          .embed_arrow_datauri( '../assets/images/arrow-end.svg', @kleur1 );
+        }        
+      }
+    }
+    
+    &.start_eind {
+    .ganttbar {
+        &:before {
+          .embed_arrow_datauri( '../assets/images/arrow-start.svg', @kleur1 );
+        }        
+        &:after {
+          .embed_arrow_datauri( '../assets/images/arrow-end.svg', @kleur1 );
+        }        
+      }
+    }
+    
+  }
+
+  .intervalheader {
+    background-color: @kleur1;
+    color: @txtcolor1;
+  }
+
+  @media only screen and ( max-width: @breakpoint_chart ) {
+  
+    .programma {
+      .single-actielijn {  
+        background-color: @kleur2;
+      }
+    }
+  }
+
+
+}
+
+
+
+.arrow_shared() {
+  position: absolute;
+  display: block;
+  content: ' ';
+  width: 24px;                   
+  background-repeat: no-repeat;
+  top: @arrow_offset;
+  bottom: @arrow_offset;
+}
+
+.arrow_after() {
+
+  position: relative;
+  padding-right: 2.5em;
+
+  &:after {
+    .arrow_shared();
+    background-image: url('../assets/images/arrow-end.svg');
+    background-position: left center;
+//    right: @arrow_offset;
+    right: 0;
+  }
+}
+
+.arrow_before() {
+
+  position: relative;
+  padding-left: 2.5em;
+  
+  &:before {
+    .arrow_shared();
+    background-image: url('../assets/images/arrow-start.svg');
+    background-position: right center;
+//    left: @arrow_offset;
+    left: 0;
+  }
+}
+
+

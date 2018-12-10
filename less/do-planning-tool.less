@@ -1,0 +1,474 @@
+
+/*!
+
+//**
+// * DO_Planningtool - do-planning-tool.less
+// * ----------------------------------------------------------------------------------
+// * CSS for front-end
+// * ----------------------------------------------------------------------------------
+// * @author  Paul van Buuren
+// * @license GPL-2.0+
+// * @plugin: do-planning-tool
+// * Version: 0.0.5
+// * Version desc: Eerste opzet mobiele weergave.
+// * @link    https://github.com/ICTU/Digitale-Overheid---WordPress-plugin-Planning-Tool/
+
+
+<!--                                                            -->
+<!-- ========================================================   -->
+<!--                                                            -->
+<!--                  .:::::::::::::::}}}}}}}                   -->
+<!--                  .:::::::::::::::}}}}}}}                   -->
+<!--                  .:::::::::::::::}}}}}}}                   -->
+<!--              ````.:::::::::::::::::}}}}}``````             -->
+<!--        ``.------------------::::::::::::::::}}}::.`        -->
+<!--      `.---------------------::::::::::::::::}}}}}}}:`      -->
+<!--     `-----------------------::::::::::::::::}}}}}}}}}.     -->
+<!--     .-----------------------::::::::::::::::}}}}}}}}}}     -->
+<!--     ------------------------::::::::::::::::}}}}}}}}}}     -->
+<!--     ------------------------::::::::::::::::}}}}}}}}}}     -->
+<!--     ------------------------::::::::::::::::}}}}}}}}}}     -->
+<!--     -----------------::-----:::::::}::::::::}}}}}}}}}}     -->
+<!--     ---------------:hmmd+---:::::smmmy::::::}}}}}}}}}}     -->
+<!--     ---------------+MMMMy---:::::NMMMN}:::::}}}}}}}}}}     -->
+<!--     ----------------oyhs:---:::::}yhy+::::::}}}}}}}}}}     -->
+<!--     ------------------------::::::::::::::::}}}}}}}}}}     -->
+<!--     ------------------------::::::::::::::::}}}}}}}}}}     -->
+<!--     ------------------oso}}:::}}+sy}::::::::}}}}}}}}}}     -->
+<!--     ------------------}oyhhdhhdhys+:::::::::}}}}}}}}}}     -->
+<!--     -----------------------:::::::::::::::::}}}}}}}}}}     -->
+<!--     ------------------------::::::::::::::::}}}}}}}}}}     -->
+<!--     `-----------------------::::::::::::::::}}}}}}}}}.     -->
+<!--      `.---------------------::::::::::::::::}}}}}}}:`      -->
+<!--        `..-----------------::::::::::::::::}}}}::-`        -->
+<!--             ``::::::::::::::::}}}}}}}}}}}}}}-`             -->
+<!--              `::::::::::::::::}}}}}}}}}}}}}}.              -->
+<!--              `::::::::::::::::}}}}}}}}}}}}}}.              -->
+<!--                                                            -->
+<!-- ========================================================   -->
+<!--                                                            -->
+	
+ 
+ */
+
+@import "01-sizes-colors.less";  
+
+@maxwidth:              1200px;
+@breakpoint_chart:      821px;
+@minheight_year:        4em;
+@timescale_year_width:  12em; // 16em;
+@columnwidth_labels:    ( ( @timescale_year_width + 1 ) * 2 ); // ( 1 timescale = 12em width + 1em margin right: 13em ) and that twice please
+@thefontsize:           80%;
+@thefontsreset:         ( 100% * ( 100% / @thefontsize ) );
+
+
+
+//========================================================================================================
+
+form {
+  input[type="radio"] {
+    float: left;
+    clear: right;
+    margin-right: .5em;
+  }
+  label {
+    overflow: hidden;
+    display: block;
+    clear: both;
+    margin-bottom: .5em;
+  }
+  button {
+    float: none;
+    clear: both;
+  }
+}
+
+//========================================================================================================
+
+@media only screen {
+
+  .programma {
+
+    font-size: @thefontsize;
+    margin-bottom: 3em;
+    padding-bottom: 0;
+
+    &.fixed {
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    header {
+      overflow: hidden;
+      
+      .container {
+        float: left;
+        margin: 0;
+        width: @columnwidth_labels;
+        
+        & + .container {
+          width: auto;
+        }
+      }
+
+    }
+
+    //====================================================================================================
+    // for the table version
+
+    caption {
+      text-align: left; 
+      font-size: ( 1.4 * @thefontsreset );
+    } 
+
+    td,
+    th {
+      padding-left: 1rem !important;
+      
+      ul, ol {
+        &, li {
+          list-style: none;
+          margin-left: 0;
+          padding-left: 0;
+        }
+      }
+    }
+
+    th[scope="col"] {
+        width: 25%;
+    }
+    
+    #th_col_actielijn {
+      width: 50%;
+    }
+    
+    //====================================================================================================
+    // for the section version
+    .timescale-container {
+
+      .single-actielijn {
+        padding: .25em .5em;
+        overflow: hidden;
+        
+        &:hover {
+          background: rgba( 210, 210, 210, .3 );
+        }
+      }
+    }    
+
+    .intervalheader {
+  
+      width: 100%;
+      overflow: hidden;
+  
+      div {
+        text-align: center;
+        float: left;
+        display: inline-block;
+        margin: 0;
+        padding: 0;
+        span {
+          float: none;
+          clear: both;
+          display: block;
+          font-size: @thefontsreset;
+          margin-top: .75em;
+        }
+      }
+
+      .intervalheader-year {
+        width: @timescale_year_width;
+        padding-bottom: 0;
+  
+        & + .intervalheader-year {
+          margin-left: 1em;
+        }
+        
+      }
+      .intervalheader-quarter {
+        width: 25%;
+        min-height: 2em;
+        margin-top: .5em;
+        background-image: url('../assets/images/bg-image-grid.svg'),  url('../assets/images/bg-image-grid.svg'),  url('../assets/images/bg-image-grid.svg');
+        background-size: ( @timescale_year_width + 1 ) 1em,  ( @timescale_year_width + 1 ) 1em,  ( @timescale_year_width + 1 ) 1em;
+        background-repeat: repeat;
+
+        &:last-of-type {
+          border-right-style: none;
+        }
+      }
+    }    
+    
+    //====================================================================================================
+    // for both versions
+    caption,
+    h2 {
+      color: @wit;
+      padding: .5em .5em .5em 1rem;
+      margin-top: 0;
+    }
+
+    h2 {
+      font-size: ( 1.2 * @thefontsreset );
+      margin: 0;
+    }
+
+    ul {
+      margin-left: 1rem;
+      margin-right: 1rem;
+    }
+
+    p,
+    ul {
+      margin-top: 0;
+      margin-bottom: 0;
+      
+      & + ul {
+        margin-top: 0;
+      }
+      
+      & + h3 {
+        margin-top: 1em;
+      }
+    }
+
+    &.digibeter-oranje,
+    &.digibeter-violet,
+    &.digibeter-paars,
+    &.digibeter-groen,
+    &.digibeter-blauw {
+      h2 {
+        color: @wit;
+      }
+    }
+  
+    &.digibeter-en-orange,
+    &.digibeter-oranje {
+      .kleurtjeslijntjes( @digibeter_oranje, @oranje_licht, @wit, @txt );
+    }
+    &.digibeter-en-violet,
+    &.digibeter-violet {
+      .kleurtjeslijntjes( @digibeter_violet, @violet_licht, @wit, @txt );
+    }
+    &.digibeter-en-purple,
+    &.digibeter-paars {
+      .kleurtjeslijntjes( @digibeter_paars, @paars_licht, @wit, @txt );
+    }
+    &.digibeter-en-green,
+    &.digibeter-groen {
+      .kleurtjeslijntjes( @digibeter_groen, @groen_licht, @wit, @txt );
+    }
+    &.digibeter-en-blue,
+    &.digibeter-blauw {
+      .kleurtjeslijntjes( @digibeter_blauw, @hemelblauw_licht, @wit, @txt );
+    }
+
+    //====================================================================================================
+
+    .ganttbar {
+      text-align: left;
+      margin: 0;
+      padding: 0 .5em;
+      background-repeat: no-repeat;
+      background-size: contain;
+      background: @active;
+      color: @wit;
+    }
+    .planning {
+      
+      ul {
+        margin: .25em 0;
+        
+        li {
+          
+        }
+      }
+      
+      &.start_eind {
+        .ganttbar {
+          .arrow_before();
+          .arrow_after();
+        }
+      }
+      &.start {
+        .ganttbar {
+          .arrow_before();
+        }
+      }
+      &.eind {
+        .ganttbar {
+          .arrow_after();
+        }
+      }
+    }
+    
+
+  
+  }
+
+}
+
+//========================================================================================================
+
+@media only screen and ( min-width: @breakpoint_chart ) {
+
+  .page-template-planningtool-template.full-width-content {
+    .site-inner {
+      max-width: none;
+      overflow: auto;
+    }
+    .entry-header,
+    #reactieformulier,
+    .sharing.block {
+      max-width: @maxwidth;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+
+  .programma {
+    .timescale-container {
+      padding: 0;
+//      position: relative;
+      background-color: @wit;
+      background: url('../assets/images/bg-image-white.svg'),  
+                  url('../assets/images/bg-image-grid.svg');
+      background-size: @columnwidth_labels @columnwidth_labels, 
+                  ( @timescale_year_width + 1 ) 1em;
+      background-repeat: repeat-y, 
+                  repeat;
+  
+      .single-actielijn {
+        padding: 0;
+        clear: both;
+        float: none;
+        
+        .description {
+          width: @columnwidth_labels;
+          padding: .5em .5em 1em 1rem;
+          float: left;
+//          position: relative;
+          min-height: 4em;
+  
+          a {
+            font-size: @thefontsreset;
+          }
+        }
+
+        .planning {
+          display: block;
+          float: left;
+          padding-top: .75em;
+          padding-bottom: .25em;
+          width: ~"calc(99% - @{columnwidth_labels})";
+          
+          p,
+          ul {
+            clear: both;
+            float: none;
+          }
+          
+          ul {
+            padding-top: .5em;
+            position: relative;
+            
+            &, li {
+              list-style: none;
+              padding: 0;
+              margin: 0;
+            }
+            li {
+              text-align: left;
+              padding-right: .5em;
+
+              a {
+                display: inline-block;
+                min-width: 4em;
+                margin: .1em;
+                display: block;
+                
+                &:before {
+                  content: ' ';
+                  display: block;
+                  float: left;
+                  height: 8px;
+                  width: 8px;
+                  margin-top: .5em;
+                  margin-right: .5em;
+                  background: @active;
+                }
+                &:hover,
+                &:active,
+                &:focus {
+                  background: @wit;
+                }
+
+                span {
+                  visibility: hidden;
+                }
+                &:hover,
+                &:active,
+                &:focus {
+                 span {
+                    visibility: visible;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+//========================================================================================================
+
+@media only screen and ( max-width: @breakpoint_chart ) {
+
+  .entry-content table, 
+  .entry-content table.programma,
+  .programma {
+    
+    tr, th, td {
+      display: block;
+      clear: both;
+      float: none;
+    }
+
+    td, th {
+      padding-top: 0;
+      padding-bottom: .1em;
+    }
+
+    td, th {
+      padding-top: .5em;
+    }
+
+    th[scope="row"] {
+      width: 100%;
+    }
+
+    th[scope="col"] {
+      .visuallyhidden();
+    }
+  }
+
+  .programma {
+    .single-actielijn {  
+      margin-bottom: 1em;
+      p a {
+        font-size: 120%;
+        font-weight: bold;
+        text-decoration: none;
+        margin-top: .5em;
+        margin-bottom: .5em;
+        display: block;
+      }
+    }
+  }
+  
+}
+
+//========================================================================================================
+

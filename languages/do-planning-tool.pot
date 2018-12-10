@@ -1,0 +1,693 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"Project-Id-Version: Planning Tool digitaleoverheid.nl\n"
+"POT-Creation-Date: 2018-11-16 15:54+0100\n"
+"PO-Revision-Date: 2018-06-13 10:59+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.2\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: do-planning-tool.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+
+#: cmb2/includes/CMB2.php:179
+msgid "Metabox configuration is required to have an ID parameter."
+msgstr ""
+
+#: cmb2/includes/CMB2.php:581
+msgid "Click to toggle"
+msgstr ""
+
+#: cmb2/includes/CMB2_Ajax.php:75
+msgid "Please Try Again"
+msgstr ""
+
+#: cmb2/includes/CMB2_Ajax.php:181 cmb2/tests/cmb-tests-base.php:50
+msgid "Remove Embed"
+msgstr ""
+
+#. translators: 1: results for. 2: link to codex.wordpress.org/Embeds
+#: cmb2/includes/CMB2_Ajax.php:189 cmb2/includes/helper-functions.php:107
+#: cmb2/tests/cmb-tests-base.php:68 cmb2/tests/test-cmb-types-display.php:208
+#, php-format
+msgid "No oEmbed Results Found for %1$s. View more info at %2$s."
+msgstr ""
+
+#: cmb2/includes/CMB2_Base.php:422
+#, php-format
+msgid ""
+"The \"%1$s\" field parameter has been deprecated in favor of the \"%2$s\" "
+"parameter."
+msgstr ""
+
+#: cmb2/includes/CMB2_Base.php:426
+#, php-format
+msgid ""
+"Using the \"%1$s\" field parameter as a callback has been deprecated in favor of "
+"the \"%2$s\" parameter."
+msgstr ""
+
+#: cmb2/includes/CMB2_Base.php:456
+#, php-format
+msgid ""
+"%1$s was called with a parameter that is <strong>deprecated</strong> since "
+"version %2$s! %3$s"
+msgstr ""
+
+#: cmb2/includes/CMB2_Base.php:458
+#, php-format
+msgid ""
+"%1$s was called with a parameter that is <strong>deprecated</strong> since "
+"version %2$s with no alternative available."
+msgstr ""
+
+#: cmb2/includes/CMB2_Base.php:491 cmb2/includes/CMB2_Hookup_Base.php:102
+#: cmb2/includes/CMB2_Options_Hookup.php:357
+#: cmb2/includes/types/CMB2_Type_Base.php:173
+#, php-format
+msgid "Invalid %1$s property: %2$s"
+msgstr ""
+
+#: cmb2/includes/CMB2_Base.php:509 cmb2/includes/types/CMB2_Type_Base.php:157
+#, php-format
+msgid "Invalid %1$s method: %2$s"
+msgstr ""
+
+#: cmb2/includes/CMB2_Field.php:1348
+msgid "Add Group"
+msgstr ""
+
+#: cmb2/includes/CMB2_Field.php:1349
+msgid "Remove Group"
+msgstr ""
+
+#: cmb2/includes/CMB2_Field.php:1380 cmb2/includes/CMB2_Field.php:1384
+#: cmb2/tests/test-cmb-field.php:237
+msgid "None"
+msgstr ""
+
+#: cmb2/includes/CMB2_Field.php:1495
+msgid "Sorry, this field does not have a cmb_id specified."
+msgstr ""
+
+#: cmb2/includes/CMB2_Field_Display.php:432 cmb2/includes/CMB2_JS.php:230
+#: cmb2/includes/types/CMB2_Type_File_Base.php:79
+#: cmb2/tests/test-cmb-types-base.php:149 cmb2/tests/test-cmb-types.php:956
+msgid "File:"
+msgstr ""
+
+#: cmb2/includes/CMB2_Hookup_Base.php:44
+#, php-format
+msgid "%1$s should be implemented by the extended class."
+msgstr ""
+
+#: cmb2/includes/CMB2_JS.php:165 cmb2/includes/CMB2_JS.php:210
+msgid "Clear"
+msgstr ""
+
+#: cmb2/includes/CMB2_JS.php:166
+msgid "Default"
+msgstr ""
+
+#: cmb2/includes/CMB2_JS.php:167
+msgid "Select Color"
+msgstr ""
+
+#: cmb2/includes/CMB2_JS.php:168
+msgid "Current Color"
+msgstr ""
+
+#: cmb2/includes/CMB2_JS.php:200
+msgctxt "Valid formatDate string for jquery-ui datepicker"
+msgid "mm/dd/yy"
+msgstr ""
+
+#: cmb2/includes/CMB2_JS.php:201
+msgid "Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday"
+msgstr ""
+
+#: cmb2/includes/CMB2_JS.php:202
+msgid "Su, Mo, Tu, We, Th, Fr, Sa"
+msgstr ""
+
+#: cmb2/includes/CMB2_JS.php:203
+msgid "Sun, Mon, Tue, Wed, Thu, Fri, Sat"
+msgstr ""
+
+#: cmb2/includes/CMB2_JS.php:204
+msgid ""
+"January, February, March, April, May, June, July, August, September, October, "
+"November, December"
+msgstr ""
+
+#: cmb2/includes/CMB2_JS.php:205
+msgid "Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec"
+msgstr ""
+
+#: cmb2/includes/CMB2_JS.php:206
+msgid "Next"
+msgstr ""
+
+#: cmb2/includes/CMB2_JS.php:207
+msgid "Prev"
+msgstr ""
+
+#: cmb2/includes/CMB2_JS.php:208
+msgid "Today"
+msgstr ""
+
+#: cmb2/includes/CMB2_JS.php:209 cmb2/includes/CMB2_JS.php:219
+msgid "Done"
+msgstr ""
+
+#: cmb2/includes/CMB2_JS.php:213
+msgid "Choose Time"
+msgstr ""
+
+#: cmb2/includes/CMB2_JS.php:214
+msgid "Time"
+msgstr ""
+
+#: cmb2/includes/CMB2_JS.php:215
+msgid "Hour"
+msgstr ""
+
+#: cmb2/includes/CMB2_JS.php:216
+msgid "Minute"
+msgstr ""
+
+#: cmb2/includes/CMB2_JS.php:217
+msgid "Second"
+msgstr ""
+
+#: cmb2/includes/CMB2_JS.php:218
+msgid "Now"
+msgstr ""
+
+#: cmb2/includes/CMB2_JS.php:220
+msgctxt ""
+"Valid formatting string, as per http://trentrichardson.com/examples/timepicker/"
+msgid "hh:mm TT"
+msgstr ""
+
+#: cmb2/includes/CMB2_JS.php:226
+msgid "Use this file"
+msgstr ""
+
+#: cmb2/includes/CMB2_JS.php:227
+msgid "Use these files"
+msgstr ""
+
+#: cmb2/includes/CMB2_JS.php:228 cmb2/includes/types/CMB2_Type_File_Base.php:64
+msgid "Remove Image"
+msgstr ""
+
+#: cmb2/includes/CMB2_JS.php:229 cmb2/includes/CMB2_Types.php:413
+#: cmb2/includes/types/CMB2_Type_File_Base.php:84
+#: cmb2/tests/test-cmb-types-base.php:149 cmb2/tests/test-cmb-types.php:47
+#: cmb2/tests/test-cmb-types.php:55 cmb2/tests/test-cmb-types.php:956
+msgid "Remove"
+msgstr ""
+
+#: cmb2/includes/CMB2_JS.php:231 cmb2/includes/types/CMB2_Type_File_Base.php:82
+#: cmb2/tests/test-cmb-types-base.php:149 cmb2/tests/test-cmb-types.php:956
+msgid "Download"
+msgstr ""
+
+#: cmb2/includes/CMB2_JS.php:232
+msgid "Select / Deselect All"
+msgstr ""
+
+#: cmb2/includes/CMB2_Options_Hookup.php:139
+msgid "Nothing to update."
+msgstr ""
+
+#: cmb2/includes/CMB2_Options_Hookup.php:143
+msgid "Settings updated."
+msgstr ""
+
+#: cmb2/includes/CMB2_Types.php:232
+msgid "Custom CMB2 field type classes must extend CMB2_Type_Base."
+msgstr ""
+
+#: cmb2/includes/CMB2_Types.php:350
+msgid "Add Row"
+msgstr ""
+
+#: cmb2/includes/CMB2_Types.php:413 cmb2/tests/test-cmb-types.php:47
+#: cmb2/tests/test-cmb-types.php:55
+msgid "Remove Row"
+msgstr ""
+
+#: cmb2/includes/CMB2_hookup.php:181
+msgid ""
+"Term Metadata is a WordPress 4.4+ feature. Please upgrade your WordPress install."
+msgstr ""
+
+#: cmb2/includes/CMB2_hookup.php:185
+msgid "Term metaboxes configuration requires a \"taxonomies\" parameter."
+msgstr ""
+
+#: cmb2/includes/CMB2_hookup.php:465
+#, php-format
+msgid "Toggle panel: %s"
+msgstr ""
+
+#: cmb2/includes/helper-functions.php:307
+msgid "Save"
+msgstr ""
+
+#: cmb2/includes/rest-api/CMB2_REST_Controller.php:257
+msgid "This box does not have read permissions."
+msgstr ""
+
+#: cmb2/includes/rest-api/CMB2_REST_Controller.php:277
+msgid "This box does not have write permissions."
+msgstr ""
+
+#: cmb2/includes/rest-api/CMB2_REST_Controller.php:300
+msgid ""
+"No box found by that id. A box needs to be registered with the \"show_in_rest\" "
+"parameter configured."
+msgstr ""
+
+#: cmb2/includes/rest-api/CMB2_REST_Controller.php:378
+msgid "A human-readable description of the object."
+msgstr ""
+
+#: cmb2/includes/rest-api/CMB2_REST_Controller.php:385
+msgid "The id for the object."
+msgstr ""
+
+#: cmb2/includes/rest-api/CMB2_REST_Controller.php:392
+msgid "The title for the object."
+msgstr ""
+
+#: cmb2/includes/rest-api/CMB2_REST_Controller_Boxes.php:51
+msgid "Includes the registered fields for the box in the response."
+msgstr ""
+
+#: cmb2/includes/rest-api/CMB2_REST_Controller_Boxes.php:72
+msgid ""
+"Includes the fully rendered attributes, 'form_open', 'form_close', as well as "
+"the enqueued 'js_dependencies' script handles, and 'css_dependencies' stylesheet "
+"handles."
+msgstr ""
+
+#: cmb2/includes/rest-api/CMB2_REST_Controller_Boxes.php:122
+msgid "No boxes found."
+msgstr ""
+
+#: cmb2/includes/rest-api/CMB2_REST_Controller_Fields.php:27
+msgid "Includes the box object which the fields are registered to in the response."
+msgstr ""
+
+#: cmb2/includes/rest-api/CMB2_REST_Controller_Fields.php:30
+msgid ""
+"When the '_rendered' argument is passed, the renderable field attributes will be "
+"returned fully rendered. By default, the names of the callback handers for the "
+"renderable attributes will be returned."
+msgstr ""
+
+#: cmb2/includes/rest-api/CMB2_REST_Controller_Fields.php:33
+#: cmb2/includes/rest-api/CMB2_REST_Controller_Fields.php:36
+msgid ""
+"To view or modify the field's value, the 'object_id' and 'object_type' arguments "
+"are required."
+msgstr ""
+
+#: cmb2/includes/rest-api/CMB2_REST_Controller_Fields.php:236
+#: cmb2/tests/test-cmb-rest-controllers.php:247
+msgid "CMB2 Field value cannot be updated without the value parameter specified."
+msgstr ""
+
+#: cmb2/includes/rest-api/CMB2_REST_Controller_Fields.php:297
+#: cmb2/tests/test-cmb-rest-controllers.php:258
+#: cmb2/tests/test-cmb-rest-controllers.php:269
+msgid ""
+"CMB2 Field value cannot be modified without the object_id and object_type "
+"parameters specified."
+msgstr ""
+
+#: cmb2/includes/rest-api/CMB2_REST_Controller_Fields.php:312
+#: cmb2/includes/rest-api/CMB2_REST_Controller_Fields.php:341
+msgid "No field found by that id."
+msgstr ""
+
+#: cmb2/includes/rest-api/CMB2_REST_Controller_Fields.php:415
+#, php-format
+msgid "Value Error for %s"
+msgstr ""
+
+#. translators: %s: register_routes()
+#: cmb2/includes/shim/WP_REST_Controller.php:25
+#, php-format
+msgid "Method '%s' must be overridden."
+msgstr ""
+
+#: cmb2/includes/shim/WP_REST_Controller.php:35
+#: cmb2/includes/shim/WP_REST_Controller.php:47
+#: cmb2/includes/shim/WP_REST_Controller.php:59
+#: cmb2/includes/shim/WP_REST_Controller.php:71
+#: cmb2/includes/shim/WP_REST_Controller.php:83
+#: cmb2/includes/shim/WP_REST_Controller.php:95
+#: cmb2/includes/shim/WP_REST_Controller.php:107
+#: cmb2/includes/shim/WP_REST_Controller.php:119
+#: cmb2/includes/shim/WP_REST_Controller.php:131
+#: cmb2/includes/shim/WP_REST_Controller.php:143
+#: cmb2/includes/shim/WP_REST_Controller.php:155
+#: cmb2/includes/shim/WP_REST_Controller.php:168
+#, php-format
+msgid "Method '%s' not implemented. Must be overridden in subclass."
+msgstr ""
+
+#: cmb2/includes/shim/WP_REST_Controller.php:273
+msgid "Current page of the collection."
+msgstr ""
+
+#: cmb2/includes/shim/WP_REST_Controller.php:281
+msgid "Maximum number of items to be returned in result set."
+msgstr ""
+
+#: cmb2/includes/shim/WP_REST_Controller.php:290
+msgid "Limit results to those matching a string."
+msgstr ""
+
+#: cmb2/includes/shim/WP_REST_Controller.php:308
+msgid ""
+"Scope under which the request is made; determines fields present in response."
+msgstr ""
+
+#: cmb2/includes/types/CMB2_Type_File.php:76 cmb2/tests/test-cmb-types.php:932
+#: cmb2/tests/test-cmb-types.php:956
+msgid "Add or Upload File"
+msgstr ""
+
+#: cmb2/includes/types/CMB2_Type_File_List.php:41 cmb2/tests/test-cmb-types.php:881
+#: cmb2/tests/test-cmb-types.php:912
+msgid "Add or Upload Files"
+msgstr ""
+
+#: cmb2/includes/types/CMB2_Type_Taxonomy_Base.php:115
+msgid "No terms"
+msgstr ""
+
+#: cmb2/tests/test-cmb-field.php:263
+msgid "Test Metabox"
+msgstr ""
+
+#: cmb2/tests/test-cmb-field.php:274
+msgid "Test Multi Checkbox"
+msgstr ""
+
+#: cmb2/tests/test-cmb-field.php:275
+msgid "field description (optional)"
+msgstr ""
+
+#: cmb2/tests/test-cmb-field.php:280
+msgid "Check One"
+msgstr ""
+
+#: cmb2/tests/test-cmb-field.php:281
+msgid "Check Two"
+msgstr ""
+
+#: cmb2/tests/test-cmb-field.php:282
+msgid "Check Three"
+msgstr ""
+
+#: do-planning-tool.php:277
+msgctxt "naam template"
+msgid "Planning Tool Template"
+msgstr ""
+
+#: do-planning-tool.php:294
+msgid "General settings"
+msgstr ""
+
+#: do-planning-tool.php:326
+msgid "Documentation"
+msgstr ""
+
+#: do-planning-tool.php:327
+msgid "GC Maturity documentation"
+msgstr ""
+
+#: do-planning-tool.php:341
+msgctxt "admin"
+msgid "Hier onderhoud voor de actielijnen."
+msgstr ""
+
+#: do-planning-tool.php:374
+msgctxt "js"
+msgid "URL"
+msgstr ""
+
+#: do-planning-tool.php:375
+msgctxt "js"
+msgid "Caption"
+msgstr ""
+
+#: do-planning-tool.php:376
+msgctxt "js"
+msgid "New Window"
+msgstr ""
+
+#: do-planning-tool.php:377
+msgctxt "js"
+msgid "Are you sure?"
+msgstr ""
+
+#: do-planning-tool.php:401 do-planning-tool.php:451
+msgid "Reset statistics"
+msgstr ""
+
+#: do-planning-tool.php:402
+msgid "Empty log"
+msgstr ""
+
+#: do-planning-tool.php:407
+msgid "Ehm, please allow JavaScript."
+msgstr ""
+
+#: do-planning-tool.php:410
+msgid "Press the button!"
+msgstr ""
+
+#: do-planning-tool.php:430 do-planning-tool.php:464
+msgid "Just a moment please"
+msgstr ""
+
+#: do-planning-tool.php:795
+msgctxt "tussenkopje"
+msgid "Actielijn"
+msgstr ""
+
+#: do-planning-tool.php:796
+msgctxt "tussenkopje"
+msgid "Planning"
+msgstr ""
+
+#: do-planning-tool.php:797 do-planning-tool.php:1139
+msgctxt "tussenkopje"
+msgid "Gebeurtenissen"
+msgstr ""
+
+#: do-planning-tool.php:844
+msgctxt "tussenkopje"
+msgid "Van"
+msgstr ""
+
+#: do-planning-tool.php:847
+msgctxt "tussenkopje"
+msgid "Start"
+msgstr ""
+
+#: do-planning-tool.php:857
+msgctxt "tussenkopje"
+msgid "tot"
+msgstr ""
+
+#: do-planning-tool.php:860
+msgctxt "tussenkopje"
+msgid "Eind"
+msgstr ""
+
+#: do-planning-tool.php:901
+msgid ""
+"Geen actielijnen geselecteerd voor deze pagina, dus alle actielijnen per "
+"digibeter-kleur worden getoond."
+msgstr ""
+
+#: do-planning-tool.php:1126
+msgctxt "tussenkopje"
+msgid "Actielijnen"
+msgstr ""
+
+#: inc/dopt.posttypes-taxonomies.php:15
+msgctxt "labels"
+msgid "Actielijn"
+msgstr ""
+
+#: inc/dopt.posttypes-taxonomies.php:16
+msgctxt "labels"
+msgid "Actielijnen"
+msgstr ""
+
+#: inc/dopt.posttypes-taxonomies.php:18
+msgctxt "labels"
+msgid "actielijn"
+msgstr ""
+
+#: inc/dopt.posttypes-taxonomies.php:19
+msgctxt "labels"
+msgid "actielijnen"
+msgstr ""
+
+#: inc/dopt.posttypes-taxonomies.php:25 inc/dopt.posttypes-taxonomies.php:73
+#: inc/dopt.posttypes-taxonomies.php:130
+#, php-format
+msgctxt "labels"
+msgid "All %s"
+msgstr ""
+
+#: inc/dopt.posttypes-taxonomies.php:26 inc/dopt.posttypes-taxonomies.php:30
+#: inc/dopt.posttypes-taxonomies.php:74 inc/dopt.posttypes-taxonomies.php:78
+#: inc/dopt.posttypes-taxonomies.php:131 inc/dopt.posttypes-taxonomies.php:135
+#, php-format
+msgctxt "labels"
+msgid "Add %s"
+msgstr ""
+
+#: inc/dopt.posttypes-taxonomies.php:27 inc/dopt.posttypes-taxonomies.php:75
+#: inc/dopt.posttypes-taxonomies.php:132
+#, php-format
+msgctxt "labels"
+msgid "Add new %s"
+msgstr ""
+
+#: inc/dopt.posttypes-taxonomies.php:28 inc/dopt.posttypes-taxonomies.php:76
+#: inc/dopt.posttypes-taxonomies.php:133 inc/dopt.posttypes-taxonomies.php:142
+msgctxt "labels"
+msgid "Edit?"
+msgstr ""
+
+#: inc/dopt.posttypes-taxonomies.php:29 inc/dopt.posttypes-taxonomies.php:77
+#: inc/dopt.posttypes-taxonomies.php:134
+#, php-format
+msgctxt "labels"
+msgid "Edit %s"
+msgstr ""
+
+#: inc/dopt.posttypes-taxonomies.php:31 inc/dopt.posttypes-taxonomies.php:79
+#: inc/dopt.posttypes-taxonomies.php:136
+msgctxt "labels"
+msgid "Show"
+msgstr ""
+
+#: inc/dopt.posttypes-taxonomies.php:32 inc/dopt.posttypes-taxonomies.php:80
+#: inc/dopt.posttypes-taxonomies.php:137
+#, php-format
+msgctxt "labels"
+msgid "View %s"
+msgstr ""
+
+#: inc/dopt.posttypes-taxonomies.php:33 inc/dopt.posttypes-taxonomies.php:81
+#: inc/dopt.posttypes-taxonomies.php:138
+#, php-format
+msgctxt "labels"
+msgid "Search %s"
+msgstr ""
+
+#: inc/dopt.posttypes-taxonomies.php:34 inc/dopt.posttypes-taxonomies.php:82
+#: inc/dopt.posttypes-taxonomies.php:139
+#, php-format
+msgctxt "labels"
+msgid "No %s available"
+msgstr ""
+
+#: inc/dopt.posttypes-taxonomies.php:35 inc/dopt.posttypes-taxonomies.php:83
+#: inc/dopt.posttypes-taxonomies.php:140
+#, php-format
+msgctxt "labels"
+msgid "No %s in trash"
+msgstr ""
+
+#: inc/dopt.posttypes-taxonomies.php:36 inc/dopt.posttypes-taxonomies.php:84
+#: inc/dopt.posttypes-taxonomies.php:141
+msgctxt "labels"
+msgid "Parent"
+msgstr ""
+
+#: inc/dopt.posttypes-taxonomies.php:63
+msgctxt "labels"
+msgid "Gebeurtenis"
+msgstr ""
+
+#: inc/dopt.posttypes-taxonomies.php:64
+msgctxt "labels"
+msgid "Gebeurtenissen"
+msgstr ""
+
+#: inc/dopt.posttypes-taxonomies.php:66
+msgctxt "labels"
+msgid "gebeurtenis"
+msgstr ""
+
+#: inc/dopt.posttypes-taxonomies.php:67
+msgctxt "labels"
+msgid "gebeurtenissen"
+msgstr ""
+
+#: inc/dopt.posttypes-taxonomies.php:118
+msgctxt "labels"
+msgid "Planning label"
+msgstr ""
+
+#: inc/dopt.posttypes-taxonomies.php:119
+msgctxt "labels"
+msgid "Planning labels"
+msgstr ""
+
+#: inc/dopt.posttypes-taxonomies.php:121
+msgctxt "labels"
+msgid "planning label"
+msgstr ""
+
+#: inc/dopt.posttypes-taxonomies.php:122
+msgctxt "labels"
+msgid "planning labels"
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "ICTU / WP Planning Tool digitaleoverheid.nl"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "https://github.com/ICTU/Digitale-Overheid---WordPress-plugin-Planning-Tool/"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid ""
+"Plugin voor digitaleoverheid.nl waarmee extra functionaliteit mogelijk wordt "
+"voor het tonen van een planning met actielijnen en gebeurtenissen."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Paul van Buuren"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "https://wbvb.nl"
+msgstr ""
