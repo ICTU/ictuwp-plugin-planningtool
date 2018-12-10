@@ -7,7 +7,7 @@
 // * @author  Paul van Buuren
 // * @license GPL-2.0+
 // * @package do-planning-tool
-// * @version 0.0.5b
+// * @version 0.0.5
 // * @desc.   Eerste opzet mobiele weergave.
 // * @link    https://github.com/ICTU/Digitale-Overheid---WordPress-plugin-Planning-Tool/
 
