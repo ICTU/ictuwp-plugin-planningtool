@@ -135,8 +135,8 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 
         define( 'DOPT__ARCHIVE_CSS',            'dopt-header-css' );  
 
-        define( 'DOPT_CSS_RADIALGRADIENT', true );
-        // define( 'DOPT_CSS_RADIALGRADIENT', false );
+        //define( 'DOPT_CSS_RADIALGRADIENT', true );
+        define( 'DOPT_CSS_RADIALGRADIENT', false );
 
        }
   
@@ -552,9 +552,13 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 
           $this->dopt_years_max_nr = ( ( $this->dopt_years_end - $this->dopt_years_start ) + 1 );
 
-          $header_css .= ".programma header, ";
+//          $header_css .= ".programma header, ";
           $header_css .= ".actielijnen { ";
           $header_css .= " width: " . ( ( $this->dopt_years_max_nr * DOPT_CSS_YEARWIDTH ) + DOPT_CSS_PADDINGLEFT ) . "em;";   
+          $header_css .= "}\n";
+
+          $header_css .= ".programma .timescale-container {";
+          $header_css .= " max-width: " . ( ( $this->dopt_years_max_nr * DOPT_CSS_YEARWIDTH ) + DOPT_CSS_PADDINGLEFT ) . "em;";   
           $header_css .= "}\n";
 
           $distanceyears = ( $this->dopt_years_start - $year_now );
