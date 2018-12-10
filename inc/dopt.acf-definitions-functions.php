@@ -20,13 +20,23 @@ if ( ! defined( 'ABSPATH' ) ) {
 //========================================================================================================
 
 function bidirectional_acf_update_value( $value, $post_id, $field  ) {
+
 	
 	// vars
 	$field_name   = $field['name'];
 	$field_key    = $field['key'];
 	$global_name  = 'is_updating_' . $field_name;
-	
-	
+
+  $debugstring = 'bidirectional_acf_update_value';
+  
+  $debugstring .= "value='" . implode( ", ", $value ) . "'";
+  $debugstring .= ", post_id='" . $post_id . "'";
+  $debugstring .= " (type=" . get_post_type( $post_id ) . ")";
+  $debugstring .= ", field_key='" . $field_key . "'";
+  $debugstring .= ", field_name='" . $field_name . "'";
+  
+  // dodebug( $debugstring );
+
 	// bail early if this filter was triggered from the update_field() function called within the loop below
 	// - this prevents an inifinte loop
 	if( !empty($GLOBALS[ $global_name ]) ) return $value;
@@ -39,8 +49,17 @@ function bidirectional_acf_update_value( $value, $post_id, $field  ) {
 	
 	// loop over selected posts and add this $post_id
 	if( is_array($value) ) {
+
+    // dodebug( 'bidirectional_acf_update_value: is array' );
 	
 		foreach( $value as $post_id2 ) {
+
+      $debugstring = "post_id2='" . $post_id2 . "'";
+      $debugstring .= " (type=" . get_post_type( $post_id2 ) . ")";
+
+  
+      // dodebug( $debugstring );
+
 			
 			// load existing related posts
 			$value2 = get_field($field_name, $post_id2, false);
@@ -52,6 +71,7 @@ function bidirectional_acf_update_value( $value, $post_id, $field  ) {
 				$value2 = array();
 				
 			}
+
 			
 			
 			// bail early if the current $post_id is already found in selected post's $value2
@@ -196,7 +216,7 @@ if( function_exists('acf_add_local_field_group') ) {
   						'id' => '',
   					),
   					'post_type' => array(
-  						0 => 'actielijn',
+  						0 => DOPT__ACTIELIJN_CPT,
   					),
   					'taxonomy' => '',
   					'filters' => array(
@@ -250,7 +270,7 @@ if( function_exists('acf_add_local_field_group') ) {
   				'id' => '',
   			),
   			'display_format' => 'j F Y',
-  			'return_format' => 'j F Y',
+  			'return_format' => 'Y-m-d',
   			'first_day' => 1,
   		),
   		array(
@@ -286,7 +306,7 @@ if( function_exists('acf_add_local_field_group') ) {
   				'id' => '',
   			),
   			'post_type' => array(
-  				0 => 'actielijn',
+  				0 => DOPT__ACTIELIJN_CPT,
   			),
   			'taxonomy' => '',
   			'filters' => array(
@@ -304,7 +324,7 @@ if( function_exists('acf_add_local_field_group') ) {
   			array(
   				'param' => 'post_type',
   				'operator' => '==',
-  				'value' => 'gebeurtenis',
+  				'value' => DOPT__GEBEURTENIS_CPT,
   			),
   		),
   	),
@@ -324,6 +344,7 @@ if( function_exists('acf_add_local_field_group') ) {
   	'key' => 'group_5be97485d6c95',
   	'title' => 'Actielijn: datums, samenhang met gebeurtenissen en actielijnen',
   	'fields' => array(
+/*    	
   		array(
   			'key' => 'field_5be9d869b3559',
   			'label' => 'Datum beschrijving (zichtbaar)',
@@ -343,6 +364,7 @@ if( function_exists('acf_add_local_field_group') ) {
   			'append' => '',
   			'maxlength' => '',
   		),
+*/  		
   		array(
   			'key' => 'field_5bec3c8db4fd6',
   			'label' => 'Heeft start- of einddatums?',
@@ -544,7 +566,7 @@ if( function_exists('acf_add_local_field_group') ) {
   				'id' => '',
   			),
   			'post_type' => array(
-  				0 => 'actielijn',
+  				0 => DOPT__ACTIELIJN_CPT,
   			),
   			'taxonomy' => '',
   			'filters' => array(
@@ -570,7 +592,7 @@ if( function_exists('acf_add_local_field_group') ) {
   				'id' => '',
   			),
   			'post_type' => array(
-  				0 => 'gebeurtenis',
+  				0 => DOPT__GEBEURTENIS_CPT,
   			),
   			'taxonomy' => '',
   			'filters' => array(
@@ -588,7 +610,7 @@ if( function_exists('acf_add_local_field_group') ) {
   			array(
   				'param' => 'post_type',
   				'operator' => '==',
-  				'value' => 'actielijn',
+  				'value' => DOPT__ACTIELIJN_CPT,
   			),
   		),
   	),

@@ -88,7 +88,6 @@
 
 //=========================================================================================================
 
-
 .kleurtjeslijntjes( @kleur1: red,  @kleur2: green, @txtcolor1: @txt, @txtcolor2: @wit ) {
 
   border: 8px solid @kleur1;
@@ -150,21 +149,44 @@
   .intervalheader {
     background-color: @kleur1;
     color: @txtcolor1;
+
+    span {
+      background: @kleur1;
+      color: @txtcolor1;
+    }
+    
   }
 
-  @media only screen and ( max-width: @breakpoint_chart ) {
-  
-    .programma {
-      .single-actielijn {  
-        background-color: @kleur2;
-      }
+  .timescale-container {
+    .currentkwartaal {
+      background: @kleur1;
+      opacity: .3;
     }
   }
+  
 
+  //-------------------------------------------------------------------------------------------------------
+  
+  @media only screen and ( min-width: @breakpoint_chart ) {
+  
+    
+  }
 
+  //-------------------------------------------------------------------------------------------------------
+  
+  @media only screen and ( max-width: @breakpoint_chart ) {
+  
+    .single-actielijn {  
+      background-color: @kleur2;
+    }
+    
+  }
+
+  //-------------------------------------------------------------------------------------------------------
+  
 }
 
-
+//=========================================================================================================
 
 .arrow_shared() {
   position: absolute;
@@ -175,6 +197,8 @@
   top: @arrow_offset;
   bottom: @arrow_offset;
 }
+
+//=========================================================================================================
 
 .arrow_after() {
 
@@ -190,6 +214,8 @@
   }
 }
 
+//=========================================================================================================
+
 .arrow_before() {
 
   position: relative;
@@ -204,4 +230,5 @@
   }
 }
 
+//=========================================================================================================
 
