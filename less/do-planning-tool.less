@@ -9,8 +9,8 @@
 // * @author  Paul van Buuren
 // * @license GPL-2.0+
 // * @plugin: do-planning-tool
-// * version: 1.1.2
-// * @desc.   Betere uitlijning voor de rest van the_content. Mogelijkheid om HTML-ID in te voeren.
+// * version: 1.1.3
+// * @desc.   Bugfiks voor correcte plaatsing van gebeurtenissen.
 // * @link    https://github.com/ICTU/Digitale-Overheid---WordPress-plugin-Planning-Tool/
 
 
@@ -411,7 +411,6 @@ form {
               padding-right: .5em;
 
               a {
-//            border-left: 2px solid green;
                 min-width: 4em;
                 margin-top: .1em;
                 margin-bottom: .1em;
@@ -431,17 +430,6 @@ form {
                 &:active,
                 &:focus {
                   background: @wit;
-                }
-
-                span {
-                  visibility: hidden;
-                }
-                &:hover,
-                &:active,
-                &:focus {
-                 span {
-                    visibility: visible;
-                  }
                 }
               }
             }

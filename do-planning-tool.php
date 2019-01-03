@@ -5,8 +5,8 @@
  * Plugin Name:         ICTU / WP Planning Tool digitaleoverheid.nl
  * Plugin URI:          https://github.com/ICTU/Digitale-Overheid---WordPress-plugin-Planning-Tool/
  * Description:         Plugin voor digitaleoverheid.nl waarmee extra functionaliteit mogelijk wordt voor het tonen van een planning met actielijnen en gebeurtenissen.
- * Version:             1.1.2
- * Version description: Betere uitlijning voor de rest van the_content. Mogelijkheid om HTML-ID in te voeren.
+ * Version:             1.1.3
+ * Version description: Bugfiks voor correcte plaatsing van gebeurtenissen.
  * Author:              Paul van Buuren
  * Author URI:          https://wbvb.nl
  * License:             GPL-2.0+
@@ -35,7 +35,7 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
       /**
        * @var string
        */
-      public $version = '1.1.2';
+      public $version = '1.1.3';
   
   
       /**
@@ -325,7 +325,7 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
     	/**
     	 * Register the options page
     	 *
-    	 * @since    1.1.2
+    	 * @since    1.1.3
     	 */
     	public function do_pt_admin_register_settings() {
   
@@ -683,6 +683,9 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
           //----------------------------------------------------------------------------------------------------
           //----------------------------------------------------------------------------------------------------
 
+          $oneemday         = round( ( 12  / 365 ), 6 ); // 12em per jaar
+
+
           foreach( $this->dopt_array_data as $key => $value ) {
             
             $actielijn_kwartaal_start_jaar      = 0;
@@ -691,7 +694,6 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 
               $gebeurtenis_datum    = '';
               $datetext             = '';
-              $styling              = '';
               $daydiff              = '';
 
               $yearevent            = date_i18n( "Y", strtotime( $value['gebeurtenis_datum'] ) );
@@ -701,7 +703,11 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
               if ( $yearevent ) {
       
                 $yeardiff         = 0;
-                $oneemday         = round( ( 12  / 365 ), 2 ); // 12em per jaar
+
+//echo '<p>' . $value['type'] . '-' . $key . '<br>';
+//echo get_the_title( $key ) . ', <strong>' . date_i18n( get_option( 'date_format' ),  strtotime( $value['gebeurtenis_datum'] ) ) . '</strong>, ';
+//echo 'yearevent: ' . $yearevent . '<br>';
+//echo 'this->dopt_years_start: ' . $this->dopt_years_start . '<br>';
                 
                 if ( $this->dopt_years_start < $yearevent ) {
                   $yeardiff       = ( $yearevent - $this->dopt_years_start );
@@ -717,15 +723,14 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
                 $translate_days   = round( ( $daydiff * $oneemday ), 2);      
                 $translate        = ( $translate_year + $translate_days );
       
-                $styling          = ' class="' . DOPT__GEBEURTENIS_CPT . '-' . $key . '" data-yearevent="' . $yearevent . '" data-daydiff="' . $daydiff . '"';
+//echo 'translate: ' . $translate . ' (' . $translate_year . '+' . $translate_days . ')<br>';
+//echo '</p>';
+
         
               }
 
-//div.planning.start_eind > ul > li.gebeurtenis-35741
-
-//              $header_css .= "." . $value['type'] . '-' . $key . " a { ";
-              $header_css .= "div.planning.start_eind > ul > li." . $value['type'] . '-' . $key . " { ";
-//              $header_css .= "transform: translatex(" . $translate . "em);";
+//hiero
+              $header_css .= "li." . $value['type'] . '-' . $key . " { ";
               $header_css .= "margin-left: " . $translate . "em;";
               $header_css .= "} ";
 
@@ -1924,7 +1929,7 @@ function do_pt_frontend_get_gebeurtenissen_for_actielijn( $args ) {
       elseif ( $key ) {
         $gebeurtenis_datum     = date_i18n( get_option( 'date_format' ),  $key );
       }
-
+//hiero
       $returnstring .= '<li class="' . DOPT__GEBEURTENIS_CPT . '-' . $value . '"><a href="' . get_permalink( $value ) . '">' . get_the_title( $value ) . '<span aria-hidden="true">' . sprintf( _x( ', %s %s', 'verborgen datum in ganttchart', "do-planning-tool" ), $label, strtolower( $gebeurtenis_datum ) )  . '</span></a></li>';
   
     }
