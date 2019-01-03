@@ -407,10 +407,6 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
           if ( intval( $this->dopt_years_start > 0 ) && ( intval( $this->dopt_years_start ) > intval( date("Y") ) ) ) {
             $this->dopt_years_start = date("Y");  
           }
-          // uitgecommentarieerd, omdat het eindjaar het eindjaar is
-//          if ( intval( $this->dopt_years_end > 0 ) && ( intval( $this->dopt_years_end ) < intval( date("Y") ) ) ) {
-//            $this->dopt_years_end = ( date("Y") + 1 );
-//          }
           
           if ( ! $this->dopt_years_start ) {
             $this->dopt_years_start = date("Y");
@@ -553,7 +549,6 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 
           $this->dopt_years_max_nr = ( ( $this->dopt_years_end - $this->dopt_years_start ) + 1 );
 
-//          $header_css .= ".programma header, ";
           $header_css .= ".actielijnen { ";
           $header_css .= " width: " . ( ( $this->dopt_years_max_nr * DOPT_CSS_YEARWIDTH ) + DOPT_CSS_PADDINGLEFT ) . "em;";   
           $header_css .= "}\n";
@@ -672,7 +667,6 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
             $header_css .= "    white 100% ";
             $header_css .= "  );";
             
-  //          $header_css .= "background-size: " . ( 2 * $afstand ) . "em 22em,78em 100em,84em .5em;";
             $header_css .= "background-size: 2em 22em," . ( ( $this->dopt_years_max_nr * DOPT_CSS_YEARWIDTH ) + DOPT_CSS_PADDINGLEFT ) . "em 100em, 84em .5em;";
             $header_css .= "background-repeat: repeat-y, repeat-y, repeat-y;";
   
@@ -704,11 +698,6 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
       
                 $yeardiff         = 0;
 
-//echo '<p>' . $value['type'] . '-' . $key . '<br>';
-//echo get_the_title( $key ) . ', <strong>' . date_i18n( get_option( 'date_format' ),  strtotime( $value['gebeurtenis_datum'] ) ) . '</strong>, ';
-//echo 'yearevent: ' . $yearevent . '<br>';
-//echo 'this->dopt_years_start: ' . $this->dopt_years_start . '<br>';
-                
                 if ( $this->dopt_years_start < $yearevent ) {
                   $yeardiff       = ( $yearevent - $this->dopt_years_start );
                 }
@@ -722,14 +711,9 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
                 $daydiff          = dateDiff( $startdatum, $einddatum  );
                 $translate_days   = round( ( $daydiff * $oneemday ), 2);      
                 $translate        = ( $translate_year + $translate_days );
-      
-//echo 'translate: ' . $translate . ' (' . $translate_year . '+' . $translate_days . ')<br>';
-//echo '</p>';
 
-        
               }
 
-//hiero
               $header_css .= "li." . $value['type'] . '-' . $key . " { ";
               $header_css .= "margin-left: " . $translate . "em;";
               $header_css .= "} ";
@@ -1914,7 +1898,6 @@ function do_pt_frontend_get_gebeurtenissen_for_actielijn( $args ) {
     }      
 
     ksort( $sortthisarray );    
-//    krsort( $sortthisarray );    
 
     foreach( $sortthisarray as $key => $value ){
       
@@ -1929,7 +1912,7 @@ function do_pt_frontend_get_gebeurtenissen_for_actielijn( $args ) {
       elseif ( $key ) {
         $gebeurtenis_datum     = date_i18n( get_option( 'date_format' ),  $key );
       }
-//hiero
+
       $returnstring .= '<li class="' . DOPT__GEBEURTENIS_CPT . '-' . $value . '"><a href="' . get_permalink( $value ) . '">' . get_the_title( $value ) . '<span aria-hidden="true">' . sprintf( _x( ', %s %s', 'verborgen datum in ganttchart', "do-planning-tool" ), $label, strtolower( $gebeurtenis_datum ) )  . '</span></a></li>';
   
     }
