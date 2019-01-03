@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: Planning Tool digitaleoverheid.nl\n"
-"POT-Creation-Date: 2018-11-16 15:54+0100\n"
+"POT-Creation-Date: 2019-01-03 14:45+0100\n"
 "PO-Revision-Date: 2018-06-13 10:59+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -427,112 +427,146 @@ msgstr ""
 msgid "Check Three"
 msgstr ""
 
-#: do-planning-tool.php:277
+#: do-planning-tool.php:318
 msgctxt "naam template"
-msgid "Planning Tool Template"
+msgid "Planningtool Digitale Overheid"
 msgstr ""
 
-#: do-planning-tool.php:294
+#: do-planning-tool.php:335
 msgid "General settings"
 msgstr ""
 
-#: do-planning-tool.php:326
+#: do-planning-tool.php:367
 msgid "Documentation"
 msgstr ""
 
-#: do-planning-tool.php:327
+#: do-planning-tool.php:368
 msgid "GC Maturity documentation"
 msgstr ""
 
-#: do-planning-tool.php:341
-msgctxt "admin"
-msgid "Hier onderhoud voor de actielijnen."
+#: do-planning-tool.php:939 do-planning-tool.php:1229 do-planning-tool.php:1363
+#: do-planning-tool.php:1475
+msgctxt "geschatte planning"
+msgid "Planning:"
 msgstr ""
 
-#: do-planning-tool.php:374
-msgctxt "js"
-msgid "URL"
+#: do-planning-tool.php:948 do-planning-tool.php:1238
+#, php-format
+msgctxt "geschatte planning"
+msgid "van %s-%s tot %s-%s"
 msgstr ""
 
-#: do-planning-tool.php:375
-msgctxt "js"
-msgid "Caption"
+#: do-planning-tool.php:956 do-planning-tool.php:1246
+#, php-format
+msgctxt "geschatte planning"
+msgid "vanaf %s-%s"
 msgstr ""
 
-#: do-planning-tool.php:376
-msgctxt "js"
-msgid "New Window"
+#: do-planning-tool.php:962 do-planning-tool.php:1252
+#, php-format
+msgctxt "geschatte planning"
+msgid "tot %s-%s"
 msgstr ""
 
-#: do-planning-tool.php:377
-msgctxt "js"
-msgid "Are you sure?"
+#: do-planning-tool.php:982 do-planning-tool.php:1272
+msgid "Gebeurtenissen hierbij:"
 msgstr ""
 
-#: do-planning-tool.php:401 do-planning-tool.php:451
-msgid "Reset statistics"
-msgstr ""
-
-#: do-planning-tool.php:402
-msgid "Empty log"
-msgstr ""
-
-#: do-planning-tool.php:407
-msgid "Ehm, please allow JavaScript."
-msgstr ""
-
-#: do-planning-tool.php:410
-msgid "Press the button!"
-msgstr ""
-
-#: do-planning-tool.php:430 do-planning-tool.php:464
-msgid "Just a moment please"
-msgstr ""
-
-#: do-planning-tool.php:795
+#: do-planning-tool.php:1018
 msgctxt "tussenkopje"
 msgid "Actielijn"
 msgstr ""
 
-#: do-planning-tool.php:796
+#: do-planning-tool.php:1019
 msgctxt "tussenkopje"
 msgid "Planning"
 msgstr ""
 
-#: do-planning-tool.php:797 do-planning-tool.php:1139
+#: do-planning-tool.php:1020
 msgctxt "tussenkopje"
 msgid "Gebeurtenissen"
 msgstr ""
 
-#: do-planning-tool.php:844
+#: do-planning-tool.php:1054
 msgctxt "tussenkopje"
 msgid "Van"
 msgstr ""
 
-#: do-planning-tool.php:847
+#: do-planning-tool.php:1057
 msgctxt "tussenkopje"
 msgid "Start"
 msgstr ""
 
-#: do-planning-tool.php:857
+#: do-planning-tool.php:1067
 msgctxt "tussenkopje"
 msgid "tot"
 msgstr ""
 
-#: do-planning-tool.php:860
+#: do-planning-tool.php:1070
 msgctxt "tussenkopje"
 msgid "Eind"
 msgstr ""
 
-#: do-planning-tool.php:901
+#: do-planning-tool.php:1106
 msgid ""
-"Geen actielijnen geselecteerd voor deze pagina, dus alle actielijnen per "
-"digibeter-kleur worden getoond."
+"Hallo, lid van de redactie. Er zijn geen actielijnen geselecteerd voor deze "
+"pagina, dus ALLE actielijnen per digibeter-kleur worden getoond.<br>Normale "
+"bezoekers zien deze geel-rode melding uiteraard niet."
 msgstr ""
 
-#: do-planning-tool.php:1126
+#: do-planning-tool.php:1382 do-planning-tool.php:1533
+msgctxt "tussenkopje"
+msgid "Gerelateerde actielijnen"
+msgstr ""
+
+#: do-planning-tool.php:1416
+msgctxt "tussenkopje"
+msgid "Gerelateerde gebeurtenissen"
+msgstr ""
+
+#: do-planning-tool.php:1466 do-planning-tool.php:1916
+msgctxt "geschatte planning"
+msgid "Geen datum ingevoerd"
+msgstr ""
+
+#: do-planning-tool.php:1486
+msgctxt "tussenkopje"
+msgid "Gerelateerde activiteiten"
+msgstr ""
+
+#: do-planning-tool.php:1561
 msgctxt "tussenkopje"
 msgid "Actielijnen"
+msgstr ""
+
+#: do-planning-tool.php:1584
+msgctxt "tussenkopje"
+msgid "Gebeurtenissen (A)"
+msgstr ""
+
+#: do-planning-tool.php:1597
+#, php-format
+msgid "Gebeurtenissen bij %s"
+msgstr ""
+
+#: do-planning-tool.php:1867
+msgid "Gebeurtenissen"
+msgstr ""
+
+#: do-planning-tool.php:1918
+msgctxt "label voor verborgen datum in ganttchart"
+msgid "datum:"
+msgstr ""
+
+#: do-planning-tool.php:1922
+msgctxt "label voor verborgen datum in ganttchart"
+msgid "geschatte datum:"
+msgstr ""
+
+#: do-planning-tool.php:1928
+#, php-format
+msgctxt "verborgen datum in ganttchart"
+msgid ", %s %s"
 msgstr ""
 
 #: inc/dopt.posttypes-taxonomies.php:15

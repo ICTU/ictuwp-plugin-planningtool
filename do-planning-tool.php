@@ -5,8 +5,8 @@
  * Plugin Name:         ICTU / WP Planning Tool digitaleoverheid.nl
  * Plugin URI:          https://github.com/ICTU/Digitale-Overheid---WordPress-plugin-Planning-Tool/
  * Description:         Plugin voor digitaleoverheid.nl waarmee extra functionaliteit mogelijk wordt voor het tonen van een planning met actielijnen en gebeurtenissen.
- * Version:             1.1.1
- * Version description: Als geen blokken geselecteerd zijn voor de pagina worden nu toch alle actielijnen in een goede layout getoond.
+ * Version:             1.1.2
+ * Version description: Betere uitlijning voor de rest van the_content. Mogelijkheid om HTML-ID in te voeren.
  * Author:              Paul van Buuren
  * Author URI:          https://wbvb.nl
  * License:             GPL-2.0+
@@ -35,7 +35,7 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
       /**
        * @var string
        */
-      public $version = '1.1.1';
+      public $version = '1.1.2';
   
   
       /**
@@ -315,7 +315,7 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
       */
       function do_pt_init_add_page_templates( $post_templates ) {
       
-        $post_templates[$this->templatefile]  = _x( 'Planning Tool Template', "naam template", "do-planning-tool" );    
+        $post_templates[$this->templatefile]  = _x( 'Planningtool Digitale Overheid', "naam template", "do-planning-tool" );    
         return $post_templates;
       
       }
@@ -325,7 +325,7 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
     	/**
     	 * Register the options page
     	 *
-    	 * @since    1.1.1
+    	 * @since    1.1.2
     	 */
     	public function do_pt_admin_register_settings() {
   
@@ -866,6 +866,14 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
               $actielijnblok_counter++;
         
               $actielijnblok_titel    = esc_html( $actielijnblok[ 'actielijnen_per_thema_titel' ] );
+              
+              if ( ! $actielijnblok[ 'actielijnen_per_thema_htmlid' ] ) {
+                $actielijnblok_htmlid = esc_html( $actielijnblok[ 'actielijnen_per_thema_titel' ] );
+              }
+              else {
+                $actielijnblok_htmlid = esc_html( $actielijnblok[ 'actielijnen_per_thema_htmlid' ] );
+              }
+              
               $digibeterclass         = get_field( 'digibeter_term_achtergrondkleur', RHSWP_CT_DIGIBETER . '_' . $actielijnblok[ 'actielijnen_per_thema_kleur' ] );
               $select_actielijnen     = $actielijnblok[ 'actielijnen_per_thema_actielijnen' ];
               $intervalheader2        = preg_replace('/class="intervalheader"/', 'class="intervalheader" id="intervalheader_' . $actielijnblok_counter . '"', $intervalheader );          
@@ -874,7 +882,7 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
               $possiblewidth_total      = ( $possiblewidth_timeline + DOPT_CSS_PADDINGLEFT );
 
 
-              echo '<section id="' . sanitize_title( $actielijnblok_titel ) . '" class="programma ' . $digibeterclass . '" data-possiblewidth="' . ( $possiblewidth_total + 1 ) . 'em">';      
+              echo '<section id="' . sanitize_title( $actielijnblok_htmlid ) . '" class="programma ' . $digibeterclass . '" data-possiblewidth="' . ( $possiblewidth_total + 1 ) . 'em">';      
               
               // header
               echo '<header>';
@@ -1091,8 +1099,13 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
         }
         else { //   if( have_rows('actielijnen_per_thema', $acfid ) ) {
       
-          echo '<p class="wrap">' . __( "Geen actielijnen geselecteerd voor deze pagina, dus alle actielijnen per digibeter-kleur worden getoond.", "do-planning-tool" ) . '</p>';
 
+          $user = wp_get_current_user();
+          if ( in_array( 'manage_categories', (array) $user->allcaps ) ) {
+            // ingelogde gebruiker die minstens redactierechten heeft          
+            echo '<div class="wrap"><p class="debugstring" style="margin-bottom: 1em;">' . __( "Hallo, lid van de redactie. Er zijn geen actielijnen geselecteerd voor deze pagina, dus ALLE actielijnen per digibeter-kleur worden getoond.<br>Normale bezoekers zien deze geel-rode melding uiteraard niet.", "do-planning-tool" ) . '</p></div>';
+          
+          }
           $intervalheader = '<div class="intervalheader" aria-hidden="true">';
           $currentyear    = $this->dopt_years_start;
           $currentquarter = 1;
@@ -1132,6 +1145,8 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
               $actielijnblok_titel    = esc_html( $term->name );
               $digibeterclass         = get_field( 'digibeter_term_achtergrondkleur', RHSWP_CT_DIGIBETER . '_' . $term->ID );
               $intervalheader2        = preg_replace('/class="intervalheader"/', 'class="intervalheader" id="intervalheader_' . $actielijnblok_counter . '"', $intervalheader );          
+              $actielijnblok_htmlid   = esc_html( $actielijnblok_titel );
+              
 
               $possiblewidth_timeline = ( ( $this->dopt_years_max_nr * DOPT_CSS_YEARWIDTH ) - 1 ); // -1 is to strip off the unnecessary margin-right of the last year
               $possiblewidth_total      = ( $possiblewidth_timeline + DOPT_CSS_PADDINGLEFT );
@@ -1156,7 +1171,7 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
         
                 $digibeterclass  = get_field( 'digibeter_term_achtergrondkleur', RHSWP_CT_DIGIBETER . '_' . $term->term_id );
           
-                echo '<section id="' . sanitize_title( $actielijnblok_titel ) . '" class="programma ' . $digibeterclass . '" data-possiblewidth="' . ( $possiblewidth_total + 1 ) . 'em">';      
+                echo '<section id="' . sanitize_title( $actielijnblok_htmlid ) . '" class="programma ' . $digibeterclass . '" data-possiblewidth="' . ( $possiblewidth_total + 1 ) . 'em">';      
                 
                 // header
                 echo '<header>';
@@ -1532,26 +1547,10 @@ else {
           $returnstring .= '</ul>';
           
         }
-        else {
-//          dodebug( "Geen actielijnen ('related_actielijnen') voor " . $postid );
-        }
-    
-      }
-
-      if ( DOPT__GEBEURTENIS_CPT == get_post_type( $postid ) ) {
 
       }
-    
-    
-//      $returnstring .= '<h2>related_gebeurtenissen_actielijnen checken voor ' . $postid;
-    
-      if( get_field( 'related_gebeurtenissen_actielijnen', $postid ) ) {
-//        $returnstring .= " JA!</h2>";
-      }
-      else {
-//        $returnstring .= " neen :-( </h2>";
-      }
-    
+
+
       if( get_field( 'related_gebeurtenissen_actielijnen', $postid ) ) {
         
         // alleen header teruggeven als er uberhaupt iets te melden is
@@ -1580,9 +1579,7 @@ else {
       
         }
         elseif ( DOPT__ACTIELIJN_CPT == get_post_type( $postid ) ) {
-    
-    //      $returnstring .= '<p>B: ' . DOPT__ACTIELIJN_CPT . '</p>';
-    
+
           if ( ! $titletext ) {
             $titletext = _x( 'Gebeurtenissen (A)', 'tussenkopje', "do-planning-tool" );
           }
@@ -1617,6 +1614,24 @@ else {
 
     }
 
+
+    //====================================================================================================
+
+    /**
+    * wrap the content in a wrapper as to limit its max width
+    */
+    public function do_pt_frontend_append_content_wrapper($content) {
+      
+      if( is_singular() && is_main_query() ) {
+    
+        // wrap the content in a wrapper
+        $content = '<div class="wrap">' . $content . '</div>';
+    		
+    	}	
+    	return $content;
+    	
+    }
+
     //====================================================================================================
 
     /**
@@ -1629,12 +1644,16 @@ else {
       $page_template  = get_post_meta( get_the_ID(), '_wp_page_template', true );
 
       if ( $this->templatefile == $page_template ) {
-  
-        add_action( 'genesis_entry_content',   array( $this, 'do_pt_do_frontend_pagetemplate_add_actielijnen' ), 15 );
 
         //* Force full-width-content layout
         add_filter( 'genesis_pre_get_option_site_layout', '__genesis_return_full_width_content' );
-      
+
+        // wrap the text in a wrapper to contain its widths
+        add_filter('the_content', array( $this, 'do_pt_frontend_append_content_wrapper' ), 15 );
+
+        // append actielijnen
+        add_action( 'genesis_after_entry_content',   array( $this, 'do_pt_do_frontend_pagetemplate_add_actielijnen' ), 15 );
+
       }
 
     	//=================================================

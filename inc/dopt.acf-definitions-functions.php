@@ -7,8 +7,8 @@
 // * @author  Paul van Buuren
 // * @license GPL-2.0+
 // * @package do-planning-tool
-// * @version 0.0.5
-// * @desc.   Eerste opzet mobiele weergave.
+// * version: 1.1.2
+// * @desc.   Betere uitlijning voor de rest van the_content. Mogelijkheid om HTML-ID in te voeren.
 // * @link    https://github.com/ICTU/Digitale-Overheid---WordPress-plugin-Planning-Tool/
 
 
@@ -137,7 +137,7 @@ function bidirectional_acf_update_value( $value, $post_id, $field  ) {
 if( function_exists('acf_add_local_field_group') ) {
 
   //======================================================================================================
-  
+
   acf_add_local_field_group(array(
   	'key' => 'group_5beaf126f2d00',
   	'title' => 'Planning Tool Page',
@@ -228,6 +228,25 @@ if( function_exists('acf_add_local_field_group') ) {
   					'max' => '',
   					'return_format' => 'object',
   				),
+  				array(
+  					'key' => 'field_5c2e0648c28f0',
+  					'label' => 'HTML-ID',
+  					'name' => 'actielijnen_per_thema_htmlid',
+  					'type' => 'text',
+  					'instructions' => 'Via dit ID kun je rechtstreeks naar dit blok verwijzen in je URL',
+  					'required' => 0,
+  					'conditional_logic' => 0,
+  					'wrapper' => array(
+  						'width' => '',
+  						'class' => '',
+  						'id' => '',
+  					),
+  					'default_value' => '',
+  					'placeholder' => '',
+  					'prepend' => '',
+  					'append' => '',
+  					'maxlength' => '',
+  				),
   			),
   		),
   	),
@@ -249,6 +268,7 @@ if( function_exists('acf_add_local_field_group') ) {
   	'active' => 1,
   	'description' => '',
   ));
+
 
   //======================================================================================================
 
