@@ -9,8 +9,8 @@
 // * @author  Paul van Buuren
 // * @license GPL-2.0+
 // * @plugin: do-planning-tool
-// * Version: 1.0.2
-// * Version desc: Datumlabels en beschrijving gecorrigeerd in Gantt-chart.
+// * Version: 1.1.1
+// * Version desc: Als geen blokken geselecteerd zijn voor de pagina worden nu toch alle actielijnen in een goede layout getoond.
 // * @link    https://github.com/ICTU/Digitale-Overheid---WordPress-plugin-Planning-Tool/
 
 
@@ -358,7 +358,6 @@ form {
     .timescale-container {
       padding: 0;
       position: relative;
-//      background: pink;
       background-color: @wit;
       background: url('../assets/images/bg-image-white.svg'),  
                   url('../assets/images/bg-image-grid.svg');
@@ -366,79 +365,9 @@ form {
                   ( @timescale_year_width + 1 ) 1em;
       background-repeat: repeat-y, 
                   repeat;
-/*      
-
-      background: 
-        linear-gradient( 90deg, white 99%, white 100% ), 
-        linear-gradient( 90deg, 
-          white .1em, black .1em, black 3em, white 3em, white 3.1em, black 3.1em, black 6em, white 6em, black 6.1em, black 9em, white 9em, black 9.1em, black 12em, white 12em, yellow 13em);
-      background-size: 2em 26em, 30em 1em, 3em .5em;
-      background-repeat: repeat-y, repeat-y, repeat-y;
-
-
-      background: linear-gradient( 90deg, white 99%, white 100% ), 
-linear-gradient( 90deg, white 4em, white 4.1em, red 4.2em, red 7.2em, white 7.3em, white 8.3em, white 11.3em, white 11.4em, red 11.5em, red 14.5em, white 14.6em, white 15.6em, white 18.6em, white 18.7em, red 18.8em, red 21.8em, white 21.9em, white 22.9em, white 25.9em, white 26em, red 26.1em, red 29.1em, white 29.2em, white 30.2em, green 35.2em white 33.2em, white 33.3em, black 33.4em, black 36.4em, white 36.5em, white 37.5em, white 40.5em, white 40.6em, black 40.7em, black 43.7em, white 43.8em, white 44.8em, white 47.8em, white 47.9em, black 48em, black 51em, white 51.1em, white 52.1em, white 55.1em, white 55.2em, black 55.3em, black 58.3em, white 58.4em, white 59.4em, green 77.4em ), linear-gradient( 90deg, white 99%, white 100% );
-
-
-      background: linear-gradient( 90deg, white 99%, white 100% ), linear-gradient( 90deg, white 4em,
-  white 4.1em,
-  red 4.2em,
-  red 7.2em,
-  white 7.3em,
-  white 8.3em,
-  white 11.3em,
-  white 11.4em,
-  red 11.5em,
-  red 14.5em,
-  white 14.6em,
-  white 15.6em,
-  white 18.6em,
-  white 18.7em,
-  red 18.8em,
-  red 21.8em,
-  white 21.9em,
-  white 22.9em,
-  white 25.9em,
-  white 26em,
-  red 26.1em,
-  red 29.1em,
-  white 29.2em,
-  white 30.2em,
-  green 35.2em, 
-  white 33.2em,
-  white 33.3em,
-  black 33.4em,
-  black 36.4em,
-  white 36.5em,
-  white 37.5em,
-  white 40.5em,
-  white 40.6em,
-  black 40.7em,
-  black 43.7em,
-  white 43.8em,
-  white 44.8em,
-  white 47.8em,
-  white 47.9em,
-  black 48em,
-  black 51em,
-  white 51.1em,
-  white 52.1em,
-  white 55.1em,
-  white 55.2em,
-  black 55.3em,
-  black 58.3em,
-  white 58.4em,
-  white 59.4em,
-  green 77.4em ), linear-gradient( 90deg, yellow 99%, yellow 100% );
-
-
-      background-size: 22em 22em,78em 1em,84em .5em;
-      background-repeat: repeat-y, repeat-y, repeat-y;
-*/
                   
       .currentkwartaal {
         background: rgba( 123, 123, 123, .3 );
-//        border: 1px solid rgba( 123, 123, 123, .3 );
         width: 2.7em;
       }                  
   
@@ -453,10 +382,6 @@ linear-gradient( 90deg, white 4em, white 4.1em, red 4.2em, red 7.2em, white 7.3e
           padding: .5em .5em 1em 1rem;
           float: left;
           min-height: 4em;
-  
-          a {
-//            font-size: @thefontsreset;
-          }
         }
 
         .planning {
@@ -475,20 +400,21 @@ linear-gradient( 90deg, white 4em, white 4.1em, red 4.2em, red 7.2em, white 7.3e
           ul {
             padding-top: .5em;
             position: relative;
+//            border: 2px solid red;
             
             &, li {
               list-style: none;
               padding: 0;
-              margin: 0;
             }
             li {
               text-align: left;
               padding-right: .5em;
 
               a {
-                display: inline-block;
+//            border-left: 2px solid green;
                 min-width: 4em;
-                margin: .1em;
+                margin-top: .1em;
+                margin-bottom: .1em;
                 display: block;
                 
                 &:before {
