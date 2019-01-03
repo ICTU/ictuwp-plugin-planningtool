@@ -5,8 +5,8 @@
  * Plugin Name:         ICTU / WP Planning Tool digitaleoverheid.nl
  * Plugin URI:          https://github.com/ICTU/Digitale-Overheid---WordPress-plugin-Planning-Tool/
  * Description:         Plugin voor digitaleoverheid.nl waarmee extra functionaliteit mogelijk wordt voor het tonen van een planning met actielijnen en gebeurtenissen.
- * Version:             1.0.2
- * Version description: Datumlabels en beschrijving gecorrigeerd in Gantt-chart.
+ * Version:             1.1.1
+ * Version description: Als geen blokken geselecteerd zijn voor de pagina worden nu toch alle actielijnen in een goede layout getoond.
  * Author:              Paul van Buuren
  * Author URI:          https://wbvb.nl
  * License:             GPL-2.0+
@@ -35,7 +35,7 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
       /**
        * @var string
        */
-      public $version = '1.0.2';
+      public $version = '1.1.1';
   
   
       /**
@@ -325,7 +325,7 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
     	/**
     	 * Register the options page
     	 *
-    	 * @since    1.0.2
+    	 * @since    1.1.1
     	 */
     	public function do_pt_admin_register_settings() {
   
@@ -407,9 +407,10 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
           if ( intval( $this->dopt_years_start > 0 ) && ( intval( $this->dopt_years_start ) > intval( date("Y") ) ) ) {
             $this->dopt_years_start = date("Y");  
           }
-          if ( intval( $this->dopt_years_end > 0 ) && ( intval( $this->dopt_years_end ) < intval( date("Y") ) ) ) {
-            $this->dopt_years_end = ( date("Y") + 1 );
-          }
+          // uitgecommentarieerd, omdat het eindjaar het eindjaar is
+//          if ( intval( $this->dopt_years_end > 0 ) && ( intval( $this->dopt_years_end ) < intval( date("Y") ) ) ) {
+//            $this->dopt_years_end = ( date("Y") + 1 );
+//          }
           
           if ( ! $this->dopt_years_start ) {
             $this->dopt_years_start = date("Y");
@@ -560,15 +561,31 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
           $header_css .= ".programma .timescale-container {";
           $header_css .= " max-width: " . ( ( $this->dopt_years_max_nr * DOPT_CSS_YEARWIDTH ) + DOPT_CSS_PADDINGLEFT ) . "em;";   
           $header_css .= "}\n";
-
-          $distanceyears = ( $this->dopt_years_start - $year_now );
+          
+          // de kwartaalbalk is 2.7em breed
+          // een jaar is 3em breed.
+          // dus de linkerafstand vanwege de jaren moet opgehoogd worden met ( 3em - 2.7em ) = .3
+          $distanceyears = ( ( ( $year_now - $this->dopt_years_start ) * DOPT_CSS_YEARWIDTH ) + .3 );
           $distancekwartalen = ( ( ( $q_now - 1 ) * DOPT_CSS_QUARTERWIDTH ) + DOPT_CSS_PADDINGLEFT );
 
+          
           $header_css .= ".currentkwartaal {";
-          $header_css .= " position: absolute; ";
-          $header_css .= " left: " . ( $distanceyears + $distancekwartalen ) . "em;";
-          $header_css .= " top: 0;";
-          $header_css .= " bottom: 0;";
+          if ( $year_now <= $this->dopt_years_end ) {
+              
+            // toon de kwartaalbalk alleen als we niet voorbij de gewenste periode zijn
+            // dat wil zeggen het huidige jaar is kleiner of gelijk aan het bepaalde eindjaar ($this->dopt_years_end)
+            
+            $header_css .= " position: absolute; ";
+            
+            $header_css .= " left: " . ( $distanceyears + $distancekwartalen ) . "em; /* dopt_years_start: " . $this->dopt_years_start . ",  year_now: " . $year_now . ",  dopt_years_end: " . $this->dopt_years_end . ", distanceyears: " . $distanceyears . "*/ \n";
+            $header_css .= " top: 0;";
+            $header_css .= " bottom: 0;";
+
+          }
+          else {
+            $header_css .= " display:none;\n";
+          }
+
           $header_css .= "} \n";
 
           //----------------------------------------------------------------------------------------------------
@@ -662,31 +679,6 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
             $header_css .= "} \n";
   
           } // DOPT_CSS_RADIALGRADIENT 
-          else {
-            if ( 22 == 33 ) {
-              
-              $header_css .= ".programma .timescale-container {";
-              $header_css .= "background: ";
-              $header_css .= "  linear-gradient( ";
-              $header_css .= "    90deg,  ";
-              $header_css .= "    white 0,  ";
-              $header_css .= "    white 100% ";
-              $header_css .= "  ),";
-              $header_css .= "  url('/wp-content/plugins/do-planning-tool/assets/images/bg-image-grid.svg'),";
-              $header_css .= "  linear-gradient( ";
-              $header_css .= "    90deg,  ";
-              $header_css .= "    yellow 84em,  ";
-              $header_css .= "    pink 100% ";
-              $header_css .= "  );";
-              
-              $header_css .= "background-size: 26em 22em, 13em 1em, 84em .5em;";
-              $header_css .= "background-repeat: repeat-y, repeat, repeat-y;";
-            
-              $header_css .= "} \n";
-            
-            }
-            
-          }
 
           //----------------------------------------------------------------------------------------------------
           //----------------------------------------------------------------------------------------------------
@@ -729,8 +721,12 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
         
               }
 
-              $header_css .= "." . $value['type'] . '-' . $key . " a { ";
-              $header_css .= "transform: translatex(" . $translate . "em);";
+//div.planning.start_eind > ul > li.gebeurtenis-35741
+
+//              $header_css .= "." . $value['type'] . '-' . $key . " a { ";
+              $header_css .= "div.planning.start_eind > ul > li." . $value['type'] . '-' . $key . " { ";
+//              $header_css .= "transform: translatex(" . $translate . "em);";
+              $header_css .= "margin-left: " . $translate . "em;";
               $header_css .= "} ";
 
             }
@@ -826,15 +822,16 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
         $actielijnblokken         = get_field( 'actielijnen_per_thema', $acfid );
   
         $numberofyears            = 0;
+        $actielijnblok_counter    = 0;
 
         $year_now                 = date("Y");
         $q_now                    = date("m");
   
-        $dinges                   = 'gantt';
+        $verschijningsvorm        = 'gantt';
 
         if( have_rows('actielijnen_per_thema', $acfid ) ) {
         
-          if ( 'gantt' == $dinges ) {
+          if ( 'gantt' == $verschijningsvorm ) {
         
             $intervalheader = '<div class="intervalheader" aria-hidden="true">';
             $currentyear    = $this->dopt_years_start;
@@ -863,8 +860,6 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
       
       
             // nu gegevens tonen
-            
-            $actielijnblok_counter = 0;
           
             foreach( $actielijnblokken as $actielijnblok ) {
 
@@ -997,8 +992,8 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
             }
             
             
-          }    //  if ( 'gantt' == $dinges
-          elseif ( 'table' == $dinges ) {
+          }    //  if ( 'gantt' == $verschijningsvorm
+          elseif ( 'table' == $verschijningsvorm ) {
           
             foreach( $actielijnblokken as $actielijnblok ) {
         
@@ -1096,8 +1091,32 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
         }
         else { //   if( have_rows('actielijnen_per_thema', $acfid ) ) {
       
-          echo '<p>' . __( "Geen actielijnen geselecteerd voor deze pagina, dus alle actielijnen per digibeter-kleur worden getoond.", "do-planning-tool" ) . '</p>';
+          echo '<p class="wrap">' . __( "Geen actielijnen geselecteerd voor deze pagina, dus alle actielijnen per digibeter-kleur worden getoond.", "do-planning-tool" ) . '</p>';
+
+          $intervalheader = '<div class="intervalheader" aria-hidden="true">';
+          $currentyear    = $this->dopt_years_start;
+          $currentquarter = 1;
+    
+          while ( intval( $currentyear ) <= intval( $this->dopt_years_end ) ) : 
+    
+            $intervalheader .= '<div class="intervalheader-year"><span>' . $currentyear . '</span>';
           
+            while ( intval( $currentquarter ) <= intval( ( DOPT__NR_QUARTERS - 1 ) ) ) : 
+
+              $intervalheader .= '<div class="intervalheader-quarter">Q' . $currentquarter . '</div>';
+              $currentquarter++;
+            
+            endwhile;
+          
+            $intervalheader .= '</div>';
+            $currentquarter = 1;
+            $currentyear++;
+              
+          endwhile;
+          
+          $intervalheader .= '</div>'; // class=intervalheader
+    
+          $currentkwartaal = '<div class="currentkwartaal">&nbsp;</div>'; // class=intervalheader          
         
           $terms = get_terms( array(
             'taxonomy'    => RHSWP_CT_DIGIBETER,
@@ -1107,7 +1126,16 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
           if ( $terms ) {
         
             foreach ( $terms as $term ) {
+
+              $actielijnblok_counter++;
         
+              $actielijnblok_titel    = esc_html( $term->name );
+              $digibeterclass         = get_field( 'digibeter_term_achtergrondkleur', RHSWP_CT_DIGIBETER . '_' . $term->ID );
+              $intervalheader2        = preg_replace('/class="intervalheader"/', 'class="intervalheader" id="intervalheader_' . $actielijnblok_counter . '"', $intervalheader );          
+
+              $possiblewidth_timeline = ( ( $this->dopt_years_max_nr * DOPT_CSS_YEARWIDTH ) - 1 ); // -1 is to strip off the unnecessary margin-right of the last year
+              $possiblewidth_total      = ( $possiblewidth_timeline + DOPT_CSS_PADDINGLEFT );
+
               $args = array(
                   'post_type'       => DOPT__ACTIELIJN_CPT, 
                   'post_status'     => 'publish',
@@ -1127,23 +1155,124 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
               if ( $wp_queryposts->have_posts() ) {
         
                 $digibeterclass  = get_field( 'digibeter_term_achtergrondkleur', RHSWP_CT_DIGIBETER . '_' . $term->term_id );
-        
-                echo '<div class="programma ' . $digibeterclass . '">';      
+          
+                echo '<section id="' . sanitize_title( $actielijnblok_titel ) . '" class="programma ' . $digibeterclass . '" data-possiblewidth="' . ( $possiblewidth_total + 1 ) . 'em">';      
+                
+                // header
+                echo '<header>';
+                echo '<div class="container">';
                 echo '<h2>' . $term->name . '</h2>';      
+                echo '</div>';
+                echo '<div class="container">';
+                echo $intervalheader2;
+                echo '<div>';
+                echo '</header>';
+        
+                echo '<div class="timescale-container">' . $currentkwartaal;
+                echo '<div class="actielijnen">';
+  
         
                 $postcounter = 0;
             
                 while ( $wp_queryposts->have_posts() ) : $wp_queryposts->the_post();
                   $postcounter++;
                   $theid = get_the_id();
-                  echo '<h3><a href="' . get_the_permalink() . '">' . get_the_title() . '</a></h3>';
-                  echo $this->do_pt_frontend_display_actielijn_info( $select_actielijn->ID, false, true, $this->dopt_years_start, $this->dopt_years_end );          
+
+                  $currentyear    = $this->dopt_years_start;
+                  $startatyearq   = intval( $this->dopt_years_start . 1 );
+                  $endatyearq     = intval( $this->dopt_years_end . 4 );
+
+                  // we hebben een ID nodig voor dit element. 
+                  // De combinatie van een titel van het blok en de ID van de actielijn zou voldoende moeten zijn
+                  // Dit ID wordt o.m. gebruikt voor het toevoegen van labeltjes en anchors op de pagina
+                  $identifier                         = DOPT__ACTIELIJN_CPT . '-' . $theid;
+                  $planning                           = wp_get_post_terms( $theid, DOPT_CT_PLANNINGLABEL );
+      
+                  // gebruik $identifier als class en niet als ID omdat een actielijn per ongeluk aan meerdere 
+                  // blokken toegekend kan worden en dan dus de HTML ongeldig kan maken.
+                  echo '<div class="' . $identifier . ' single-actielijn" id="' . sanitize_title( $actielijnblok_titel ) . '-' . $theid . '">';
+
+                  echo '<div class="description">';                  
+                  echo '<h3><a href="' . get_the_permalink( $theid ) . '">' . get_the_title( $theid ) . '</a></h3>';
+                  echo '</div>';
+                  
+                  echo '<div class="planning ' . get_field( 'heeft_start-_of_einddatums', $theid ) . '">';
+
+                  $emptycontent = '&nbsp;';
+      
+                  if ( $planning ) {
+    
+                    if ( $planning[0]->name ) {
+                      $emptycontent = '<span aria-hidden="true">' . $planning[0]->name . '</span>';
+                    }
+                  }
+
+                  echo '<div class="ganttbar">';    
+
+                  if ( $planning ) {
+                    if ( $planning[0]->name ) {
+                      echo '<span class="visuallyhidden">' . _x( 'Planning:', 'geschatte planning', 'wp-rijkshuisstijl' ) . '</span> ' .  strtolower( $planning[0]->name );
+                    }
+                  }
+
+                  echo '<span class="visuallyhidden">, ';      
+      
+                  switch ( get_field( 'heeft_start-_of_einddatums', $theid ) ) {
+                    
+                    case 'start_eind':
+                      echo sprintf( _x( 'van %s-%s tot %s-%s', 'geschatte planning', 'wp-rijkshuisstijl' ), 
+                                        strtoupper( get_field( 'actielijn_kwartaal_eind_kwartaal', $theid ) ), 
+                                        $this->dopt_array_data[$theid]['start_jaar'],
+                                        strtoupper( get_field( 'actielijn_kwartaal_eind_kwartaal', $theid ) ), 
+                                        $this->dopt_array_data[$theid]['eind_jaar'] ) . '. ';
+                      break;
+                  
+                    case 'start':
+                      echo sprintf( _x( 'vanaf %s-%s', 'geschatte planning', 'wp-rijkshuisstijl' ), 
+                                        strtoupper( get_field( 'actielijn_kwartaal_eind_kwartaal', $theid ) ), 
+                                        $this->dopt_array_data[$theid]['start_jaar'] ) . '. ';
+                      break;
+                  
+                    case 'eind':
+                      echo sprintf( _x( 'tot %s-%s', 'geschatte planning', 'wp-rijkshuisstijl' ), 
+                                        strtoupper( get_field( 'actielijn_kwartaal_eind_kwartaal', $theid ) ), 
+                                        $this->dopt_array_data[$theid]['eind_jaar'] ) . '. ';
+                      break;
+                  
+                  }      
+
+      
+                  echo '</span>';      
+                  echo '</div>';    
+
+
+                  $args = array(    
+                    'id'              => $theid,
+                    'echo'            => false,
+                  	'showheader'      => 0,
+                    'startyear'       => $this->dopt_years_start,
+                    'endyear'         => $this->dopt_years_end,
+                    'uniqueelementid' => $identifier,
+                    'headertag'       => 'p',
+                    'titletext'       => __( 'Gebeurtenissen hierbij:', 'wp-rijkshuisstijl' )  
+                  );
+
+                  echo do_pt_frontend_get_gebeurtenissen_for_actielijn( $args );          
+                  
+                  echo '</div>'; // class=planning
+                  echo '</div>'; // class=single-actielijn
             
                 endwhile;
-        
-                echo '</div>';
+
+                echo '</div>'; // class=actielijnen
+                echo '</div>'; // class=timescale-container;
+                echo '</section>'; // class=programma
+
             
               }
+              
+
+
             }
           }
         }
@@ -1761,6 +1890,7 @@ function do_pt_frontend_get_gebeurtenissen_for_actielijn( $args ) {
     }      
 
     ksort( $sortthisarray );    
+//    krsort( $sortthisarray );    
 
     foreach( $sortthisarray as $key => $value ){
       
