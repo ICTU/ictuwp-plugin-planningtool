@@ -425,18 +425,18 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 
           wp_enqueue_script( 'functions-frontend-min', DOPT__ASSETS_URL . 'js/functions-frontend.js', '', DOPT__VERSION, $infooter );
 
-          $header_css .= "@media only screen and ( max-width: " . $breakpoint . " ) {\n";
-          $header_css .= ".programma .intervalheader {\n";
-          $header_css .= "display: none; \n";
-          $header_css .= "visibility: hidden; \n";
-          $header_css .= "} \n";
-          $header_css .= "} \n";
+          $header_css .= "@media only screen and ( max-width: " . $breakpoint . " ) { ";
+          $header_css .= ".programma .intervalheader { ";
+          $header_css .= "display: none;  ";
+          $header_css .= "visibility: hidden;  ";
+          $header_css .= "}  ";
+          $header_css .= "}  ";
           
-          $header_css .= "@media only screen and ( min-width: " . $breakpoint . " ) {\n";
-          $header_css .= ".programma .intervalheader {\n";
-          $header_css .= "display: block; \n";
-          $header_css .= "visibility: visible; \n";
-          $header_css .= "} \n";
+          $header_css .= "@media only screen and ( min-width: " . $breakpoint . " ) { ";
+          $header_css .= ".programma .intervalheader { ";
+          $header_css .= "display: block;  ";
+          $header_css .= "visibility: visible;  ";
+          $header_css .= "}  ";
 
           $args = array(
               'post_type'       => DOPT__ACTIELIJN_CPT, 
@@ -551,11 +551,11 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 
           $header_css .= ".actielijnen { ";
           $header_css .= " width: " . ( ( $this->dopt_years_max_nr * DOPT_CSS_YEARWIDTH ) + DOPT_CSS_PADDINGLEFT ) . "em;";   
-          $header_css .= "}\n";
+          $header_css .= "} ";
 
           $header_css .= ".programma .timescale-container {";
           $header_css .= " max-width: " . ( ( $this->dopt_years_max_nr * DOPT_CSS_YEARWIDTH ) + DOPT_CSS_PADDINGLEFT ) . "em;";   
-          $header_css .= "}\n";
+          $header_css .= "} ";
           
           // de kwartaalbalk is 2.7em breed
           // een jaar is 3em breed.
@@ -572,16 +572,16 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
             
             $header_css .= " position: absolute; ";
             
-            $header_css .= " left: " . ( $distanceyears + $distancekwartalen ) . "em; /* dopt_years_start: " . $this->dopt_years_start . ",  year_now: " . $year_now . ",  dopt_years_end: " . $this->dopt_years_end . ", distanceyears: " . $distanceyears . "*/ \n";
+            $header_css .= " left: " . ( $distanceyears + $distancekwartalen ) . "em; /* dopt_years_start: " . $this->dopt_years_start . ",  year_now: " . $year_now . ",  dopt_years_end: " . $this->dopt_years_end . ", distanceyears: " . $distanceyears . "*/  ";
             $header_css .= " top: 0;";
             $header_css .= " bottom: 0;";
 
           }
           else {
-            $header_css .= " display:none;\n";
+            $header_css .= " display:none; ";
           }
 
-          $header_css .= "} \n";
+          $header_css .= "}  ";
 
           //----------------------------------------------------------------------------------------------------
           //----------------------------------------------------------------------------------------------------
@@ -647,7 +647,7 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
                 
                 }
                 
-                $header_css .= $appendstring . "\n";
+                $header_css .= $appendstring . " ";
                 $kwartaalcounter++ ;
                 $startat = ( $startat + $kwartaalbreedte );
                 
@@ -670,7 +670,7 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
             $header_css .= "background-size: 2em 22em," . ( ( $this->dopt_years_max_nr * DOPT_CSS_YEARWIDTH ) + DOPT_CSS_PADDINGLEFT ) . "em 100em, 84em .5em;";
             $header_css .= "background-repeat: repeat-y, repeat-y, repeat-y;";
   
-            $header_css .= "} \n";
+            $header_css .= "}  ";
   
           } // DOPT_CSS_RADIALGRADIENT 
 
@@ -776,7 +776,7 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 
               if ( ( $emwidth_start ) || ( $emwidth_eind ) ) {
 
-                $header_css .= "\n." . $value['type'] . '-' . $key . " .ganttbar { ";
+                $header_css .= " ." . $value['type'] . '-' . $key . " .ganttbar { ";
                 if ( $emwidth_start ) {
                   $header_css .= "margin-left: " . $emwidth_start . "em; ";
                 }
