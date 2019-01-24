@@ -7,8 +7,8 @@
 // * @author  Paul van Buuren
 // * @license GPL-2.0+
 // * @package do-planning-tool
-// * version: 1.1.2
-// * @desc.   Betere uitlijning voor de rest van the_content. Mogelijkheid om HTML-ID in te voeren.
+// * version: 1.1.4
+// * @desc.   Extra velden actielijn en bugfiks voor CSS-validatie.
 // * @link    https://github.com/ICTU/Digitale-Overheid---WordPress-plugin-Planning-Tool/
 
 
@@ -360,7 +360,7 @@ if( function_exists('acf_add_local_field_group') ) {
 
   //======================================================================================================
 
-  acf_add_local_field_group(array(
+    acf_add_local_field_group(array(
   	'key' => 'group_5be97485d6c95',
   	'title' => 'Actielijn: datums, samenhang met gebeurtenissen en actielijnen',
   	'fields' => array(
@@ -639,6 +639,72 @@ if( function_exists('acf_add_local_field_group') ) {
   	'style' => 'default',
   	'label_placement' => 'top',
   	'instruction_placement' => 'field',
+  	'hide_on_screen' => '',
+  	'active' => 1,
+  	'description' => '',
+  ));
+
+  //======================================================================================================
+  // doel en resultaat voor een actielijn.
+  // since 1.1.4
+  
+  acf_add_local_field_group(array(
+  	'key' => 'group_5c49a13678524',
+  	'title' => 'Actielijn : doel en resultaat',
+  	'fields' => array(
+  		array(
+  			'key' => 'field_5c49a14deda73',
+  			'label' => 'Doel',
+  			'name' => 'actielijn_doel',
+  			'type' => 'wysiwyg',
+  			'instructions' => '',
+  			'required' => 0,
+  			'conditional_logic' => 0,
+  			'wrapper' => array(
+  				'width' => '',
+  				'class' => '',
+  				'id' => '',
+  			),
+  			'default_value' => '',
+  			'tabs' => 'all',
+  			'toolbar' => 'basic',
+  			'media_upload' => 1,
+  			'delay' => 0,
+  		),
+  		array(
+  			'key' => 'field_5c49a17918caa',
+  			'label' => 'Resultaat',
+  			'name' => 'actielijn_resultaat',
+  			'type' => 'wysiwyg',
+  			'instructions' => '',
+  			'required' => 0,
+  			'conditional_logic' => 0,
+  			'wrapper' => array(
+  				'width' => '',
+  				'class' => '',
+  				'id' => '',
+  			),
+  			'default_value' => '',
+  			'tabs' => 'all',
+  			'toolbar' => 'basic',
+  			'media_upload' => 1,
+  			'delay' => 0,
+  		),
+  	),
+  	'location' => array(
+  		array(
+  			array(
+  				'param' => 'post_type',
+  				'operator' => '==',
+  				'value' => 'actielijn',
+  			),
+  		),
+  	),
+  	'menu_order' => 1,
+  	'position' => 'normal',
+  	'style' => 'default',
+  	'label_placement' => 'top',
+  	'instruction_placement' => 'label',
   	'hide_on_screen' => '',
   	'active' => 1,
   	'description' => '',

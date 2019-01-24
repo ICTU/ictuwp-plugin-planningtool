@@ -8,8 +8,8 @@
 // * @author  Paul van Buuren
 // * @license GPL-2.0+
 // * @plugin: do-planning-tool
-// * Version: 0.0.5
-// * Version desc: Eerste opzet mobiele weergave.
+// * version: 1.1.4
+// * @desc.   Extra velden actielijn en bugfiks voor CSS-validatie.
 // * @link    https://github.com/ICTU/Digitale-Overheid---WordPress-plugin-Planning-Tool/
 
 @import "palet-do.less";
@@ -153,6 +153,7 @@
     span {
       background: @kleur1;
       color: @txtcolor1;
+      font-weight: bold;
     }
     
   }
@@ -163,26 +164,14 @@
       opacity: .3;
     }
   }
-  
 
-  //-------------------------------------------------------------------------------------------------------
-  
-  @media only screen and ( min-width: @breakpoint_chart ) {
-  
-    
+  @media ( max-width: @breakpoint_chart ) {  
+
+//    .single-actielijn {  
+//      background-color: @kleur2;
+//    }
+
   }
-
-  //-------------------------------------------------------------------------------------------------------
-  
-  @media only screen and ( max-width: @breakpoint_chart ) {
-  
-    .single-actielijn {  
-      background-color: @kleur2;
-    }
-    
-  }
-
-  //-------------------------------------------------------------------------------------------------------
   
 }
 

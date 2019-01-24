@@ -5,8 +5,8 @@
  * Plugin Name:         ICTU / WP Planning Tool digitaleoverheid.nl
  * Plugin URI:          https://github.com/ICTU/Digitale-Overheid---WordPress-plugin-Planning-Tool/
  * Description:         Plugin voor digitaleoverheid.nl waarmee extra functionaliteit mogelijk wordt voor het tonen van een planning met actielijnen en gebeurtenissen.
- * Version:             1.1.3
- * Version description: Bugfiks voor correcte plaatsing van gebeurtenissen.
+ * Version:             1.1.4
+ * Version description: Extra velden actielijn en bugfiks voor CSS-validatie.
  * Author:              Paul van Buuren
  * Author URI:          https://wbvb.nl
  * License:             GPL-2.0+
@@ -35,7 +35,7 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
       /**
        * @var string
        */
-      public $version = '1.1.3';
+      public $version = '1.1.4';
   
   
       /**
@@ -110,6 +110,8 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
         define( 'DOPT__SURVEY_DEFAULT_USERID',   2600 ); // 't is wat, hardgecodeerde userids (todo: invoerbaar maken via admin)
 
         define( 'DOPT_CT_PLANNINGLABEL',         "Planning label" );
+
+        define( 'DOPT_CT_TREKKER',               "trekker" );
 
         define( 'DOPT__QUESTION_PREFIX',         DOPT__ACTIELIJN_CPT . '_pf_' ); // prefix for cmb2 metadata fields
         define( 'DOPT__CMBS2_PREFIX',            DOPT__QUESTION_PREFIX . '_form_' ); // prefix for cmb2 metadata fields
@@ -286,10 +288,12 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
         
         // admin settings
         add_action( 'admin_init',             array( $this, 'do_pt_admin_register_settings' ) );
-        
+
         add_action( 'wp_enqueue_scripts',     array( $this, 'do_pt_frontend_register_frontend_style_script' ) );
 
         add_action( 'admin_enqueue_scripts',  array( $this, 'do_pt_admin_register_styles' ) );
+
+
 
 
       }
@@ -319,13 +323,14 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
         return $post_templates;
       
       }
-  
+
       //========================================================================================================
   
+
     	/**
     	 * Register the options page
     	 *
-    	 * @since    1.1.3
+    	 * @since    1.1.4
     	 */
     	public function do_pt_admin_register_settings() {
   
@@ -1336,34 +1341,88 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
       
       if ( is_single() && DOPT__ACTIELIJN_CPT == get_post_type() ) {
 
-//        $acfid = DOPT__ACTIELIJN_CPT . '_' . $post->ID;
         $acfid = $post->ID;
+
+        $actielijn_doel       = get_field('actielijn_doel', $acfid );
+        $actielijn_resultaat  = get_field('actielijn_resultaat', $acfid );
         
-//        $returnstring .= '<p>acfid: ' . $acfid . '</p>';
-        
+        if ( $actielijn_doel ) {
+          $returnstring .= '<h2>' . _x( 'Doel', 'kopje', 'wp-rijkshuisstijl' ) . '</h2>';
+          $returnstring .= $actielijn_doel;
+        }
+
+        if ( $actielijn_resultaat ) {
+          $returnstring .= '<h2>' . _x( 'Resultaat', 'kopje', 'wp-rijkshuisstijl' ) . '</h2>';
+          $returnstring .= $actielijn_resultaat;
+        }
+
         //------------------------------------------------------------------------------------------------
         // haal de planning taxonomie op en toon deze
 
         $planning = wp_get_post_terms( $post->ID, DOPT_CT_PLANNINGLABEL );
     
         if ( $planning ) {
-          if ( $planning[0]->name ) {
+//          $tax_info = get_taxonomy( DOPT_CT_PLANNINGLABEL );
             
-          $returnstring .= '<p>' . _x( 'Planning:', 'geschatte planning', 'wp-rijkshuisstijl' ) . ' ' .  strtolower( $planning[0]->name )  . '</p>';
+          $returnstring .= '<h2>' . _x( 'Planning', 'kopje', 'wp-rijkshuisstijl' ) . '</h2>';
+          
+          $returnstring .= '<p>';
+//          $returnstring .= $tax_info->labels->singular_name;
+//          $returnstring .= $tax_info->labels->singular_name;
+//          $returnstring .= ': ';
+
+          foreach ( $planning as $term ) {
+            $countertje++;
+            if ( $countertje <= 1 ) {
+              $returnstring .= $term->name;
+            }
+            else {
+              $returnstring .= ', ' . $term->name;
+            }
           }
+          
+          $returnstring .= '.</p>';
+          
+        }
+
+        //------------------------------------------------------------------------------------------------
+        // haal de trekkers taxonomie op en toon deze
+
+        $planning = wp_get_post_terms( $post->ID, DOPT_CT_TREKKER );
+    
+        if ( $planning ) {
+
+          $tax_info     = get_taxonomy( DOPT_CT_TREKKER );
+          $countertje   = 0;
+//          $returnstring .= '<p>';
+          $returnstring .= '<h2>';
+
+          if ( count( $planning ) > 1 ) {
+            $returnstring .= $tax_info->labels->name;
+          }
+          else {
+            $returnstring .= $tax_info->labels->singular_name;
+          }
+//          $returnstring .= ': ';
+          $returnstring .= '</h2>';
+          $returnstring .= '<p>';
+
+          foreach ( $planning as $term ) {
+            $countertje++;
+            if ( $countertje <= 1 ) {
+              $returnstring .= $term->name;
+            }
+            else {
+              $returnstring .= ', ' . $term->name;
+            }
+          }
+          $returnstring .= '.</p>';
         }
 
         //------------------------------------------------------------------------------------------------
         // kijken of er gerelateerde actielijnen zijn
 
         $related_actielijnen = get_field('related_actielijnen', $acfid );
-
-if( $related_actielijnen ) {
-// $returnstring .= '<p>Actielijnen voor: ' . $acfid . '</p>';
-}
-else {
-// $returnstring .= '<p>Geen actielijnen voor: ' . $acfid . '</p>';
-}
 
         if( $related_actielijnen ) {
       
@@ -1391,13 +1450,6 @@ else {
         // kijken of er gebeurtenissen aan deze actielijn gekoppeld zijn
 
         $related_gebeurtenissen = get_field('related_gebeurtenissen_actielijnen', $acfid );
-
-if( $related_gebeurtenissen ) {
-// $returnstring .= '<p>Gebeurtenissen voor: ' . $acfid . '</p>';
-}
-else {
-// $returnstring .= '<p>Geen gebeurtenissen voor: ' . $acfid . '</p>';
-}
 
         if( $related_gebeurtenissen ) {
       

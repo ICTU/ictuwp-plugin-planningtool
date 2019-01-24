@@ -9,9 +9,10 @@ Planning Tool plugin voor digitaleoverheid.nl. Toont actielijnen en gebeurteniss
 * eh
 
 ## Current version:
-1.1.3 - Bugfiks voor correcte plaatsing van gebeurtenissen.
+1.1.4 - Extra velden actielijn en bugfiks voor CSS-validatie.
 
 ## Version history
+* 1.1.4 - Extra velden actielijn en bugfiks voor CSS-validatie.
 * 1.1.3 - Bugfiks voor correcte plaatsing van gebeurtenissen.
 * 1.1.2 - Betere uitlijning voor de rest van the_content. Mogelijkheid om HTML-ID in te voeren.
 * 1.1.1 - Als geen blokken geselecteerd zijn voor de pagina worden nu toch alle actielijnen in een goede layout getoond.
@@ -23,3 +24,4 @@ Planning Tool plugin voor digitaleoverheid.nl. Toont actielijnen en gebeurteniss
 * 0.0.3 - Second design sprint implemented.
 * 0.0.2 - First design of actielijnen implemented.
 * 0.0.1h - First set up of plugin files.
+
