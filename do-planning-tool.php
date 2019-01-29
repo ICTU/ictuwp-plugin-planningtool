@@ -5,8 +5,8 @@
  * Plugin Name:         ICTU / WP Planning Tool digitaleoverheid.nl
  * Plugin URI:          https://github.com/ICTU/Digitale-Overheid---WordPress-plugin-Planning-Tool/
  * Description:         Plugin voor digitaleoverheid.nl waarmee extra functionaliteit mogelijk wordt voor het tonen van een planning met actielijnen en gebeurtenissen.
- * Version:             1.1.4
- * Version description: Extra velden actielijn en bugfiks voor CSS-validatie.
+ * Version:             1.1.5
+ * Version description: Andere kleuren voor NL-Digibeter oranje.
  * Author:              Paul van Buuren
  * Author URI:          https://wbvb.nl
  * License:             GPL-2.0+
@@ -35,7 +35,7 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
       /**
        * @var string
        */
-      public $version = '1.1.4';
+      public $version = '1.1.5';
   
   
       /**
@@ -330,7 +330,7 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
     	/**
     	 * Register the options page
     	 *
-    	 * @since    1.1.4
+    	 * @since    1.1.5
     	 */
     	public function do_pt_admin_register_settings() {
   
@@ -934,6 +934,9 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
                     }
                   }
 
+/*
+
+// deze teksten leveren uiteindelijk niet meer duidelijkheid op, dus uitgecommentarieerd.
                   echo '<span class="visuallyhidden">, ';      
       
                   switch ( get_field( 'heeft_start-_of_einddatums', $select_actielijn->ID ) ) {
@@ -962,6 +965,7 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 
       
                   echo '</span>';      
+*/                  
                   echo '</div>';    
 
 
@@ -1224,6 +1228,10 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
                     }
                   }
 
+/*
+
+// deze teksten leveren uiteindelijk niet meer duidelijkheid op, dus uitgecommentarieerd.
+  
                   echo '<span class="visuallyhidden">, ';      
       
                   switch ( get_field( 'heeft_start-_of_einddatums', $theid ) ) {
@@ -1252,6 +1260,7 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 
       
                   echo '</span>';      
+*/                  
                   echo '</div>';    
 
 
