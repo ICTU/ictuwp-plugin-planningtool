@@ -9,9 +9,10 @@ Planning Tool plugin voor digitaleoverheid.nl. Toont actielijnen en gebeurteniss
 * eh
 
 ## Current version:
-1.1.5 - Andere kleuren voor NL-Digibeter oranje.
+1.1.6 - Oranje defintief gewijzigd naar #c25607.
 
 ## Version history
+* 1.1.6 - Oranje defintief gewijzigd naar #c25607.
 * 1.1.5 - Andere kleuren voor NL-Digibeter oranje.
 * 1.1.4 - Extra velden actielijn en bugfiks voor CSS-validatie.
 * 1.1.3 - Bugfiks voor correcte plaatsing van gebeurtenissen.
