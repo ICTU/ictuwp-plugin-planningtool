@@ -7,8 +7,8 @@
 // * @author  Paul van Buuren
 // * @license GPL-2.0+
 // * @package do-planning-tool
-// * version: 1.1.4
-// * @desc.   Extra velden actielijn en bugfiks voor CSS-validatie.
+// * version: 1.2.1
+// * @desc.   Beleidsonderwerp-taxonomie toegevoegd; paginafilter hiervoor verfijnd.
 // * @link    https://github.com/ICTU/Digitale-Overheid---WordPress-plugin-Planning-Tool/
 
 
@@ -716,6 +716,9 @@ if( function_exists('acf_add_local_field_group') ) {
   	'key' => 'group_5be5e4ee3cb94',
   	'title' => 'Planning Tool instellingen',
   	'fields' => array(
+    	
+    	/*
+    	
   		array(
   			'key' => 'field_5be5e5070642f',
   			'label' => 'Planning-pagina',
@@ -738,6 +741,9 @@ if( function_exists('acf_add_local_field_group') ) {
   			'return_format' => 'object',
   			'ui' => 1,
   		),
+  		
+  		*/
+  		
   		array(
   			'key' => 'field_5bee9098c1202',
   			'label' => 'Start jaar',
@@ -801,7 +807,55 @@ if( function_exists('acf_add_local_field_group') ) {
   ));
 
   //======================================================================================================
-  
+
+  acf_add_local_field_group(array(
+  	'key' => 'group_5c6ec39a6be33',
+  	'title' => 'Pagina bij dit beleidsonderwerp',
+  	'fields' => array(
+  		array(
+  			'key' => 'field_5c6ec3eac0509',
+  			'label' => 'Welke pagina hoort bij dit beleidsonderwerp?',
+  			'name' => 'dopt_ct_onderwerp_page',
+  			'type' => 'post_object',
+  			'instructions' => '',
+  			'required' => 1,
+  			'conditional_logic' => 0,
+  			'wrapper' => array(
+  				'width' => '',
+  				'class' => '',
+  				'id' => '',
+  			),
+  			'post_type' => array(
+  				0 => 'page',
+  			),
+  			'taxonomy' => '',
+  			'allow_null' => 0,
+  			'multiple' => 0,
+  			'return_format' => 'object',
+  			'ui' => 1,
+  		),
+  	),
+  	'location' => array(
+  		array(
+  			array(
+  				'param' => 'taxonomy',
+  				'operator' => '==',
+  				'value' => DOPT_CT_ONDERWERP,
+  			),
+  		),
+  	),
+  	'menu_order' => 0,
+  	'position' => 'normal',
+  	'style' => 'default',
+  	'label_placement' => 'top',
+  	'instruction_placement' => 'label',
+  	'hide_on_screen' => '',
+  	'active' => true,
+  	'description' => '',
+  ));
+
+  //======================================================================================================
+
 
 }
 

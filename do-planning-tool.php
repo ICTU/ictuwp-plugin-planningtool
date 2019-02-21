@@ -5,8 +5,8 @@
  * Plugin Name:         ICTU / WP Planning Tool digitaleoverheid.nl
  * Plugin URI:          https://github.com/ICTU/Digitale-Overheid---WordPress-plugin-Planning-Tool/
  * Description:         Plugin voor digitaleoverheid.nl waarmee extra functionaliteit mogelijk wordt voor het tonen van een planning met actielijnen en gebeurtenissen.
- * Version:             1.1.6
- * Version description: Oranje defintief gewijzigd naar #c25607.
+ * Version:             1.2.1
+ * Version description: Beleidsonderwerp-taxonomie toegevoegd; paginafilter hiervoor verfijnd.
  * Author:              Paul van Buuren
  * Author URI:          https://wbvb.nl
  * License:             GPL-2.0+
@@ -35,7 +35,7 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
       /**
        * @var string
        */
-      public $version = '1.1.6';
+      public $version = '1.2.1';
   
   
       /**
@@ -113,15 +113,24 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 
         define( 'DOPT_CT_TREKKER',               "trekker" );
 
+        define( 'DOPT_CT_ONDERWERP',             "beleidsonderwerp" );
+        define( 'DOPT_CT_ONDERWERP_DEFAULT',     "NL Digibeter" );
+
         define( 'DOPT__QUESTION_PREFIX',         DOPT__ACTIELIJN_CPT . '_pf_' ); // prefix for cmb2 metadata fields
         define( 'DOPT__CMBS2_PREFIX',            DOPT__QUESTION_PREFIX . '_form_' ); // prefix for cmb2 metadata fields
         define( 'DOPT__FORMKEYS',                DOPT__CMBS2_PREFIX . 'keys' ); // prefix for cmb2 metadata fields
         
+
+//        define( 'ADD_DEFAULT_TERM_ID',              false );
+        define( 'ADD_DEFAULT_TERM_ID',              true );
+
         define( 'DOPT__PLUGIN_DO_DEBUG',         true );
 //        define( 'DOPT__PLUGIN_DO_DEBUG',         false );
+
 //        define( 'DOPT__PLUGIN_OUTPUT_TOSCREEN',  false );
         define( 'DOPT__PLUGIN_OUTPUT_TOSCREEN',  true );
-        define( 'DOPT__PLUGIN_USE_CMB2',         true ); 
+//        define( 'DOPT__PLUGIN_USE_CMB2',         true ); 
+        define( 'DOPT__PLUGIN_USE_CMB2',         false ); 
         define( 'DOPT__PLUGIN_GENESIS_ACTIVE',   true ); // todo: inbouwen check op actief zijn van Genesis framework
 
         define( 'DOPT__ALGEMEEN_LABEL',          'ictudo_planning_label' ); 
@@ -811,6 +820,55 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
        */
        
       public function do_pt_do_frontend_pagetemplate_add_actielijnen() {
+
+        if ( ADD_DEFAULT_TERM_ID && WP_DEBUG && DOPT__PLUGIN_DO_DEBUG ) {
+
+          $args = array(
+            'post_type'       => DOPT__ACTIELIJN_CPT,
+            'post_status'     => 'publish',
+            'posts_per_page'  => -1,
+          );
+            
+          $actielijnen = new WP_query();
+          $actielijnen->query($args);
+            
+          if ( $actielijnen->have_posts() ) {
+
+            echo '<ul>';
+        
+            while ($actielijnen->have_posts()) : $actielijnen->the_post();
+        
+              $post_id = get_the_id();
+              
+              $terms = wp_get_post_terms( $post_id, DOPT_CT_ONDERWERP );
+
+              if ( empty( $terms ) ) {
+              
+                if ( term_exists( DOPT_CT_ONDERWERP_DEFAULT, DOPT_CT_ONDERWERP ) ) {
+                  echo '<li>' . get_the_title( $post_id );
+                  wp_set_object_terms( $post_id, DOPT_CT_ONDERWERP_DEFAULT, DOPT_CT_ONDERWERP );
+
+                  echo 'now has <span style="display: inline-block; background: green; color: white;">term: ' . esc_html( $term->name ) . '</span >';
+                  
+                  echo '</li>';
+                }
+                
+              }              
+              else {
+                // do nothing, actielijn has terms
+              }
+              
+              
+            endwhile;
+
+            echo '</ul>';
+            
+          }
+
+          // RESET THE QUERY
+          wp_reset_query();
+
+        }
       
         $acfid                    = get_the_id();
         $actielijnblokken         = get_field( 'actielijnen_per_thema', $acfid );
@@ -1096,12 +1154,39 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
       
         }
         else { //   if( have_rows('actielijnen_per_thema', $acfid ) ) {
-      
+
+          // loop through all the terms in DOPT_CT_ONDERWERP and see if the attached page has the same ID as the current page 
+          $select_term_id   = '';
+          $postid           = get_the_id();          
+          $terms2           = get_terms( DOPT_CT_ONDERWERP );
+          
+          foreach ( $terms2 as $_term ) {          
+
+            $planning_page      = get_field( 'dopt_ct_onderwerp_page', DOPT_CT_ONDERWERP . '_' . $_term->term_id );
+            
+            if ( $postid == $planning_page->ID ) {
+              // the attached page has the same ID as the current page 
+              // so keep the term ID for selection
+              $select_term_id = $_term->term_id;
+            }
+
+          }
+
 
           $user = wp_get_current_user();
           if ( in_array( 'manage_categories', (array) $user->allcaps ) ) {
-            // ingelogde gebruiker die minstens redactierechten heeft          
-            echo '<div class="wrap"><p class="debugstring" style="margin-bottom: 1em;">' . __( "Hallo, lid van de redactie. Er zijn geen actielijnen geselecteerd voor deze pagina, dus ALLE actielijnen per digibeter-kleur worden getoond.<br>Normale bezoekers zien deze geel-rode melding uiteraard niet.", "do-planning-tool" ) . '</p></div>';
+            // ingelogde gebruiker die minstens redactierechten heeft    
+            if ( $select_term_id ) {
+              $termname = get_term( $select_term_id );
+              $asdf = __( ", dus we tonen de actielijnen onder", "do-planning-tool" ) . " '" . $termname->name . "'.";
+            } 
+            else {
+              $asdf = __( ", dus ALLE actielijnen per digibeter-kleur worden getoond.", "do-planning-tool" );
+            }     
+            echo '<div class="wrap"><p class="debugstring" style="margin-bottom: 1em;">' . 
+              __( "Hallo, lid van de redactie. Er zijn geen actielijnen geselecteerd voor deze pagina.", "do-planning-tool" ) . 
+              $asdf . 
+              __( "<br>Normale bezoekers zien deze geel-rode melding uiteraard niet.", "do-planning-tool" ) . '</p></div>';
           
           }
           $intervalheader = '<div class="intervalheader" aria-hidden="true">';
@@ -1128,7 +1213,7 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
           $intervalheader .= '</div>'; // class=intervalheader
     
           $currentkwartaal = '<div class="currentkwartaal">&nbsp;</div>'; // class=intervalheader          
-        
+          
           $terms = get_terms( array(
             'taxonomy'    => RHSWP_CT_DIGIBETER,
             'hide_empty'  => true,
@@ -1149,18 +1234,45 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
               $possiblewidth_timeline = ( ( $this->dopt_years_max_nr * DOPT_CSS_YEARWIDTH ) - 1 ); // -1 is to strip off the unnecessary margin-right of the last year
               $possiblewidth_total      = ( $possiblewidth_timeline + DOPT_CSS_PADDINGLEFT );
 
-              $args = array(
-                  'post_type'       => DOPT__ACTIELIJN_CPT, 
-                  'post_status'     => 'publish',
-                  'tax_query'       => array(
-                      array(
-                        'taxonomy'  => RHSWP_CT_DIGIBETER,
-                        'field'     => 'term_id',
-                        'terms'     => $term->term_id,
-                      )
-                  ),      
-                  'posts_per_page'  => -1,
-                );
+              if ( $select_term_id ) {
+              
+                $args = array(
+                    'post_type'       => DOPT__ACTIELIJN_CPT, 
+                    'post_status'     => 'publish',
+                    'tax_query'       => array(
+                        'relation' => 'AND',
+                        array(
+                          'taxonomy'  => DOPT_CT_ONDERWERP,
+                          'field'     => 'term_id',
+                          'terms'     => $select_term_id,
+                        ),
+                        array(
+                          'taxonomy'  => RHSWP_CT_DIGIBETER,
+                          'field'     => 'term_id',
+                          'terms'     => $term->term_id,
+                        )
+                    ),      
+                    'posts_per_page'  => -1,
+                  );
+              
+              }
+              else {
+
+                $args = array(
+                    'post_type'       => DOPT__ACTIELIJN_CPT, 
+                    'post_status'     => 'publish',
+                    'tax_query'       => array(
+                        array(
+                          'taxonomy'  => RHSWP_CT_DIGIBETER,
+                          'field'     => 'term_id',
+                          'terms'     => $term->term_id,
+                        )
+                    ),      
+                    'posts_per_page'  => -1,
+                  );
+              
+              }
+        
         
               $wp_queryposts = new WP_Query( $args );
         
@@ -1300,6 +1412,8 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
     //====================================================================================================
 
     public function do_pt_frontend_filter_breadcrumb( $crumb, $args ) {
+      
+      global $post;    
     
       if ( $crumb ) {
         
@@ -1309,18 +1423,43 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
         $loop               = rhswp_get_context_info();
         $berichtnaam        = get_the_title();
 
-        $planning_page      = get_field( 'planning_page', 'option');
-        $planning_page_id   = $planning_page->ID;
-        
-        if ( !$planning_page_id ) {
-          $planning_page_id = get_option( 'page_for_posts' );
-        }  
-  
         if( ( is_single() && DOPT__ACTIELIJN_CPT == get_post_type() ) || 
             ( is_single() && DOPT__GEBEURTENIS_CPT == get_post_type() ) ) {
+  
+          // get page that goes with this DOPT_CT_ONDERWERP
+          $terms              = wp_get_post_terms( $post->ID, DOPT_CT_ONDERWERP );
+  
+          if ( $terms ) {
+  
+            foreach ( $terms as $_term) {          
+  
+              $planning_page      = get_field( 'dopt_ct_onderwerp_page', DOPT_CT_ONDERWERP . '_' . $_term->term_id );
+              $planning_page_id   = $planning_page->ID;
+              $pagetitle          = get_the_title( $planning_page_id );
+  
+            }
+          }
+          else {
+            
+            // actielijn not attached to any DOPT_CT_ONDERWERP term
+            
+            if ( !$planning_page_id ) {
+              $planning_page      = get_field( 'planning_page', 'option');
+              $planning_page_id   = $planning_page->ID;
+              $pagetitle          = get_the_title( $planning_page_id );
+            }  
+            
+            if ( !$planning_page_id ) {
+              // last resort. Default to post archive page
+              //  ¯\_(ツ)_/¯ 
+              $planning_page_id   = get_option( 'page_for_posts' );
+              $pagetitle          = get_the_title( $planning_page_id );
+              
+            }  
+          }
 
         	if ( $planning_page_id ) {
-        		return '<a href="' . get_permalink( $planning_page_id ) . '">' . get_the_title( $planning_page_id ) .'</a>' . $args['sep'] . ' ' . $berichtnaam;
+        		return '<a href="' . get_permalink( $planning_page_id ) . '">' . $pagetitle .'</a>' . $args['sep'] . ' ' . $berichtnaam;
         	}
         	else {
         		return $crumb;

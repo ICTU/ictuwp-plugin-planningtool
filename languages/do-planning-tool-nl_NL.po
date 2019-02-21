@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: GC Maturity\n"
-"POT-Creation-Date: 2019-01-24 12:23+0100\n"
-"PO-Revision-Date: 2019-01-24 12:23+0100\n"
+"POT-Creation-Date: 2019-02-21 19:54+0100\n"
+"PO-Revision-Date: 2019-02-21 19:54+0100\n"
 "Last-Translator: Paul van Buuren <paul@wbvb.nl>\n"
 "Language-Team: paul@wbvb.nl\n"
 "Language: nl_NL\n"
@@ -85,11 +85,8 @@ msgid "Invalid %1$s method: %2$s"
 msgstr ""
 
 #: cmb2/includes/CMB2_Field.php:1348
-#, fuzzy
-#| msgctxt "labels"
-#| msgid "Add %s"
 msgid "Add Group"
-msgstr "%s toevoegen"
+msgstr "Groep toevoegen"
 
 #: cmb2/includes/CMB2_Field.php:1349
 msgid "Remove Group"
@@ -246,11 +243,8 @@ msgid "Custom CMB2 field type classes must extend CMB2_Type_Base."
 msgstr ""
 
 #: cmb2/includes/CMB2_Types.php:350
-#, fuzzy
-#| msgctxt "labels"
-#| msgid "Add %s"
 msgid "Add Row"
-msgstr "%s toevoegen"
+msgstr "Rij toevoegen"
 
 #: cmb2/includes/CMB2_Types.php:413 cmb2/tests/test-cmb-types.php:47
 #: cmb2/tests/test-cmb-types.php:55
@@ -438,293 +432,321 @@ msgstr ""
 msgid "Check Three"
 msgstr ""
 
-#: do-planning-tool.php:322
+#: do-planning-tool.php:331
 msgctxt "naam template"
 msgid "Planningtool Digitale Overheid"
 msgstr ""
 
-#: do-planning-tool.php:340
+#: do-planning-tool.php:349
 msgid "General settings"
 msgstr "Algemene instellingen"
 
-#: do-planning-tool.php:372
+#: do-planning-tool.php:381
 msgid "Documentation"
 msgstr "Documentatie"
 
-#: do-planning-tool.php:373
+#: do-planning-tool.php:382
 msgid "GC Maturity documentation"
 msgstr "Documentatie Gebuiker Centraal Volwassenheidsscore"
 
-#: do-planning-tool.php:933 do-planning-tool.php:1223 do-planning-tool.php:1357
-#: do-planning-tool.php:1469
+#: do-planning-tool.php:991 do-planning-tool.php:1339 do-planning-tool.php:1664
 msgctxt "geschatte planning"
 msgid "Planning:"
 msgstr ""
 
-#: do-planning-tool.php:942 do-planning-tool.php:1232
-#, php-format
-msgctxt "geschatte planning"
-msgid "van %s-%s tot %s-%s"
-msgstr ""
-
-#: do-planning-tool.php:950 do-planning-tool.php:1240
-#, php-format
-msgctxt "geschatte planning"
-msgid "vanaf %s-%s"
-msgstr ""
-
-#: do-planning-tool.php:956 do-planning-tool.php:1246
-#, php-format
-msgctxt "geschatte planning"
-msgid "tot %s-%s"
-msgstr ""
-
-#: do-planning-tool.php:976 do-planning-tool.php:1266
+#: do-planning-tool.php:1038 do-planning-tool.php:1387
 msgid "Gebeurtenissen hierbij:"
 msgstr ""
 
-#: do-planning-tool.php:1012
+#: do-planning-tool.php:1074
 msgctxt "tussenkopje"
 msgid "Actielijn"
 msgstr ""
 
-#: do-planning-tool.php:1013
+#: do-planning-tool.php:1075
 msgctxt "tussenkopje"
 msgid "Planning"
 msgstr ""
 
-#: do-planning-tool.php:1014
+#: do-planning-tool.php:1076
 msgctxt "tussenkopje"
 msgid "Gebeurtenissen"
 msgstr ""
 
-#: do-planning-tool.php:1048
+#: do-planning-tool.php:1110
 msgctxt "tussenkopje"
 msgid "Van"
 msgstr ""
 
-#: do-planning-tool.php:1051
+#: do-planning-tool.php:1113
 msgctxt "tussenkopje"
 msgid "Start"
 msgstr ""
 
-#: do-planning-tool.php:1061
+#: do-planning-tool.php:1123
 msgctxt "tussenkopje"
 msgid "tot"
 msgstr ""
 
-#: do-planning-tool.php:1064
+#: do-planning-tool.php:1126
 msgctxt "tussenkopje"
 msgid "Eind"
 msgstr ""
 
-#: do-planning-tool.php:1100
-msgid ""
-"Hallo, lid van de redactie. Er zijn geen actielijnen geselecteerd voor deze "
-"pagina, dus ALLE actielijnen per digibeter-kleur worden getoond.<br>Normale "
-"bezoekers zien deze geel-rode melding uiteraard niet."
+#: do-planning-tool.php:1181
+msgid ", dus we tonen de actielijnen onder"
 msgstr ""
 
-#: do-planning-tool.php:1376 do-planning-tool.php:1527
+#: do-planning-tool.php:1184
+msgid ", dus ALLE actielijnen per digibeter-kleur worden getoond."
+msgstr ""
+
+#: do-planning-tool.php:1187
+msgid ""
+"Hallo, lid van de redactie. Er zijn geen actielijnen geselecteerd voor deze "
+"pagina."
+msgstr ""
+
+#: do-planning-tool.php:1189
+msgid "<br>Normale bezoekers zien deze geel-rode melding uiteraard niet."
+msgstr ""
+
+#: do-planning-tool.php:1498
+msgctxt "kopje"
+msgid "Doel"
+msgstr ""
+
+#: do-planning-tool.php:1503
+msgctxt "kopje"
+msgid "Resultaat"
+msgstr ""
+
+#: do-planning-tool.php:1515
+msgctxt "kopje"
+msgid "Planning"
+msgstr ""
+
+#: do-planning-tool.php:1578 do-planning-tool.php:1722
 msgctxt "tussenkopje"
 msgid "Gerelateerde actielijnen"
 msgstr ""
 
-#: do-planning-tool.php:1410
+#: do-planning-tool.php:1605
 msgctxt "tussenkopje"
 msgid "Gerelateerde gebeurtenissen"
 msgstr ""
 
-#: do-planning-tool.php:1460 do-planning-tool.php:1909
+#: do-planning-tool.php:1655 do-planning-tool.php:2104
 msgctxt "geschatte planning"
 msgid "Geen datum ingevoerd"
 msgstr ""
 
-#: do-planning-tool.php:1480
+#: do-planning-tool.php:1675
 msgctxt "tussenkopje"
 msgid "Gerelateerde activiteiten"
 msgstr ""
 
-#: do-planning-tool.php:1555
+#: do-planning-tool.php:1750
 msgctxt "tussenkopje"
 msgid "Actielijnen"
 msgstr ""
 
-#: do-planning-tool.php:1578
+#: do-planning-tool.php:1773
 msgctxt "tussenkopje"
 msgid "Gebeurtenissen (A)"
 msgstr ""
 
-#: do-planning-tool.php:1591
+#: do-planning-tool.php:1786
 #, php-format
 msgid "Gebeurtenissen bij %s"
 msgstr ""
 
-#: do-planning-tool.php:1861
+#: do-planning-tool.php:2056
 msgid "Gebeurtenissen"
 msgstr ""
 
-#: do-planning-tool.php:1911
+#: do-planning-tool.php:2106
 msgctxt "label voor verborgen datum in ganttchart"
 msgid "datum:"
 msgstr ""
 
-#: do-planning-tool.php:1915
+#: do-planning-tool.php:2110
 msgctxt "label voor verborgen datum in ganttchart"
 msgid "geschatte datum:"
 msgstr ""
 
-#: do-planning-tool.php:1921
+#: do-planning-tool.php:2116
 #, php-format
 msgctxt "verborgen datum in ganttchart"
 msgid ", %s %s"
 msgstr ""
 
-#: inc/dopt.posttypes-taxonomies.php:15
+#: inc/dopt.posttypes-taxonomies.php:28
 msgctxt "labels"
 msgid "Actielijn"
 msgstr ""
 
-#: inc/dopt.posttypes-taxonomies.php:16
+#: inc/dopt.posttypes-taxonomies.php:29
 msgctxt "labels"
 msgid "Actielijnen"
 msgstr ""
 
-#: inc/dopt.posttypes-taxonomies.php:18
+#: inc/dopt.posttypes-taxonomies.php:31
 msgctxt "labels"
 msgid "actielijn"
 msgstr ""
 
-#: inc/dopt.posttypes-taxonomies.php:19
+#: inc/dopt.posttypes-taxonomies.php:32
 msgctxt "labels"
 msgid "actielijnen"
 msgstr ""
 
-#: inc/dopt.posttypes-taxonomies.php:25 inc/dopt.posttypes-taxonomies.php:73
-#: inc/dopt.posttypes-taxonomies.php:130 inc/dopt.posttypes-taxonomies.php:179
+#: inc/dopt.posttypes-taxonomies.php:38 inc/dopt.posttypes-taxonomies.php:86
+#: inc/dopt.posttypes-taxonomies.php:143 inc/dopt.posttypes-taxonomies.php:192
+#: inc/dopt.posttypes-taxonomies.php:241
 #, php-format
 msgctxt "labels"
 msgid "All %s"
 msgstr "Alle  %s"
 
-#: inc/dopt.posttypes-taxonomies.php:26 inc/dopt.posttypes-taxonomies.php:30
-#: inc/dopt.posttypes-taxonomies.php:74 inc/dopt.posttypes-taxonomies.php:78
-#: inc/dopt.posttypes-taxonomies.php:131 inc/dopt.posttypes-taxonomies.php:135
-#: inc/dopt.posttypes-taxonomies.php:180 inc/dopt.posttypes-taxonomies.php:184
+#: inc/dopt.posttypes-taxonomies.php:39 inc/dopt.posttypes-taxonomies.php:43
+#: inc/dopt.posttypes-taxonomies.php:87 inc/dopt.posttypes-taxonomies.php:91
+#: inc/dopt.posttypes-taxonomies.php:144 inc/dopt.posttypes-taxonomies.php:148
+#: inc/dopt.posttypes-taxonomies.php:193 inc/dopt.posttypes-taxonomies.php:197
+#: inc/dopt.posttypes-taxonomies.php:242 inc/dopt.posttypes-taxonomies.php:246
 #, php-format
 msgctxt "labels"
 msgid "Add %s"
 msgstr "%s toevoegen"
 
-#: inc/dopt.posttypes-taxonomies.php:27 inc/dopt.posttypes-taxonomies.php:75
-#: inc/dopt.posttypes-taxonomies.php:132 inc/dopt.posttypes-taxonomies.php:181
+#: inc/dopt.posttypes-taxonomies.php:40 inc/dopt.posttypes-taxonomies.php:88
+#: inc/dopt.posttypes-taxonomies.php:145 inc/dopt.posttypes-taxonomies.php:194
+#: inc/dopt.posttypes-taxonomies.php:243
 #, php-format
 msgctxt "labels"
 msgid "Add new %s"
 msgstr "Nieuwe  %s toevoegen"
 
-#: inc/dopt.posttypes-taxonomies.php:28 inc/dopt.posttypes-taxonomies.php:76
-#: inc/dopt.posttypes-taxonomies.php:133 inc/dopt.posttypes-taxonomies.php:142
-#: inc/dopt.posttypes-taxonomies.php:182 inc/dopt.posttypes-taxonomies.php:191
+#: inc/dopt.posttypes-taxonomies.php:41 inc/dopt.posttypes-taxonomies.php:89
+#: inc/dopt.posttypes-taxonomies.php:146 inc/dopt.posttypes-taxonomies.php:155
+#: inc/dopt.posttypes-taxonomies.php:195 inc/dopt.posttypes-taxonomies.php:204
+#: inc/dopt.posttypes-taxonomies.php:244 inc/dopt.posttypes-taxonomies.php:253
 msgctxt "labels"
 msgid "Edit?"
 msgstr "Bewerken?"
 
-#: inc/dopt.posttypes-taxonomies.php:29 inc/dopt.posttypes-taxonomies.php:77
-#: inc/dopt.posttypes-taxonomies.php:134 inc/dopt.posttypes-taxonomies.php:183
+#: inc/dopt.posttypes-taxonomies.php:42 inc/dopt.posttypes-taxonomies.php:90
+#: inc/dopt.posttypes-taxonomies.php:147 inc/dopt.posttypes-taxonomies.php:196
+#: inc/dopt.posttypes-taxonomies.php:245
 #, php-format
 msgctxt "labels"
 msgid "Edit %s"
 msgstr "%s bewerken"
 
-#: inc/dopt.posttypes-taxonomies.php:31 inc/dopt.posttypes-taxonomies.php:79
-#: inc/dopt.posttypes-taxonomies.php:136 inc/dopt.posttypes-taxonomies.php:185
+#: inc/dopt.posttypes-taxonomies.php:44 inc/dopt.posttypes-taxonomies.php:92
+#: inc/dopt.posttypes-taxonomies.php:149 inc/dopt.posttypes-taxonomies.php:198
+#: inc/dopt.posttypes-taxonomies.php:247
 msgctxt "labels"
 msgid "Show"
 msgstr "Toon"
 
-#: inc/dopt.posttypes-taxonomies.php:32 inc/dopt.posttypes-taxonomies.php:80
-#: inc/dopt.posttypes-taxonomies.php:137 inc/dopt.posttypes-taxonomies.php:186
+#: inc/dopt.posttypes-taxonomies.php:45 inc/dopt.posttypes-taxonomies.php:93
+#: inc/dopt.posttypes-taxonomies.php:150 inc/dopt.posttypes-taxonomies.php:199
+#: inc/dopt.posttypes-taxonomies.php:248
 #, php-format
 msgctxt "labels"
 msgid "View %s"
 msgstr "Bekijk  %s"
 
-#: inc/dopt.posttypes-taxonomies.php:33 inc/dopt.posttypes-taxonomies.php:81
-#: inc/dopt.posttypes-taxonomies.php:138 inc/dopt.posttypes-taxonomies.php:187
+#: inc/dopt.posttypes-taxonomies.php:46 inc/dopt.posttypes-taxonomies.php:94
+#: inc/dopt.posttypes-taxonomies.php:151 inc/dopt.posttypes-taxonomies.php:200
+#: inc/dopt.posttypes-taxonomies.php:249
 #, php-format
 msgctxt "labels"
 msgid "Search %s"
 msgstr "%s zoeken"
 
-#: inc/dopt.posttypes-taxonomies.php:34 inc/dopt.posttypes-taxonomies.php:82
-#: inc/dopt.posttypes-taxonomies.php:139 inc/dopt.posttypes-taxonomies.php:188
+#: inc/dopt.posttypes-taxonomies.php:47 inc/dopt.posttypes-taxonomies.php:95
+#: inc/dopt.posttypes-taxonomies.php:152 inc/dopt.posttypes-taxonomies.php:201
+#: inc/dopt.posttypes-taxonomies.php:250
 #, php-format
 msgctxt "labels"
 msgid "No %s available"
 msgstr "Geen  %s gevonden"
 
-#: inc/dopt.posttypes-taxonomies.php:35 inc/dopt.posttypes-taxonomies.php:83
-#: inc/dopt.posttypes-taxonomies.php:140 inc/dopt.posttypes-taxonomies.php:189
+#: inc/dopt.posttypes-taxonomies.php:48 inc/dopt.posttypes-taxonomies.php:96
+#: inc/dopt.posttypes-taxonomies.php:153 inc/dopt.posttypes-taxonomies.php:202
+#: inc/dopt.posttypes-taxonomies.php:251
 #, php-format
 msgctxt "labels"
 msgid "No %s in trash"
 msgstr "Geen  %s in de prullenbak"
 
-#: inc/dopt.posttypes-taxonomies.php:36 inc/dopt.posttypes-taxonomies.php:84
-#: inc/dopt.posttypes-taxonomies.php:141 inc/dopt.posttypes-taxonomies.php:190
+#: inc/dopt.posttypes-taxonomies.php:49 inc/dopt.posttypes-taxonomies.php:97
+#: inc/dopt.posttypes-taxonomies.php:154 inc/dopt.posttypes-taxonomies.php:203
+#: inc/dopt.posttypes-taxonomies.php:252
 msgctxt "labels"
 msgid "Parent"
 msgstr "Parent"
 
-#: inc/dopt.posttypes-taxonomies.php:63
+#: inc/dopt.posttypes-taxonomies.php:76
 msgctxt "labels"
 msgid "Gebeurtenis"
 msgstr ""
 
-#: inc/dopt.posttypes-taxonomies.php:64
+#: inc/dopt.posttypes-taxonomies.php:77
 msgctxt "labels"
 msgid "Gebeurtenissen"
 msgstr ""
 
-#: inc/dopt.posttypes-taxonomies.php:66
+#: inc/dopt.posttypes-taxonomies.php:79
 msgctxt "labels"
 msgid "gebeurtenis"
 msgstr ""
 
-#: inc/dopt.posttypes-taxonomies.php:67
+#: inc/dopt.posttypes-taxonomies.php:80
 msgctxt "labels"
 msgid "gebeurtenissen"
 msgstr ""
 
-#: inc/dopt.posttypes-taxonomies.php:118
+#: inc/dopt.posttypes-taxonomies.php:131
 msgctxt "labels"
 msgid "Planning label"
 msgstr ""
 
-#: inc/dopt.posttypes-taxonomies.php:119
+#: inc/dopt.posttypes-taxonomies.php:132
 msgctxt "labels"
 msgid "Planning labels"
 msgstr ""
 
-#: inc/dopt.posttypes-taxonomies.php:121
+#: inc/dopt.posttypes-taxonomies.php:134
 msgctxt "labels"
 msgid "planning label"
 msgstr ""
 
-#: inc/dopt.posttypes-taxonomies.php:122
+#: inc/dopt.posttypes-taxonomies.php:135
 msgctxt "labels"
 msgid "planning labels"
 msgstr ""
 
-#: inc/dopt.posttypes-taxonomies.php:167
+#: inc/dopt.posttypes-taxonomies.php:180
 msgctxt "labels"
 msgid "Trekker"
 msgstr ""
 
-#: inc/dopt.posttypes-taxonomies.php:168
+#: inc/dopt.posttypes-taxonomies.php:181
 msgctxt "labels"
 msgid "Trekkers"
+msgstr ""
+
+#: inc/dopt.posttypes-taxonomies.php:229
+msgctxt "labels"
+msgid "Beleidsonderwerp"
+msgstr ""
+
+#: inc/dopt.posttypes-taxonomies.php:230
+msgctxt "labels"
+msgid "Beleidsonderwerpen"
 msgstr ""
 
 #. Plugin Name of the plugin/theme
@@ -749,6 +771,10 @@ msgstr ""
 #. Author URI of the plugin/theme
 msgid "https://wbvb.nl"
 msgstr ""
+
+#~ msgctxt "slug"
+#~ msgid "beleidsonderwerp"
+#~ msgstr "beleidsonderwerpje"
 
 #~ msgctxt "js"
 #~ msgid "URL"
