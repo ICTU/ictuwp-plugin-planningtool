@@ -9,8 +9,8 @@
 // * @author  Paul van Buuren
 // * @license GPL-2.0+
 // * @plugin: do-planning-tool
-// * version: 1.2.1
-// * @desc.   Beleidsonderwerp-taxonomie toegevoegd; paginafilter hiervoor verfijnd.
+// * version: 1.2.2
+// * @desc.   Styling voor Data-agenda toegevoegd en wat extra toegankelijkheidssaus toegevoegd.
 // * @link    https://github.com/ICTU/Digitale-Overheid---WordPress-plugin-Planning-Tool/
 
 
@@ -235,7 +235,11 @@ form {
       }
     }
 
-//    &.digibeter-oranje,
+    &.da-01-problemen-oplossen,
+    &.da-02-wetgeving-publieke-waarden,
+    &.da-03-overheidsdata-verbeteren,
+    &.da-04-kennis-verzamelen-verbeteren,
+    &.da-05-mensen-organisatie-cultuurverandering,
     &.digibeter-violet,
     &.digibeter-paars,
     &.digibeter-groen,
@@ -245,6 +249,9 @@ form {
       }
     }
   
+    &.da-01-problemen-oplossen,
+    &.da-02-wetgeving-publieke-waarden,
+    &.da-03-overheidsdata-verbeteren,
     &.digibeter-en-orange,
     &.digibeter-oranje {
       .kleurtjeslijntjes( @digibeter_oranje, @digibeter_oranje_licht, @wit, @txt );
@@ -261,6 +268,9 @@ form {
     &.digibeter-groen {
       .kleurtjeslijntjes( @digibeter_groen, @groen_licht, @wit, @txt );
     }
+    
+    &.da-04-kennis-verzamelen-verbeteren,
+    &.da-05-mensen-organisatie-cultuurverandering,
     &.digibeter-en-blue,
     &.digibeter-blauw {
       .kleurtjeslijntjes( @digibeter_blauw, @hemelblauw_licht, @wit, @txt );
@@ -327,6 +337,11 @@ form {
       margin-top: 0;
     }
 
+  }
+  
+  .planning-label {
+    position: relative;
+    z-index: 9999;
   }
   
 }
@@ -437,6 +452,12 @@ form {
       }
     }
   }
+
+
+  .hide-in-chartview {
+    .visuallyhidden();
+  }
+  
 }
 
 //========================================================================================================
@@ -483,6 +504,10 @@ form {
         display: block;
       }
     }
+  }
+  
+  .hide-in-chartview {
+//    border: 10px solid red;
   }
   
 }

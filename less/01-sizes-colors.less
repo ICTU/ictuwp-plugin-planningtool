@@ -8,8 +8,8 @@
 // * @author  Paul van Buuren
 // * @license GPL-2.0+
 // * @plugin: do-planning-tool
-// * version: 1.1.5
-// * @desc.   Andere kleuren voor NL-Digibeter oranje.
+// * version: 1.2.2
+// * @desc.   Styling voor Data-agenda toegevoegd en wat extra toegankelijkheidssaus toegevoegd.
 // * @link    https://github.com/ICTU/Digitale-Overheid---WordPress-plugin-Planning-Tool/
 
 @import "palet-do.less";
@@ -119,6 +119,11 @@
       border-bottom: 2px solid @wit;
       background-color: @kleur2;
       color: @txtcolor2;
+      
+      .planning-label {
+        background-color: @kleur2;
+      }
+      
     }
 
     &.start {
@@ -212,7 +217,7 @@
 .arrow_before() {
 
   position: relative;
-  padding-left: 2.5em;
+  padding-left: 1.8em;
   
   &:before {
     .arrow_shared();

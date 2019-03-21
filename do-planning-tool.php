@@ -5,8 +5,8 @@
  * Plugin Name:         ICTU / WP Planning Tool digitaleoverheid.nl
  * Plugin URI:          https://github.com/ICTU/Digitale-Overheid---WordPress-plugin-Planning-Tool/
  * Description:         Plugin voor digitaleoverheid.nl waarmee extra functionaliteit mogelijk wordt voor het tonen van een planning met actielijnen en gebeurtenissen.
- * Version:             1.2.1
- * Version description: Beleidsonderwerp-taxonomie toegevoegd; paginafilter hiervoor verfijnd.
+ * Version:             1.2.2
+ * Version description: Styling voor Data-agenda toegevoegd en wat extra toegankelijkheidssaus toegevoegd.
  * Author:              Paul van Buuren
  * Author URI:          https://wbvb.nl
  * License:             GPL-2.0+
@@ -35,7 +35,7 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
       /**
        * @var string
        */
-      public $version = '1.2.1';
+      public $version = '1.2.2';
   
   
       /**
@@ -988,14 +988,11 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 
                   if ( $planning ) {
                     if ( $planning[0]->name ) {
-                      echo '<span class="visuallyhidden">' . _x( 'Planning:', 'geschatte planning', 'wp-rijkshuisstijl' ) . '</span> ' .  strtolower( $planning[0]->name );
+                      echo '<span class="hide-in-chartview">' . _x( 'Planning:', 'geschatte planning', 'wp-rijkshuisstijl' ) . '</span> <span class="planning-label">' .  strtolower( $planning[0]->name ) . '</span>';
                     }
                   }
 
-/*
-
-// deze teksten leveren uiteindelijk niet meer duidelijkheid op, dus uitgecommentarieerd.
-                  echo '<span class="visuallyhidden">, ';      
+                  echo '<span class="hide-in-chartview">, ';      
       
                   switch ( get_field( 'heeft_start-_of_einddatums', $select_actielijn->ID ) ) {
                     
@@ -1023,7 +1020,7 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 
       
                   echo '</span>';      
-*/                  
+
                   echo '</div>';    
 
 

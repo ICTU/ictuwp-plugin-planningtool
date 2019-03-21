@@ -8,8 +8,8 @@
 // * @author  Paul van Buuren
 // * @license GPL-2.0+
 // * @package do-planning-tool
-// * version: 1.2.1
-// * @desc.   Beleidsonderwerp-taxonomie toegevoegd; paginafilter hiervoor verfijnd.
+// * version: 1.2.2
+// * @desc.   Styling voor Data-agenda toegevoegd en wat extra toegankelijkheidssaus toegevoegd.
 // * @link    https://github.com/ICTU/Digitale-Overheid---WordPress-plugin-Planning-Tool/
 
 
@@ -219,7 +219,7 @@ function do_pt_init_register_post_type() {
 		"show_admin_column"   => true,
 		"show_in_rest"        => false,
 		"rest_base"           => "",
-		"show_in_quick_edit"  => false,
+		"show_in_quick_edit"  => true,
 	);
 
 	register_taxonomy( DOPT_CT_TREKKER, array( DOPT__ACTIELIJN_CPT ), $args );
@@ -268,7 +268,7 @@ function do_pt_init_register_post_type() {
 		"show_admin_column"   => true,
 		"show_in_rest"        => false,
 		"rest_base"           => "",
-		"show_in_quick_edit"  => false,
+		"show_in_quick_edit"  => true,
 	);
 	
 
@@ -291,28 +291,32 @@ function do_pt_init_register_post_type() {
       
   }
 
-	
-  if ( class_exists( 'Taxonomy_Single_Term' ) ) {
+  if ( 22 == 33 ) { // mag bij meerdere dossiers horen?
     
-    
-    $custom_tax_mb = new Taxonomy_Single_Term( DOPT_CT_ONDERWERP, array( DOPT__ACTIELIJN_CPT ) );
-    
-    // Custom title for this metabox
-    $custom_tax_mb->set( 'metabox_title', 'Hoort bij beleidsonderwerp:' );
-    
-    // Will keep radio elements from indenting for child-terms.
-    $custom_tax_mb->set( 'indented', false );
-
-    // Kiezen is geen keuze
-    $custom_tax_mb->set( 'force_selection', false );    
-    
-    // Allows adding of new terms from the metabox
-    $custom_tax_mb->set( 'allow_new_terms', false );
-    
-    // Priority of the metabox placement.
-    $custom_tax_mb->set( 'priority', 'high' );
+    if ( class_exists( 'Taxonomy_Single_Term' ) ) {
+      
+      
+      $custom_tax_mb = new Taxonomy_Single_Term( DOPT_CT_ONDERWERP, array( DOPT__ACTIELIJN_CPT ) );
+      
+      // Custom title for this metabox
+      $custom_tax_mb->set( 'metabox_title', 'Hoort bij beleidsonderwerp:' );
+      
+      // Will keep radio elements from indenting for child-terms.
+      $custom_tax_mb->set( 'indented', false );
   
-  }
+      // Kiezen is geen keuze
+      $custom_tax_mb->set( 'force_selection', false );    
+      
+      // Allows adding of new terms from the metabox
+      $custom_tax_mb->set( 'allow_new_terms', false );
+      
+      // Priority of the metabox placement.
+      $custom_tax_mb->set( 'priority', 'high' );
+    
+    }
+  
+  }	
+
 
 //      	flush_rewrite_rules();
 
