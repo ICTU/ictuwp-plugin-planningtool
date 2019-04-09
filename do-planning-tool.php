@@ -5,8 +5,8 @@
  * Plugin Name:         ICTU / WP Planning Tool digitaleoverheid.nl
  * Plugin URI:          https://github.com/ICTU/Digitale-Overheid---WordPress-plugin-Planning-Tool/
  * Description:         Plugin voor digitaleoverheid.nl waarmee extra functionaliteit mogelijk wordt voor het tonen van een planning met actielijnen en gebeurtenissen.
- * Version:             1.2.2
- * Version description: Styling voor Data-agenda toegevoegd en wat extra toegankelijkheidssaus toegevoegd.
+ * Version:             1.2.3
+ * Version description: Broodkruimelpad verbeterd: ook parents van pagina's tonen.
  * Author:              Paul van Buuren
  * Author URI:          https://wbvb.nl
  * License:             GPL-2.0+
@@ -35,7 +35,7 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
       /**
        * @var string
        */
-      public $version = '1.2.2';
+      public $version = '1.2.3';
   
   
       /**
@@ -124,13 +124,12 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 //        define( 'ADD_DEFAULT_TERM_ID',              false );
         define( 'ADD_DEFAULT_TERM_ID',              true );
 
-        define( 'DOPT__PLUGIN_DO_DEBUG',         true );
-//        define( 'DOPT__PLUGIN_DO_DEBUG',         false );
+//        define( 'DOPT__PLUGIN_DO_DEBUG',         true );
+        define( 'DOPT__PLUGIN_DO_DEBUG',         false );
 
 //        define( 'DOPT__PLUGIN_OUTPUT_TOSCREEN',  false );
         define( 'DOPT__PLUGIN_OUTPUT_TOSCREEN',  true );
-//        define( 'DOPT__PLUGIN_USE_CMB2',         true ); 
-        define( 'DOPT__PLUGIN_USE_CMB2',         false ); 
+
         define( 'DOPT__PLUGIN_GENESIS_ACTIVE',   true ); // todo: inbouwen check op actief zijn van Genesis framework
 
         define( 'DOPT__ALGEMEEN_LABEL',          'ictudo_planning_label' ); 
@@ -171,19 +170,6 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
        */
       private function includes() {
       
-        if ( DOPT__PLUGIN_USE_CMB2 ) {
-          // load CMB2 functionality
-          if ( ! defined( 'CMB2_LOADED' ) ) {
-            // cmb2 NOT loaded
-            if ( file_exists( dirname( __FILE__ ) . '/cmb2/init.php' ) ) {
-              require_once dirname( __FILE__ ) . '/cmb2/init.php';
-            }
-            elseif ( file_exists( dirname( __FILE__ ) . '/CMB2/init.php' ) ) {
-              require_once dirname( __FILE__ ) . '/CMB2/init.php';
-            }
-          }
-        }
-
         $autoload_is_disabled = defined( 'DOPT__AUTOLOAD_CLASSES' ) && DOPT__AUTOLOAD_CLASSES === false;
         
         if ( function_exists( "spl_autoload_register" ) && ! ( $autoload_is_disabled ) ) {
@@ -1419,21 +1405,21 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
         $span_before_end    = '</span>';  
         $loop               = rhswp_get_context_info();
         $berichtnaam        = get_the_title();
-
+        
         if( ( is_single() && DOPT__ACTIELIJN_CPT == get_post_type() ) || 
             ( is_single() && DOPT__GEBEURTENIS_CPT == get_post_type() ) ) {
-  
+        
           // get page that goes with this DOPT_CT_ONDERWERP
           $terms              = wp_get_post_terms( $post->ID, DOPT_CT_ONDERWERP );
   
           if ( $terms ) {
-  
+            
             foreach ( $terms as $_term) {          
-  
-              $planning_page      = get_field( 'dopt_ct_onderwerp_page', DOPT_CT_ONDERWERP . '_' . $_term->term_id );
-              $planning_page_id   = $planning_page->ID;
-              $pagetitle          = get_the_title( $planning_page_id );
-  
+            
+            $planning_page      = get_field( 'dopt_ct_onderwerp_page', DOPT_CT_ONDERWERP . '_' . $_term->term_id );
+            $planning_page_id   = $planning_page->ID;
+            $pagetitle          = get_the_title( $planning_page_id );
+            
             }
           }
           else {
@@ -1451,16 +1437,29 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
               //  ¯\_(ツ)_/¯ 
               $planning_page_id   = get_option( 'page_for_posts' );
               $pagetitle          = get_the_title( $planning_page_id );
-              
             }  
           }
 
-        	if ( $planning_page_id ) {
-        		return '<a href="' . get_permalink( $planning_page_id ) . '">' . $pagetitle .'</a>' . $args['sep'] . ' ' . $berichtnaam;
-        	}
-        	else {
-        		return $crumb;
-        	}
+          if ( $planning_page_id ) {
+            $crumb = $args['sep'] . ' ' . $berichtnaam;
+            
+            $crumb = ' <a href="' . get_permalink( $planning_page_id ) . '">' . get_the_title( $planning_page_id ) .'</a>' . $crumb;
+
+            // haal de ancestors op voor de huidige pagina
+            $ancestors = get_post_ancestors( $planning_page_id );
+
+            // haal de hele keten aan ancestors op en zet ze in de returnstring
+            foreach ( $ancestors as $ancestorid ) {
+
+              $crumb = ' <a href="' . get_permalink( $ancestorid ) . '">' . get_the_title( $ancestorid ) .'</a>' . $crumb;
+
+            }
+
+            return $crumb;
+          }
+          else {
+            return $crumb;
+          }
       	}
       	else {
       		return $crumb;
