@@ -76,5 +76,11 @@ rsync -r -a --delete '/shared-paul-files/Webs/ICTU/Gebruiker Centraal/developmen
 rsync -r -a --delete '/shared-paul-files/Webs/ICTU/Gebruiker Centraal/development/wp-content/plugins/do-planning-tool/' '/shared-paul-files/Webs/ICTU/Gebruiker Centraal/sentia/live/www/wp-content/plugins/do-planning-tool/'
 
 
+
+# naar temp server
+rsync -r -a --delete '/shared-paul-files/Webs/ICTU/Gebruiker Centraal/development/wp-content/plugins/do-planning-tool/' '/shared-paul-files/Webs/ICTU/Gebruiker Centraal/beeldbank-temp/wp-content/plugins/do-planning-tool/'
+
+
+
 echo 'Ready';
 echo '----------------------------------------------------------------';
