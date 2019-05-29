@@ -94,16 +94,12 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 
         $this->dopt_array_data    = array();
 
-
-        
-  
         define( 'DOPT__VERSION',                 $this->version );
         define( 'DOPT__FOLDER',                  'do-planning-tool' );
         define( 'DOPT__BASE_URL',                trailingslashit( plugins_url( DOPT__FOLDER ) ) );
         define( 'DOPT__ASSETS_URL',              trailingslashit( DOPT__BASE_URL ) );
         define( 'DOPT__PATH',                    plugin_dir_path( __FILE__ ) );
-        define( 'DOPT__PATH_LANGUAGES',          trailingslashit( DOPT__PATH . 'languages' ) );;
-
+        define( 'DOPT__PATH_LANGUAGES',          trailingslashit( DOPT__PATH . 'languages' ) );
         define( 'DOPT__ACTIELIJN_CPT',           "actielijn" );
         define( 'DOPT__GEBEURTENIS_CPT',         "gebeurtenis" );
 
@@ -1474,160 +1470,155 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
      *
      * @return void
      */
-    public function do_pt_do_frontend_single_actielijn_info() {
-    
-      global $post;
-      
-      $echo         = true;
-      $showheader   = true;
-      $returnstring = '';
-      $actielijnentitletext = '';
-      
-      if ( is_single() && DOPT__ACTIELIJN_CPT == get_post_type() ) {
+	public function do_pt_do_frontend_single_actielijn_info() {
+		
+		global $post;
+		
+		$echo         = true;
+		$showheader   = true;
+		$returnstring = '';
+		$actielijnentitletext = '';
+		
+		if ( is_single() && DOPT__ACTIELIJN_CPT == get_post_type() ) {
+			
+			$acfid = $post->ID;
+			
+			$actielijn_doel       = get_field('actielijn_doel', $acfid );
+			$actielijn_resultaat  = get_field('actielijn_resultaat', $acfid );
+			
+			if ( $actielijn_doel ) {
+				$returnstring .= '<h2>' . _x( 'Doel', 'kopje', 'wp-rijkshuisstijl' ) . '</h2>';
+				$returnstring .= $actielijn_doel;
+			}
+			
+			if ( $actielijn_resultaat ) {
+				$returnstring .= '<h2>' . _x( 'Resultaat', 'kopje', 'wp-rijkshuisstijl' ) . '</h2>';
+				$returnstring .= $actielijn_resultaat;
+			}
+			
+			//------------------------------------------------------------------------------------------------
+			// haal de planning taxonomie op en toon deze
+			
+			$planning = wp_get_post_terms( $post->ID, DOPT_CT_PLANNINGLABEL );
+			
+			if ( $planning ) {
+				$returnstring .= '<h2>' . _x( 'Planning', 'kopje', 'wp-rijkshuisstijl' ) . '</h2>';
+				$returnstring .= '<p>';
 
-        $acfid = $post->ID;
+				foreach ( $planning as $term ) {
+					$countertje++;
+					if ( $countertje <= 1 ) {
+						$returnstring .= $term->name;
+					}
+					else {
+						$returnstring .= ', ' . $term->name;
+					}
+				}
+				
+				$returnstring .= '.</p>';
+				
+			}
+			
+			//------------------------------------------------------------------------------------------------
+			// haal de trekkers taxonomie op en toon deze
+			
+			$planning = wp_get_post_terms( $post->ID, DOPT_CT_TREKKER );
+			
+			if ( $planning ) {
+				
+				$tax_info     = get_taxonomy( DOPT_CT_TREKKER );
+				$countertje   = 0;
 
-        $actielijn_doel       = get_field('actielijn_doel', $acfid );
-        $actielijn_resultaat  = get_field('actielijn_resultaat', $acfid );
-        
-        if ( $actielijn_doel ) {
-          $returnstring .= '<h2>' . _x( 'Doel', 'kopje', 'wp-rijkshuisstijl' ) . '</h2>';
-          $returnstring .= $actielijn_doel;
-        }
+				$returnstring .= '<h2>';
+				
+				if ( count( $planning ) > 1 ) {
+					$returnstring .= $tax_info->labels->name;
+				}
+				else {
+					$returnstring .= $tax_info->labels->singular_name;
+				}
 
-        if ( $actielijn_resultaat ) {
-          $returnstring .= '<h2>' . _x( 'Resultaat', 'kopje', 'wp-rijkshuisstijl' ) . '</h2>';
-          $returnstring .= $actielijn_resultaat;
-        }
+				$returnstring .= '</h2>';
+				$returnstring .= '<p>';
+				
+				foreach ( $planning as $term ) {
+					$countertje++;
+					if ( $countertje <= 1 ) {
+						$returnstring .= $term->name;
+					}
+					else {
+						$returnstring .= ', ' . $term->name;
+					}
+				}
+				
+				$returnstring .= '.</p>';
+			}
+			
+			//------------------------------------------------------------------------------------------------
+			// kijken of er gerelateerde actielijnen zijn
+			
+			$related_actielijnen = get_field('related_actielijnen', $acfid );
+			
+			if( $related_actielijnen ) {
+				
+				if ( ! $actielijnentitletext ) {
+					$actielijnentitletext = _x( 'Gerelateerde actielijnen', 'tussenkopje', "do-planning-tool" );
+				}
+				if ( $showheader ) {
+					$returnstring .= '<h2>' . $actielijnentitletext . '</h2>';
+					$actielijnentitletext = '';
+				}
+				
+				$returnstring .= '<ul>';
+				
+				$related_actielijnen = get_field('related_actielijnen', $acfid );
+				
+				foreach ( $related_actielijnen as $relatedobject ) {      
+//					$returnstring .= '<li>' . get_the_title( $relatedobject->ID ) . '</li>';
+					$returnstring .= '<li><a href="' . get_permalink( $relatedobject->ID ) . '">' . get_the_title( $relatedobject->ID ) . '</a></li>';
+				}
+				
+				$returnstring .= '</ul>';
+				
+			}
+			
+			//------------------------------------------------------------------------------------------------
+			// kijken of er gebeurtenissen aan deze actielijn gekoppeld zijn
+			
+			$related_gebeurtenissen = get_field('related_gebeurtenissen_actielijnen', $acfid );
+			
+			if( $related_gebeurtenissen ) {
+				
+				if ( ! $actielijnentitletext ) {
+					$actielijnentitletext = _x( 'Gerelateerde gebeurtenissen', 'tussenkopje', "do-planning-tool" );
+				}
+				if ( $showheader ) {
+					$returnstring .= '<h2>' . $actielijnentitletext . '</h2>';
+				}
+				
+				$returnstring .= '<ul>';
 
-        //------------------------------------------------------------------------------------------------
-        // haal de planning taxonomie op en toon deze
-
-        $planning = wp_get_post_terms( $post->ID, DOPT_CT_PLANNINGLABEL );
-    
-        if ( $planning ) {
-//          $tax_info = get_taxonomy( DOPT_CT_PLANNINGLABEL );
-            
-          $returnstring .= '<h2>' . _x( 'Planning', 'kopje', 'wp-rijkshuisstijl' ) . '</h2>';
-          
-          $returnstring .= '<p>';
-//          $returnstring .= $tax_info->labels->singular_name;
-//          $returnstring .= $tax_info->labels->singular_name;
-//          $returnstring .= ': ';
-
-          foreach ( $planning as $term ) {
-            $countertje++;
-            if ( $countertje <= 1 ) {
-              $returnstring .= $term->name;
-            }
-            else {
-              $returnstring .= ', ' . $term->name;
-            }
-          }
-          
-          $returnstring .= '.</p>';
-          
-        }
-
-        //------------------------------------------------------------------------------------------------
-        // haal de trekkers taxonomie op en toon deze
-
-        $planning = wp_get_post_terms( $post->ID, DOPT_CT_TREKKER );
-    
-        if ( $planning ) {
-
-          $tax_info     = get_taxonomy( DOPT_CT_TREKKER );
-          $countertje   = 0;
-//          $returnstring .= '<p>';
-          $returnstring .= '<h2>';
-
-          if ( count( $planning ) > 1 ) {
-            $returnstring .= $tax_info->labels->name;
-          }
-          else {
-            $returnstring .= $tax_info->labels->singular_name;
-          }
-//          $returnstring .= ': ';
-          $returnstring .= '</h2>';
-          $returnstring .= '<p>';
-
-          foreach ( $planning as $term ) {
-            $countertje++;
-            if ( $countertje <= 1 ) {
-              $returnstring .= $term->name;
-            }
-            else {
-              $returnstring .= ', ' . $term->name;
-            }
-          }
-          $returnstring .= '.</p>';
-        }
-
-        //------------------------------------------------------------------------------------------------
-        // kijken of er gerelateerde actielijnen zijn
-
-        $related_actielijnen = get_field('related_actielijnen', $acfid );
-
-        if( $related_actielijnen ) {
-      
-          if ( ! $actielijnentitletext ) {
-            $actielijnentitletext = _x( 'Gerelateerde actielijnen', 'tussenkopje', "do-planning-tool" );
-          }
-          if ( $showheader ) {
-            $returnstring .= '<h2>' . $actielijnentitletext . '</h2>';
-            $actielijnentitletext = '';
-          }
-      
-          $returnstring .= '<ul>';
-        
-          $related_actielijnen = get_field('related_actielijnen', $acfid );
-      
-          foreach ( $related_actielijnen as $relatedobject ) {      
-            $returnstring .= '<li><a href="' . get_permalink( $relatedobject->ID ) . '">' . get_the_title( $relatedobject->ID ) . '</a></li>';
-          }
-      
-          $returnstring .= '</ul>';
-          
-        }
-
-        //------------------------------------------------------------------------------------------------
-        // kijken of er gebeurtenissen aan deze actielijn gekoppeld zijn
-
-        $related_gebeurtenissen = get_field('related_gebeurtenissen_actielijnen', $acfid );
-
-        if( $related_gebeurtenissen ) {
-      
-          if ( ! $actielijnentitletext ) {
-            $actielijnentitletext = _x( 'Gerelateerde gebeurtenissen', 'tussenkopje', "do-planning-tool" );
-          }
-          if ( $showheader ) {
-            $returnstring .= '<h2>' . $actielijnentitletext . '</h2>';
-          }
-      
-          $returnstring .= '<ul>';
-        
-      
-          foreach ( $related_gebeurtenissen as $relatedobject ) {      
-            $returnstring .= '<li><a href="' . get_permalink( $relatedobject->ID ) . '">' . get_the_title( $relatedobject->ID ) . '</a></li>';
-          }
-      
-          $returnstring .= '</ul>';
-          
-        }
-
-        //------------------------------------------------------------------------------------------------
-
-      }
-
-      if ( $echo ) {
-        echo $returnstring;
-      }
-      else {
-        return $returnstring;
-      }
-
-      
-    }
+				foreach ( $related_gebeurtenissen as $relatedobject ) {      
+					$returnstring .= '<li><a href="' . get_permalink( $relatedobject->ID ) . '">' . get_the_title( $relatedobject->ID ) . '</a></li>';
+				}
+				
+				$returnstring .= '</ul>';
+				
+			}
+			
+			//------------------------------------------------------------------------------------------------
+			
+		}
+		
+		if ( $echo ) {
+			echo $returnstring;
+		}
+		else {
+			return $returnstring;
+		}
+		
+		
+	}
 
     //====================================================================================================
 
