@@ -1390,78 +1390,105 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
   
     //====================================================================================================
 
-    public function do_pt_frontend_filter_breadcrumb( $crumb, $args ) {
-      
-      global $post;    
-    
-      if ( $crumb ) {
-        
-        $span_before_start  = '<span class="breadcrumb-link-wrap" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">';  
-        $span_between_start = '<span itemprop="name">';  
-        $span_before_end    = '</span>';  
-        $loop               = rhswp_get_context_info();
-        $berichtnaam        = get_the_title();
-        
-        if( ( is_single() && DOPT__ACTIELIJN_CPT == get_post_type() ) || 
-            ( is_single() && DOPT__GEBEURTENIS_CPT == get_post_type() ) ) {
-        
-          // get page that goes with this DOPT_CT_ONDERWERP
-          $terms              = wp_get_post_terms( $post->ID, DOPT_CT_ONDERWERP );
-  
-          if ( $terms ) {
-            
-            foreach ( $terms as $_term) {          
-            
-            $planning_page      = get_field( 'dopt_ct_onderwerp_page', DOPT_CT_ONDERWERP . '_' . $_term->term_id );
-            $planning_page_id   = $planning_page->ID;
-            $pagetitle          = get_the_title( $planning_page_id );
-            
-            }
-          }
-          else {
-            
-            // actielijn not attached to any DOPT_CT_ONDERWERP term
-            
-            if ( !$planning_page_id ) {
-              $planning_page      = get_field( 'planning_page', 'option');
-              $planning_page_id   = $planning_page->ID;
-              $pagetitle          = get_the_title( $planning_page_id );
-            }  
-            
-            if ( !$planning_page_id ) {
-              // last resort. Default to post archive page
-              //  ¯\_(ツ)_/¯ 
-              $planning_page_id   = get_option( 'page_for_posts' );
-              $pagetitle          = get_the_title( $planning_page_id );
-            }  
-          }
+	public function do_pt_frontend_filter_breadcrumb( $crumb, $args ) {
+		
+		global $post;    
+		
+		if ( $crumb ) {
+			
+			$span_before_start  	= '<span class="breadcrumb-link-wrap" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">';  
+			$span_between_start 	= '<span itemprop="name">';  
+			$span_before_end    	= '</span>';  
+			$loop               	= rhswp_get_context_info();
+			$berichtnaam        	= get_the_title();
+			$gebeurtenis_parentid	= 0;
+			
+			if( ( is_single() && DOPT__ACTIELIJN_CPT == get_post_type() ) || 
+				( is_single() && DOPT__GEBEURTENIS_CPT == get_post_type() ) ) {
+				
+				if ( DOPT__GEBEURTENIS_CPT == get_post_type() ) {
 
-          if ( $planning_page_id ) {
-            $crumb = $args['sep'] . ' ' . $berichtnaam;
-            
-            $crumb = ' <a href="' . get_permalink( $planning_page_id ) . '">' . get_the_title( $planning_page_id ) .'</a>' . $crumb;
+					$acfid = $post->ID;
 
-            // haal de ancestors op voor de huidige pagina
-            $ancestors = get_post_ancestors( $planning_page_id );
+					// Gerelateerde gebeurtenissen
+					$related_actielijnen = get_field('related_gebeurtenissen_actielijnen', $acfid );
 
-            // haal de hele keten aan ancestors op en zet ze in de returnstring
-            foreach ( $ancestors as $ancestorid ) {
+					if( $related_actielijnen ) {
 
-              $crumb = ' <a href="' . get_permalink( $ancestorid ) . '">' . get_the_title( $ancestorid ) .'</a>' . $crumb;
+						foreach ( $related_actielijnen as $relatedobject ) {      
+							$gebeurtenis_parentid = $relatedobject->ID;
+							$terms              = wp_get_post_terms( $gebeurtenis_parentid, DOPT_CT_ONDERWERP );
+						}
 
-            }
+					}
+					else {
+						// geen actielijn gevonden bij deze gebeurtenis
+					}
+				}
+				if ( DOPT__ACTIELIJN_CPT == get_post_type() ) {
+					// get page that goes with this DOPT_CT_ONDERWERP
+					$terms              = wp_get_post_terms( $post->ID, DOPT_CT_ONDERWERP );
+				}
+				
+				if ( $terms ) {
 
-            return $crumb;
-          }
-          else {
-            return $crumb;
-          }
-      	}
-      	else {
-      		return $crumb;
-      	}
-      }
-    }
+					foreach ( $terms as $_term) {          
+						
+						$planning_page      = get_field( 'dopt_ct_onderwerp_page', DOPT_CT_ONDERWERP . '_' . $_term->term_id );
+						$planning_page_id   = $planning_page->ID;
+						$pagetitle          = get_the_title( $planning_page_id );
+					
+					}
+				}
+				else {
+					
+					// actielijn not attached to any DOPT_CT_ONDERWERP term
+					
+					if ( !$planning_page_id ) {
+						$planning_page      = get_field( 'planning_page', 'option');
+						$planning_page_id   = $planning_page->ID;
+						$pagetitle          = get_the_title( $planning_page_id );
+					}  
+					
+					if ( !$planning_page_id ) {
+						// last resort. Default to post archive page
+						//  ¯\_(ツ)_/¯ 
+						$planning_page_id   = get_option( 'page_for_posts' );
+						$pagetitle          = get_the_title( $planning_page_id );
+					}  
+				}
+				
+				if ( $planning_page_id ) {
+					
+					if ( DOPT__GEBEURTENIS_CPT == get_post_type() && $gebeurtenis_parentid ) {
+						$crumb = $args['sep'] . '<a href="' . get_permalink( $gebeurtenis_parentid ) . '">' . get_the_title( $gebeurtenis_parentid ) . '</a>' . $args['sep'] . $berichtnaam;
+					}
+					else {
+						$crumb = $args['sep'] . ' ' . $berichtnaam;
+					}					
+					
+					$crumb = ' <a href="' . get_permalink( $planning_page_id ) . '">' . get_the_title( $planning_page_id ) .'</a>' . $crumb;
+					
+					// haal de ancestors op voor de huidige pagina
+					$ancestors = get_post_ancestors( $planning_page_id );
+					
+					// haal de hele keten aan ancestors op en zet ze in de returnstring
+					foreach ( $ancestors as $ancestorid ) {
+					
+						$crumb = ' <a href="' . get_permalink( $ancestorid ) . '">' . get_the_title( $ancestorid ) .'</a>' . $crumb;
+						
+					}
+					return $crumb;
+				}
+				else {
+					return $crumb;
+				}
+			}
+			else {
+				return $crumb;
+			}
+		}
+	}
 
     //====================================================================================================
 
@@ -1571,11 +1598,11 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 				
 				$returnstring .= '<ul>';
 				
-				$related_actielijnen = get_field('related_actielijnen', $acfid );
+//				$related_actielijnen = get_field('related_actielijnen', $acfid );
 				
 				foreach ( $related_actielijnen as $relatedobject ) {      
-//					$returnstring .= '<li>' . get_the_title( $relatedobject->ID ) . '</li>';
-					$returnstring .= '<li><a href="' . get_permalink( $relatedobject->ID ) . '">' . get_the_title( $relatedobject->ID ) . '</a></li>';
+					$returnstring .= '<li>' . get_the_title( $relatedobject->ID ) . '</li>';
+//					$returnstring .= '<li><a href="' . get_permalink( $relatedobject->ID ) . '">' . get_the_title( $relatedobject->ID ) . '</a></li>';
 				}
 				
 				$returnstring .= '</ul>';
@@ -1599,7 +1626,11 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 				$returnstring .= '<ul>';
 
 				foreach ( $related_gebeurtenissen as $relatedobject ) {      
-					$returnstring .= '<li><a href="' . get_permalink( $relatedobject->ID ) . '">' . get_the_title( $relatedobject->ID ) . '</a></li>';
+
+					$gebeurtenis_datum     = date_i18n( get_option( 'date_format' ),  strtotime( get_field( 'gebeurtenis_datum', $relatedobject->ID ) ) );
+					
+					$returnstring .= '<li><a href="' . get_permalink( $relatedobject->ID ) . '">' . get_the_title( $relatedobject->ID ) . ' (' . $gebeurtenis_datum . ')</a></li>';
+//					$returnstring .= '<li><a href="' . get_permalink( $relatedobject->ID ) . '">' . get_the_title( $relatedobject->ID ) . '</a></li>';
 				}
 				
 				$returnstring .= '</ul>';

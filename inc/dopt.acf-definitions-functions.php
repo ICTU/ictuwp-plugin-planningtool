@@ -26,16 +26,15 @@ function bidirectional_acf_update_value( $value, $post_id, $field  ) {
 	$field_name   = $field['name'];
 	$field_key    = $field['key'];
 	$global_name  = 'is_updating_' . $field_name;
-
-  $debugstring = 'bidirectional_acf_update_value';
-  
-  $debugstring .= "value='" . implode( ", ", $value ) . "'";
-  $debugstring .= ", post_id='" . $post_id . "'";
-  $debugstring .= " (type=" . get_post_type( $post_id ) . ")";
-  $debugstring .= ", field_key='" . $field_key . "'";
-  $debugstring .= ", field_name='" . $field_name . "'";
-  
-  // dodebug( $debugstring );
+	
+	$debugstring = 'bidirectional_acf_update_value';
+	
+	$debugstring .= "value='" . implode( ", ", $value ) . "'";
+	$debugstring .= ", post_id='" . $post_id . "'";
+	$debugstring .= " (type=" . get_post_type( $post_id ) . ")";
+	$debugstring .= ", field_key='" . $field_key . "'";
+	$debugstring .= ", field_name='" . $field_name . "'";
+	
 
 	// bail early if this filter was triggered from the update_field() function called within the loop below
 	// - this prevents an inifinte loop
