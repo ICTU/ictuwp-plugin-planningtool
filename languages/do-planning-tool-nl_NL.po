@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: GC Maturity\n"
-"POT-Creation-Date: 2019-02-21 19:54+0100\n"
-"PO-Revision-Date: 2019-02-21 19:54+0100\n"
+"POT-Creation-Date: 2019-09-30 23:12+0200\n"
+"PO-Revision-Date: 2019-09-30 23:12+0200\n"
 "Last-Translator: Paul van Buuren <paul@wbvb.nl>\n"
 "Language-Team: paul@wbvb.nl\n"
 "Language: nl_NL\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.2.1\n"
+"X-Generator: Poedit 2.2.3\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
 "X-Poedit-WPHeader: do-planning-tool.php\n"
@@ -21,11 +21,11 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
-#: cmb2/includes/CMB2.php:179
+#: cmb2/includes/CMB2.php:199
 msgid "Metabox configuration is required to have an ID parameter."
 msgstr ""
 
-#: cmb2/includes/CMB2.php:581
+#: cmb2/includes/CMB2.php:601
 msgid "Click to toggle"
 msgstr ""
 
@@ -251,17 +251,17 @@ msgstr "Rij toevoegen"
 msgid "Remove Row"
 msgstr ""
 
-#: cmb2/includes/CMB2_hookup.php:181
+#: cmb2/includes/CMB2_hookup.php:182
 msgid ""
 "Term Metadata is a WordPress 4.4+ feature. Please upgrade your WordPress "
 "install."
 msgstr ""
 
-#: cmb2/includes/CMB2_hookup.php:185
+#: cmb2/includes/CMB2_hookup.php:186
 msgid "Term metaboxes configuration requires a \"taxonomies\" parameter."
 msgstr ""
 
-#: cmb2/includes/CMB2_hookup.php:465
+#: cmb2/includes/CMB2_hookup.php:466
 #, php-format
 msgid "Toggle panel: %s"
 msgstr ""
@@ -432,150 +432,168 @@ msgstr ""
 msgid "Check Three"
 msgstr ""
 
-#: do-planning-tool.php:331
+#: do-planning-tool.php:313
 msgctxt "naam template"
 msgid "Planningtool Digitale Overheid"
 msgstr ""
 
-#: do-planning-tool.php:349
+#: do-planning-tool.php:331
 msgid "General settings"
 msgstr "Algemene instellingen"
 
-#: do-planning-tool.php:381
+#: do-planning-tool.php:363
 msgid "Documentation"
 msgstr "Documentatie"
 
-#: do-planning-tool.php:382
+#: do-planning-tool.php:364
 msgid "GC Maturity documentation"
 msgstr "Documentatie Gebuiker Centraal Volwassenheidsscore"
 
-#: do-planning-tool.php:991 do-planning-tool.php:1339 do-planning-tool.php:1664
+#: do-planning-tool.php:973 do-planning-tool.php:1318 do-planning-tool.php:1682
 msgctxt "geschatte planning"
 msgid "Planning:"
 msgstr ""
 
-#: do-planning-tool.php:1038 do-planning-tool.php:1387
+#: do-planning-tool.php:982
+#, php-format
+msgctxt "geschatte planning"
+msgid "van %s-%s tot %s-%s"
+msgstr ""
+
+#: do-planning-tool.php:990
+#, php-format
+msgctxt "geschatte planning"
+msgid "vanaf %s-%s"
+msgstr ""
+
+#: do-planning-tool.php:996
+#, php-format
+msgctxt "geschatte planning"
+msgid "tot %s-%s"
+msgstr ""
+
+#: do-planning-tool.php:1017 do-planning-tool.php:1366
 msgid "Gebeurtenissen hierbij:"
 msgstr ""
 
-#: do-planning-tool.php:1074
+#: do-planning-tool.php:1053
 msgctxt "tussenkopje"
 msgid "Actielijn"
 msgstr ""
 
-#: do-planning-tool.php:1075
+#: do-planning-tool.php:1054
 msgctxt "tussenkopje"
 msgid "Planning"
 msgstr ""
 
-#: do-planning-tool.php:1076
+#: do-planning-tool.php:1055
 msgctxt "tussenkopje"
 msgid "Gebeurtenissen"
 msgstr ""
 
-#: do-planning-tool.php:1110
+#: do-planning-tool.php:1089
 msgctxt "tussenkopje"
 msgid "Van"
 msgstr ""
 
-#: do-planning-tool.php:1113
+#: do-planning-tool.php:1092
 msgctxt "tussenkopje"
 msgid "Start"
 msgstr ""
 
-#: do-planning-tool.php:1123
+#: do-planning-tool.php:1102
 msgctxt "tussenkopje"
 msgid "tot"
 msgstr ""
 
-#: do-planning-tool.php:1126
+#: do-planning-tool.php:1105
 msgctxt "tussenkopje"
 msgid "Eind"
 msgstr ""
 
-#: do-planning-tool.php:1181
+#: do-planning-tool.php:1160
 msgid ", dus we tonen de actielijnen onder"
 msgstr ""
 
-#: do-planning-tool.php:1184
+#: do-planning-tool.php:1163
 msgid ", dus ALLE actielijnen per digibeter-kleur worden getoond."
 msgstr ""
 
-#: do-planning-tool.php:1187
+#: do-planning-tool.php:1166
 msgid ""
 "Hallo, lid van de redactie. Er zijn geen actielijnen geselecteerd voor deze "
 "pagina."
 msgstr ""
 
-#: do-planning-tool.php:1189
+#: do-planning-tool.php:1168
 msgid "<br>Normale bezoekers zien deze geel-rode melding uiteraard niet."
 msgstr ""
 
-#: do-planning-tool.php:1498
+#: do-planning-tool.php:1517
 msgctxt "kopje"
 msgid "Doel"
 msgstr ""
 
-#: do-planning-tool.php:1503
+#: do-planning-tool.php:1522
 msgctxt "kopje"
 msgid "Resultaat"
 msgstr ""
 
-#: do-planning-tool.php:1515
+#: do-planning-tool.php:1532
 msgctxt "kopje"
 msgid "Planning"
 msgstr ""
 
-#: do-planning-tool.php:1578 do-planning-tool.php:1722
+#: do-planning-tool.php:1592 do-planning-tool.php:1740
 msgctxt "tussenkopje"
 msgid "Gerelateerde actielijnen"
 msgstr ""
 
-#: do-planning-tool.php:1605
+#: do-planning-tool.php:1620
 msgctxt "tussenkopje"
 msgid "Gerelateerde gebeurtenissen"
 msgstr ""
 
-#: do-planning-tool.php:1655 do-planning-tool.php:2104
+#: do-planning-tool.php:1673 do-planning-tool.php:2122
 msgctxt "geschatte planning"
 msgid "Geen datum ingevoerd"
 msgstr ""
 
-#: do-planning-tool.php:1675
+#: do-planning-tool.php:1693
 msgctxt "tussenkopje"
 msgid "Gerelateerde activiteiten"
 msgstr ""
 
-#: do-planning-tool.php:1750
+#: do-planning-tool.php:1768
 msgctxt "tussenkopje"
 msgid "Actielijnen"
 msgstr ""
 
-#: do-planning-tool.php:1773
+#: do-planning-tool.php:1791
 msgctxt "tussenkopje"
 msgid "Gebeurtenissen (A)"
 msgstr ""
 
-#: do-planning-tool.php:1786
+#: do-planning-tool.php:1804
 #, php-format
 msgid "Gebeurtenissen bij %s"
 msgstr ""
 
-#: do-planning-tool.php:2056
+#: do-planning-tool.php:2074
 msgid "Gebeurtenissen"
 msgstr ""
 
-#: do-planning-tool.php:2106
+#: do-planning-tool.php:2124
 msgctxt "label voor verborgen datum in ganttchart"
 msgid "datum:"
 msgstr ""
 
-#: do-planning-tool.php:2110
+#: do-planning-tool.php:2128
 msgctxt "label voor verborgen datum in ganttchart"
 msgid "geschatte datum:"
 msgstr ""
 
-#: do-planning-tool.php:2116
+#: do-planning-tool.php:2134
 #, php-format
 msgctxt "verborgen datum in ganttchart"
 msgid ", %s %s"
@@ -732,12 +750,12 @@ msgstr ""
 #: inc/dopt.posttypes-taxonomies.php:180
 msgctxt "labels"
 msgid "Trekker"
-msgstr ""
+msgstr "Betrokken organisatie"
 
 #: inc/dopt.posttypes-taxonomies.php:181
 msgctxt "labels"
 msgid "Trekkers"
-msgstr ""
+msgstr "Betrokken organisaties"
 
 #: inc/dopt.posttypes-taxonomies.php:229
 msgctxt "labels"
@@ -771,6 +789,13 @@ msgstr ""
 #. Author URI of the plugin/theme
 msgid "https://wbvb.nl"
 msgstr ""
+
+#, fuzzy
+#~| msgctxt "labels"
+#~| msgid "organisation types"
+#~ msgctxt "labels"
+#~ msgid "Betrokken organisaties"
+#~ msgstr "organisatietypes"
 
 #~ msgctxt "slug"
 #~ msgid "beleidsonderwerp"
@@ -818,10 +843,6 @@ msgstr ""
 #~ msgctxt "labels"
 #~ msgid "organisation type"
 #~ msgstr "organisatietype"
-
-#~ msgctxt "labels"
-#~ msgid "organisation types"
-#~ msgstr "organisatietypes"
 
 #~ msgid "Maturity score"
 #~ msgstr "Volwassenheids&shy;score"

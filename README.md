@@ -9,9 +9,10 @@ Planning Tool plugin voor digitaleoverheid.nl. Toont actielijnen en gebeurteniss
 * eh
 
 ## Current version:
-1.2.3 - Broodkruimelpad verbeterd: ook parents van pagina's tonen.
+* 1.2.4 - Bugfixje en 'Trekker' omgenoemd naar 'Betrokken organisaties'.
 
 ## Version history
+* 1.2.4 - Bugfixje en 'Trekker' omgenoemd naar 'Betrokken organisaties'.
 * 1.2.3 - Broodkruimelpad verbeterd: ook parents van pagina's tonen.
 * 1.2.2 - Styling voor Data-agenda toegevoegd en wat extra toegankelijkheidssaus toegevoegd.
 * 1.2.1 - Beleidsonderwerp-taxonomie toegevoegd; paginafilter hiervoor verfijnd.
