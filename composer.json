@@ -1,0 +1,20 @@
+
+{
+  "name": "ictuwp-plugin-planningtool",
+  "version": "1.2.4",
+  "description": "Inclusie Front-end",
+  "main": "index.js",
+  "repository": "https://github.com/ICTU/ictuwp-plugin-planningtool",
+  "author": "Gebruiker Centraal",
+  "license": "MIT",
+  "dependencies": {
+    "browser-sync": "2.26.7",
+    "gulp": "4.0.2",
+    "gulp-less": "4.0.1",
+    "gulp-notify": "3.2.0",
+    "gulp-sourcemaps": "2.6.5",
+    "gulp-util": "3.0.8",
+    "less-plugin-autoprefix": "2.0.0",
+    "path": "0.12.7"
+  }
+}
