@@ -9,9 +9,10 @@ Planning Tool plugin voor digitaleoverheid.nl. Toont actielijnen en gebeurteniss
 * eh
 
 ## Current version:
-* 1.2.4 - Bugfixje en 'Trekker' omgenoemd naar 'Betrokken organisaties'.
+* 1.3.1 - Plugin hernoemd van 'do-planning-tool' naar 'ictuwp-plugin-planningtool'; achtergrondkleur toegevoegd voor gebeurtenissen in overzichtsplaat.
 
 ## Version history
+* 1.3.1 - Plugin hernoemd van 'do-planning-tool' naar 'ictuwp-plugin-planningtool'; achtergrondkleur toegevoegd voor gebeurtenissen in overzichtsplaat.
 * 1.2.4 - Bugfixje en 'Trekker' omgenoemd naar 'Betrokken organisaties'.
 * 1.2.3 - Broodkruimelpad verbeterd: ook parents van pagina's tonen.
 * 1.2.2 - Styling voor Data-agenda toegevoegd en wat extra toegankelijkheidssaus toegevoegd.

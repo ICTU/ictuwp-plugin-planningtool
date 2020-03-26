@@ -13,7 +13,7 @@ msgstr ""
 "X-Generator: Poedit 2.2.3\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
-"X-Poedit-WPHeader: do-planning-tool.php\n"
+"X-Poedit-WPHeader: ictuwp-plugin-planningtool.php\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
 "esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
@@ -427,168 +427,168 @@ msgstr ""
 msgid "Check Three"
 msgstr ""
 
-#: do-planning-tool.php:313
+#: ictuwp-plugin-planningtool.php:313
 msgctxt "naam template"
 msgid "Planningtool Digitale Overheid"
 msgstr ""
 
-#: do-planning-tool.php:331
+#: ictuwp-plugin-planningtool.php:331
 msgid "General settings"
 msgstr ""
 
-#: do-planning-tool.php:363
+#: ictuwp-plugin-planningtool.php:363
 msgid "Documentation"
 msgstr ""
 
-#: do-planning-tool.php:364
+#: ictuwp-plugin-planningtool.php:364
 msgid "GC Maturity documentation"
 msgstr ""
 
-#: do-planning-tool.php:973 do-planning-tool.php:1318 do-planning-tool.php:1682
+#: ictuwp-plugin-planningtool.php:973 ictuwp-plugin-planningtool.php:1318 ictuwp-plugin-planningtool.php:1682
 msgctxt "geschatte planning"
 msgid "Planning:"
 msgstr ""
 
-#: do-planning-tool.php:982
+#: ictuwp-plugin-planningtool.php:982
 #, php-format
 msgctxt "geschatte planning"
 msgid "van %s-%s tot %s-%s"
 msgstr ""
 
-#: do-planning-tool.php:990
+#: ictuwp-plugin-planningtool.php:990
 #, php-format
 msgctxt "geschatte planning"
 msgid "vanaf %s-%s"
 msgstr ""
 
-#: do-planning-tool.php:996
+#: ictuwp-plugin-planningtool.php:996
 #, php-format
 msgctxt "geschatte planning"
 msgid "tot %s-%s"
 msgstr ""
 
-#: do-planning-tool.php:1017 do-planning-tool.php:1366
+#: ictuwp-plugin-planningtool.php:1017 ictuwp-plugin-planningtool.php:1366
 msgid "Gebeurtenissen hierbij:"
 msgstr ""
 
-#: do-planning-tool.php:1053
+#: ictuwp-plugin-planningtool.php:1053
 msgctxt "tussenkopje"
 msgid "Actielijn"
 msgstr ""
 
-#: do-planning-tool.php:1054
+#: ictuwp-plugin-planningtool.php:1054
 msgctxt "tussenkopje"
 msgid "Planning"
 msgstr ""
 
-#: do-planning-tool.php:1055
+#: ictuwp-plugin-planningtool.php:1055
 msgctxt "tussenkopje"
 msgid "Gebeurtenissen"
 msgstr ""
 
-#: do-planning-tool.php:1089
+#: ictuwp-plugin-planningtool.php:1089
 msgctxt "tussenkopje"
 msgid "Van"
 msgstr ""
 
-#: do-planning-tool.php:1092
+#: ictuwp-plugin-planningtool.php:1092
 msgctxt "tussenkopje"
 msgid "Start"
 msgstr ""
 
-#: do-planning-tool.php:1102
+#: ictuwp-plugin-planningtool.php:1102
 msgctxt "tussenkopje"
 msgid "tot"
 msgstr ""
 
-#: do-planning-tool.php:1105
+#: ictuwp-plugin-planningtool.php:1105
 msgctxt "tussenkopje"
 msgid "Eind"
 msgstr ""
 
-#: do-planning-tool.php:1160
+#: ictuwp-plugin-planningtool.php:1160
 msgid ", dus we tonen de actielijnen onder"
 msgstr ""
 
-#: do-planning-tool.php:1163
+#: ictuwp-plugin-planningtool.php:1163
 msgid ", dus ALLE actielijnen per digibeter-kleur worden getoond."
 msgstr ""
 
-#: do-planning-tool.php:1166
+#: ictuwp-plugin-planningtool.php:1166
 msgid ""
 "Hallo, lid van de redactie. Er zijn geen actielijnen geselecteerd voor deze "
 "pagina."
 msgstr ""
 
-#: do-planning-tool.php:1168
+#: ictuwp-plugin-planningtool.php:1168
 msgid "<br>Normale bezoekers zien deze geel-rode melding uiteraard niet."
 msgstr ""
 
-#: do-planning-tool.php:1517
+#: ictuwp-plugin-planningtool.php:1517
 msgctxt "kopje"
 msgid "Doel"
 msgstr ""
 
-#: do-planning-tool.php:1522
+#: ictuwp-plugin-planningtool.php:1522
 msgctxt "kopje"
 msgid "Resultaat"
 msgstr ""
 
-#: do-planning-tool.php:1532
+#: ictuwp-plugin-planningtool.php:1532
 msgctxt "kopje"
 msgid "Planning"
 msgstr ""
 
-#: do-planning-tool.php:1592 do-planning-tool.php:1740
+#: ictuwp-plugin-planningtool.php:1592 ictuwp-plugin-planningtool.php:1740
 msgctxt "tussenkopje"
 msgid "Gerelateerde actielijnen"
 msgstr ""
 
-#: do-planning-tool.php:1620
+#: ictuwp-plugin-planningtool.php:1620
 msgctxt "tussenkopje"
 msgid "Gerelateerde gebeurtenissen"
 msgstr ""
 
-#: do-planning-tool.php:1673 do-planning-tool.php:2122
+#: ictuwp-plugin-planningtool.php:1673 ictuwp-plugin-planningtool.php:2122
 msgctxt "geschatte planning"
 msgid "Geen datum ingevoerd"
 msgstr ""
 
-#: do-planning-tool.php:1693
+#: ictuwp-plugin-planningtool.php:1693
 msgctxt "tussenkopje"
 msgid "Gerelateerde activiteiten"
 msgstr ""
 
-#: do-planning-tool.php:1768
+#: ictuwp-plugin-planningtool.php:1768
 msgctxt "tussenkopje"
 msgid "Actielijnen"
 msgstr ""
 
-#: do-planning-tool.php:1791
+#: ictuwp-plugin-planningtool.php:1791
 msgctxt "tussenkopje"
 msgid "Gebeurtenissen (A)"
 msgstr ""
 
-#: do-planning-tool.php:1804
+#: ictuwp-plugin-planningtool.php:1804
 #, php-format
 msgid "Gebeurtenissen bij %s"
 msgstr ""
 
-#: do-planning-tool.php:2074
+#: ictuwp-plugin-planningtool.php:2074
 msgid "Gebeurtenissen"
 msgstr ""
 
-#: do-planning-tool.php:2124
+#: ictuwp-plugin-planningtool.php:2124
 msgctxt "label voor verborgen datum in ganttchart"
 msgid "datum:"
 msgstr ""
 
-#: do-planning-tool.php:2128
+#: ictuwp-plugin-planningtool.php:2128
 msgctxt "label voor verborgen datum in ganttchart"
 msgid "geschatte datum:"
 msgstr ""
 
-#: do-planning-tool.php:2134
+#: ictuwp-plugin-planningtool.php:2134
 #, php-format
 msgctxt "verborgen datum in ganttchart"
 msgid ", %s %s"

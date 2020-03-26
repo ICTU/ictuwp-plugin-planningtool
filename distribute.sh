@@ -20,30 +20,18 @@ rsync -r -a --delete '/Users/paul/shared-paul-files/Webs/git-repos/Digitale-Over
 # clean up temp dir
 rm -rf '/Users/paul/shared-paul-files/Webs/temp/.git/'
 rm '/Users/paul/shared-paul-files/Webs/temp/.gitignore'
-rm '/Users/paul/shared-paul-files/Webs/temp/config.codekit3'
+rm '/Users/paul/shared-paul-files/Webs/temp/.config.codekit3'
 rm '/Users/paul/shared-paul-files/Webs/temp/distribute.sh'
 rm '/Users/paul/shared-paul-files/Webs/temp/README.md'
 rm '/Users/paul/shared-paul-files/Webs/temp/LICENSE'
 rm '/Users/paul/shared-paul-files/Webs/temp/wijzigingen-planningstool.txt'
 
 
-
-# clean up temp dir
-rm -rf '/Users/paul/shared-paul-files/Webs/temp/.git/'
-rm '/Users/paul/shared-paul-files/Webs/temp/.gitignore'
-rm '/Users/paul/shared-paul-files/Webs/temp/config.codekit3'
-rm '/Users/paul/shared-paul-files/Webs/temp/.config.codekit3'
-rm '/Users/paul/shared-paul-files/Webs/temp/distribute.sh'
-rm '/Users/paul/shared-paul-files/Webs/temp/README.md'
-rm '/Users/paul/shared-paul-files/Webs/temp/LICENSE'
-
-
-
 # --------------------------------------------------------------------------------------------------------------------------------
 # Vertalingen --------------------------------------------------------------------------------------------------------------------
 # --------------------------------------------------------------------------------------------------------------------------------
 # remove the .pot
-rm '/Users/paul/shared-paul-files/Webs/temp/languages/do-planning-tool.pot'
+rm '/Users/paul/shared-paul-files/Webs/temp/languages/ictuwp-plugin-planningtool.pot'
 
 # copy files to /wp-content/languages/themes
 rsync -ah '/Users/paul/shared-paul-files/Webs/temp/languages/' '/Users/paul/shared-paul-files/Webs/ICTU/Gebruiker Centraal/development/wp-content/languages/plugins/'

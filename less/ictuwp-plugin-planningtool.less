@@ -2,15 +2,15 @@
 /*!
 
 //**
-// * DO_Planningtool - do-planning-tool.less
+// * DO_Planningtool - ictuwp-plugin-planningtool.less
 // * ----------------------------------------------------------------------------------
 // * CSS for front-end
 // * ----------------------------------------------------------------------------------
 // * @author  Paul van Buuren
 // * @license GPL-2.0+
-// * @plugin: do-planning-tool
-// * version: 1.2.4
-// * @desc.   Bugfixje en 'Trekker' omgenoemd naar 'Betrokken organisaties'.
+// * @plugin: ictuwp-plugin-planningtool
+// * version: 1.3.1
+// * @desc.   Plugin hernoemd van 'do-planning-tool' naar 'ictuwp-plugin-planningtool'; achtergrondkleur toegevoegd voor gebeurtenissen in overzichtsplaat.
 // * @link    https://github.com/ICTU/Digitale-Overheid---WordPress-plugin-Planning-Tool/
 
 
@@ -415,7 +415,6 @@ form {
           ul {
             padding-top: .5em;
             position: relative;
-//            border: 2px solid red;
             
             &, li {
               list-style: none;
@@ -429,7 +428,8 @@ form {
                 min-width: 4em;
                 margin-top: .1em;
                 margin-bottom: .1em;
-                display: block;
+                display: inline-block;
+                background: #e8e8e8;
                 
                 &:before {
                   content: ' ';

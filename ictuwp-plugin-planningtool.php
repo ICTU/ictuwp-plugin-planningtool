@@ -5,13 +5,13 @@
  * Plugin Name:         ICTU / WP Planning Tool digitaleoverheid.nl
  * Plugin URI:          https://github.com/ICTU/Digitale-Overheid---WordPress-plugin-Planning-Tool/
  * Description:         Plugin voor digitaleoverheid.nl waarmee extra functionaliteit mogelijk wordt voor het tonen van een planning met actielijnen en gebeurtenissen.
- * Version:             1.2.4
- * Version description: Bugfixje en 'Trekker' omgenoemd naar 'Betrokken organisaties'.
+ * Version:             1.3.1
+ * Version description: Plugin hernoemd van 'do-planning-tool' naar 'ictuwp-plugin-planningtool'; achtergrondkleur toegevoegd voor gebeurtenissen in overzichtsplaat.
  * Author:              Paul van Buuren
  * Author URI:          https://wbvb.nl
  * License:             GPL-2.0+
  *
- * Text Domain:         do-planning-tool
+ * Text Domain:         ictuwp-plugin-planningtool
  * Domain Path:         /languages
  */
 
@@ -35,7 +35,7 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 		/**
 		 * @var string
 		 */
-		public $version = '1.2.4';
+		public $version = '1.3.1';
 
 
 		/**
@@ -95,7 +95,7 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 			$this->dopt_array_data = array();
 
 			define( 'DOPT__VERSION', $this->version );
-			define( 'DOPT__FOLDER', 'do-planning-tool' );
+			define( 'DOPT__FOLDER', 'ictuwp-plugin-planningtool' );
 			define( 'DOPT__BASE_URL', trailingslashit( plugins_url( DOPT__FOLDER ) ) );
 			define( 'DOPT__ASSETS_URL', trailingslashit( DOPT__BASE_URL ) );
 			define( 'DOPT__PATH', plugin_dir_path( __FILE__ ) );
@@ -115,7 +115,6 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 			define( 'DOPT__QUESTION_PREFIX', DOPT__ACTIELIJN_CPT . '_pf_' ); // prefix for cmb2 metadata fields
 			define( 'DOPT__CMBS2_PREFIX', DOPT__QUESTION_PREFIX . '_form_' ); // prefix for cmb2 metadata fields
 			define( 'DOPT__FORMKEYS', DOPT__CMBS2_PREFIX . 'keys' ); // prefix for cmb2 metadata fields
-
 
 //        define( 'ADD_DEFAULT_TERM_ID',              false );
 			define( 'ADD_DEFAULT_TERM_ID', true );
@@ -308,7 +307,7 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 		 */
 		function do_pt_init_add_page_templates( $post_templates ) {
 
-			$post_templates[ $this->templatefile ] = _x( 'Planningtool Digitale Overheid', "naam template", "do-planning-tool" );
+			$post_templates[ $this->templatefile ] = _x( 'Planningtool Digitale Overheid', "naam template", "ictuwp-plugin-planningtool" );
 
 			return $post_templates;
 
@@ -327,7 +326,7 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 			// Add a General section
 			add_settings_section(
 				$this->option_name . '_general',
-				__( 'General settings', "do-planning-tool" ),
+				__( 'General settings', "ictuwp-plugin-planningtool" ),
 				array( $this, $this->option_name . '_general_cb' ),
 				DOPT__PLUGIN_KEY
 			);
@@ -342,7 +341,7 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 		public function do_pt_admin_register_styles() {
 
 			if ( is_admin() ) {
-				wp_enqueue_style( 'do-planning-tool-admin', DOPT__ASSETS_URL . 'css/do-planning-tool-admin.css', false, DOPT__VERSION );
+				wp_enqueue_style( 'ictuwp-plugin-planningtool-admin', DOPT__ASSETS_URL . 'css/ictuwp-plugin-planningtool-admin.css', false, DOPT__VERSION );
 			}
 
 		}
@@ -359,8 +358,8 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 			// documentation tab
 			$screen->add_do_pt_admin_help_tab( array(
 					'id'      => 'documentation',
-					'title'   => __( 'Documentation', "do-planning-tool" ),
-					'content' => "<p><a href='https://github.com/ICTU/Digitale-Overheid---WordPress-plugin-Planning-Tool/documentation/' target='blank'>" . __( 'GC Maturity documentation', "do-planning-tool" ) . "</a></p>",
+					'title'   => __( 'Documentation', "ictuwp-plugin-planningtool" ),
+					'content' => "<p><a href='https://github.com/ICTU/Digitale-Overheid---WordPress-plugin-Planning-Tool/documentation/' target='blank'>" . __( 'GC Maturity documentation', "ictuwp-plugin-planningtool" ) . "</a></p>",
 				)
 			);
 		}
@@ -778,7 +777,7 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 					}
 				}
 
-				wp_enqueue_style( DOPT__ARCHIVE_CSS, DOPT__ASSETS_URL . 'css/do-planning-tool.css', array(), DOPT__VERSION, 'all' );
+				wp_enqueue_style( DOPT__ARCHIVE_CSS, DOPT__ASSETS_URL . 'css/ictuwp-plugin-planningtool.css', array(), DOPT__VERSION, 'all' );
 
 				if ( $header_css ) {
 					wp_add_inline_style( DOPT__ARCHIVE_CSS, $header_css );
@@ -1042,9 +1041,9 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 						if ( $select_actielijnen ) {
 
 							echo '<tr>';
-							echo '<th scope="col" id="th_col_actielijn">' . _x( 'Actielijn', 'tussenkopje', "do-planning-tool" ) . '</th>';
-							echo '<th scope="col" id="th_col_planning">' . _x( 'Planning', 'tussenkopje', "do-planning-tool" ) . '</th>';
-							echo '<th scope="col" id="th_col_gebeurtenis">' . _x( 'Gebeurtenissen', 'tussenkopje', "do-planning-tool" ) . '</th>';
+							echo '<th scope="col" id="th_col_actielijn">' . _x( 'Actielijn', 'tussenkopje', "ictuwp-plugin-planningtool" ) . '</th>';
+							echo '<th scope="col" id="th_col_planning">' . _x( 'Planning', 'tussenkopje', "ictuwp-plugin-planningtool" ) . '</th>';
+							echo '<th scope="col" id="th_col_gebeurtenis">' . _x( 'Gebeurtenissen', 'tussenkopje', "ictuwp-plugin-planningtool" ) . '</th>';
 
 							echo '</tr>';
 
@@ -1078,9 +1077,9 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 										if ( $actielijn_kwartaal_start_kwartaal && $actielijn_kwartaal_start_jaar ) {
 
 											if ( $actielijn_kwartaal_eind_kwartaal && $actielijn_kwartaal_eind_jaar ) {
-												echo _x( 'Van', 'tussenkopje', "do-planning-tool" ) . ' ';
+												echo _x( 'Van', 'tussenkopje', "ictuwp-plugin-planningtool" ) . ' ';
 											} else {
-												echo _x( 'Start', 'tussenkopje', "do-planning-tool" ) . ': ';
+												echo _x( 'Start', 'tussenkopje', "ictuwp-plugin-planningtool" ) . ': ';
 											}
 
 											echo $actielijn_kwartaal_start_kwartaal . '-' . $actielijn_kwartaal_start_jaar;
@@ -1090,9 +1089,9 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 										if ( $actielijn_kwartaal_eind_kwartaal && $actielijn_kwartaal_eind_jaar ) {
 
 											if ( $actielijn_kwartaal_start_kwartaal && $actielijn_kwartaal_start_jaar ) {
-												echo ' ' . _x( 'tot', 'tussenkopje', "do-planning-tool" ) . ' ';
+												echo ' ' . _x( 'tot', 'tussenkopje', "ictuwp-plugin-planningtool" ) . ' ';
 											} else {
-												echo _x( 'Eind', 'tussenkopje', "do-planning-tool" ) . ': ';
+												echo _x( 'Eind', 'tussenkopje', "ictuwp-plugin-planningtool" ) . ': ';
 											}
 
 											echo $actielijn_kwartaal_eind_kwartaal . '-' . $actielijn_kwartaal_eind_jaar;
@@ -1146,14 +1145,14 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 					// ingelogde gebruiker die minstens redactierechten heeft
 					if ( $select_term_id ) {
 						$termname = get_term( $select_term_id );
-						$asdf     = __( ", dus we tonen de actielijnen onder", "do-planning-tool" ) . " '" . $termname->name . "'.";
+						$asdf     = __( ", dus we tonen de actielijnen onder", "ictuwp-plugin-planningtool" ) . " '" . $termname->name . "'.";
 					} else {
-						$asdf = __( ", dus ALLE actielijnen per digibeter-kleur worden getoond.", "do-planning-tool" );
+						$asdf = __( ", dus ALLE actielijnen per digibeter-kleur worden getoond.", "ictuwp-plugin-planningtool" );
 					}
 					echo '<div class="wrap"><p class="debugstring" style="margin-bottom: 1em;">' .
-					     __( "Hallo, lid van de redactie. Er zijn geen actielijnen geselecteerd voor deze pagina.", "do-planning-tool" ) .
+					     __( "Hallo, lid van de redactie. Er zijn geen actielijnen geselecteerd voor deze pagina.", "ictuwp-plugin-planningtool" ) .
 					     $asdf .
-					     __( "<br>Normale bezoekers zien deze geel-rode melding uiteraard niet.", "do-planning-tool" ) . '</p></div>';
+					     __( "<br>Normale bezoekers zien deze geel-rode melding uiteraard niet.", "ictuwp-plugin-planningtool" ) . '</p></div>';
 
 				}
 				$intervalheader = '<div class="intervalheader" aria-hidden="true">';
@@ -1569,7 +1568,7 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 				if ( $related_actielijnen ) {
 
 					if ( ! $actielijnentitletext ) {
-						$actielijnentitletext = _x( 'Gerelateerde actielijnen', 'tussenkopje', "do-planning-tool" );
+						$actielijnentitletext = _x( 'Gerelateerde actielijnen', 'tussenkopje', "ictuwp-plugin-planningtool" );
 					}
 					if ( $showheader ) {
 						$returnstring         .= '<h2>' . $actielijnentitletext . '</h2>';
@@ -1597,7 +1596,7 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 				if ( $related_gebeurtenissen ) {
 
 					if ( ! $actielijnentitletext ) {
-						$actielijnentitletext = _x( 'Gerelateerde gebeurtenissen', 'tussenkopje', "do-planning-tool" );
+						$actielijnentitletext = _x( 'Gerelateerde gebeurtenissen', 'tussenkopje', "ictuwp-plugin-planningtool" );
 					}
 					if ( $showheader ) {
 						$returnstring .= '<h2>' . $actielijnentitletext . '</h2>';
@@ -1668,7 +1667,7 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 				if ( $related_gebeurtenissen ) {
 
 					if ( ! $actielijnentitletext ) {
-						$actielijnentitletext = _x( 'Gerelateerde activiteiten', 'tussenkopje', "do-planning-tool" );
+						$actielijnentitletext = _x( 'Gerelateerde activiteiten', 'tussenkopje', "ictuwp-plugin-planningtool" );
 					}
 					if ( $showheader ) {
 						$returnstring .= '<h2>' . $actielijnentitletext . '</h2>';
@@ -1714,7 +1713,7 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 				if ( get_field( 'related_actielijnen', $postid ) ) {
 
 					if ( ! $actielijnentitletext ) {
-						$actielijnentitletext = _x( 'Gerelateerde actielijnen', 'tussenkopje', "do-planning-tool" );
+						$actielijnentitletext = _x( 'Gerelateerde actielijnen', 'tussenkopje', "ictuwp-plugin-planningtool" );
 					}
 					if ( $showheader ) {
 						$returnstring .= '<h2>' . $actielijnentitletext . '</h2>';
@@ -1742,7 +1741,7 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 				if ( DOPT__GEBEURTENIS_CPT == get_post_type( $postid ) ) {
 
 					if ( ! $titletext ) {
-						$titletext = _x( 'Actielijnen', 'tussenkopje', "do-planning-tool" );
+						$titletext = _x( 'Actielijnen', 'tussenkopje', "ictuwp-plugin-planningtool" );
 					}
 
 					if ( $showheader ) {
@@ -1764,7 +1763,7 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 				} elseif ( DOPT__ACTIELIJN_CPT == get_post_type( $postid ) ) {
 
 					if ( ! $titletext ) {
-						$titletext = _x( 'Gebeurtenissen (A)', 'tussenkopje', "do-planning-tool" );
+						$titletext = _x( 'Gebeurtenissen (A)', 'tussenkopje', "ictuwp-plugin-planningtool" );
 					}
 
 					if ( $showheader ) {
@@ -1969,7 +1968,7 @@ if ( ! function_exists( 'dodebug' ) ) {
  */
 function do_pt_init_load_plugin_textdomain() {
 
-	load_plugin_textdomain( "do-planning-tool", false, basename( dirname( __FILE__ ) ) . '/languages' );
+	load_plugin_textdomain( "ictuwp-plugin-planningtool", false, basename( dirname( __FILE__ ) ) . '/languages' );
 
 }
 
@@ -2047,7 +2046,7 @@ function do_pt_frontend_get_gebeurtenissen_for_actielijn( $args ) {
 		'headertag'  => 'h2',
 		'startyear'  => '',
 		'endyear'    => '',
-		'titletext'  => __( 'Gebeurtenissen', "do-planning-tool" )
+		'titletext'  => __( 'Gebeurtenissen', "ictuwp-plugin-planningtool" )
 	);
 
 	/**
@@ -2096,16 +2095,16 @@ function do_pt_frontend_get_gebeurtenissen_for_actielijn( $args ) {
 
 			$gebeurtenis_datum = _x( 'Geen datum ingevoerd', 'geschatte planning', 'wp-rijkshuisstijl' );
 
-			$label = _x( 'datum:', 'label voor verborgen datum in ganttchart', "do-planning-tool" );
+			$label = _x( 'datum:', 'label voor verborgen datum in ganttchart', "ictuwp-plugin-planningtool" );
 
 			if ( get_field( 'gebeurtenis_geschatte_datum', $value ) ) {
 				$gebeurtenis_datum = get_field( 'gebeurtenis_geschatte_datum', $value );
-				$label             = _x( 'geschatte datum:', 'label voor verborgen datum in ganttchart', "do-planning-tool" );
+				$label             = _x( 'geschatte datum:', 'label voor verborgen datum in ganttchart', "ictuwp-plugin-planningtool" );
 			} elseif ( $key ) {
 				$gebeurtenis_datum = date_i18n( get_option( 'date_format' ), $key );
 			}
 
-			$returnstring .= '<li class="' . DOPT__GEBEURTENIS_CPT . '-' . $value . '"><a href="' . get_permalink( $value ) . '">' . get_the_title( $value ) . '<span aria-hidden="true">' . sprintf( _x( ', %s %s', 'verborgen datum in ganttchart', "do-planning-tool" ), $label, strtolower( $gebeurtenis_datum ) ) . '</span></a></li>';
+			$returnstring .= '<li class="' . DOPT__GEBEURTENIS_CPT . '-' . $value . '"><a href="' . get_permalink( $value ) . '">' . get_the_title( $value ) . '<span aria-hidden="true">' . sprintf( _x( ', %s %s', 'verborgen datum in ganttchart', "ictuwp-plugin-planningtool" ), $label, strtolower( $gebeurtenis_datum ) ) . '</span></a></li>';
 
 		}
 
