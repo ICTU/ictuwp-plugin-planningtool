@@ -25,3 +25,5 @@ tets/*
 *.txt
 
 cmb2/*
+.idea/*
+*.iml
