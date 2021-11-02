@@ -1,6 +1,6 @@
 <?php
 /*
- * DO_Planningtool. 
+ * DO_Planningtool.
  *
  * Plugin Name:         ICTU / WP Planning Tool digitaleoverheid.nl
  * Plugin URI:          https://github.com/ICTU/Digitale-Overheid---WordPress-plugin-Planning-Tool/
@@ -386,10 +386,13 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 				$q_now    = date( "m" );
 
 				if ( $q_now >= 10 ) {
+					// als huidige maand oktober of later is dan is het huidige kwartaal: 4
 					$q_now = 4;
 				} elseif ( $q_now >= 7 ) {
+					// anders, als huidige maand juli of later is dan is het huidige kwartaal: 3
 					$q_now = 3;
 				} elseif ( $q_now >= 4 ) {
+					// anders, als huidige maand april of later is dan is het huidige kwartaal: 2
 					$q_now = 2;
 				} else {
 					$q_now = 1;
@@ -428,6 +431,7 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 				$header_css .= "display: block;  ";
 				$header_css .= "visibility: visible;  ";
 				$header_css .= "}  ";
+				$header_css .= "}  "; // ?
 
 				$args = array(
 					'post_type'      => DOPT__ACTIELIJN_CPT,
@@ -916,7 +920,7 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 						echo '</div>';
 						echo '<div class="container">';
 						echo $intervalheader2;
-						echo '<div>';
+						echo '</div>';
 						echo '</header>';
 
 						echo '<div class="timescale-container">' . $currentkwartaal;
@@ -942,7 +946,7 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 
 								echo '<div class="description">';
 								echo '<h3><a href="' . get_the_permalink( $select_actielijn->ID ) . '">' . get_the_title( $select_actielijn->ID ) . '</a></h3>';
-								echo '</div>';
+								echo '</div>'; // .description
 
 								echo '<div class="planning ' . get_field( 'heeft_start-_of_einddatums', $select_actielijn->ID ) . '">';
 
@@ -992,9 +996,9 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 								}
 
 
-								echo '</span>';
+								echo '</span>'; // .hide-in-chartview
 
-								echo '</div>';
+								echo '</div>'; // .ganttbar
 
 
 								$args = array(
