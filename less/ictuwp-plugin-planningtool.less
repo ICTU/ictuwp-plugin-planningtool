@@ -9,8 +9,8 @@
 // * @author  Paul van Buuren
 // * @license GPL-2.0+
 // * @plugin: ictuwp-plugin-planningtool
-// * version: 1.3.1
-// * @desc.   Plugin hernoemd van 'do-planning-tool' naar 'ictuwp-plugin-planningtool'; achtergrondkleur toegevoegd voor gebeurtenissen in overzichtsplaat.
+// * version: 1.3.2
+// * @desc.   Parsing fouten verholpen, CSS verbeterd.
 // * @link    https://github.com/ICTU/Digitale-Overheid---WordPress-plugin-Planning-Tool/
 
 
@@ -47,11 +47,11 @@
 <!--                                                            -->
 <!-- ========================================================   -->
 <!--                                                            -->
-	
- 
+
+
  */
 
-@import "01-sizes-colors.less";  
+@import "01-sizes-colors.less";
 
 @maxwidth:              1200px;
 @breakpoint_chart:      821px;
@@ -95,15 +95,19 @@ form {
       margin-left: auto;
       margin-right: auto;
     }
-    
+
     header {
-      overflow: hidden;
-      
+//      overflow: hidden;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+
       .container {
         float: left;
         margin: 0;
         width: @columnwidth_labels;
-        
+        border-top-style: none;
+
         & + .container {
           width: auto;
         }
@@ -115,14 +119,14 @@ form {
     // for the table version
 
     caption {
-      text-align: left; 
+      text-align: left;
       font-size: ( 1.4 * @thefontsreset );
-    } 
+    }
 
     td,
     th {
       padding-left: 1rem !important;
-      
+
       ul, ol {
         &, li {
           list-style: none;
@@ -135,27 +139,26 @@ form {
     th[scope="col"] {
         width: 25%;
     }
-    
+
     #th_col_actielijn {
       width: 50%;
     }
-    
+
     //====================================================================================================
     // for the section version
     .timescale-container {
 
       .single-actielijn {
         padding: .25em .5em;
-        overflow: hidden;
-        
+
         &:hover {
           background-color: rgba( 210, 210, 210, .3 );
         }
       }
-    }    
+    }
 
     .intervalheader {
-  
+
       width: 100%;
       overflow: hidden;
 
@@ -185,11 +188,11 @@ form {
       .intervalheader-year {
         width: @timescale_year_width;
         padding-bottom: 0;
-  
+
         & + .intervalheader-year {
           margin-left: 1em;
         }
-        
+
       }
       .intervalheader-quarter {
         width: 25%;
@@ -200,8 +203,8 @@ form {
           border-right-style: none;
         }
       }
-    }    
-    
+    }
+
     //====================================================================================================
     // for both versions
     caption,
@@ -225,11 +228,11 @@ form {
     ul {
       margin-top: 0;
       margin-bottom: 0;
-      
+
       & + ul {
         margin-top: 0;
       }
-      
+
       & + h3 {
         margin-top: 1em;
       }
@@ -248,7 +251,7 @@ form {
         color: @wit;
       }
     }
-  
+
     &.da-01-problemen-oplossen,
     &.da-02-wetgeving-publieke-waarden,
     &.da-03-overheidsdata-verbeteren,
@@ -268,7 +271,7 @@ form {
     &.digibeter-groen {
       .kleurtjeslijntjes( @digibeter_groen, @groen_licht, @wit, @txt );
     }
-    
+
     &.da-04-kennis-verzamelen-verbeteren,
     &.da-05-mensen-organisatie-cultuurverandering,
     &.digibeter-en-blue,
@@ -289,15 +292,15 @@ form {
       box-shadow: 1px 1px 4px 0 rgba(123, 123, 123, .3);
     }
     .planning {
-      
+
       ul {
         margin: .25em 0;
-        
+
         li {
-          
+
         }
       }
-      
+
       &.start_eind {
         .ganttbar {
           .arrow_before();
@@ -315,9 +318,9 @@ form {
         }
       }
     }
-    
 
-  
+
+
   }
 
 }
@@ -338,20 +341,20 @@ form {
     }
 
   }
-  
+
   .planning-label {
     position: relative;
     white-space: nowrap;
     z-index: 9999;
   }
-  
+
 }
 
 
 //========================================================================================================
 
 @media only screen and ( min-width: @breakpoint_chart ) {
- 
+
 
   .page-template-planningtool-template.full-width-content {
     .site-inner {
@@ -369,29 +372,29 @@ form {
 
   .programma {
     min-width: @maxwidth;
-    
+
     .timescale-container {
       padding: 0;
       position: relative;
       background-color: @wit;
-      background: url('../assets/images/bg-image-white.svg'),  
+      background: url('../assets/images/bg-image-white.svg'),
                   url('../assets/images/bg-image-grid.svg');
-      background-size: @columnwidth_labels @columnwidth_labels, 
+      background-size: @columnwidth_labels @columnwidth_labels,
                   ( @timescale_year_width + 1 ) 1em;
-      background-repeat: repeat-y, 
+      background-repeat: repeat-y,
                   repeat;
-                  
+
       .currentkwartaal {
         background: rgba( 123, 123, 123, .3 );
         width: 2.7em;
-      }                  
-  
+      }
+
       .single-actielijn {
         padding: 0;
         clear: both;
         float: none;
         height: 100%;
-        
+
         .description {
           width: @columnwidth_labels;
           padding: .5em .5em 1em 1rem;
@@ -411,11 +414,11 @@ form {
             clear: both;
             float: none;
           }
-          
+
           ul {
             padding-top: .5em;
             position: relative;
-            
+
             &, li {
               list-style: none;
               padding: 0;
@@ -430,7 +433,7 @@ form {
                 margin-bottom: .1em;
                 display: inline-block;
                 background: #e8e8e8;
-                
+
                 &:before {
                   content: ' ';
                   display: block;
@@ -458,17 +461,17 @@ form {
   .hide-in-chartview {
     .visuallyhidden();
   }
-  
+
 }
 
 //========================================================================================================
 
 @media only screen and ( max-width: @breakpoint_chart ) {
 
-  .entry-content table, 
+  .entry-content table,
   .entry-content table.programma,
   .programma {
-    
+
     tr, th, td {
       display: block;
       clear: both;
@@ -494,7 +497,7 @@ form {
   }
 
   .programma {
-    .single-actielijn {  
+    .single-actielijn {
       margin-bottom: 1em;
       p a {
         font-size: 120%;
@@ -506,11 +509,11 @@ form {
       }
     }
   }
-  
+
   .hide-in-chartview {
 //    border: 10px solid red;
   }
-  
+
 }
 
 //========================================================================================================
@@ -519,16 +522,16 @@ form {
 
   section.programma {
     width: 100% !important;
-    box-decoration-break: clone;    
-    
+    box-decoration-break: clone;
+
     .ganttbar,
     header {
       -webkit-print-color-adjust: exact;
     }
     .single-actielijn {
       margin-bottom: 1em;
-    }    
-    
+    }
+
   }
 
   a[href]:after {

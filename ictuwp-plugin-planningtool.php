@@ -5,8 +5,8 @@
  * Plugin Name:         ICTU / WP Planning Tool digitaleoverheid.nl
  * Plugin URI:          https://github.com/ICTU/Digitale-Overheid---WordPress-plugin-Planning-Tool/
  * Description:         Plugin voor digitaleoverheid.nl waarmee extra functionaliteit mogelijk wordt voor het tonen van een planning met actielijnen en gebeurtenissen.
- * Version:             1.3.1
- * Version description: Plugin hernoemd van 'do-planning-tool' naar 'ictuwp-plugin-planningtool'; achtergrondkleur toegevoegd voor gebeurtenissen in overzichtsplaat.
+ * Version:             1.3.2
+ * Version description: Parsing fouten verholpen, CSS verbeterd.
  * Author:              Paul van Buuren
  * Author URI:          https://wbvb.nl
  * License:             GPL-2.0+
@@ -35,7 +35,7 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 		/**
 		 * @var string
 		 */
-		public $version = '1.3.1';
+		public $version = '1.3.2';
 
 
 		/**
@@ -428,7 +428,7 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 
 				$header_css .= "@media only screen and ( min-width: " . $breakpoint . " ) { ";
 				$header_css .= ".programma .intervalheader { ";
-				$header_css .= "display: block;  ";
+				$header_css .= "display: flex;  ";
 				$header_css .= "visibility: visible;  ";
 				$header_css .= "}  ";
 				$header_css .= "}  "; // ?
@@ -546,6 +546,8 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 
 				$header_css .= ".actielijnen { ";
 				$header_css .= " width: " . ( ( $this->dopt_years_max_nr * DOPT_CSS_YEARWIDTH ) + DOPT_CSS_PADDINGLEFT ) . "em;";
+				$header_css .= " max-width: 100%;";
+				$header_css .= " overflow: hidden;";
 				$header_css .= "} ";
 
 				$header_css .= ".programma .timescale-container {";
@@ -707,9 +709,11 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 
 						}
 
+						$header_css .= "@media only screen and ( min-width: " . $breakpoint . " ) { ";
 						$header_css .= "li." . $value['type'] . '-' . $key . " { ";
 						$header_css .= "margin-left: " . $translate . "em;";
 						$header_css .= "} ";
+						$header_css .= "}"; // breakpoint
 
 					} elseif ( DOPT__ACTIELIJN_CPT == $value['type'] ) {
 
@@ -767,7 +771,16 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 						}
 
 						if ( ( $emwidth_start ) || ( $emwidth_eind ) ) {
+/*
+ * 				$header_css .= "@media only screen and ( min-width: " . $breakpoint . " ) { ";
+				$header_css .= ".programma .intervalheader { ";
+				$header_css .= "display: flex;  ";
+				$header_css .= "visibility: visible;  ";
+				$header_css .= "}  ";
+				$header_css .= "}  "; // ?
 
+ */
+							$header_css .= "@media only screen and ( min-width: " . $breakpoint . " ) { ";
 							$header_css .= " ." . $value['type'] . '-' . $key . " .ganttbar { ";
 							if ( $emwidth_start ) {
 								$header_css .= "margin-left: " . $emwidth_start . "em; ";
@@ -776,6 +789,7 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 								$header_css .= "margin-right: " . $emwidth_eind . "em; ";
 							}
 							$header_css .= "}";
+							$header_css .= "}"; // breakpoint
 
 						}
 					}
