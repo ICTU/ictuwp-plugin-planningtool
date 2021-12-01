@@ -88,11 +88,10 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 			$protocol = strtolower( substr( $_SERVER["SERVER_PROTOCOL"], 0, strpos( $_SERVER["SERVER_PROTOCOL"], '/' ) ) ) . '://';
 
 			$this->option_name       = 'ictudo_planning-option';
-			$this->dopt_years_start  = get_field( 'planning_page_start_jaar', 'option' );
-			$this->dopt_years_end    = get_field( 'planning_page_end_jaar', 'option' );
+//			$this->dopt_years_start  = get_field( 'planning_page_start_jaar', 'option' );
+//			$this->dopt_years_end    = get_field( 'planning_page_end_jaar', 'option' );
 			$this->dopt_years_max_nr = ( $this->dopt_years_end - $this->dopt_years_start );
-
-			$this->dopt_array_data = array();
+			$this->dopt_array_data   = array();
 
 			define( 'DOPT__VERSION', $this->version );
 			define( 'DOPT__FOLDER', 'ictuwp-plugin-planningtool' );
@@ -771,15 +770,15 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 						}
 
 						if ( ( $emwidth_start ) || ( $emwidth_eind ) ) {
-/*
- * 				$header_css .= "@media only screen and ( min-width: " . $breakpoint . " ) { ";
-				$header_css .= ".programma .intervalheader { ";
-				$header_css .= "display: flex;  ";
-				$header_css .= "visibility: visible;  ";
-				$header_css .= "}  ";
-				$header_css .= "}  "; // ?
+							/*
+							 * 				$header_css .= "@media only screen and ( min-width: " . $breakpoint . " ) { ";
+											$header_css .= ".programma .intervalheader { ";
+											$header_css .= "display: flex;  ";
+											$header_css .= "visibility: visible;  ";
+											$header_css .= "}  ";
+											$header_css .= "}  "; // ?
 
- */
+							 */
 							$header_css .= "@media only screen and ( min-width: " . $breakpoint . " ) { ";
 							$header_css .= " ." . $value['type'] . '-' . $key . " .ganttbar { ";
 							if ( $emwidth_start ) {
