@@ -5,8 +5,8 @@
  * Plugin Name:         ICTU / WP Planning Tool digitaleoverheid.nl
  * Plugin URI:          https://github.com/ICTU/Digitale-Overheid---WordPress-plugin-Planning-Tool/
  * Description:         Plugin voor digitaleoverheid.nl waarmee extra functionaliteit mogelijk wordt voor het tonen van een planning met actielijnen en gebeurtenissen.
- * Version:             1.3.2
- * Version description: Parsing fouten verholpen, CSS verbeterd.
+ * Version:             1.3.3
+ * Version description: .currentyear verbergen bij smallere scherm ter voorkoming van horizontale scroll.
  * Author:              Paul van Buuren
  * Author URI:          https://wbvb.nl
  * License:             GPL-2.0+
@@ -35,7 +35,7 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 		/**
 		 * @var string
 		 */
-		public $version = '1.3.2';
+		public $version = '1.3.3';
 
 
 		/**
@@ -88,8 +88,8 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 			$protocol = strtolower( substr( $_SERVER["SERVER_PROTOCOL"], 0, strpos( $_SERVER["SERVER_PROTOCOL"], '/' ) ) ) . '://';
 
 			$this->option_name       = 'ictudo_planning-option';
-//			$this->dopt_years_start  = get_field( 'planning_page_start_jaar', 'option' );
-//			$this->dopt_years_end    = get_field( 'planning_page_end_jaar', 'option' );
+			$this->dopt_years_start  = get_field( 'planning_page_start_jaar', 'option' );
+			$this->dopt_years_end    = get_field( 'planning_page_end_jaar', 'option' );
 			$this->dopt_years_max_nr = ( $this->dopt_years_end - $this->dopt_years_start );
 			$this->dopt_array_data   = array();
 
@@ -419,6 +419,7 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 				wp_enqueue_script( 'functions-frontend-min', DOPT__ASSETS_URL . 'js/functions-frontend.js', '', DOPT__VERSION, $infooter );
 
 				$header_css .= "@media only screen and ( max-width: " . $breakpoint . " ) { ";
+				$header_css .= ".currentkwartaal, ";
 				$header_css .= ".programma .intervalheader { ";
 				$header_css .= "display: none;  ";
 				$header_css .= "visibility: hidden;  ";
@@ -567,7 +568,6 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 					// dat wil zeggen het huidige jaar is kleiner of gelijk aan het bepaalde eindjaar ($this->dopt_years_end)
 
 					$header_css .= " position: absolute; ";
-
 					$header_css .= " left: " . ( $distanceyears + $distancekwartalen ) . "em; /* dopt_years_start: " . $this->dopt_years_start . ",  year_now: " . $year_now . ",  dopt_years_end: " . $this->dopt_years_end . ", distanceyears: " . $distanceyears . "*/  ";
 					$header_css .= " top: 0;";
 					$header_css .= " bottom: 0;";
@@ -2121,7 +2121,7 @@ function do_pt_frontend_get_gebeurtenissen_for_actielijn( $args ) {
 				$gebeurtenis_datum = date_i18n( get_option( 'date_format' ), $key );
 			}
 
-			$returnstring .= '<li class="' . DOPT__GEBEURTENIS_CPT . '-' . $value . '"><a href="' . get_permalink( $value ) . '">' . get_the_title( $value ) . '<span aria-hidden="true">' . sprintf( _x( ', %s %s', 'verborgen datum in ganttchart', "ictuwp-plugin-planningtool" ), $label, strtolower( $gebeurtenis_datum ) ) . '</span></a></li>';
+			$returnstring .= '<li class="' . DOPT__GEBEURTENIS_CPT . '-' . $value . '"><a href="' . get_permalink( $value ) . '">' . get_the_title( $value ) . '<span class="visuallyhidden">' . sprintf( _x( ', %s %s', 'verborgen datum in ganttchart', "ictuwp-plugin-planningtool" ), $label, strtolower( $gebeurtenis_datum ) ) . '</span></a></li>';
 
 		}
 
