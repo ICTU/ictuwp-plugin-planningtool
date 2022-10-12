@@ -916,7 +916,11 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 							$actielijnblok_htmlid = esc_html( $actielijnblok['actielijnen_per_thema_htmlid'] );
 						}
 
-						$digibeterclass     = get_field( 'digibeter_term_achtergrondkleur', RHSWP_CT_DIGIBETER . '_' . $actielijnblok['actielijnen_per_thema_kleur'] );
+						if ( get_field( 'digibeter_term_achtergrondkleur', RHSWP_CT_DIGIBETER . '_' . $actielijnblok['actielijnen_per_thema_kleur'] ) ) {
+							$digibeterclass     = get_field( 'digibeter_term_achtergrondkleur', RHSWP_CT_DIGIBETER . '_' . $actielijnblok['actielijnen_per_thema_kleur'] );
+						} else {
+							$digibeterclass = 'digibeter-blauw';
+						}
 						$select_actielijnen = $actielijnblok['actielijnen_per_thema_actielijnen'];
 						$intervalheader2    = preg_replace( '/class="intervalheader"/', 'class="intervalheader" id="intervalheader_' . $actielijnblok_counter . '"', $intervalheader );
 
@@ -975,19 +979,12 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 
 								echo '<div class="ganttbar">';
 
-
-								if ( $planning ) {
-									if ( $planning[0]->name ) {
-										echo '<span class="hide-in-chartview">' . _x( 'Planning:', 'geschatte planning', 'wp-rijkshuisstijl' ) . '</span> <span class="planning-label">' . strtolower( $planning[0]->name ) . '</span>';
-									}
-								}
-
-								echo '<span class="hide-in-chartview">, ';
+								$startendlabel = _x( 'Gestart', 'standaard label planning', 'wp-rijkshuisstijl' );
 
 								switch ( get_field( 'heeft_start-_of_einddatums', $select_actielijn->ID ) ) {
 
 									case 'start_eind':
-										echo sprintf( _x( 'van %s-%s tot %s-%s', 'geschatte planning', 'wp-rijkshuisstijl' ),
+										$startendlabel = sprintf( _x( 'van %s-%s tot %s-%s', 'geschatte planning', 'wp-rijkshuisstijl' ),
 												strtoupper( get_field( 'actielijn_kwartaal_eind_kwartaal', $select_actielijn->ID ) ),
 												$this->dopt_array_data[ $select_actielijn->ID ]['start_jaar'],
 												strtoupper( get_field( 'actielijn_kwartaal_eind_kwartaal', $select_actielijn->ID ) ),
@@ -995,18 +992,32 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 										break;
 
 									case 'start':
-										echo sprintf( _x( 'vanaf %s-%s', 'geschatte planning', 'wp-rijkshuisstijl' ),
+										$startendlabel = sprintf( _x( 'vanaf %s-%s', 'geschatte planning', 'wp-rijkshuisstijl' ),
 												strtoupper( get_field( 'actielijn_kwartaal_eind_kwartaal', $select_actielijn->ID ) ),
 												$this->dopt_array_data[ $select_actielijn->ID ]['start_jaar'] ) . '. ';
 										break;
 
 									case 'eind':
-										echo sprintf( _x( 'tot %s-%s', 'geschatte planning', 'wp-rijkshuisstijl' ),
+										$startendlabel = sprintf( _x( 'tot %s-%s', 'geschatte planning', 'wp-rijkshuisstijl' ),
 												strtoupper( get_field( 'actielijn_kwartaal_eind_kwartaal', $select_actielijn->ID ) ),
 												$this->dopt_array_data[ $select_actielijn->ID ]['eind_jaar'] ) . '. ';
 										break;
 
 								}
+
+
+								if ( $planning ) {
+									if ( $planning[0]->name ) {
+										echo '<span class="hide-in-chartview">' . _x( 'Planning:', 'geschatte planning', 'wp-rijkshuisstijl' ) . '</span> <span class="planning-label">' . strtolower( $planning[0]->name ) . '</span>';
+									}
+								} else {
+									echo '<span class="planning-label">' . $startendlabel . '</span>';
+								}
+
+								echo '<span class="hide-in-chartview">, ';
+
+								echo $startendlabel;
+
 
 
 								echo '</span>'; // .hide-in-chartview
