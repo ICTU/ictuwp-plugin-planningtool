@@ -143,8 +143,6 @@ if ( function_exists( 'acf_add_local_field_group' ) ) {
 
 	//======================================================================================================
 	// planning tool page
-	/*
-	 *
 	acf_add_local_field_group( array(
 		'key'                   => 'group_5beaf126f2d00',
 		'title'                 => 'Planning Tool Page',
@@ -167,6 +165,7 @@ if ( function_exists( 'acf_add_local_field_group' ) ) {
 				'max'               => 0,
 				'layout'            => 'row',
 				'button_label'      => 'Blok met actielijnen toevoegen',
+				'rows_per_page'     => 20,
 				'sub_fields'        => array(
 					array(
 						'key'               => 'field_5beaf173c4397',
@@ -186,12 +185,13 @@ if ( function_exists( 'acf_add_local_field_group' ) ) {
 						'prepend'           => '',
 						'append'            => '',
 						'maxlength'         => '',
+						'parent_repeater'   => 'field_5beaf13ac4396',
 					),
 					array(
 						'key'               => 'field_5bec22d240e6c',
 						'label'             => 'Kies een kleur',
 						'name'              => 'actielijnen_per_thema_kleur',
-						'type'              => 'taxonomy',
+						'type'              => 'select',
 						'instructions'      => '',
 						'required'          => 0,
 						'conditional_logic' => 0,
@@ -200,14 +200,21 @@ if ( function_exists( 'acf_add_local_field_group' ) ) {
 							'class' => '',
 							'id'    => '',
 						),
-						'taxonomy'          => 'beleidsterreinen',
-						'field_type'        => 'radio',
-						'allow_null'        => 1,
-						'add_term'          => 0,
-						'save_terms'        => 0,
-						'load_terms'        => 0,
-						'return_format'     => 'id',
 						'multiple'          => 0,
+						'allow_null'        => 0,
+						'choices'           => array(
+							'digibeter-blauw'  => 'Blauw (Rijkshuisstijl)',
+							'digibeter-oranje' => 'Oranje (Rijkshuisstijl)',
+							'digibeter-groen'  => 'Groen (Rijkshuisstijl)',
+							'digibeter-violet' => 'Violet (Rijkshuisstijl)',
+							'digibeter-paars'  => 'Paars (Rijkshuisstijl)',
+						),
+						'default_value'     => false,
+						'ui'                => 0,
+						'ajax'              => 0,
+						'placeholder'       => '',
+						'return_format'     => 'value',
+						'parent_repeater'   => 'field_5beaf13ac4396',
 					),
 					array(
 						'key'               => 'field_5bec22f340e6d',
@@ -223,7 +230,7 @@ if ( function_exists( 'acf_add_local_field_group' ) ) {
 							'id'    => '',
 						),
 						'post_type'         => array(
-							0 => DOPT__ACTIELIJN_CPT,
+							0 => 'actielijn',
 						),
 						'taxonomy'          => '',
 						'filters'           => array(
@@ -234,25 +241,7 @@ if ( function_exists( 'acf_add_local_field_group' ) ) {
 						'min'               => 1,
 						'max'               => '',
 						'return_format'     => 'object',
-					),
-					array(
-						'key'               => 'field_5c2e0648c28f0',
-						'label'             => 'HTML-ID',
-						'name'              => 'actielijnen_per_thema_htmlid',
-						'type'              => 'text',
-						'instructions'      => 'Via dit ID kun je rechtstreeks naar dit blok verwijzen in je URL',
-						'required'          => 0,
-						'conditional_logic' => 0,
-						'wrapper'           => array(
-							'width' => '',
-							'class' => '',
-							'id'    => '',
-						),
-						'default_value'     => '',
-						'placeholder'       => '',
-						'prepend'           => '',
-						'append'            => '',
-						'maxlength'         => '',
+						'parent_repeater'   => 'field_5beaf13ac4396',
 					),
 				),
 			),
@@ -272,10 +261,10 @@ if ( function_exists( 'acf_add_local_field_group' ) ) {
 		'label_placement'       => 'top',
 		'instruction_placement' => 'label',
 		'hide_on_screen'        => '',
-		'active'                => 1,
+		'active'                => true,
 		'description'           => '',
+		'show_in_rest'          => 0,
 	) );
-	 */
 
 
 	//======================================================================================================

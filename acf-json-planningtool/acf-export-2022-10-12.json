@@ -1,0 +1,124 @@
+[
+    {
+        "key": "group_5beaf126f2d00",
+        "title": "Planning Tool Page",
+        "fields": [
+            {
+                "key": "field_5beaf13ac4396",
+                "label": "Actielijnen per thema",
+                "name": "actielijnen_per_thema",
+                "type": "repeater",
+                "instructions": "Kies een thema en voeg de bijbehorende actielijnen toe",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "collapsed": "",
+                "min": 0,
+                "max": 0,
+                "layout": "row",
+                "button_label": "Blok met actielijnen toevoegen",
+                "rows_per_page": 20,
+                "sub_fields": [
+                    {
+                        "key": "field_5beaf173c4397",
+                        "label": "Thema-titel",
+                        "name": "actielijnen_per_thema_titel",
+                        "type": "text",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "maxlength": "",
+                        "parent_repeater": "field_5beaf13ac4396"
+                    },
+                    {
+                        "key": "field_5bec22d240e6c",
+                        "label": "Kies een kleur",
+                        "name": "actielijnen_per_thema_kleur",
+                        "type": "select",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "multiple": 0,
+                        "allow_null": 0,
+                        "choices": {
+                            "digibeter-blauw": "Blauw (Rijkshuisstijl)",
+                            "digibeter-oranje": "Oranje (Rijkshuisstijl)",
+                            "digibeter-groen": "Groen (Rijkshuisstijl)",
+                            "digibeter-violet": "Violet (Rijkshuisstijl)",
+                            "digibeter-paars": "Paars (Rijkshuisstijl)"
+                        },
+                        "default_value": false,
+                        "ui": 0,
+                        "ajax": 0,
+                        "placeholder": "",
+                        "return_format": "value",
+                        "parent_repeater": "field_5beaf13ac4396"
+                    },
+                    {
+                        "key": "field_5bec22f340e6d",
+                        "label": "Kies de actielijnen in dit blok",
+                        "name": "actielijnen_per_thema_actielijnen",
+                        "type": "relationship",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "post_type": [
+                            "actielijn"
+                        ],
+                        "taxonomy": "",
+                        "filters": [
+                            "search",
+                            "taxonomy"
+                        ],
+                        "elements": "",
+                        "min": 1,
+                        "max": "",
+                        "return_format": "object",
+                        "parent_repeater": "field_5beaf13ac4396"
+                    }
+                ]
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "page_template",
+                    "operator": "==",
+                    "value": "planningtool-template.php"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "acf_after_title",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": true,
+        "description": "",
+        "show_in_rest": 0
+    }
+]
