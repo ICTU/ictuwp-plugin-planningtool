@@ -917,7 +917,13 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 						}
 
 						if ( get_field( 'digibeter_term_achtergrondkleur', RHSWP_CT_DIGIBETER . '_' . $actielijnblok['actielijnen_per_thema_kleur'] ) ) {
+							// dit is de oude manier om de kleur te bepalen. Oude pagina's verwezen qua kleur nog naar
+							// de kleur die bij een RHSWP_CT_DIGIBETER term gekozen is. Voor backward compatibilit
+							// laten we deze staan
 							$digibeterclass     = get_field( 'digibeter_term_achtergrondkleur', RHSWP_CT_DIGIBETER . '_' . $actielijnblok['actielijnen_per_thema_kleur'] );
+						} elseif ( $actielijnblok['actielijnen_per_thema_kleur'] ) {
+							// de nieuwe manier om een kleur te kiezen is simpeler
+							$digibeterclass     = $actielijnblok['actielijnen_per_thema_kleur'];
 						} else {
 							$digibeterclass = 'digibeter-blauw';
 						}
