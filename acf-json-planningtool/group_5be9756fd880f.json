@@ -1,0 +1,68 @@
+{
+    "key": "group_5be9756fd880f",
+    "title": "Gebeurtenis: datum + gekoppelde actielijnen",
+    "fields": [
+        {
+            "key": "field_5be99930b1843",
+            "label": "Datum",
+            "name": "gebeurtenis_datum",
+            "type": "date_picker",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "display_format": "j F Y",
+            "return_format": "j F Y",
+            "first_day": 1
+        },
+        {
+            "key": "field_5be975841eea9",
+            "label": "Bijbehorende actielijnen",
+            "name": "related_gebeurtenissen_actielijnen",
+            "type": "relationship",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "actielijn"
+            ],
+            "taxonomy": "",
+            "filters": [
+                "search",
+                "taxonomy"
+            ],
+            "elements": "",
+            "min": "",
+            "max": "",
+            "return_format": "object"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "gebeurtenis"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "acf_after_title",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": false,
+    "modified": 1665501336
+}
