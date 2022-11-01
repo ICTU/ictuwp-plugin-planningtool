@@ -118,7 +118,7 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 //        define( 'ADD_DEFAULT_TERM_ID',              false );
 			define( 'ADD_DEFAULT_TERM_ID', true );
 
-//        define( 'DOPT__PLUGIN_DO_DEBUG',         true );
+//			define( 'DOPT__PLUGIN_DO_DEBUG', true );
 			define( 'DOPT__PLUGIN_DO_DEBUG', false );
 
 //        define( 'DOPT__PLUGIN_OUTPUT_TOSCREEN',  false );
@@ -399,10 +399,17 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 
 				if ( intval( $this->dopt_years_start > 0 ) && ( intval( $this->dopt_years_start ) > intval( date( "Y" ) ) ) ) {
 					$this->dopt_years_start = date( "Y" );
+					if ( DOPT__PLUGIN_DO_DEBUG ) {
+						echo "<!-- 001  - Start-jaar: " . $this->dopt_years_start . ' -->';
+					}
+
 				}
 
 				if ( ! $this->dopt_years_start ) {
 					$this->dopt_years_start = date( "Y" );
+					if ( DOPT__PLUGIN_DO_DEBUG ) {
+						echo "<!-- 002  - Start-jaar: " . $this->dopt_years_start . ' -->';
+					}
 				}
 				if ( ! $this->dopt_years_end ) {
 					$this->dopt_years_end = ( date( "Y" ) + 1 );
@@ -486,6 +493,10 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 
 						if ( intval( $actielijn_kwartaal_start_jaar > 0 ) && ( intval( $actielijn_kwartaal_start_jaar ) < intval( $this->dopt_years_start ) ) ) {
 							$this->dopt_years_start = $actielijn_kwartaal_start_jaar;
+							if ( DOPT__PLUGIN_DO_DEBUG ) {
+								echo "<!-- 003  - Start-jaar uit instellingen : " . get_field( 'planning_page_start_jaar', 'option' ) . "\n";
+								echo 'startjaar: ' . $this->dopt_years_start . ' vanwege actielijn: ' . get_the_title( $theid ) . ' -->';
+							}
 						}
 
 						if ( intval( $actielijn_kwartaal_eind_jaar > 0 ) && ( intval( $actielijn_kwartaal_eind_jaar ) > intval( $this->dopt_years_end ) ) ) {
@@ -528,6 +539,9 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 
 						if ( intval( $yeargebeurtenis > 0 ) && ( intval( $yeargebeurtenis ) < intval( $this->dopt_years_start ) ) ) {
 							$this->dopt_years_start = $yeargebeurtenis;
+							if ( DOPT__PLUGIN_DO_DEBUG ) {
+								echo "<!-- 004  - Start-jaar: " . $this->dopt_years_start . " -->";
+							}
 						}
 
 						if ( intval( $yeargebeurtenis > 0 ) && ( intval( $yeargebeurtenis ) > intval( $this->dopt_years_end ) ) ) {
@@ -879,6 +893,9 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 					$intervalheader = '<div class="intervalheader" aria-hidden="true">';
 					$currentyear    = $this->dopt_years_start;
 					$currentquarter = 1;
+					if ( DOPT__PLUGIN_DO_DEBUG ) {
+						echo "<!-- 005  - Start-jaar: " . $this->dopt_years_start . ' -->';
+					}
 
 					while ( intval( $currentyear ) <= intval( $this->dopt_years_end ) ) :
 
@@ -960,7 +977,7 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 						if ( $blok_toelichting_titel ) {
 							echo '<header class="entry-header">';
 							echo '<h2 id="' . $actielijnblok_titel_id . '">' . $blok_toelichting_titel . '</h2>';
-							if ( $blok_toelichting_text) {
+							if ( $blok_toelichting_text ) {
 								echo '<div class="toelichting">' . $blok_toelichting_text . '</div>';
 							}
 							echo '</header>';
