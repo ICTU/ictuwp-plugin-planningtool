@@ -1,16 +1,16 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: GC Maturity\n"
-"POT-Creation-Date: 2020-03-26 16:30+0100\n"
-"PO-Revision-Date: 2020-03-26 16:30+0100\n"
-"Last-Translator: Paul van Buuren <paul@wbvb.nl>\n"
+"POT-Creation-Date: 2022-11-01 15:30+0100\n"
+"PO-Revision-Date: 2022-11-01 15:32+0100\n"
+"Last-Translator: Paul van Buuren <poedit@wbvb.nl>\n"
 "Language-Team: paul@wbvb.nl\n"
 "Language: nl_NL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.3\n"
+"X-Generator: Poedit 3.1.1\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
 "X-Poedit-WPHeader: ictuwp-plugin-planningtool.php\n"
@@ -21,604 +21,223 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
-#: cmb2/includes/CMB2.php:199
-msgid "Metabox configuration is required to have an ID parameter."
-msgstr ""
-
-#: cmb2/includes/CMB2.php:609
-msgid "Click to toggle"
-msgstr ""
-
-#: cmb2/includes/CMB2_Ajax.php:75
-msgid "Please Try Again"
-msgstr ""
-
-#: cmb2/includes/CMB2_Ajax.php:181 cmb2/tests/cmb-tests-base.php:50
-msgid "Remove Embed"
-msgstr ""
-
-#. translators: 1: results for. 2: link to codex.wordpress.org/Embeds
-#: cmb2/includes/CMB2_Ajax.php:189 cmb2/includes/helper-functions.php:107
-#: cmb2/tests/cmb-tests-base.php:68 cmb2/tests/test-cmb-types-display.php:208
-#, php-format
-msgid "No oEmbed Results Found for %1$s. View more info at %2$s."
-msgstr ""
-
-#: cmb2/includes/CMB2_Base.php:422
-#, php-format
-msgid ""
-"The \"%1$s\" field parameter has been deprecated in favor of the \"%2$s\" "
-"parameter."
-msgstr ""
-
-#: cmb2/includes/CMB2_Base.php:426
-#, php-format
-msgid ""
-"Using the \"%1$s\" field parameter as a callback has been deprecated in "
-"favor of the \"%2$s\" parameter."
-msgstr ""
-
-#: cmb2/includes/CMB2_Base.php:456
-#, php-format
-msgid ""
-"%1$s was called with a parameter that is <strong>deprecated</strong> since "
-"version %2$s! %3$s"
-msgstr ""
-
-#: cmb2/includes/CMB2_Base.php:458
-#, php-format
-msgid ""
-"%1$s was called with a parameter that is <strong>deprecated</strong> since "
-"version %2$s with no alternative available."
-msgstr ""
-
-#: cmb2/includes/CMB2_Base.php:491 cmb2/includes/CMB2_Hookup_Base.php:102
-#: cmb2/includes/CMB2_Options.php:247 cmb2/includes/CMB2_Options_Hookup.php:357
-#: cmb2/includes/types/CMB2_Type_Base.php:173
-#, php-format
-msgid "Invalid %1$s property: %2$s"
-msgstr ""
-
-#: cmb2/includes/CMB2_Base.php:509 cmb2/includes/types/CMB2_Type_Base.php:157
-#, php-format
-msgid "Invalid %1$s method: %2$s"
-msgstr ""
-
-#: cmb2/includes/CMB2_Field.php:1438
-msgid "Add Group"
-msgstr "Groep toevoegen"
-
-#: cmb2/includes/CMB2_Field.php:1439
-msgid "Remove Group"
-msgstr ""
-
-#: cmb2/includes/CMB2_Field.php:1471 cmb2/includes/CMB2_Field.php:1475
-#: cmb2/tests/test-cmb-field.php:237
-msgid "None"
-msgstr ""
-
-#: cmb2/includes/CMB2_Field.php:1589
-msgid "Sorry, this field does not have a cmb_id specified."
-msgstr ""
-
-#: cmb2/includes/CMB2_Field_Display.php:453 cmb2/includes/CMB2_JS.php:242
-#: cmb2/includes/types/CMB2_Type_File_Base.php:79
-#: cmb2/tests/test-cmb-types-base.php:149 cmb2/tests/test-cmb-types.php:959
-msgid "File:"
-msgstr ""
-
-#: cmb2/includes/CMB2_Hookup.php:188
-msgid ""
-"Term Metadata is a WordPress 4.4+ feature. Please upgrade your WordPress "
-"install."
-msgstr ""
-
-#: cmb2/includes/CMB2_Hookup.php:192
-msgid "Term metaboxes configuration requires a \"taxonomies\" parameter."
-msgstr ""
-
-#: cmb2/includes/CMB2_Hookup.php:550
-#, php-format
-msgid "Toggle panel: %s"
-msgstr ""
-
-#: cmb2/includes/CMB2_Hookup_Base.php:44
-#, php-format
-msgid "%1$s should be implemented by the extended class."
-msgstr ""
-
-#: cmb2/includes/CMB2_JS.php:177 cmb2/includes/CMB2_JS.php:222
-msgid "Clear"
-msgstr ""
-
-#: cmb2/includes/CMB2_JS.php:178
-msgid "Default"
-msgstr ""
-
-#: cmb2/includes/CMB2_JS.php:179
-msgid "Select Color"
-msgstr ""
-
-#: cmb2/includes/CMB2_JS.php:180
-msgid "Current Color"
-msgstr ""
-
-#: cmb2/includes/CMB2_JS.php:212
-msgctxt "Valid formatDate string for jquery-ui datepicker"
-msgid "mm/dd/yy"
-msgstr ""
-
-#: cmb2/includes/CMB2_JS.php:213
-msgid "Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday"
-msgstr ""
-
-#: cmb2/includes/CMB2_JS.php:214
-msgid "Su, Mo, Tu, We, Th, Fr, Sa"
-msgstr ""
-
-#: cmb2/includes/CMB2_JS.php:215
-msgid "Sun, Mon, Tue, Wed, Thu, Fri, Sat"
-msgstr ""
-
-#: cmb2/includes/CMB2_JS.php:216
-msgid ""
-"January, February, March, April, May, June, July, August, September, "
-"October, November, December"
-msgstr ""
-
-#: cmb2/includes/CMB2_JS.php:217
-msgid "Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec"
-msgstr ""
-
-#: cmb2/includes/CMB2_JS.php:218
-msgid "Next"
-msgstr ""
-
-#: cmb2/includes/CMB2_JS.php:219
-msgid "Prev"
-msgstr ""
-
-#: cmb2/includes/CMB2_JS.php:220
-msgid "Today"
-msgstr ""
-
-#: cmb2/includes/CMB2_JS.php:221 cmb2/includes/CMB2_JS.php:231
-msgid "Done"
-msgstr ""
-
-#: cmb2/includes/CMB2_JS.php:225
-msgid "Choose Time"
-msgstr ""
-
-#: cmb2/includes/CMB2_JS.php:226
-msgid "Time"
-msgstr ""
-
-#: cmb2/includes/CMB2_JS.php:227
-msgid "Hour"
-msgstr ""
-
-#: cmb2/includes/CMB2_JS.php:228
-msgid "Minute"
-msgstr ""
-
-#: cmb2/includes/CMB2_JS.php:229
-msgid "Second"
-msgstr ""
-
-#: cmb2/includes/CMB2_JS.php:230
-msgid "Now"
-msgstr ""
-
-#: cmb2/includes/CMB2_JS.php:232
-msgctxt ""
-"Valid formatting string, as per http://trentrichardson.com/examples/"
-"timepicker/"
-msgid "hh:mm TT"
-msgstr ""
-
-#: cmb2/includes/CMB2_JS.php:238
-msgid "Use this file"
-msgstr ""
-
-#: cmb2/includes/CMB2_JS.php:239
-msgid "Use these files"
-msgstr ""
-
-#: cmb2/includes/CMB2_JS.php:240 cmb2/includes/types/CMB2_Type_File_Base.php:64
-msgid "Remove Image"
-msgstr ""
-
-#: cmb2/includes/CMB2_JS.php:241 cmb2/includes/CMB2_Types.php:408
-#: cmb2/includes/types/CMB2_Type_File_Base.php:84
-#: cmb2/tests/test-cmb-types-base.php:149 cmb2/tests/test-cmb-types.php:47
-#: cmb2/tests/test-cmb-types.php:55 cmb2/tests/test-cmb-types.php:959
-msgid "Remove"
-msgstr ""
-
-#: cmb2/includes/CMB2_JS.php:243 cmb2/includes/types/CMB2_Type_File_Base.php:82
-#: cmb2/tests/test-cmb-types-base.php:149 cmb2/tests/test-cmb-types.php:959
-msgid "Download"
-msgstr ""
-
-#: cmb2/includes/CMB2_JS.php:244
-msgid "Select / Deselect All"
-msgstr ""
-
-#: cmb2/includes/CMB2_Options_Hookup.php:139
-msgid "Nothing to update."
-msgstr ""
-
-#: cmb2/includes/CMB2_Options_Hookup.php:143
-msgid "Settings updated."
-msgstr ""
-
-#: cmb2/includes/CMB2_Types.php:226
-msgid "Custom CMB2 field type classes must extend CMB2_Type_Base."
-msgstr ""
-
-#: cmb2/includes/CMB2_Types.php:344
-msgid "Add Row"
-msgstr "Rij toevoegen"
-
-#: cmb2/includes/CMB2_Types.php:408 cmb2/tests/test-cmb-types.php:47
-#: cmb2/tests/test-cmb-types.php:55
-msgid "Remove Row"
-msgstr ""
-
-#: cmb2/includes/helper-functions.php:307
-msgid "Save"
-msgstr ""
-
-#: cmb2/includes/rest-api/CMB2_REST_Controller.php:257
-msgid "This box does not have read permissions."
-msgstr ""
-
-#: cmb2/includes/rest-api/CMB2_REST_Controller.php:277
-msgid "This box does not have write permissions."
-msgstr ""
-
-#: cmb2/includes/rest-api/CMB2_REST_Controller.php:300
-msgid ""
-"No box found by that id. A box needs to be registered with the \"show_in_rest"
-"\" parameter configured."
-msgstr ""
-
-#: cmb2/includes/rest-api/CMB2_REST_Controller.php:378
-msgid "A human-readable description of the object."
-msgstr ""
-
-#: cmb2/includes/rest-api/CMB2_REST_Controller.php:385
-msgid "The id for the object."
-msgstr ""
-
-#: cmb2/includes/rest-api/CMB2_REST_Controller.php:392
-msgid "The title for the object."
-msgstr ""
-
-#: cmb2/includes/rest-api/CMB2_REST_Controller_Boxes.php:51
-msgid "Includes the registered fields for the box in the response."
-msgstr ""
-
-#: cmb2/includes/rest-api/CMB2_REST_Controller_Boxes.php:72
-msgid ""
-"Includes the fully rendered attributes, 'form_open', 'form_close', as well "
-"as the enqueued 'js_dependencies' script handles, and 'css_dependencies' "
-"stylesheet handles."
-msgstr ""
-
-#: cmb2/includes/rest-api/CMB2_REST_Controller_Boxes.php:122
-msgid "No boxes found."
-msgstr "Geen e-mail tekst gevonden."
-
-#: cmb2/includes/rest-api/CMB2_REST_Controller_Fields.php:27
-msgid ""
-"Includes the box object which the fields are registered to in the response."
-msgstr ""
-
-#: cmb2/includes/rest-api/CMB2_REST_Controller_Fields.php:30
-msgid ""
-"When the '_rendered' argument is passed, the renderable field attributes "
-"will be returned fully rendered. By default, the names of the callback "
-"handers for the renderable attributes will be returned."
-msgstr ""
-
-#: cmb2/includes/rest-api/CMB2_REST_Controller_Fields.php:33
-#: cmb2/includes/rest-api/CMB2_REST_Controller_Fields.php:36
-msgid ""
-"To view or modify the field's value, the 'object_id' and 'object_type' "
-"arguments are required."
-msgstr ""
-
-#: cmb2/includes/rest-api/CMB2_REST_Controller_Fields.php:236
-#: cmb2/tests/test-cmb-rest-controllers.php:247
-msgid ""
-"CMB2 Field value cannot be updated without the value parameter specified."
-msgstr ""
-
-#: cmb2/includes/rest-api/CMB2_REST_Controller_Fields.php:297
-#: cmb2/tests/test-cmb-rest-controllers.php:258
-#: cmb2/tests/test-cmb-rest-controllers.php:269
-msgid ""
-"CMB2 Field value cannot be modified without the object_id and object_type "
-"parameters specified."
-msgstr ""
-
-#: cmb2/includes/rest-api/CMB2_REST_Controller_Fields.php:312
-#: cmb2/includes/rest-api/CMB2_REST_Controller_Fields.php:341
-msgid "No field found by that id."
-msgstr ""
-
-#: cmb2/includes/rest-api/CMB2_REST_Controller_Fields.php:415
-#, fuzzy, php-format
-#| msgid "Value answer %s"
-msgid "Value Error for %s"
-msgstr "Antwoord %s score"
-
-#. translators: %s: register_routes()
-#: cmb2/includes/shim/WP_REST_Controller.php:25
-#, php-format
-msgid "Method '%s' must be overridden."
-msgstr ""
-
-#: cmb2/includes/shim/WP_REST_Controller.php:35
-#: cmb2/includes/shim/WP_REST_Controller.php:47
-#: cmb2/includes/shim/WP_REST_Controller.php:59
-#: cmb2/includes/shim/WP_REST_Controller.php:71
-#: cmb2/includes/shim/WP_REST_Controller.php:83
-#: cmb2/includes/shim/WP_REST_Controller.php:95
-#: cmb2/includes/shim/WP_REST_Controller.php:107
-#: cmb2/includes/shim/WP_REST_Controller.php:119
-#: cmb2/includes/shim/WP_REST_Controller.php:131
-#: cmb2/includes/shim/WP_REST_Controller.php:143
-#: cmb2/includes/shim/WP_REST_Controller.php:155
-#: cmb2/includes/shim/WP_REST_Controller.php:168
-#, php-format
-msgid "Method '%s' not implemented. Must be overridden in subclass."
-msgstr ""
-
-#: cmb2/includes/shim/WP_REST_Controller.php:273
-msgid "Current page of the collection."
-msgstr ""
-
-#: cmb2/includes/shim/WP_REST_Controller.php:281
-msgid "Maximum number of items to be returned in result set."
-msgstr ""
-
-#: cmb2/includes/shim/WP_REST_Controller.php:290
-msgid "Limit results to those matching a string."
-msgstr ""
-
-#: cmb2/includes/shim/WP_REST_Controller.php:308
-msgid ""
-"Scope under which the request is made; determines fields present in response."
-msgstr ""
-
-#: cmb2/includes/types/CMB2_Type_Counter_Base.php:50
-msgid "Words left"
-msgstr ""
-
-#: cmb2/includes/types/CMB2_Type_Counter_Base.php:51
-msgid "Words"
-msgstr ""
-
-#: cmb2/includes/types/CMB2_Type_Counter_Base.php:56
-msgid "Characters left"
-msgstr ""
-
-#: cmb2/includes/types/CMB2_Type_Counter_Base.php:57
-msgid "Characters"
-msgstr ""
-
-#: cmb2/includes/types/CMB2_Type_Counter_Base.php:62
-msgid "Your text may be truncated."
-msgstr ""
-
-#: cmb2/includes/types/CMB2_Type_File.php:76 cmb2/tests/test-cmb-types.php:935
-#: cmb2/tests/test-cmb-types.php:959
-msgid "Add or Upload File"
-msgstr ""
-
-#: cmb2/includes/types/CMB2_Type_File_List.php:41
-#: cmb2/tests/test-cmb-types.php:882 cmb2/tests/test-cmb-types.php:915
-msgid "Add or Upload Files"
-msgstr ""
-
-#: cmb2/includes/types/CMB2_Type_Taxonomy_Base.php:115
-msgid "No terms"
-msgstr ""
-
-#: cmb2/tests/test-cmb-field.php:263
-msgid "Test Metabox"
-msgstr ""
-
-#: cmb2/tests/test-cmb-field.php:274
-msgid "Test Multi Checkbox"
-msgstr ""
-
-#: cmb2/tests/test-cmb-field.php:275
-msgid "field description (optional)"
-msgstr ""
-
-#: cmb2/tests/test-cmb-field.php:280
-msgid "Check One"
-msgstr ""
-
-#: cmb2/tests/test-cmb-field.php:281
-msgid "Check Two"
-msgstr ""
-
-#: cmb2/tests/test-cmb-field.php:282
-msgid "Check Three"
-msgstr ""
-
-#: ictuwp-plugin-planningtool.php:310
+#: ictuwp-plugin-planningtool.php:309
 msgctxt "naam template"
 msgid "Planningtool Digitale Overheid"
 msgstr ""
 
-#: ictuwp-plugin-planningtool.php:329
+#: ictuwp-plugin-planningtool.php:328
 msgid "General settings"
 msgstr "Algemene instellingen"
 
-#: ictuwp-plugin-planningtool.php:361
+#: ictuwp-plugin-planningtool.php:360
 msgid "Documentation"
 msgstr "Documentatie"
 
-#: ictuwp-plugin-planningtool.php:362
+#: ictuwp-plugin-planningtool.php:361
 msgid "GC Maturity documentation"
 msgstr "Documentatie Gebuiker Centraal Volwassenheidsscore"
 
-#: ictuwp-plugin-planningtool.php:964 ictuwp-plugin-planningtool.php:1304
-#: ictuwp-plugin-planningtool.php:1659
-msgctxt "geschatte planning"
-msgid "Planning:"
-msgstr ""
+#: ictuwp-plugin-planningtool.php:1026
+msgctxt "standaard label planning"
+msgid "Gestart"
+msgstr "Gestart"
 
-#: ictuwp-plugin-planningtool.php:973
+#: ictuwp-plugin-planningtool.php:1031
 #, php-format
 msgctxt "geschatte planning"
 msgid "van %s-%s tot %s-%s"
 msgstr ""
 
-#: ictuwp-plugin-planningtool.php:981
+#: ictuwp-plugin-planningtool.php:1039
 #, php-format
 msgctxt "geschatte planning"
 msgid "vanaf %s-%s"
 msgstr ""
 
-#: ictuwp-plugin-planningtool.php:987
+#: ictuwp-plugin-planningtool.php:1045
 #, php-format
 msgctxt "geschatte planning"
 msgid "tot %s-%s"
 msgstr ""
 
-#: ictuwp-plugin-planningtool.php:1008 ictuwp-plugin-planningtool.php:1352
+#: ictuwp-plugin-planningtool.php:1055 ictuwp-plugin-planningtool.php:1376
+#: ictuwp-plugin-planningtool.php:1745
+msgctxt "geschatte planning"
+msgid "Planning:"
+msgstr ""
+
+#: ictuwp-plugin-planningtool.php:1079 ictuwp-plugin-planningtool.php:1424
 msgid "Gebeurtenissen hierbij:"
 msgstr ""
 
-#: ictuwp-plugin-planningtool.php:1044
+#: ictuwp-plugin-planningtool.php:1116
 msgctxt "tussenkopje"
 msgid "Actielijn"
 msgstr ""
 
-#: ictuwp-plugin-planningtool.php:1045
+#: ictuwp-plugin-planningtool.php:1117
 msgctxt "tussenkopje"
 msgid "Planning"
 msgstr ""
 
-#: ictuwp-plugin-planningtool.php:1046
+#: ictuwp-plugin-planningtool.php:1118
 msgctxt "tussenkopje"
 msgid "Gebeurtenissen"
 msgstr ""
 
-#: ictuwp-plugin-planningtool.php:1080
+#: ictuwp-plugin-planningtool.php:1152
 msgctxt "tussenkopje"
 msgid "Van"
 msgstr ""
 
-#: ictuwp-plugin-planningtool.php:1082
+#: ictuwp-plugin-planningtool.php:1154
 msgctxt "tussenkopje"
 msgid "Start"
 msgstr ""
 
-#: ictuwp-plugin-planningtool.php:1092
+#: ictuwp-plugin-planningtool.php:1164
 msgctxt "tussenkopje"
 msgid "tot"
 msgstr ""
 
-#: ictuwp-plugin-planningtool.php:1094
+#: ictuwp-plugin-planningtool.php:1166
 msgctxt "tussenkopje"
 msgid "Eind"
 msgstr ""
 
-#: ictuwp-plugin-planningtool.php:1148
+#: ictuwp-plugin-planningtool.php:1220
 msgid ", dus we tonen de actielijnen onder"
 msgstr ""
 
-#: ictuwp-plugin-planningtool.php:1150
+#: ictuwp-plugin-planningtool.php:1222
 msgid ", dus ALLE actielijnen per digibeter-kleur worden getoond."
 msgstr ""
 
-#: ictuwp-plugin-planningtool.php:1153
+#: ictuwp-plugin-planningtool.php:1225
 msgid ""
 "Hallo, lid van de redactie. Er zijn geen actielijnen geselecteerd voor deze "
 "pagina."
 msgstr ""
 
-#: ictuwp-plugin-planningtool.php:1155
+#: ictuwp-plugin-planningtool.php:1227
 msgid "<br>Normale bezoekers zien deze geel-rode melding uiteraard niet."
 msgstr ""
 
-#: ictuwp-plugin-planningtool.php:1498
+#: ictuwp-plugin-planningtool.php:1570
 msgctxt "kopje"
 msgid "Doel"
 msgstr ""
 
-#: ictuwp-plugin-planningtool.php:1503
+#: ictuwp-plugin-planningtool.php:1575
 msgctxt "kopje"
 msgid "Resultaat"
 msgstr ""
 
-#: ictuwp-plugin-planningtool.php:1514
+#: ictuwp-plugin-planningtool.php:1586
 msgctxt "kopje"
 msgid "Planning"
 msgstr ""
 
-#: ictuwp-plugin-planningtool.php:1571 ictuwp-plugin-planningtool.php:1716
+#: ictuwp-plugin-planningtool.php:1639
+msgctxt "markering voor primaire trekker"
+msgid "belangrijkste trekker"
+msgstr "de belangrijkste trekker"
+
+#: ictuwp-plugin-planningtool.php:1657 ictuwp-plugin-planningtool.php:1802
 msgctxt "tussenkopje"
 msgid "Gerelateerde actielijnen"
 msgstr ""
 
-#: ictuwp-plugin-planningtool.php:1599
+#: ictuwp-plugin-planningtool.php:1685
 msgctxt "tussenkopje"
 msgid "Gerelateerde gebeurtenissen"
 msgstr ""
 
-#: ictuwp-plugin-planningtool.php:1651 ictuwp-plugin-planningtool.php:2096
+#: ictuwp-plugin-planningtool.php:1737 ictuwp-plugin-planningtool.php:2182
 msgctxt "geschatte planning"
 msgid "Geen datum ingevoerd"
 msgstr ""
 
-#: ictuwp-plugin-planningtool.php:1670
+#: ictuwp-plugin-planningtool.php:1756
 msgctxt "tussenkopje"
 msgid "Gerelateerde activiteiten"
 msgstr ""
 
-#: ictuwp-plugin-planningtool.php:1744
+#: ictuwp-plugin-planningtool.php:1830
 msgctxt "tussenkopje"
 msgid "Actielijnen"
 msgstr ""
 
-#: ictuwp-plugin-planningtool.php:1766
+#: ictuwp-plugin-planningtool.php:1852
 msgctxt "tussenkopje"
 msgid "Gebeurtenissen (A)"
 msgstr ""
 
-#: ictuwp-plugin-planningtool.php:1779
+#: ictuwp-plugin-planningtool.php:1865
 #, php-format
 msgid "Gebeurtenissen bij %s"
 msgstr ""
 
-#: ictuwp-plugin-planningtool.php:2049
+#: ictuwp-plugin-planningtool.php:2135
 msgid "Gebeurtenissen"
 msgstr ""
 
-#: ictuwp-plugin-planningtool.php:2098
+#: ictuwp-plugin-planningtool.php:2184
 msgctxt "label voor verborgen datum in ganttchart"
 msgid "datum:"
 msgstr ""
 
-#: ictuwp-plugin-planningtool.php:2102
+#: ictuwp-plugin-planningtool.php:2188
 msgctxt "label voor verborgen datum in ganttchart"
 msgid "geschatte datum:"
 msgstr ""
 
-#: ictuwp-plugin-planningtool.php:2107
+#: ictuwp-plugin-planningtool.php:2193
 #, php-format
 msgctxt "verborgen datum in ganttchart"
 msgid ", %s %s"
 msgstr ""
+
+#: inc/dopt.acf-definitions-functions.php:852
+#, fuzzy
+#| msgctxt "kleuren actielijnblok"
+#| msgid "Rijkshuisstijl Blauw"
+msgctxt "kleuren actielijnblok"
+msgid "Blauw (Rijkshuisstijl)"
+msgstr "Blauw (Rijkshuisstijl)"
+
+#: inc/dopt.acf-definitions-functions.php:853
+#, fuzzy
+#| msgctxt "kleuren actielijnblok"
+#| msgid "Rijkshuisstijl Blauw"
+msgctxt "kleuren actielijnblok"
+msgid "Oranje (Rijkshuisstijl)"
+msgstr "Blauw (Rijkshuisstijl)"
+
+#: inc/dopt.acf-definitions-functions.php:854
+#, fuzzy
+#| msgctxt "kleuren actielijnblok"
+#| msgid "Rijkshuisstijl Groen"
+msgctxt "kleuren actielijnblok"
+msgid "Groen (Rijkshuisstijl)"
+msgstr "Groen (Rijkshuisstijl)"
+
+#: inc/dopt.acf-definitions-functions.php:855
+#, fuzzy
+#| msgctxt "kleuren actielijnblok"
+#| msgid "Rijkshuisstijl Blauw"
+msgctxt "kleuren actielijnblok"
+msgid "Violet (Rijkshuisstijl)"
+msgstr "Blauw (Rijkshuisstijl)"
+
+#: inc/dopt.acf-definitions-functions.php:856
+#, fuzzy
+#| msgctxt "kleuren actielijnblok"
+#| msgid "Rijkshuisstijl Paars"
+msgctxt "kleuren actielijnblok"
+msgid "Paars (Rijkshuisstijl)"
+msgstr "Paars (Rijkshuisstijl)"
 
 #: inc/dopt.posttypes-taxonomies.php:28
 msgctxt "labels"
@@ -810,6 +429,28 @@ msgstr ""
 #. Author URI of the plugin/theme
 msgid "https://wbvb.nl"
 msgstr ""
+
+#~ msgctxt "kleuren actielijnblok"
+#~ msgid "Rijkshuisstijl Oranje"
+#~ msgstr "Oranje (Rijkshuisstijl)"
+
+#~ msgctxt "kleuren actielijnblok"
+#~ msgid "Rijkshuisstijl Violet"
+#~ msgstr "Violet (Rijkshuisstijl)"
+
+#~ msgid "Add Group"
+#~ msgstr "Groep toevoegen"
+
+#~ msgid "Add Row"
+#~ msgstr "Rij toevoegen"
+
+#~ msgid "No boxes found."
+#~ msgstr "Geen e-mail tekst gevonden."
+
+#, fuzzy, php-format
+#~| msgid "Value answer %s"
+#~ msgid "Value Error for %s"
+#~ msgstr "Antwoord %s score"
 
 #, fuzzy
 #~| msgctxt "labels"

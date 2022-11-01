@@ -1,0 +1,251 @@
+{
+    "key": "group_5be97485d6c95",
+    "title": "Actielijn: datums + link met gebeurtenissen",
+    "fields": [
+        {
+            "key": "field_5be9d869b3559",
+            "label": "Datum beschrijving (zichtbaar)",
+            "name": "actielijn_toon_datum",
+            "type": "text",
+            "instructions": "deze tekst is zichtbaar voor de gebruiker",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_5bec3c8db4fd6",
+            "label": "Heeft start- of einddatums?",
+            "name": "heeft_start-_of_einddatums",
+            "type": "radio",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "start": "Alleen startdatum",
+                "eind": "Alleen einddatum",
+                "start_eind": "Zowel een start- als einddatum"
+            },
+            "allow_null": 0,
+            "other_choice": 0,
+            "default_value": "start",
+            "layout": "vertical",
+            "return_format": "value",
+            "save_other_choice": 0
+        },
+        {
+            "key": "field_5be99a18c781e",
+            "label": "Start lwartaal",
+            "name": "actielijn_kwartaal_start_kwartaal",
+            "type": "select",
+            "instructions": "(niet zichtbaar)",
+            "required": 1,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5bec3c8db4fd6",
+                        "operator": "==",
+                        "value": "start"
+                    }
+                ],
+                [
+                    {
+                        "field": "field_5bec3c8db4fd6",
+                        "operator": "==",
+                        "value": "start_eind"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "48",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "q1": "Kwartaal 1",
+                "q2": "Kwartaal 2",
+                "q3": "Kwartaal 3",
+                "q4": "Kwartaal 4"
+            },
+            "default_value": "q1",
+            "allow_null": 0,
+            "multiple": 0,
+            "ui": 0,
+            "return_format": "value",
+            "ajax": 0,
+            "placeholder": ""
+        },
+        {
+            "key": "field_5bec3d241a410",
+            "label": "Jaar start",
+            "name": "actielijn_kwartaal_start_jaar",
+            "type": "number",
+            "instructions": "(niet zichtbaar)\r\nFormat: xxxx",
+            "required": 1,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5bec3c8db4fd6",
+                        "operator": "==",
+                        "value": "start"
+                    }
+                ],
+                [
+                    {
+                        "field": "field_5bec3c8db4fd6",
+                        "operator": "==",
+                        "value": "start_eind"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "48",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "min": "",
+            "max": "",
+            "step": ""
+        },
+        {
+            "key": "field_5bec3e0b8f5f6",
+            "label": "Kwartaal eind",
+            "name": "actielijn_kwartaal_eind_kwartaal",
+            "type": "select",
+            "instructions": "(niet zichtbaar)",
+            "required": 1,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5bec3c8db4fd6",
+                        "operator": "==",
+                        "value": "eind"
+                    }
+                ],
+                [
+                    {
+                        "field": "field_5bec3c8db4fd6",
+                        "operator": "==",
+                        "value": "start_eind"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "48",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "q1": "Kwartaal 1",
+                "q2": "Kwartaal 2",
+                "q3": "Kwartaal 3",
+                "q4": "Kwartaal 4"
+            },
+            "default_value": "q1",
+            "allow_null": 0,
+            "multiple": 0,
+            "ui": 0,
+            "return_format": "value",
+            "ajax": 0,
+            "placeholder": ""
+        },
+        {
+            "key": "field_5bec3e248f5f7",
+            "label": "Jaar eind",
+            "name": "actielijn_kwartaal_eind_jaar",
+            "type": "number",
+            "instructions": "(niet zichtbaar)\r\nFormat: xxxx",
+            "required": 1,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5bec3c8db4fd6",
+                        "operator": "==",
+                        "value": "eind"
+                    }
+                ],
+                [
+                    {
+                        "field": "field_5bec3c8db4fd6",
+                        "operator": "==",
+                        "value": "start_eind"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "48",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "min": "",
+            "max": "",
+            "step": ""
+        },
+        {
+            "key": "field_5be974b66ea85",
+            "label": "Kies bijbehorende gebeurtenissen",
+            "name": "related_gebeurtenissen_actielijnen",
+            "type": "relationship",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "gebeurtenis"
+            ],
+            "taxonomy": "",
+            "filters": [
+                "search",
+                "taxonomy"
+            ],
+            "elements": "",
+            "min": "",
+            "max": "",
+            "return_format": "object"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "actielijn"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "acf_after_title",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "field",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "modified": 1665501388
+}

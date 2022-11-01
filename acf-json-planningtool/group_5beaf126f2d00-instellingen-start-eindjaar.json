@@ -1,0 +1,68 @@
+[
+    {
+        "key": "group_5be5e4ee3cb94",
+        "title": "Planning Tool instellingen",
+        "fields": [
+            {
+                "key": "field_5bee9098c1202",
+                "label": "Start jaar",
+                "name": "planning_page_start_jaar",
+                "type": "number",
+                "instructions": "format: xxxx",
+                "required": 1,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": 2017,
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "min": 1900,
+                "max": 2100,
+                "step": ""
+            },
+            {
+                "key": "field_5bee90d2a5dad",
+                "label": "Eind jaar",
+                "name": "planning_page_end_jaar",
+                "type": "number",
+                "instructions": "format: xxxx",
+                "required": 1,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": 2020,
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "min": 1900,
+                "max": 2100,
+                "step": ""
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "options_page",
+                    "operator": "==",
+                    "value": "instellingen"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": true,
+        "description": "",
+        "show_in_rest": false
+    }
+]

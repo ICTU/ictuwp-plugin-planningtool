@@ -5,8 +5,8 @@
  * Plugin Name:         ICTU / WP Planning Tool digitaleoverheid.nl
  * Plugin URI:          https://github.com/ICTU/Digitale-Overheid---WordPress-plugin-Planning-Tool/
  * Description:         Plugin voor digitaleoverheid.nl waarmee extra functionaliteit mogelijk wordt voor het tonen van een planning met actielijnen en gebeurtenissen.
- * Version:             1.3.3
- * Version description: .currentyear verbergen bij smallere scherm ter voorkoming van horizontale scroll.
+ * Version:             1.4.2
+ * Version description: Extra toelichtingstekst voor een actielijnblok.
  * Author:              Paul van Buuren
  * Author URI:          https://wbvb.nl
  * License:             GPL-2.0+
@@ -35,7 +35,7 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 		/**
 		 * @var string
 		 */
-		public $version = '1.3.3';
+		public $version = '1.4.2';
 
 
 		/**
@@ -908,7 +908,13 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 
 						$actielijnblok_counter ++;
 
-						$actielijnblok_titel = esc_html( $actielijnblok['actielijnen_per_thema_titel'] );
+						$actielijnblok_titel         = esc_html( $actielijnblok['actielijnen_per_thema_titel'] );
+						$extra_toelichting_toevoegen = esc_html( $actielijnblok['actielijnen_per_thema_actielijnen_extra_toelichting_toevoegen'] );
+						$blok_toelichting_titel      = null;
+						$blok_toelichting_text       = null;
+						$programma_title_tag         = 'h2';
+						$actielijn_title_tag         = 'h3';
+						$actielijnblok_titel_id      = $actielijnblok_counter;
 
 						if ( ! $actielijnblok['actielijnen_per_thema_htmlid'] ) {
 							$actielijnblok_htmlid = esc_html( $actielijnblok['actielijnen_per_thema_titel'] );
@@ -916,20 +922,64 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 							$actielijnblok_htmlid = esc_html( $actielijnblok['actielijnen_per_thema_htmlid'] );
 						}
 
-						$digibeterclass     = get_field( 'digibeter_term_achtergrondkleur', RHSWP_CT_DIGIBETER . '_' . $actielijnblok['actielijnen_per_thema_kleur'] );
+						if ( get_field( 'digibeter_term_achtergrondkleur', RHSWP_CT_DIGIBETER . '_' . $actielijnblok['actielijnen_per_thema_kleur'] ) ) {
+							// dit is de oude manier om de kleur te bepalen. Oude pagina's verwezen qua kleur nog naar
+							// de kleur die bij een RHSWP_CT_DIGIBETER term gekozen is. Voor backward compatibilit
+							// laten we deze staan
+							$digibeterclass = get_field( 'digibeter_term_achtergrondkleur', RHSWP_CT_DIGIBETER . '_' . $actielijnblok['actielijnen_per_thema_kleur'] );
+						} elseif ( $actielijnblok['actielijnen_per_thema_kleur'] ) {
+							// de nieuwe manier om een kleur te kiezen is simpeler
+							$digibeterclass = $actielijnblok['actielijnen_per_thema_kleur'];
+						} else {
+							$digibeterclass = 'digibeter-blauw';
+						}
+
+						// de bijbehorende geselecteerde actielijnen ophalen
 						$select_actielijnen = $actielijnblok['actielijnen_per_thema_actielijnen'];
 						$intervalheader2    = preg_replace( '/class="intervalheader"/', 'class="intervalheader" id="intervalheader_' . $actielijnblok_counter . '"', $intervalheader );
 
+						// CSS magie om te b
 						$possiblewidth_timeline = ( ( $this->dopt_years_max_nr * DOPT_CSS_YEARWIDTH ) - 1 ); // -1 is to strip off the unnecessary margin-right of the last year
 						$possiblewidth_total    = ( $possiblewidth_timeline + DOPT_CSS_PADDINGLEFT );
 
+						if ( 'actielijnen_per_thema_actielijnen_extra_toelichting_toevoegen_ja' === $extra_toelichting_toevoegen ) {
+							// er is een extra text die we tonen voorafgaand aan het actielijnen-blok.
+							// de titel hiervan gebruiken we als de beschrijvende titel voor de sectie
+							$programma_title_tag    = 'h3';
+							$actielijn_title_tag    = 'h4';
+							$actielijnblok_titel_id = sanitize_title( $blok_toelichting_titel . '-' . $actielijnblok_counter );
+							$blok_toelichting_titel = esc_html( $actielijnblok['actielijnen_per_thema_actielijnen_extra_toelichting_titel'] );
+							$blok_toelichting_text  = $actielijnblok['actielijnen_per_thema_actielijnen_extra_toelichting_text'];
+						} else {
+							// de titel in het actieblok zelf gebruiken we als de beschrijvende titel voor de sectie
+							$actielijnblok_titel_id = sanitize_title( $actielijnblok_titel . '-' . $actielijnblok_counter );
+						}
 
-						echo '<section id="' . sanitize_title( $actielijnblok_htmlid ) . '" class="programma ' . $digibeterclass . '" data-possiblewidth="' . ( $possiblewidth_total + 1 ) . 'em">';
+						echo '<section aria-labelledby="' . $actielijnblok_titel_id . '" class="actielijn-block">';
+
+						if ( $blok_toelichting_titel ) {
+							echo '<header class="entry-header">';
+							echo '<h2 id="' . $actielijnblok_titel_id . '">' . $blok_toelichting_titel . '</h2>';
+							if ( $blok_toelichting_text) {
+								echo '<div class="toelichting">' . $blok_toelichting_text . '</div>';
+							}
+							echo '</header>';
+
+							$actielijnblok_titel_id = null; // deze hoeven we niet meer te gebruiken
+						}
+
+						echo '<div id="' . sanitize_title( $actielijnblok_htmlid ) . '" class="programma ' . $digibeterclass . '" data-possiblewidth="' . ( $possiblewidth_total + 1 ) . 'em">';
 
 						// header
 						echo '<header>';
 						echo '<div class="container">';
-						echo '<h2>' . $actielijnblok_titel . '</h2>';
+						if ( $actielijnblok_titel_id ) {
+							// er kan een toelichtingstitel gebruikt zijn
+							echo '<' . $programma_title_tag . ' id="' . $actielijnblok_titel_id . '">';
+						} else {
+							echo '<' . $programma_title_tag . '>';
+						}
+						echo $actielijnblok_titel . '</' . $programma_title_tag . '>';
 						echo '</div>';
 						echo '<div class="container">';
 						echo $intervalheader2;
@@ -958,7 +1008,7 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 								echo '<div class="' . $identifier . ' single-actielijn" id="' . sanitize_title( $actielijnblok_titel ) . '-' . $select_actielijn->ID . '">';
 
 								echo '<div class="description">';
-								echo '<h3><a href="' . get_the_permalink( $select_actielijn->ID ) . '">' . get_the_title( $select_actielijn->ID ) . '</a></h3>';
+								echo '<' . $actielijn_title_tag . '><a href="' . get_the_permalink( $select_actielijn->ID ) . '">' . get_the_title( $select_actielijn->ID ) . '</a></>';
 								echo '</div>'; // .description
 
 								echo '<div class="planning ' . get_field( 'heeft_start-_of_einddatums', $select_actielijn->ID ) . '">';
@@ -975,19 +1025,12 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 
 								echo '<div class="ganttbar">';
 
-
-								if ( $planning ) {
-									if ( $planning[0]->name ) {
-										echo '<span class="hide-in-chartview">' . _x( 'Planning:', 'geschatte planning', 'wp-rijkshuisstijl' ) . '</span> <span class="planning-label">' . strtolower( $planning[0]->name ) . '</span>';
-									}
-								}
-
-								echo '<span class="hide-in-chartview">, ';
+								$startendlabel = _x( 'Gestart', 'standaard label planning', 'wp-rijkshuisstijl' );
 
 								switch ( get_field( 'heeft_start-_of_einddatums', $select_actielijn->ID ) ) {
 
 									case 'start_eind':
-										echo sprintf( _x( 'van %s-%s tot %s-%s', 'geschatte planning', 'wp-rijkshuisstijl' ),
+										$startendlabel = sprintf( _x( 'van %s-%s tot %s-%s', 'geschatte planning', 'wp-rijkshuisstijl' ),
 												strtoupper( get_field( 'actielijn_kwartaal_eind_kwartaal', $select_actielijn->ID ) ),
 												$this->dopt_array_data[ $select_actielijn->ID ]['start_jaar'],
 												strtoupper( get_field( 'actielijn_kwartaal_eind_kwartaal', $select_actielijn->ID ) ),
@@ -995,18 +1038,31 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 										break;
 
 									case 'start':
-										echo sprintf( _x( 'vanaf %s-%s', 'geschatte planning', 'wp-rijkshuisstijl' ),
+										$startendlabel = sprintf( _x( 'vanaf %s-%s', 'geschatte planning', 'wp-rijkshuisstijl' ),
 												strtoupper( get_field( 'actielijn_kwartaal_eind_kwartaal', $select_actielijn->ID ) ),
 												$this->dopt_array_data[ $select_actielijn->ID ]['start_jaar'] ) . '. ';
 										break;
 
 									case 'eind':
-										echo sprintf( _x( 'tot %s-%s', 'geschatte planning', 'wp-rijkshuisstijl' ),
+										$startendlabel = sprintf( _x( 'tot %s-%s', 'geschatte planning', 'wp-rijkshuisstijl' ),
 												strtoupper( get_field( 'actielijn_kwartaal_eind_kwartaal', $select_actielijn->ID ) ),
 												$this->dopt_array_data[ $select_actielijn->ID ]['eind_jaar'] ) . '. ';
 										break;
 
 								}
+
+
+								if ( $planning ) {
+									if ( $planning[0]->name ) {
+										echo '<span class="hide-in-chartview">' . _x( 'Planning:', 'geschatte planning', 'wp-rijkshuisstijl' ) . '</span> <span class="planning-label">' . strtolower( $planning[0]->name ) . '</span>';
+									}
+								} else {
+									echo '<span class="planning-label">' . $startendlabel . '</span>';
+								}
+
+								echo '<span class="hide-in-chartview">, ';
+
+								echo $startendlabel;
 
 
 								echo '</span>'; // .hide-in-chartview
@@ -1037,6 +1093,7 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 						echo '</div>'; // class=actielijnen
 
 						echo '</div>'; // class=timescale-container;
+						echo '</div>'; // class=programma;
 
 						echo '</section>'; // class=programma
 
@@ -1551,8 +1608,14 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 
 				if ( $planning ) {
 
-					$tax_info   = get_taxonomy( DOPT_CT_TREKKER );
-					$countertje = 0;
+					$tax_info              = get_taxonomy( DOPT_CT_TREKKER );
+					$countertje            = 0;
+					$wpseo_primary_term_id = null;
+					if ( class_exists( 'WPSEO_Primary_Term' ) ) {
+						// primaire trekker ophalen
+						$wpseo_primary_term    = new WPSEO_Primary_Term( DOPT_CT_TREKKER, $post->ID );
+						$wpseo_primary_term_id = $wpseo_primary_term->get_primary_term();
+					}
 
 					$returnstring .= '<h2>';
 
@@ -1567,15 +1630,24 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 
 					foreach ( $planning as $term ) {
 						$countertje ++;
+						$before = null;
+						$after  = null;
 						if ( $countertje <= 1 ) {
-							$returnstring .= $term->name;
 						} else {
-							$returnstring .= ', ' . $term->name;
+							$returnstring .= ', ';
 						}
+						if ( $term->term_id === $wpseo_primary_term_id ) {
+							// primaire trekker markeren als de belangrijkste
+							$before = '<strong><span class="visuallyhidden">' . _x( "belangrijkste trekker", "markering voor primaire trekker", "do-planning-tool" ) . ': </span>';
+							$after  = '</strong>';
+						}
+						$returnstring .= $before . $term->name . $after;
+
 					}
 
 					$returnstring .= '.</p>';
 				}
+
 
 				//------------------------------------------------------------------------------------------------
 				// kijken of er gerelateerde actielijnen zijn

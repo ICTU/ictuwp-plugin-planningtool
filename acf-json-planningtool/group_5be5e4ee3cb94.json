@@ -1,0 +1,70 @@
+{
+  "key": "group_5be5e4ee3cb94",
+  "title": "Planning Tool instellingen",
+  "local": "php",
+  "location": [
+    [
+      {
+        "param": "options_page",
+        "operator": "==",
+        "value": "instellingen"
+      }
+    ]
+  ],
+  "menu_order": 0,
+  "position": "normal",
+  "style": "default",
+  "label_placement": "top",
+  "instruction_placement": "label",
+  "hide_on_screen": "",
+  "active": 1,
+  "description": "",
+  "fields": {
+    "field_5bee9098c1202": {
+      "key": "field_5bee9098c1202",
+      "name": "planning_page_start_jaar",
+      "type": "number",
+      "parent": "group_5be5e4ee3cb94",
+      "label": "Start jaar",
+      "instructions": "format: xxxx",
+      "required": 1,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "default_value": 2017,
+      "placeholder": "",
+      "prepend": "",
+      "append": "",
+      "min": 1900,
+      "max": 2100,
+      "step": "",
+      "menu_order": 0
+    },
+    "field_5bee90d2a5dad": {
+      "key": "field_5bee90d2a5dad",
+      "name": "planning_page_end_jaar",
+      "type": "number",
+      "parent": "group_5be5e4ee3cb94",
+      "label": "Eind jaar",
+      "instructions": "format: xxxx",
+      "required": 1,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "default_value": 2020,
+      "placeholder": "",
+      "prepend": "",
+      "append": "",
+      "min": 1900,
+      "max": 2100,
+      "step": "",
+      "menu_order": 1
+    }
+  }
+}
