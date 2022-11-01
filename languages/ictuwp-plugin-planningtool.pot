@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Planning Tool digitaleoverheid.nl\n"
-"POT-Creation-Date: 2022-10-12 09:48+0200\n"
+"POT-Creation-Date: 2022-11-01 15:33+0100\n"
 "PO-Revision-Date: 2018-06-13 10:59+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -37,183 +37,188 @@ msgstr ""
 msgid "GC Maturity documentation"
 msgstr ""
 
-#: ictuwp-plugin-planningtool.php:988
+#: ictuwp-plugin-planningtool.php:1026
 msgctxt "standaard label planning"
 msgid "Gestart"
 msgstr ""
 
-#: ictuwp-plugin-planningtool.php:993
+#: ictuwp-plugin-planningtool.php:1031
 #, php-format
 msgctxt "geschatte planning"
 msgid "van %s-%s tot %s-%s"
 msgstr ""
 
-#: ictuwp-plugin-planningtool.php:1001
+#: ictuwp-plugin-planningtool.php:1039
 #, php-format
 msgctxt "geschatte planning"
 msgid "vanaf %s-%s"
 msgstr ""
 
-#: ictuwp-plugin-planningtool.php:1007
+#: ictuwp-plugin-planningtool.php:1045
 #, php-format
 msgctxt "geschatte planning"
 msgid "tot %s-%s"
 msgstr ""
 
-#: ictuwp-plugin-planningtool.php:1017 ictuwp-plugin-planningtool.php:1338
-#: ictuwp-plugin-planningtool.php:1693
+#: ictuwp-plugin-planningtool.php:1055 ictuwp-plugin-planningtool.php:1376
+#: ictuwp-plugin-planningtool.php:1745
 msgctxt "geschatte planning"
 msgid "Planning:"
 msgstr ""
 
-#: ictuwp-plugin-planningtool.php:1042 ictuwp-plugin-planningtool.php:1386
+#: ictuwp-plugin-planningtool.php:1079 ictuwp-plugin-planningtool.php:1424
 msgid "Gebeurtenissen hierbij:"
-msgstr ""
-
-#: ictuwp-plugin-planningtool.php:1078
-msgctxt "tussenkopje"
-msgid "Actielijn"
-msgstr ""
-
-#: ictuwp-plugin-planningtool.php:1079
-msgctxt "tussenkopje"
-msgid "Planning"
-msgstr ""
-
-#: ictuwp-plugin-planningtool.php:1080
-msgctxt "tussenkopje"
-msgid "Gebeurtenissen"
-msgstr ""
-
-#: ictuwp-plugin-planningtool.php:1114
-msgctxt "tussenkopje"
-msgid "Van"
 msgstr ""
 
 #: ictuwp-plugin-planningtool.php:1116
 msgctxt "tussenkopje"
+msgid "Actielijn"
+msgstr ""
+
+#: ictuwp-plugin-planningtool.php:1117
+msgctxt "tussenkopje"
+msgid "Planning"
+msgstr ""
+
+#: ictuwp-plugin-planningtool.php:1118
+msgctxt "tussenkopje"
+msgid "Gebeurtenissen"
+msgstr ""
+
+#: ictuwp-plugin-planningtool.php:1152
+msgctxt "tussenkopje"
+msgid "Van"
+msgstr ""
+
+#: ictuwp-plugin-planningtool.php:1154
+msgctxt "tussenkopje"
 msgid "Start"
 msgstr ""
 
-#: ictuwp-plugin-planningtool.php:1126
+#: ictuwp-plugin-planningtool.php:1164
 msgctxt "tussenkopje"
 msgid "tot"
 msgstr ""
 
-#: ictuwp-plugin-planningtool.php:1128
+#: ictuwp-plugin-planningtool.php:1166
 msgctxt "tussenkopje"
 msgid "Eind"
 msgstr ""
 
-#: ictuwp-plugin-planningtool.php:1182
+#: ictuwp-plugin-planningtool.php:1220
 msgid ", dus we tonen de actielijnen onder"
 msgstr ""
 
-#: ictuwp-plugin-planningtool.php:1184
+#: ictuwp-plugin-planningtool.php:1222
 msgid ", dus ALLE actielijnen per digibeter-kleur worden getoond."
 msgstr ""
 
-#: ictuwp-plugin-planningtool.php:1187
+#: ictuwp-plugin-planningtool.php:1225
 msgid "Hallo, lid van de redactie. Er zijn geen actielijnen geselecteerd voor deze pagina."
 msgstr ""
 
-#: ictuwp-plugin-planningtool.php:1189
+#: ictuwp-plugin-planningtool.php:1227
 msgid "<br>Normale bezoekers zien deze geel-rode melding uiteraard niet."
 msgstr ""
 
-#: ictuwp-plugin-planningtool.php:1532
+#: ictuwp-plugin-planningtool.php:1570
 msgctxt "kopje"
 msgid "Doel"
 msgstr ""
 
-#: ictuwp-plugin-planningtool.php:1537
+#: ictuwp-plugin-planningtool.php:1575
 msgctxt "kopje"
 msgid "Resultaat"
 msgstr ""
 
-#: ictuwp-plugin-planningtool.php:1548
+#: ictuwp-plugin-planningtool.php:1586
 msgctxt "kopje"
 msgid "Planning"
 msgstr ""
 
-#: ictuwp-plugin-planningtool.php:1605 ictuwp-plugin-planningtool.php:1750
+#: ictuwp-plugin-planningtool.php:1639
+msgctxt "markering voor primaire trekker"
+msgid "belangrijkste trekker"
+msgstr ""
+
+#: ictuwp-plugin-planningtool.php:1657 ictuwp-plugin-planningtool.php:1802
 msgctxt "tussenkopje"
 msgid "Gerelateerde actielijnen"
 msgstr ""
 
-#: ictuwp-plugin-planningtool.php:1633
+#: ictuwp-plugin-planningtool.php:1685
 msgctxt "tussenkopje"
 msgid "Gerelateerde gebeurtenissen"
 msgstr ""
 
-#: ictuwp-plugin-planningtool.php:1685 ictuwp-plugin-planningtool.php:2130
+#: ictuwp-plugin-planningtool.php:1737 ictuwp-plugin-planningtool.php:2182
 msgctxt "geschatte planning"
 msgid "Geen datum ingevoerd"
 msgstr ""
 
-#: ictuwp-plugin-planningtool.php:1704
+#: ictuwp-plugin-planningtool.php:1756
 msgctxt "tussenkopje"
 msgid "Gerelateerde activiteiten"
 msgstr ""
 
-#: ictuwp-plugin-planningtool.php:1778
+#: ictuwp-plugin-planningtool.php:1830
 msgctxt "tussenkopje"
 msgid "Actielijnen"
 msgstr ""
 
-#: ictuwp-plugin-planningtool.php:1800
+#: ictuwp-plugin-planningtool.php:1852
 msgctxt "tussenkopje"
 msgid "Gebeurtenissen (A)"
 msgstr ""
 
-#: ictuwp-plugin-planningtool.php:1813
+#: ictuwp-plugin-planningtool.php:1865
 #, php-format
 msgid "Gebeurtenissen bij %s"
 msgstr ""
 
-#: ictuwp-plugin-planningtool.php:2083
+#: ictuwp-plugin-planningtool.php:2135
 msgid "Gebeurtenissen"
 msgstr ""
 
-#: ictuwp-plugin-planningtool.php:2132
+#: ictuwp-plugin-planningtool.php:2184
 msgctxt "label voor verborgen datum in ganttchart"
 msgid "datum:"
 msgstr ""
 
-#: ictuwp-plugin-planningtool.php:2136
+#: ictuwp-plugin-planningtool.php:2188
 msgctxt "label voor verborgen datum in ganttchart"
 msgid "geschatte datum:"
 msgstr ""
 
-#: ictuwp-plugin-planningtool.php:2141
+#: ictuwp-plugin-planningtool.php:2193
 #, php-format
 msgctxt "verborgen datum in ganttchart"
 msgid ", %s %s"
 msgstr ""
 
-#: inc/dopt.acf-definitions-functions.php:860
+#: inc/dopt.acf-definitions-functions.php:852
 msgctxt "kleuren actielijnblok"
-msgid "Rijkshuisstijl Blauw"
+msgid "Blauw (Rijkshuisstijl)"
 msgstr ""
 
-#: inc/dopt.acf-definitions-functions.php:861
+#: inc/dopt.acf-definitions-functions.php:853
 msgctxt "kleuren actielijnblok"
-msgid "Rijkshuisstijl Oranje"
+msgid "Oranje (Rijkshuisstijl)"
 msgstr ""
 
-#: inc/dopt.acf-definitions-functions.php:862
+#: inc/dopt.acf-definitions-functions.php:854
 msgctxt "kleuren actielijnblok"
-msgid "Rijkshuisstijl Groen"
+msgid "Groen (Rijkshuisstijl)"
 msgstr ""
 
-#: inc/dopt.acf-definitions-functions.php:863
+#: inc/dopt.acf-definitions-functions.php:855
 msgctxt "kleuren actielijnblok"
-msgid "Rijkshuisstijl Violet"
+msgid "Violet (Rijkshuisstijl)"
 msgstr ""
 
-#: inc/dopt.acf-definitions-functions.php:864
+#: inc/dopt.acf-definitions-functions.php:856
 msgctxt "kleuren actielijnblok"
-msgid "Rijkshuisstijl Paars"
+msgid "Paars (Rijkshuisstijl)"
 msgstr ""
 
 #: inc/dopt.posttypes-taxonomies.php:28
