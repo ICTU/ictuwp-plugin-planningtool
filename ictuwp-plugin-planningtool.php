@@ -5,8 +5,8 @@
  * Plugin Name:         ICTU / WP Planning Tool digitaleoverheid.nl
  * Plugin URI:          https://github.com/ICTU/Digitale-Overheid---WordPress-plugin-Planning-Tool/
  * Description:         Plugin voor digitaleoverheid.nl waarmee extra functionaliteit mogelijk wordt voor het tonen van een planning met actielijnen en gebeurtenissen.
- * Version:             1.4.1
- * Version description: .currentyear verbergen bij smallere scherm ter voorkoming van horizontale scroll.
+ * Version:             1.4.2
+ * Version description: Extra toelichtingstekst voor een actielijnblok.
  * Author:              Paul van Buuren
  * Author URI:          https://wbvb.nl
  * License:             GPL-2.0+
@@ -35,7 +35,7 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 		/**
 		 * @var string
 		 */
-		public $version = '1.4.1';
+		public $version = '1.4.2';
 
 
 		/**
@@ -957,10 +957,12 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 
 						echo '<section aria-labelledby="' . $actielijnblok_titel_id . '" class="actielijn-block">';
 
-						if ( $blok_toelichting_titel && $blok_toelichting_text ) {
+						if ( $blok_toelichting_titel ) {
 							echo '<header class="entry-header">';
 							echo '<h2 id="' . $actielijnblok_titel_id . '">' . $blok_toelichting_titel . '</h2>';
-							echo '<p>' . $blok_toelichting_text . '</p>';
+							if ( $blok_toelichting_text) {
+								echo '<div class="toelichting">' . $blok_toelichting_text . '</div>';
+							}
 							echo '</header>';
 
 							$actielijnblok_titel_id = null; // deze hoeven we niet meer te gebruiken
