@@ -1606,8 +1606,14 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 
 				if ( $planning ) {
 
-					$tax_info   = get_taxonomy( DOPT_CT_TREKKER );
-					$countertje = 0;
+					$tax_info              = get_taxonomy( DOPT_CT_TREKKER );
+					$countertje            = 0;
+					$wpseo_primary_term_id = null;
+					if ( class_exists( 'WPSEO_Primary_Term' ) ) {
+						// primaire trekker ophalen
+						$wpseo_primary_term    = new WPSEO_Primary_Term( DOPT_CT_TREKKER, $post->ID );
+						$wpseo_primary_term_id = $wpseo_primary_term->get_primary_term();
+					}
 
 					$returnstring .= '<h2>';
 
@@ -1622,15 +1628,24 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 
 					foreach ( $planning as $term ) {
 						$countertje ++;
+						$before = null;
+						$after  = null;
 						if ( $countertje <= 1 ) {
-							$returnstring .= $term->name;
 						} else {
-							$returnstring .= ', ' . $term->name;
+							$returnstring .= ', ';
 						}
+						if ( $term->term_id === $wpseo_primary_term_id ) {
+							// primaire trekker markeren als de belangrijkste
+							$before = '<strong><span class="visuallyhidden">' . _x( "belangrijkste trekker", "markering voor primaire trekker", "do-planning-tool" ) . ': </span>';
+							$after  = '</strong>';
+						}
+						$returnstring .= $before . $term->name . $after;
+
 					}
 
 					$returnstring .= '.</p>';
 				}
+
 
 				//------------------------------------------------------------------------------------------------
 				// kijken of er gerelateerde actielijnen zijn
