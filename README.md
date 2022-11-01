@@ -9,10 +9,11 @@ Planning Tool plugin voor digitaleoverheid.nl. Toont actielijnen en gebeurteniss
 * eh
 
 ## Current version:
-* 1.4.1 - .currentyear verbergen bij smallere scherm ter voorkoming van horizontale scroll.
+* 1.4.2 - Extra toelichtingstekst voor een actielijnblok.
 
 ## Version history
-* 1.4.1 - .currentyear verbergen bij smallere scherm ter voorkoming van horizontale scroll.
+* 1.4.2 - Extra toelichtingstekst voor een actielijnblok.
+* 1.3.3 - .currentyear verbergen bij smallere scherm ter voorkoming van horizontale scroll.
 * 1.3.2 - Parsing fouten verholpen, CSS verbeterd.
 * 1.3.1 - Plugin hernoemd van 'do-planning-tool' naar 'ictuwp-plugin-planningtool'; achtergrondkleur toegevoegd voor gebeurtenissen in overzichtsplaat.
 * 1.2.4 - Bugfixje en 'Trekker' omgenoemd naar 'Betrokken organisaties'.
