@@ -1481,8 +1481,10 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 
 				if ( ( is_single() && DOPT__ACTIELIJN_CPT == get_post_type() ) ||
 				     ( is_single() && DOPT__GEBEURTENIS_CPT == get_post_type() ) ) {
+					// alleen voor individuele actielijnen en gebeurtenissen wijzigen we hier de breadcrumb
 
 					if ( DOPT__GEBEURTENIS_CPT == get_post_type() ) {
+						// bij een gebeurtenis tonen we de bijbehorende actielijn
 
 						$acfid = $post->ID;
 
@@ -1501,11 +1503,22 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 						}
 					}
 					if ( DOPT__ACTIELIJN_CPT == get_post_type() ) {
-						// get page that goes with this DOPT_CT_ONDERWERP
-						$terms = wp_get_post_terms( $post->ID, DOPT_CT_ONDERWERP );
+						// voor een actielijn tonen we de pagina die we hebben toegevoegd aan beleidsonderwerp (DOPT_CT_ONDERWERP)
+
+						if ( class_exists( 'WPSEO_Primary_Term' ) ) {
+							// primaire beleidsonderwerp ophalen
+							$wpseo_primary_term    = new WPSEO_Primary_Term( DOPT_CT_ONDERWERP, $post->ID );
+							$wpseo_primary_term_id = $wpseo_primary_term->get_primary_term();
+							$terms[]               = get_term_by( 'id', $wpseo_primary_term_id, DOPT_CT_ONDERWERP );
+						} else {
+							// yoast niet actief, ws.
+							$terms = wp_get_post_terms( $post->ID, DOPT_CT_ONDERWERP );
+						}
+
 					}
 
 					if ( $terms ) {
+						// er zijn beleidsonderpen gekoppeld aan deze actielijn
 
 						foreach ( $terms as $_term ) {
 
@@ -1629,7 +1642,7 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 					$countertje            = 0;
 					$wpseo_primary_term_id = null;
 					if ( class_exists( 'WPSEO_Primary_Term' ) ) {
-						// primaire trekker ophalen
+						// primaire trekker ophalen, via Yoast primary taxonomy
 						$wpseo_primary_term    = new WPSEO_Primary_Term( DOPT_CT_TREKKER, $post->ID );
 						$wpseo_primary_term_id = $wpseo_primary_term->get_primary_term();
 					}
