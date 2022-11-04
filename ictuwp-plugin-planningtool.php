@@ -1481,8 +1481,10 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 
 				if ( ( is_single() && DOPT__ACTIELIJN_CPT == get_post_type() ) ||
 				     ( is_single() && DOPT__GEBEURTENIS_CPT == get_post_type() ) ) {
+					// alleen voor individuele actielijnen en gebeurtenissen wijzigen we hier de breadcrumb
 
 					if ( DOPT__GEBEURTENIS_CPT == get_post_type() ) {
+						// bij een gebeurtenis tonen we de bijbehorende actielijn
 
 						$acfid = $post->ID;
 
@@ -1501,11 +1503,22 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 						}
 					}
 					if ( DOPT__ACTIELIJN_CPT == get_post_type() ) {
-						// get page that goes with this DOPT_CT_ONDERWERP
-						$terms = wp_get_post_terms( $post->ID, DOPT_CT_ONDERWERP );
+						// voor een actielijn tonen we de pagina die we hebben toegevoegd aan beleidsonderwerp (DOPT_CT_ONDERWERP)
+
+						if ( class_exists( 'WPSEO_Primary_Term' ) ) {
+							// primaire beleidsonderwerp ophalen
+							$wpseo_primary_term    = new WPSEO_Primary_Term( DOPT_CT_ONDERWERP, $post->ID );
+							$wpseo_primary_term_id = $wpseo_primary_term->get_primary_term();
+							$terms[]               = get_term_by( 'id', $wpseo_primary_term_id, DOPT_CT_ONDERWERP );
+						} else {
+							// yoast niet actief, ws.
+							$terms = wp_get_post_terms( $post->ID, DOPT_CT_ONDERWERP );
+						}
+
 					}
 
 					if ( $terms ) {
+						// er zijn beleidsonderpen gekoppeld aan deze actielijn
 
 						foreach ( $terms as $_term ) {
 
@@ -1559,6 +1572,7 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 				} else {
 					return $crumb;
 				}
+
 			}
 		}
 
@@ -1628,39 +1642,46 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 					$tax_info              = get_taxonomy( DOPT_CT_TREKKER );
 					$countertje            = 0;
 					$wpseo_primary_term_id = null;
+
 					if ( class_exists( 'WPSEO_Primary_Term' ) ) {
-						// primaire trekker ophalen
+						// primaire trekker ophalen, via Yoast primary taxonomy
 						$wpseo_primary_term    = new WPSEO_Primary_Term( DOPT_CT_TREKKER, $post->ID );
 						$wpseo_primary_term_id = $wpseo_primary_term->get_primary_term();
 					}
 
 					$returnstring .= '<h2>';
 
+					// meervoud of enkelvoud voor het label
 					if ( count( $planning ) > 1 ) {
 						$returnstring .= $tax_info->labels->name;
 					} else {
 						$returnstring .= $tax_info->labels->singular_name;
 					}
 
-					$returnstring .= '</h2>';
-					$returnstring .= '<p>';
+					$returnstring    .= '</h2>';
+					$returnstring    .= '<p>';
+					$trekkers_sorted = array();
+
+					if ( $wpseo_primary_term_id ) {
+						// er is een primary trekker, deze zetten we vooraan
+						$before             = '<strong><span class="visuallyhidden">' . _x( "belangrijkste trekker", "markering voor primaire trekker", "do-planning-tool" ) . ': </span>';
+						$after              = '</strong>';
+						$term               = get_term_by( 'id', $wpseo_primary_term_id, DOPT_CT_TREKKER );
+						$trekkers_sorted[0] = $before . $term->name . $after;
+					}
 
 					foreach ( $planning as $term ) {
 						$countertje ++;
-						$before = null;
-						$after  = null;
-						if ( $countertje <= 1 ) {
-						} else {
-							$returnstring .= ', ';
-						}
 						if ( $term->term_id === $wpseo_primary_term_id ) {
-							// primaire trekker markeren als de belangrijkste
-							$before = '<strong><span class="visuallyhidden">' . _x( "belangrijkste trekker", "markering voor primaire trekker", "do-planning-tool" ) . ': </span>';
-							$after  = '</strong>';
+							// primaire trekker staat al vooraan in de array, dus slaan we over
+						} else {
+							// naam trekker voegen we toe
+							$trekkers_sorted[] = $term->name;
 						}
-						$returnstring .= $before . $term->name . $after;
-
 					}
+
+					// alles uit array aan elkaar lijmen met komma's
+					$returnstring .= implode( ', ', $trekkers_sorted );
 
 					$returnstring .= '.</p>';
 				}
