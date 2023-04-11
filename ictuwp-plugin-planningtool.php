@@ -54,6 +54,8 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 		public $dopt_years_max_nr = null; // for setting the width of the containers and indicator
 		public $dopt_array_data = null; // array for storing retrieved data to be used throughout this plugin
 
+		public $templatefile = '';
+		public $templates = '';
 
 		/**
 		 * Init
@@ -279,8 +281,6 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 
 			add_action( 'wp_enqueue_scripts', array( $this, 'do_pt_frontend_register_frontend_style_script' ) );
 
-			add_action( 'admin_enqueue_scripts', array( $this, 'do_pt_admin_register_styles' ) );
-
 
 		}
 		//========================================================================================================
@@ -329,19 +329,6 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 				array( $this, $this->option_name . '_general_cb' ),
 				DOPT__PLUGIN_KEY
 			);
-
-		}
-
-		//========================================================================================================
-
-		/**
-		 * Register admin-side styles
-		 */
-		public function do_pt_admin_register_styles() {
-
-			if ( is_admin() ) {
-				wp_enqueue_style( 'ictuwp-plugin-planningtool-admin', DOPT__ASSETS_URL . 'css/ictuwp-plugin-planningtool-admin.css', false, DOPT__VERSION );
-			}
 
 		}
 
@@ -933,10 +920,10 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 						$actielijn_title_tag         = 'h3';
 						$actielijnblok_titel_id      = $actielijnblok_counter;
 
-						if ( ! $actielijnblok['actielijnen_per_thema_htmlid'] ) {
-							$actielijnblok_htmlid = esc_html( $actielijnblok['actielijnen_per_thema_titel'] );
-						} else {
+						if ( isset( $actielijnblok['actielijnen_per_thema_htmlid'] ) ) {
 							$actielijnblok_htmlid = esc_html( $actielijnblok['actielijnen_per_thema_htmlid'] );
+						} else {
+							$actielijnblok_htmlid = esc_html( $actielijnblok['actielijnen_per_thema_titel'] );
 						}
 
 						if ( get_field( 'digibeter_term_achtergrondkleur', RHSWP_CT_DIGIBETER . '_' . $actielijnblok['actielijnen_per_thema_kleur'] ) ) {
