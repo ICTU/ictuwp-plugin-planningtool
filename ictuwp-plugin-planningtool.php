@@ -5,8 +5,8 @@
  * Plugin Name:         ICTU / WP Planning Tool digitaleoverheid.nl
  * Plugin URI:          https://github.com/ICTU/Digitale-Overheid---WordPress-plugin-Planning-Tool/
  * Description:         Plugin voor digitaleoverheid.nl waarmee extra functionaliteit mogelijk wordt voor het tonen van een planning met actielijnen en gebeurtenissen.
- * Version:             1.4.2
- * Version description: Extra toelichtingstekst voor een actielijnblok.
+ * Version:             1.4.3
+ * Version description: PHP8.x compatibility checks.
  * Author:              Paul van Buuren
  * Author URI:          https://wbvb.nl
  * License:             GPL-2.0+
@@ -35,7 +35,7 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 		/**
 		 * @var string
 		 */
-		public $version = '1.4.2';
+		public $version = '1.4.3';
 
 
 		/**

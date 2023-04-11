@@ -1,9 +1,7 @@
 # Changelog
 
-## Current version:
-* 1.4.2 - Extra toelichtingstekst voor een actielijnblok.
-
 ## Version history
+* 1.4.3 - PHP8.x compatibility checks.
 * 1.4.2 - Extra toelichtingstekst voor een actielijnblok.
 * 1.3.3 - .currentyear verbergen bij smallere scherm ter voorkoming van horizontale scroll.
 * 1.3.2 - Parsing fouten verholpen, CSS verbeterd.

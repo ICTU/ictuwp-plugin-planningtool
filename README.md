@@ -9,4 +9,4 @@ Planning Tool plugin voor digitaleoverheid.nl. Toont actielijnen en gebeurteniss
 * eh
 
 ## Current version:
-* 1.4.2 - Extra toelichtingstekst voor een actielijnblok.
+* 1.4.3 - PHP8.x compatibility checks.
