@@ -886,43 +886,6 @@ Format: xxxx',
 
 }
 
-//========================================================================================================
-
-/**
- * Have the ACF (advanced custom fields) plugin read the settings from this plugin's acf-json folder
- *
- * @since    1.0.0
- */
-function fn_ictu_do_planningtool_add_acf_folder( $paths ) {
-
-	// append path
-	$paths[] = plugin_dir_path( __FILE__ ) . 'acf-json-planningtool';
-
-	// return
-	return $paths;
-
-}
-
-add_filter( 'acf/settings/load_json', 'fn_ictu_do_planningtool_add_acf_folder' );
-
-//========================================================================================================
-
-/**
- * Have the ACF (advanced custom fields) plugin save settings to a json file in this plugin's acf-json folder
- *
- * @since    1.0.0
- */
-function fn_ictu_do_planningtool_acf_json_save_point( $path ) {
-
-	// update path
-	$path = plugin_dir_path( __FILE__ ) . 'acf-json-planningtool';
-
-	// return
-	return $path;
-
-}
-
-add_filter( 'acf/settings/save_json', 'fn_ictu_do_planningtool_acf_json_save_point' );
 
 //========================================================================================================
 
