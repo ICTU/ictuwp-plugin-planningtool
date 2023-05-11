@@ -9,4 +9,4 @@ Planning Tool plugin voor digitaleoverheid.nl. Toont actielijnen en gebeurteniss
 * eh
 
 ## Current version:
-* 1.4.3 - PHP8.x compatibility checks.
+* 1.4.4 - Bugfix for ACF: avoid calling get_field too early.
