@@ -5,8 +5,8 @@
  * Plugin Name:         ICTU / WP Planning Tool digitaleoverheid.nl
  * Plugin URI:          https://github.com/ICTU/Digitale-Overheid---WordPress-plugin-Planning-Tool/
  * Description:         Plugin voor digitaleoverheid.nl waarmee extra functionaliteit mogelijk wordt voor het tonen van een planning met actielijnen en gebeurtenissen.
- * Version:             1.4.3
- * Version description: PHP8.x compatibility checks.
+ * Version:             1.4.4
+ * Version description: Bugfix for ACF: avoid calling get_field too early.
  * Author:              Paul van Buuren
  * Author URI:          https://wbvb.nl
  * License:             GPL-2.0+
@@ -35,7 +35,7 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 		/**
 		 * @var string
 		 */
-		public $version = '1.4.3';
+		public $version = '1.4.4';
 
 
 		/**
@@ -89,11 +89,6 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 
 			$protocol = strtolower( substr( $_SERVER["SERVER_PROTOCOL"], 0, strpos( $_SERVER["SERVER_PROTOCOL"], '/' ) ) ) . '://';
 
-			$this->option_name       = 'ictudo_planning-option';
-			$this->dopt_years_start  = get_field( 'planning_page_start_jaar', 'option' );
-			$this->dopt_years_end    = get_field( 'planning_page_end_jaar', 'option' );
-			$this->dopt_years_max_nr = ( $this->dopt_years_end - $this->dopt_years_start );
-			$this->dopt_array_data   = array();
 
 			define( 'DOPT__VERSION', $this->version );
 			define( 'DOPT__FOLDER', 'ictuwp-plugin-planningtool' );
@@ -330,6 +325,11 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 				DOPT__PLUGIN_KEY
 			);
 
+			$this->option_name       = 'ictudo_planning-option';
+			$this->dopt_years_start  = get_field( 'planning_page_start_jaar', 'option' );
+			$this->dopt_years_end    = get_field( 'planning_page_end_jaar', 'option' );
+			$this->dopt_years_max_nr = ( $this->dopt_years_end - $this->dopt_years_start );
+			$this->dopt_array_data   = array();
 		}
 
 		//========================================================================================================
