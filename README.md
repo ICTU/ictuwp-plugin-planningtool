@@ -9,4 +9,4 @@ Planning Tool plugin voor digitaleoverheid.nl. Toont actielijnen en gebeurteniss
 * eh
 
 ## Current version:
-* 1.4.5 - removed buggy ACF definition location from this plugin.
+* 1.4.6 - removed buggy debug code.
