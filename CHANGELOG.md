@@ -1,6 +1,7 @@
 # Changelog
 
 ## Version history
+* 1.4.6 - removed buggy debug code.
 * 1.4.5 - removed buggy ACF definition location from this plugin.
 * 1.4.4 - Bugfix for ACF: avoid calling get_field too early.
 * 1.4.3 - PHP8.x compatibility checks.
