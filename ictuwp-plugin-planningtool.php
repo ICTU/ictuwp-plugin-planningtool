@@ -5,8 +5,8 @@
  * Plugin Name:         ICTU / WP Planning Tool digitaleoverheid.nl
  * Plugin URI:          https://github.com/ICTU/Digitale-Overheid---WordPress-plugin-Planning-Tool/
  * Description:         Plugin voor digitaleoverheid.nl waarmee extra functionaliteit mogelijk wordt voor het tonen van een planning met actielijnen en gebeurtenissen.
- * Version:             1.4.6
- * Version description: removed buggy debug code.
+ * Version:             1.5.1
+ * Version description: Code improvements to make plugin more generally applicable.
  * Author:              Paul van Buuren
  * Author URI:          https://wbvb.nl
  * License:             GPL-2.0+
@@ -20,6 +20,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 add_action( 'plugins_loaded', 'do_pt_init_load_plugin_textdomain' );
+
+if ( ! defined( 'RHSWP_CT_DIGIBETER' ) ) {
+	define( 'RHSWP_CT_DIGIBETER', 'beleidsterreinen' );   // custom taxonomy for digitale agenda
+}
 
 
 if ( ! class_exists( 'DO_Planning_Tool' ) ) :
@@ -35,7 +39,7 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 		/**
 		 * @var string
 		 */
-		public $version = '1.4.6';
+		public $version = '1.5.1';
 
 
 		/**
@@ -1029,21 +1033,23 @@ if ( ! class_exists( 'DO_Planning_Tool' ) ) :
 
 								echo '<div class="ganttbar">';
 
-								$startendlabel = _x( 'Gestart', 'standaard label planning', 'wp-rijkshuisstijl' );
-
+								$startendlabel                    = _x( 'Gestart', 'standaard label planning', 'wp-rijkshuisstijl' );
+								$actielijn_kwartaal_eind_kwartaal = ( get_field( 'actielijn_kwartaal_eind_kwartaal', $select_actielijn->ID ) ) ?:'';
 								switch ( get_field( 'heeft_start-_of_einddatums', $select_actielijn->ID ) ) {
 
 									case 'start_eind':
+										$actielijn_kwartaal_eind_kwartaal = get_field( 'actielijn_kwartaal_eind_kwartaal', $select_actielijn->ID );
+
 										$startendlabel = sprintf( _x( 'van %s-%s tot %s-%s', 'geschatte planning', 'wp-rijkshuisstijl' ),
-												strtoupper( get_field( 'actielijn_kwartaal_eind_kwartaal', $select_actielijn->ID ) ),
+												strtoupper( $actielijn_kwartaal_eind_kwartaal ),
 												$this->dopt_array_data[ $select_actielijn->ID ]['start_jaar'],
-												strtoupper( get_field( 'actielijn_kwartaal_eind_kwartaal', $select_actielijn->ID ) ),
+												strtoupper( $actielijn_kwartaal_eind_kwartaal ),
 												$this->dopt_array_data[ $select_actielijn->ID ]['eind_jaar'] ) . '. ';
 										break;
 
 									case 'start':
 										$startendlabel = sprintf( _x( 'vanaf %s-%s', 'geschatte planning', 'wp-rijkshuisstijl' ),
-												strtoupper( get_field( 'actielijn_kwartaal_eind_kwartaal', $select_actielijn->ID ) ),
+												strtoupper( $actielijn_kwartaal_eind_kwartaal ),
 												$this->dopt_array_data[ $select_actielijn->ID ]['start_jaar'] ) . '. ';
 										break;
 

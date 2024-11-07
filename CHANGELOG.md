@@ -1,6 +1,7 @@
 # Changelog
 
 ## Version history
+* 1.5.1 - Code improvements to make plugin more generally applicable.
 * 1.4.6 - removed buggy debug code.
 * 1.4.5 - removed buggy ACF definition location from this plugin.
 * 1.4.4 - Bugfix for ACF: avoid calling get_field too early.

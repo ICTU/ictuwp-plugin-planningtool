@@ -9,4 +9,4 @@ Planning Tool plugin voor digitaleoverheid.nl. Toont actielijnen en gebeurteniss
 * eh
 
 ## Current version:
-* 1.4.6 - removed buggy debug code.
+* 1.5.1 - Code improvements to make plugin more generally applicable.
