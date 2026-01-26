@@ -27,3 +27,4 @@ tets/*
 cmb2/*
 .idea/*
 *.iml
+.DS_Store
